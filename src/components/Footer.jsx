@@ -5,7 +5,7 @@ import { scrollToSection } from "../utils/helpers"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 py-16">
+    <footer section id="footer" className="bg-gray-900 border-t border-gray-800 py-16">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* About */}

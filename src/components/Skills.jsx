@@ -1,40 +1,28 @@
 export default function Skills() {
   const skillCategories = [
     {
-      title: "Robotics & ROS",
-      skills: ["ROS", "ROS2", "MoveIt", "Gazebo", "Rviz", "Motion Planning", "Inverse Kinematics", "6 DOF Arms"],
+      title: "IoT & Robotics",
+      skills: ["Arduino", "Arduino Mega", "ESP32", "Raspberry Pi", "ROS", "ROS2", "MoveIt", "Sensor Integration", "Fusion 360"],
       color: "border-blue-500/20 bg-blue-500/5",
       iconColor: "text-blue-400",
     },
     {
-      title: "IoT & Embedded Systems",
-      skills: ["Arduino", "ESP32", "Raspberry Pi", "Sensor Integration", "C++", "C", "IoT Protocols", "Hardware Control"],
+      title: "Programming Languages",
+      skills: ["Python", "C++", "JavaScript"],
       color: "border-green-500/20 bg-green-500/5",
       iconColor: "text-green-400",
     },
     {
-      title: "Programming Languages",
-      skills: ["Python", "C++", "JavaScript", "HTML", "CSS", "SQL", "MATLAB", "Assembly"],
+      title: "Web Development",
+      skills: ["React", "Node.js", "Express", "Firebase", "REST APIs", "WebSockets", "HTML", "CSS", "Stockfish Engine (UCI)"],
       color: "border-purple-500/20 bg-purple-500/5",
       iconColor: "text-purple-400",
     },
     {
-      title: "Web Development",
-      skills: ["React", "Node.js", "Express", "Firebase", "REST APIs", "WebSockets", "HTML5", "CSS3"],
+      title: "Development Tools & Platforms",
+      skills: ["Git", "Docker", "Linux", "Gazebo", "Rviz", "ROS2 Control", "OpenCV"],
       color: "border-orange-500/20 bg-orange-500/5",
       iconColor: "text-orange-400",
-    },
-    {
-      title: "AI & Machine Learning",
-      skills: ["NVIDIA NEMO", "Computer Vision", "OpenCV", "TensorFlow", "Data Analysis", "Neural Networks", "AI/ML"],
-      color: "border-red-500/20 bg-red-500/5",
-      iconColor: "text-red-400",
-    },
-    {
-      title: "Tools & Platforms",
-      skills: ["Git", "Docker", "Linux", "Fusion 360", "VS Code", "GitHub", "Firebase", "Stockfish Engine"],
-      color: "border-gray-500/20 bg-gray-500/5",
-      iconColor: "text-gray-400",
     },
   ]
 
@@ -46,13 +34,15 @@ export default function Skills() {
           <p className="text-gray-400 text-lg">Technologies and tools I work with in robotics and software development</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className={`p-6 rounded-xl border ${category.color} hover:border-opacity-40 transition-all duration-300`}
+              className={`p-6 rounded-xl border ${category.color} hover:border-opacity-40 transition-all duration-300 group`}
             >
-              <h3 className={`text-lg font-semibold mb-4 ${category.iconColor}`}>{category.title}</h3>
+              <h3 className={`text-lg font-semibold mb-4 ${category.iconColor} group-hover:scale-105 transition-transform`}>
+                {category.title}
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
                   <span
