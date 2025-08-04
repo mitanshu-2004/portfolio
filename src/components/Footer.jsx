@@ -1,12 +1,14 @@
 "use client"
 
+import { Mail, MapPin, Phone } from "lucide-react"
 import { scrollToSection } from "../utils/helpers"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 py-12">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+    <footer className="bg-gray-900 border-t border-gray-800 py-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-3 gap-12 mb-12">
+          {/* About */}
           <div>
             <h3 className="text-xl font-bold text-white mb-2">
               Mitanshu<span className="text-blue-400">.</span>
@@ -16,10 +18,11 @@ export default function Footer() {
             </p>
           </div>
 
+          {/* Quick Links */}
           <div>
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <div className="space-y-2">
-              {["About", "Experience", "Projects", "Skills", "Contact"].map((item) => (
+              {["About", "Experience", "Projects", "Skills"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -31,11 +34,23 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Get in Touch */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Let's Connect</h4>
-            <p className="text-gray-400 text-sm">
-              Open to new roles, freelance work, or team-ups. If it’s worth building, I’m interested.
-            </p>
+            <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
+            <div className="space-y-4 text-sm text-gray-400">
+              <div className="flex items-center gap-3">
+                <Mail size={18} className="text-blue-400" />
+                <span>mitanshugoel@email.com</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin size={18} className="text-green-400" />
+                <span>Delhi, India</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone size={18} className="text-orange-400" />
+                <span>+91 9876543210</span> {/* Replace with actual number if needed */}
+              </div>
+            </div>
           </div>
         </div>
 
