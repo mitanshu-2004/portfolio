@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, Download, Mail } from "lucide-react"
+import { ArrowRight, ExternalLink } from "lucide-react"
 import { scrollToSection } from "../utils/helpers"
 
 export default function HeroAbout() {
@@ -62,10 +62,10 @@ export default function HeroAbout() {
 
           <a
             href="/resume.pdf"
-            download
+            
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white px-8 py-4 rounded-lg font-medium transition-colors border border-gray-600 hover:border-gray-500"
           >
-            <Download size={18} />
+            <ExternalLink size={18} />
             Resume
           </a>
 

@@ -10,13 +10,13 @@ export default function SocialBar() {
     },
     {
       icon: <Linkedin size={20} />,
-      href: "https://linkedin.com/in/mitanshugoel",
+      href: "https://www.linkedin.com/in/mitanshu-goel-177624248",
       label: "LinkedIn",
       color: "hover:text-blue-400 hover:bg-blue-500/10",
     },
     {
       icon: <Mail size={20} />,
-      href: "mailto:mitanshugoel@email.com",
+      href: "mailto:mitanshug2004@email.com",
       label: "Email",
       color: "hover:text-green-400 hover:bg-green-500/10",
     },
@@ -25,6 +25,7 @@ export default function SocialBar() {
       href: "/resume.pdf",
       label: "Resume",
       color: "hover:text-purple-400 hover:bg-purple-500/10",
+      download: true,
     },
   ]
 
@@ -39,9 +40,11 @@ export default function SocialBar() {
             rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
             className={`p-3 text-gray-400 rounded-full transition-all duration-300 ${link.color}`}
             title={link.label}
+            download={link.download || undefined}   // 👈 added here
           >
             {link.icon}
           </a>
+
         ))}
       </div>
     </div>
