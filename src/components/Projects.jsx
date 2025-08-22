@@ -27,6 +27,18 @@ export default function Projects() {
       status: "Development",
     },
     {
+      title: "MEMORY VAULT",
+      description:
+        "Built a personal memory assistant app to save, search, and organize memories and notes. Developed backend with FastAPI, supporting AI-based memory creation, retrieval, file storage, tagging,and vector search using ChromaDB. Created React frontend for smooth organization, semantic search, tagging, and quick access to memories.",
+      tech: ["FastAPI", "Python", "Python", "React", "Javascript", "ChromaDB", "Sentence Transformer"],
+      hasGithub: true,
+      github: "https://github.com/mitanshu-2004/memory-assistant",
+      hasLive: false,
+      icon: <Zap className="w-6 h-6" />,
+      color: "text-orange-400",
+      status: "Production",
+    },
+    {
       title: "Interactive Chess Game",
       description:
         "Developed an interactive browser-based chess game using React, with real-time move validations. Integrated UCI-based Stockfish engine for AI gameplay with real-time multiplayer mode and move evaluation, achieving seamless play with low-latency feedback on Firebase.",
@@ -39,17 +51,7 @@ export default function Projects() {
       color: "text-purple-400",
       status: "Live",
     },
-    {
-      title: "Scalable IoT Sensor System",
-      description:
-        "Developed a fully scalable sensor system using Raspberry Pi and multiple ESP32 via client-server architecture to collect particular and precise data and send it to a platform for analysis. Features real-time data processing and remote monitoring capabilities.",
-      tech: ["Raspberry Pi", "ESP32", "Python", "Client-Server Architecture", "IoT", "Data Analytics", "REST APIs"],
-      hasGithub: false,
-      hasLive: false,
-      icon: <Zap className="w-6 h-6" />,
-      color: "text-orange-400",
-      status: "Production",
-    },
+    
   ]
 
   const getStatusColor = (status) => {

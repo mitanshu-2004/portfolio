@@ -1,28 +1,29 @@
 export default function Skills() {
   const skillCategories = [
     {
-      title: "IoT & Robotics",
-      skills: ["Arduino", "Arduino Mega", "ESP32", "Raspberry Pi", "ROS", "ROS2", "MoveIt", "Sensor Integration", "Fusion 360"],
+      title: "Languages",
+      skills: ["JavaScript", "c++", "Python", "SQL"],
       color: "border-blue-500/20 bg-blue-500/5",
       iconColor: "text-blue-400",
     },
     {
-      title: "Programming Languages",
-      skills: ["Python", "C++", "JavaScript"],
+      title: "Full-Stack Development",
+      skills: ["React", "Next.js", "Tailwind CSS", "FastAPI", "Express.js"],
       color: "border-green-500/20 bg-green-500/5",
       iconColor: "text-green-400",
     },
     {
-      title: "Web Development",
-      skills: ["React", "Node.js", "Express", "Firebase", "REST APIs", "WebSockets", "HTML", "CSS", "Stockfish Engine (UCI)"],
-      color: "border-purple-500/20 bg-purple-500/5",
-      iconColor: "text-purple-400",
+      title: "Databases",
+      skills: ["PostgreSQL", "MongoDB", "Redis"],
+      color: "border-yellow-500/20 bg-yellow-500/5",
+      iconColor: "text-yellow-400",
     },
+    
     {
-      title: "Development Tools & Platforms",
-      skills: ["Git", "Docker", "Linux", "Gazebo", "Rviz", "ROS2 Control", "OpenCV"],
-      color: "border-orange-500/20 bg-orange-500/5",
-      iconColor: "text-orange-400",
+      title: "Others",
+      skills: ["Git", "Docker","Linux"],
+      color: "border-pink-500/20 bg-pink-500/5",
+      iconColor: "text-pink-400",
     },
   ]
 
@@ -31,7 +32,10 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Technical Skills</h2>
-          <p className="text-gray-400 text-lg">Technologies and tools I work with in robotics and software development</p>
+          <p className="text-gray-400 text-lg">
+            Core technologies and tools I use to build full-stack applications,
+            manage data, and deploy cloud-native solutions.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -40,7 +44,9 @@ export default function Skills() {
               key={index}
               className={`p-6 rounded-xl border ${category.color} hover:border-opacity-40 transition-all duration-300 group`}
             >
-              <h3 className={`text-lg font-semibold mb-4 ${category.iconColor} group-hover:scale-105 transition-transform`}>
+              <h3
+                className={`text-lg font-semibold mb-4 ${category.iconColor} group-hover:scale-105 transition-transform`}
+              >
                 {category.title}
               </h3>
               <div className="flex flex-wrap gap-2">

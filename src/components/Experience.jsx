@@ -7,7 +7,7 @@ export default function Experience() {
       title: "Project Intern - SarthakAI",
       desc: "Leading deployment of three autonomous AI workstations powered by NVIDIA NeMo framework for intelligent task automation. Architected IoT sensor networks using Raspberry Pi 4 and ESP32 microcontrollers for real-time data collection and processing. Implemented computer vision algorithms for robotic package detection and sorting, achieving 95% accuracy in object recognition.",
       color: "bg-blue-500",
-      skills: ["NVIDIA NeMo", "Raspberry Pi", "ESP32", "Computer Vision", "PyTorch", "OpenCV"],
+      skills: ["NVIDIA NeMo", "Raspberry Pi", "ESP32", "Computer Vision", "PyTorch", "OpenCV", "Yolo"],
     },
     {
       year: "2024",

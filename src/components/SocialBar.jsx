@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, ExternalLink } from "lucide-react"
+import { Github, Linkedin, Mail, Download } from "lucide-react"
 
 export default function SocialBar() {
   const socialLinks = [
@@ -21,7 +21,7 @@ export default function SocialBar() {
       color: "hover:text-green-400 hover:bg-green-500/10",
     },
     {
-      icon: <ExternalLink size={20} />,
+      icon: <Download size={20} />,
       href: "/resume.pdf",
       label: "Resume",
       color: "hover:text-purple-400 hover:bg-purple-500/10",
