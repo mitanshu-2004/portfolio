@@ -40,7 +40,7 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-gray-400">
               <div className="flex items-center gap-3">
                 <Mail size={18} className="text-blue-400" />
-                <span>mitanshugoel@email.com</span>
+                <span>mitanshug2004@email.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin size={18} className="text-green-400" />
@@ -48,7 +48,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={18} className="text-orange-400" />
-                <span>+91 9876543210</span> {/* Replace with actual number if needed */}
+                <span>+91 8595657583</span> {/* Replace with actual number if needed */}
               </div>
             </div>
           </div>
