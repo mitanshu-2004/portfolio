@@ -19,7 +19,7 @@ export default function HeroAbout() {
 
         {/* Title */}
         <p className="text-xl md:text-2xl text-gray-300 mb-8 font-light">
-          Robotics Enginee | Software Developer
+          Robotics Engineer | Software Developer
         </p>
 
         {/* About Paragraph */}
