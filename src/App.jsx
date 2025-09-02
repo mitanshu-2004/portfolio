@@ -18,9 +18,9 @@ function App() {
     <div className="bg-gray-950 text-white">
       <SocialBar />
       <About />
-      <Experience />
       <Projects />
       <Skills />
+      <Experience />
       <Footer />
     </div>
   )

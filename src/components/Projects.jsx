@@ -51,6 +51,20 @@ export default function Projects() {
       color: "text-purple-400",
       status: "Live",
     },
+    {
+      title: "Stock Influence",
+      description:
+        "Developed a web app to analyze correlations between user-provided data and historical stock prices. Engineered a FastAPI backend to process user-uploaded CSV data, fetch corresponding stock data from YahooFinance, and perform in-depth correlation analysis (Pearson, Spearman, Kendall).",
+      tech: ["FastAPI", "React", "JavaScript", "HTML", "CSS", "Python", "Pandas", "NumPy", "SciPy", "yfinance"],
+      github: "https://github.com/mitanshu-2004/Stock-Influence",
+      live: "https://stock-influence.vercel.app/",
+      hasGithub: true,
+      hasLive: true,
+      icon: <Gamepad2 className="w-6 h-6" />,
+      color: "text-purple-400",
+      status: "Live",
+    }, 
+
     
   ]
 
@@ -70,7 +84,7 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-24 px-6 bg-gray-950">
+    <section id="projects" className="py-24 px-6 bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Featured Projects</h2>

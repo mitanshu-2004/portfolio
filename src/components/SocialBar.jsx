@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Download } from "lucide-react"
+import { Github, Linkedin, Mail, Download, Instagram } from "lucide-react"
 
 export default function SocialBar() {
   const socialLinks = [
@@ -21,9 +21,9 @@ export default function SocialBar() {
       color: "hover:text-green-400 hover:bg-green-500/10",
     },
     {
-      icon: <Download size={20} />,
-      href: "/resume.pdf",
-      label: "Resume",
+      icon: <Instagram size={20} />,
+      href: "https://www.instagram.com/mitanshu._.05/",
+      label: "Instagram",
       color: "hover:text-purple-400 hover:bg-purple-500/10",
       download: true,
     },
