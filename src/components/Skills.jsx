@@ -1,59 +1,93 @@
+import { Code, Cpu, Database, Wrench, Brain, Globe } from "lucide-react"
+
 export default function Skills() {
   const skillCategories = [
     {
-      title: "Languages",
-      skills: ["JavaScript", "c++", "Python", "SQL"],
-      color: "border-blue-500/20 bg-blue-500/5",
-      iconColor: "text-blue-400",
+      title: "Programming Languages",
+      icon: <Code className="w-6 h-6" />,
+      skills: ["Python", "C++", "JavaScript", "C", "SQL", "Embedded C"],
+      color: "border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10",
+      iconColor: "text-cyan-400",
+      glowColor: "hover:shadow-cyan-500/30",
     },
     {
-      title: "Full-Stack Development",
-      skills: ["React", "Next.js", "Tailwind CSS", "FastAPI", "Express.js"],
-      color: "border-green-500/20 bg-green-500/5",
+      title: "Robotics & Computer Vision",
+      icon: <Cpu className="w-6 h-6" />,
+      skills: ["ROS/ROS2", "MoveIt", "Gazebo", "ROS2 Control", "OpenCV", "YOLO", ],
+      color: "border-green-500/30 bg-gradient-to-br from-green-500/10 to-emerald-500/10",
       iconColor: "text-green-400",
+      glowColor: "hover:shadow-green-500/30",
     },
     {
-      title: "Databases",
-      skills: ["PostgreSQL", "MongoDB", "Redis"],
-      color: "border-yellow-500/20 bg-yellow-500/5",
-      iconColor: "text-yellow-400",
+      title: "Web Development",
+      icon: <Globe className="w-6 h-6" />,
+      skills: ["React", "FastAPI", "Express", "Tailwind CSS"],
+      color: "border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10",
+      iconColor: "text-purple-400",
+      glowColor: "hover:shadow-purple-500/30",
+    },
+    {
+      title: "AI/ML & Scientific Computing",
+      icon: <Brain className="w-6 h-6" />,
+      skills: ["Pandas", "NumPy", "SciPy", "Sentence Transformers"],
+      color: "border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 to-violet-500/10",
+      iconColor: "text-indigo-400",
+      glowColor: "hover:shadow-indigo-500/30",
     },
     
     {
-      title: "Others",
-      skills: ["Git", "Docker","Linux"],
-      color: "border-pink-500/20 bg-pink-500/5",
+      title: "Databases & Data",
+      icon: <Database className="w-6 h-6" />,
+      skills: ["PostgreSQL", "MongoDB", "MySQL", "Firebase", "ChromaDB"],
+      color: "border-yellow-500/30 bg-gradient-to-br from-yellow-500/10 to-orange-500/10",
+      iconColor: "text-yellow-400",
+      glowColor: "hover:shadow-yellow-500/30",
+    },
+    {
+      title: "Tools & Platforms",
+      icon: <Wrench className="w-6 h-6" />,
+      skills: ["Git", "Docker", "Linux", "Fusion 360"],
+      color: "border-pink-500/30 bg-gradient-to-br from-pink-500/10 to-purple-500/10",
       iconColor: "text-pink-400",
+      glowColor: "hover:shadow-pink-500/30",
     },
   ]
 
   return (
-    <section id="skills" className="py-24 px-6 bg-gray-900">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-24 px-6 bg-black relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(34,211,238,0.05),transparent_50%),radial-gradient(circle_at_75%_75%,rgba(168,85,247,0.05),transparent_50%)]"></div>
+      <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse delay-300"></div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Technical Skills</h2>
-          <p className="text-gray-400 text-lg">
-            Core technologies and tools I use to build full-stack applications,
-            manage data, and deploy cloud-native solutions.
-          </p>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">Skills</span>
+          </h2>
+          
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className={`p-6 rounded-xl border ${category.color} hover:border-opacity-40 transition-all duration-300 group`}
+              className={`p-6 rounded-xl border ${category.color} ${category.glowColor} hover:border-opacity-60 transition-all duration-500 group backdrop-blur-sm hover:scale-[1.02] hover:shadow-2xl`}
             >
-              <h3
-                className={`text-lg font-semibold mb-4 ${category.iconColor} group-hover:scale-105 transition-transform`}
-              >
-                {category.title}
-              </h3>
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`${category.iconColor} group-hover:scale-110 transition-all duration-300`}>
+                  {category.icon}
+                </div>
+                <h3
+                  className={`text-lg font-semibold ${category.iconColor} group-hover:text-white transition-colors duration-300`}
+                >
+                  {category.title}
+                </h3>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
                   <span
                     key={skillIndex}
-                    className="px-3 py-1.5 bg-gray-800 text-gray-300 text-sm rounded-lg border border-gray-700 hover:border-gray-600 hover:bg-gray-750 transition-all duration-200"
+                    className="px-3 py-1.5 bg-black/60 text-gray-300 text-sm rounded-lg border border-gray-700 hover:border-gray-500 hover:bg-black/80 hover:text-white transition-all duration-200 hover:shadow-lg hover:shadow-white/10"
                   >
                     {skill}
                   </span>
@@ -62,6 +96,8 @@ export default function Skills() {
             </div>
           ))}
         </div>
+
+        
       </div>
     </section>
   )

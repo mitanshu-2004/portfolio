@@ -1,62 +1,78 @@
 "use client"
 
-import { Mail, MapPin, Phone } from "lucide-react"
-import { scrollToSection } from "../utils/helpers"
+import { Mail, MapPin, Phone, GraduationCap } from "lucide-react"
+
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" })
+  }
+}
 
 export default function Footer() {
   return (
-    <footer section id="footer" className="bg-gray-900 border-t border-gray-800 py-16">
-      <div className="max-w-6xl mx-auto px-6">
+    <footer id="footer" className="bg-black border-t border-gray-800/50 py-16 relative overflow-hidden">
+      {/* Background neon effects */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* About */}
           <div>
             <h3 className="text-xl font-bold text-white mb-2">
-              Mitanshu<span className="text-blue-400">.</span>
+              Mitanshu<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">.</span>
             </h3>
-            <p className="text-gray-400">
-              Full-stack developer focused on writing useful code and building real systems—both web and hardware.
+            <p className="text-gray-400 mb-4">
+              Systems engineer focused on building integrated solutions that bridge hardware and software—from embedded robotics to AI-powered applications.
             </p>
+            
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">Quick Navigation</h4>
             <div className="space-y-2">
-              {["About", "Experience", "Projects", "Skills"].map((item) => (
+              {[
+                { name: "About", id: "hero-about" },
+                { name: "Experience", id: "experience" },
+                { name: "Projects", id: "projects" },
+                { name: "Skills", id: "skills" }
+              ].map((item) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="block text-gray-400 hover:text-white transition-colors text-sm"
+                  key={item.name}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block text-gray-400 hover:text-cyan-400 transition-colors text-sm hover:translate-x-1 transition-transform duration-200"
                 >
-                  {item}
+                  {item.name}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Get in Touch */}
+          {/* Contact Information */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
+            <h4 className="text-white font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Get in Touch</h4>
             <div className="space-y-4 text-sm text-gray-400">
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-blue-400" />
-                <span>mitanshug2004@email.com</span>
+              <div className="flex items-center gap-3 group hover:text-cyan-400 transition-colors">
+                <Mail size={18} className="text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span>mitanshug2004@gmail.com</span>
               </div>
-              <div className="flex items-center gap-3">
-                <MapPin size={18} className="text-green-400" />
+              <div className="flex items-center gap-3 group hover:text-green-400 transition-colors">
+                <MapPin size={18} className="text-green-400 group-hover:scale-110 transition-transform" />
                 <span>Delhi, India</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone size={18} className="text-orange-400" />
-                <span>+91 8595657583</span> {/* Replace with actual number if needed */}
+              <div className="flex items-center gap-3 group hover:text-orange-400 transition-colors">
+                <Phone size={18} className="text-orange-400 group-hover:scale-110 transition-transform" />
+                <span>+91 8595657583</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-gray-500 text-sm">© 2025 Mitanshu Goel. All rights reserved.</p>
-        </div>
+        
+
+        
       </div>
     </footer>
   )
