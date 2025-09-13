@@ -16,7 +16,7 @@ export default function PortfolioPage() {
         <div className="absolute bottom-1/4 right-1/4 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="bg-black/70 backdrop-blur-xl border border-cyan-500/20 rounded-3xl shadow-[0_0_40px_rgba(0,255,255,0.15)] p-4 md:p-6 flex flex-col md:flex-row items-start gap-6 transition-all duration-500 ease-out">
+          <div className="bg-black/70 backdrop-blur-xl border border-cyan-500/20 rounded-3xl shadow-[0_0_40px_rgba(0,255,255,0.15)] p-6 md:p-6 flex flex-col md:flex-row items-center gap-6 transition-all duration-500 ease-out">
             <Image
               src="/profile.png"
               alt="Profile Photo"
@@ -45,19 +45,18 @@ export default function PortfolioPage() {
             <p className="text-center text-gray-400 text-xs md:text-sm mb-4 tracking-[0.2em] uppercase font-medium">
               Specialized In
             </p>
+
             <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm font-medium">
-              <span className="px-5 py-2.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center gap-2 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition">
-                <Cpu size={16} /> IoT & Embedded Systems
+              <span className="px-5 py-2.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center gap-2 hover:bg-orange-500/20 hover:border-orange-500/50 transition">
+                <Briefcase size={16} /> Full-Stack Development
               </span>
-              <span className="px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 flex items-center gap-2 hover:bg-green-500/20 hover:border-green-500/50 transition">
-                <Layers size={16} /> Robotics & Automation
+              <span className="px-5 py-2.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center gap-2 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition">
+                <Cpu size={16} /> IoT & Robotics
               </span>
               <span className="px-5 py-2.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center gap-2 hover:bg-purple-500/20 hover:border-purple-500/50 transition">
                 <Code2 size={16} /> AI & Machine Learning
               </span>
-              <span className="px-5 py-2.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center gap-2 hover:bg-orange-500/20 hover:border-orange-500/50 transition">
-                <Briefcase size={16} /> Full-Stack Development
-              </span>
+              
             </div>
           </div>
         </div>
