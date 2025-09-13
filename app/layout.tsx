@@ -53,7 +53,7 @@ export const metadata = {
     shortcut: '/portfolio.png',
     apple: '/portfolio.png',
   },
-  themeColor: '#1a202c', // A dark theme color
+
   openGraph: {
     title: 'Mitanshu Goel - Portfolio',
     description:
@@ -79,6 +79,10 @@ export const metadata = {
     creator: '@MitanshuGoel', // Replace with actual Twitter handle if available
     images: ['https://mitanshu.me/back.png'],
   },
+};
+
+export const viewport = {
+  themeColor: '#1a202c',
 };
 
 

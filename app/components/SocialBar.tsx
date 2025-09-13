@@ -41,6 +41,7 @@ export default function SocialBar() {
             rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
             className={`p-3 text-gray-400 rounded-full transition-all duration-300 hover:scale-110 ${link.color}`}
             title={link.label}
+            data-analytics-id={`social-${link.label.toLowerCase()}`}
           >
             {link.icon}
           </a>

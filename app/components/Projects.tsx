@@ -123,6 +123,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-3 py-1 text-xs font-medium rounded-full border bg-black/60 text-gray-300 border-gray-700 hover:bg-gray-800/80 hover:text-white hover:border-gray-500 transition-all inline-flex items-center gap-1.5 hover:shadow-lg hover:shadow-white/10"
+                          data-analytics-id={`project-${project.title.replace(/\s/g, '-')}-github`}
                         >
                           <Github size={12} />
                           GitHub
@@ -134,6 +135,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-3 py-1 text-xs font-medium rounded-full border bg-cyan-500/20 text-cyan-400 border-cyan-500/50 hover:bg-cyan-500/30 hover:border-cyan-500/70 transition-all inline-flex items-center gap-1.5 hover:shadow-lg hover:shadow-cyan-500/20"
+                          data-analytics-id={`project-${project.title.replace(/\s/g, '-')}-live-demo`}
                         >
                           <ExternalLink size={12} />
                           Live Demo

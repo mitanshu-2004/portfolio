@@ -35,13 +35,36 @@ export default function Analytics() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(safeInfo),
-        }).catch(() => {
-          console.warn("Analytics logging failed.");
-        });
+        }).catch(() => {});
       }
     };
 
     collectAndSendAnalytics();
+
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const interactiveElement = target.closest('[data-analytics-id]') as HTMLElement;
+
+      if (!interactiveElement) {
+        return; 
+      }
+
+      const analyticsId = interactiveElement.dataset.analyticsId;
+
+      if (apiUrl && analyticsId) {
+        fetch(`${apiUrl}/click`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ analyticsId, timestamp: new Date().toISOString(), currentUrl: window.location.href }),
+        }).catch(() => {});
+      }
+    };
+
+    document.body.addEventListener('click', handleClick);
+
+    return () => {
+      document.body.removeEventListener('click', handleClick);
+    };
   }, []);
 
   return null;
