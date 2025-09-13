@@ -16,7 +16,7 @@ export default function Experience() {
     {
       year: "2024",
       title: "Robotics Intern - Nextup Robotics",
-      desc: "Developing advanced motion planning algorithms for 6-DOF robotic manipulators using MoveIt framework and ROS Noetic. Implementing inverse kinematics solutions and trajectory optimization for pick-and-place operations. Targeting 30% reduction in task execution time through optimized path planning and real-time collision avoidance systems.",
+      desc: "Developing advanced motion planning algorithms for 6-DOF robotic manipulators using MoveIt framework and ROS2 Humble. Implementing inverse kinematics solutions and trajectory optimization for pick-and-place operations. Targeting reduction in task execution time through optimized path planning and real-time collision avoidance systems.",
       color: "bg-gradient-to-r from-green-500 to-emerald-500",
       glowColor: "shadow-green-500/40",
       borderColor: "border-green-500/50",
@@ -27,7 +27,7 @@ export default function Experience() {
     {
       year: "2023",
       title: "Core Member - A.T.O.M Robotics Society",
-      desc: "Developed hexapod walking robot with adaptive gait control and 6-DOF robotic arm for precision manipulation. Competed in ABU Robocon and International Rover Challenge (IRC). Organized technical workshops on embedded robotics, ROS development, and AI integration for fellow students, fostering campus-wide technical learning.",
+      desc: "Worked with the team on hexapod walking robot with adaptive gait control and 6-DOF robotic arm for precision manipulation. Competed in ABU Robocon and International Rover Challenge (IRC). Organized technical workshops on embedded robotics, ROS development, and AI integration for fellow students, fostering campus-wide technical learning.",
       color: "bg-gradient-to-r from-purple-500 to-pink-500",
       glowColor: "shadow-purple-500/40",
       borderColor: "border-purple-500/50",
@@ -38,7 +38,7 @@ export default function Experience() {
     {
       year: "2022",
       title: "Started B.Tech in ECE - MAIT Delhi",
-      desc: "Commenced Bachelor of Technology in Electronics & Communication Engineering with AI/ML minor specialization. Focusing on embedded systems, signal processing, and intelligent control systems. Maintaining 8.5+ CGPA while actively participating in technical competitions, hackathons, and research projects.",
+      desc: "Commenced Bachelor of Technology in Electronics & Communication Engineering with AI/ML minor specialization. Focusing on embedded systems, signal processing, and intelligent control systems. Actively participating in technical competitions, hackathons, and research projects.",
       color: "bg-gradient-to-r from-orange-500 to-yellow-500",
       glowColor: "shadow-orange-500/40",
       borderColor: "border-orange-500/50",
@@ -49,7 +49,7 @@ export default function Experience() {
     {
       year: "2021",
       title: "Programming Journey Begins",
-      desc: "Initiated programming journey with Python, developing sophisticated Discord bots with advanced features including music streaming, moderation tools, and database integration. Successfully delivered 10+ freelance projects on Fiverr and Upwork, earning consistent 5-star ratings while building foundational skills in API development and database management.",
+      desc: "Initiated programming journey with Python, developing sophisticated Discord bots with advanced features including music streaming, moderation tools, and database integration. Successfully delivered freelance projects on Fiverr and Upwork, while building foundational skills in API development and database management.",
       color: "bg-gradient-to-r from-pink-500 to-red-500",
       glowColor: "shadow-pink-500/40",
       borderColor: "border-pink-500/50",
