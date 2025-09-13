@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, Code2, Cpu, Layers } from "lucide-react";
+import { Briefcase, Code2, Cpu, Layers, Mail } from "lucide-react";
 import Image from 'next/image';
 
 export default function PortfolioPage() {
@@ -9,20 +9,20 @@ export default function PortfolioPage() {
     <main className="bg-black text-white overflow-x-hidden font-sans">
       <section
         id="hero-about"
-        className={`h-screen flex flex-col justify-start items-center px-6 pt-0 pb-0 relative transition-all duration-1000 opacity-100 translate-y-0`}
+        className={`min-h-screen flex flex-col justify-center items-center px-6 py-12 relative transition-all duration-1000 opacity-100 translate-y-0`}
       >
         <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.04)_1px,transparent_1px)] bg-[size:60px_60px]" />
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
-        <div className="max-w-6xl mx-auto relative z-10 mt-12">
-          <div className="bg-black/70 backdrop-blur-xl border border-cyan-500/20 rounded-3xl shadow-[0_0_40px_rgba(0,255,255,0.15)] p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 transition-all duration-500 ease-out">
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="bg-black/70 backdrop-blur-xl border border-cyan-500/20 rounded-3xl shadow-[0_0_40px_rgba(0,255,255,0.15)] p-4 md:p-6 flex flex-col md:flex-row items-start gap-6 transition-all duration-500 ease-out">
             <Image
               src="/profile.png"
               alt="Profile Photo"
-              width={224}
-              height={224}
-              className="w-44 h-44 md:w-56 md:h-56 rounded-2xl object-cover border-4 border-cyan-500/40 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-500"
+              width={176}
+              height={176}
+              className="w-32 h-32 md:w-44 md:h-44 rounded-2xl object-cover border-4 border-cyan-500/40 shadow-lg hover:shadow-cyan-400/50 transition-all duration-500"
             />
 
             <div className="text-center md:text-left max-w-2xl space-y-5">
@@ -33,7 +33,11 @@ export default function PortfolioPage() {
                 <span className="text-cyan-400">Software Engineer</span>
               </p>
               <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light">
-                I am an engineering student with a passion for building intelligent software. I have a strong foundation across multiple domains, specializing in robotics software, artificial intelligence, and full-stack development. I enjoy tackling complex challenges by engineering creative and robust software solutions.
+                I am an engineering student with a passion for building intelligent software. I enjoy tackling complex challenges by engineering creative and robust software solutions.
+              </p>
+              <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light flex items-center gap-2">
+                <Mail size={18} className="text-cyan-400" />
+                <a href="mailto:mitanshug2004@gmail.com" className="text-cyan-400 hover:underline">mitanshug2004@gmail.com</a>
               </p>
             </div>
           </div>

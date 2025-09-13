@@ -29,7 +29,7 @@ export default function SocialBar() {
   ]
 
   return (
-    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
       <div className="flex items-center gap-1 bg-black/80 backdrop-blur-md border border-gray-700/50 rounded-full px-2 py-2 shadow-2xl shadow-cyan-500/10">
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-sm -z-10"></div>
         
