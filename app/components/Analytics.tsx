@@ -44,7 +44,11 @@ export default function Analytics() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(deviceInfo),
-      }).catch((err) => console.error('Log error:', err));
+      }).catch((error) => {
+        // Log a generic message, or do nothing
+        console.warn("Analytics logging failed.");
+        // Avoid logging the error object directly to prevent exposing sensitive info
+      });
     }
   }, []);
 

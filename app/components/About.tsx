@@ -25,20 +25,19 @@ export default function PortfolioPage() {
               className="w-32 h-32 md:w-44 md:h-44 rounded-2xl object-cover border-4 border-cyan-500/40 shadow-lg hover:shadow-cyan-400/50 transition-all duration-500"
             />
 
-            <div className="text-center md:text-left max-w-2xl space-y-5">
+            <div className="text-center md:text-left space-y-3">
               <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-md">
                 Mitanshu Goel
               </h1>
               <p className="text-lg md:text-xl text-gray-300 font-medium tracking-wide">
                 <span className="text-cyan-400">Software Engineer</span>
               </p>
-              <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light">
-                I am an engineering student with a passion for building intelligent software. I enjoy tackling complex challenges by engineering creative and robust software solutions.
+              <p className="text-white text-sm md:text-base leading-loose font-light">
+                I’m an engineering student who builds intelligent systems in robotics, AI, and software. <br />
+                I’ve gained hands-on experience through internships in automation and computer vision. <br />
+                Beyond academics, I contribute to open-source and take freelance projects. <br />
               </p>
-              <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light flex items-center gap-2">
-                <Mail size={18} className="text-cyan-400" />
-                <a href="mailto:mitanshug2004@gmail.com" className="text-cyan-400 hover:underline">mitanshug2004@gmail.com</a>
-              </p>
+              
             </div>
           </div>
 
