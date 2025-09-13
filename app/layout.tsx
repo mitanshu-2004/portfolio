@@ -2,14 +2,14 @@ import './globals.css';
 import Analytics from './components/Analytics';
 
 export const metadata = {
-  title: 'Mitanshu Goel',
+  title: 'Mitanshu Goel - Portfolio',
   description:
     'Engineering student specializing in robotics, AI, and full-stack development. ',
   icons: {
     icon: '/portfolio.png',
   },
   openGraph: {
-    title: 'Mitanshu Goel | Robotics, AI & Software Engineer',
+    title: 'Mitanshu Goel - Portfolio',
     description:
       'Engineering student specializing in robotics, AI, and full-stack development. ',
     url: 'https://mitanshu.me',
@@ -26,7 +26,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mitanshu Goel | Robotics, AI & Software Engineer',
+    title: 'Mitanshu Goel - Portfolio',
     description:
       'Engineering student specializing in robotics, AI, and full-stack development.',
     images: ['/back.png'],
