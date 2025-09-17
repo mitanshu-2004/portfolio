@@ -10,7 +10,7 @@ export default function SocialBar() {
     },
     {
       icon: <Linkedin size={20} />,
-      href: "https://www.linkedin.com/in/mitanshu-goel-177624248",
+      href: "https://www.linkedin.com/in/mitanshugoel/",
       label: "LinkedIn",
       color: "hover:text-blue-400 hover:bg-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30",
     },
