@@ -33,9 +33,9 @@ export default function PortfolioPage() {
                 <span className="text-cyan-400">Software Engineer</span>
               </p>
               <p className="text-white text-sm md:text-base leading-loose font-light">
-                I’m an engineering student who builds intelligent systems in robotics, AI, and software. <br />
-                I’ve gained hands-on experience through internships in automation and computer vision. <br />
-                Beyond academics, I contribute to open-source and take freelance projects. <br />
+                I’m an engineering student who builds intelligent systems in robotics, AI, and software.
+                I’ve gained hands-on experience through internships in automation and computer vision.
+                Beyond academics, I contribute to open-source and take freelance projects.
               </p>
               
             </div>
