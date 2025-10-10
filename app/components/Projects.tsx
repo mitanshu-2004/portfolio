@@ -7,8 +7,7 @@ export default function Projects() {
       description:
         "Designed, assembled, and programmed a complete 6-DOF robotic arm system from scratch. ROS-based motion planning with MoveIt, and a custom web interface for remote teleoperation. Includes real-time video feedback via OpenCV and WebSocket-based command execution for seamless human-robot interaction.",
       tech: ["Arduino Mega", "ROS", "MoveIt", "Gazebo", "Python", "C++", "JavaScript", "WebSockets", "OpenCV"],
-      github: "https://github.com/atom-robotics-lab/Arm_GUI",
-      hasGithub: true,
+      hasGithub: false,
       hasLive: false,
       icon: <Cpu className="w-6 h-6" />,
       color: "text-cyan-400",
@@ -17,12 +16,12 @@ export default function Projects() {
       bgGradient: "bg-gradient-to-br from-cyan-500/5 to-blue-500/5",
     },
     {
-      title: "MEMORY VAULT - AI Assistant",
+      title: "MiniRAG",
       description:
-        "Built an intelligent personal memory assistant using semantic search capabilities. Features FastAPI backend with ChromaDB vector database for AI-powered note retrieval using Sentence Transformers. React frontend provides intuitive organization, tagging, and natural language search through personal memories and documents.",
-      tech: ["FastAPI", "Python", "ChromaDB", "Sentence Transformers", "React", "JavaScript", "Vector Search", "AI/ML"],
+        "Built an intelligent question-answering system for industrial safety documents, architecting a complete Retrieval-Augmented Generation (RAG) pipeline. Increased answer relevance by training and deploying a logistic regression re-ranker with Scikit-learn, combining semantic similarity, keyword matching, and custom features.",
+      tech: ["FastAPI", "Python", "ChromaDB", "Sentence Transformer", "SQLite", "Scikit-learn"],
       hasGithub: true,
-      github: "https://github.com/mitanshu-2004/memory-assistant",
+      github: "https://github.com/mitanshu-2004/MiniRag-Reranker",
       hasLive: false,
       icon: <Zap className="w-6 h-6" />,
       color: "text-purple-400",
@@ -30,6 +29,7 @@ export default function Projects() {
       borderColor: "border-purple-500/30",
       bgGradient: "bg-gradient-to-br from-purple-500/5 to-pink-500/5",
     },
+    
     {
       title: "HEXAPOD Walking Robot",
       description:
@@ -45,32 +45,18 @@ export default function Projects() {
       bgGradient: "bg-gradient-to-br from-green-500/5 to-emerald-500/5",
     },
     {
-      title: "Stock Analysis Platform",
+      title: "StockMetrics",
       description:
-        "Developed a comprehensive web application for analyzing correlations between user-provided datasets and historical stock prices. Features CSV upload processing, integration with Yahoo Finance API, and advanced statistical analysis using Pearson, Spearman, and Kendall correlation methods with interactive data visualizations.",
-      tech: ["FastAPI", "Python", "Pandas", "NumPy", "SciPy", "yfinance", "React", "JavaScript", "Data Analysis"],
-      github: "https://github.com/mitanshu-2004/Stock-Influence",
-      live: "https://stock-influence.vercel.app/",
+        "Built an analytics tool to study correlations between IT stock prices and financial indicators using Pandas and NumPy. Implemented multiple linear regression models and visualized results with Scikit-learn and Seaborn to evaluate factor significance.",
+      tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "statsmodels", "Matplotlib", "Seaborn"],
       hasGithub: true,
-      hasLive: true,
+      github: "https://github.com/mitanshu-2004/StockMetrics",
+      hasLive: false,
       icon: <TrendingUp className="w-6 h-6" />,
       color: "text-yellow-400",
       glowColor: "shadow-yellow-500/30",
       borderColor: "border-yellow-500/30",
       bgGradient: "bg-gradient-to-br from-yellow-500/5 to-orange-500/5",
-    },
-    {
-      title: "SENTINEL - Mesh Safety Network",
-      description:
-        "Engineered an offline mesh-network safety system using ESP32 microcontrollers and ESP-NOW protocol. Features automatic fall detection via MPU6050 sensors, gas leak monitoring, and self-relaying emergency alerts. Designed for environments without Wi-Fi infrastructure, creating autonomous safety networks for remote locations.",
-      tech: ["ESP32", "ESP-NOW", "C++", "Python", "Arduino IDE", "MPU6050", "Gas Sensors", "Mesh Networking"],
-      hasGithub: false,
-      hasLive: false,
-      icon: <Shield className="w-6 h-6" />,
-      color: "text-orange-400",
-      glowColor: "shadow-orange-500/30",
-      borderColor: "border-orange-500/30",
-      bgGradient: "bg-gradient-to-br from-orange-500/5 to-red-500/5",
     },
     
     {
@@ -88,19 +74,33 @@ export default function Projects() {
       borderColor: "border-pink-500/30",
       bgGradient: "bg-gradient-to-br from-pink-500/5 to-purple-500/5",
     },
-  ]
+    {
+      title: "MEMORY VAULT - AI Assistant",
+      description:
+        "Built an intelligent personal memory assistant using semantic search capabilities. Features FastAPI backend with ChromaDB vector database for AI-powered note retrieval using Sentence Transformers. React frontend provides intuitive organization, tagging, and natural language search through personal memories and documents.",
+      tech: ["FastAPI", "Python", "ChromaDB", "Sentence Transformers", "React", "JavaScript", "Vector Search", "AI/ML"],
+      hasGithub: true,
+      github: "https://github.com/mitanshu-2004/memory-assistant",
+      hasLive: false,
+      icon: <Zap className="w-6 h-6" />,
+      color: "text-purple-400",
+      glowColor: "shadow-purple-500/30",
+      borderColor: "border-purple-500/30",
+      bgGradient: "bg-gradient-to-br from-purple-500/5 to-pink-500/5",
+    },
+    
+    
+  ];
 
   return (
     <section id="projects" className="py-24 px-6 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.02)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
-      
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">Projects</span>
           </h2>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <div
@@ -123,7 +123,6 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-3 py-1 text-xs font-medium rounded-full border bg-black/60 text-gray-300 border-gray-700 hover:bg-gray-800/80 hover:text-white hover:border-gray-500 transition-all inline-flex items-center gap-1.5 hover:shadow-lg hover:shadow-white/10"
-                          data-analytics-id={`project-${project.title.replace(/\s/g, '-')}-github`}
                         >
                           <Github size={12} />
                           GitHub
@@ -135,7 +134,6 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-3 py-1 text-xs font-medium rounded-full border bg-cyan-500/20 text-cyan-400 border-cyan-500/50 hover:bg-cyan-500/30 hover:border-cyan-500/70 transition-all inline-flex items-center gap-1.5 hover:shadow-lg hover:shadow-cyan-500/20"
-                          data-analytics-id={`project-${project.title.replace(/\s/g, '-')}-live-demo`}
                         >
                           <ExternalLink size={12} />
                           Live Demo
@@ -145,9 +143,7 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-
               <p className="text-gray-300 mb-6 leading-relaxed">{project.description}</p>
-
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tech.map((tech, techIndex) => (
                   <span

@@ -5,7 +5,7 @@ export default function Skills() {
     {
       title: "Programming Languages",
       icon: <Code className="w-6 h-6" />,
-      skills: ["Python", "C++", "JavaScript", "C", "SQL", "Embedded C"],
+      skills: ["Python", "C++", "JavaScript", "SQL", "Embedded C"],
       color: "border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10",
       iconColor: "text-cyan-400",
       glowColor: "hover:shadow-cyan-500/30",
@@ -27,9 +27,9 @@ export default function Skills() {
       glowColor: "hover:shadow-purple-500/30",
     },
     {
-      title: "AI/ML & Scientific Computing",
+      title: "Data Science and ML",
       icon: <Brain className="w-6 h-6" />,
-      skills: ["Pandas", "NumPy", "SciPy", "Sentence Transformers"],
+      skills: ["Pandas", "NumPy", "SciPy", "RAG", "Scikit-learn", "seaborn"],
       color: "border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 to-violet-500/10",
       iconColor: "text-indigo-400",
       glowColor: "hover:shadow-indigo-500/30",
@@ -46,7 +46,7 @@ export default function Skills() {
     {
       title: "Tools & Platforms",
       icon: <Wrench className="w-6 h-6" />,
-      skills: ["Git", "Docker", "Linux", "Fusion 360"],
+      skills: ["Git", "Docker", "Linux", "Google Colab", "Fusion 360"],
       color: "border-pink-500/30 bg-gradient-to-br from-pink-500/10 to-purple-500/10",
       iconColor: "text-pink-400",
       glowColor: "hover:shadow-pink-500/30",

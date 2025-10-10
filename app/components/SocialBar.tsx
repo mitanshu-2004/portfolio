@@ -20,12 +20,6 @@ export default function SocialBar() {
       label: "Email",
       color: "hover:text-green-400 hover:bg-green-500/20 hover:shadow-lg hover:shadow-green-500/30",
     },
-    {
-      icon: <Instagram size={20} />,
-      href: "https://www.instagram.com/mitanshu._.05/",
-      label: "Instagram",
-      color: "hover:text-pink-400 hover:bg-pink-500/20 hover:shadow-lg hover:shadow-pink-500/30",
-    },
   ]
 
   return (

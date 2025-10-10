@@ -10,9 +10,9 @@ export default function Home() {
     <div className="bg-gray-950 text-white min-h-screen">
       <SocialBar />
       <About />
+      <Experience />
       <Projects />
       <Skills />
-      <Experience />
       <Footer />
     </div>
   );
