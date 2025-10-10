@@ -71,9 +71,7 @@ export default function Footer() {
           </button>
         </form>
 
-        {submitted && (
-          <p className="text-green-400 mt-4">Thank you! Your message has been sent.</p>
-        )}
+        
       </div>
     </footer>
   )
