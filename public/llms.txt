@@ -1,0 +1,70 @@
+# Mitanshu Goel
+
+AI and robotics systems engineer based in Delhi, India. Specializes in
+edge-deployed inference pipelines, robot perception systems, and embedded AI
+at the intersection of physical hardware and learned models.
+
+## Core Profile
+
+- Full name: Mitanshu Goel
+- Role: AI & Robotics Engineer (open to research engineering and ML engineering roles)
+- Location: Delhi, India
+- Email: mitanshug2004@gmail.com
+- GitHub: https://github.com/mitanshu-2004
+- LinkedIn: https://linkedin.com/in/mitanshugoel
+- Education: B.Tech Electronics & Communication Engineering, Minor in AI/ML —
+  Maharaja Agrasen Institute of Technology, Delhi (2022–2026)
+
+## Technical Expertise
+
+- Robotics: ROS, ROS2, MoveIt, Gazebo, URDF, ROS2 Control, inverse kinematics
+- Computer Vision: YOLOv8, OpenCV, real-time object detection and tracking
+- Edge AI: llama.cpp, ONNX, 4-bit quantization, CPU-only inference
+- Generative AI: PyTorch, SDXL, LoRA, diffusion model latent space manipulation
+- Embedded Systems: ESP32, Raspberry Pi, ESP-NOW, Arduino, C++ firmware
+- ML: scikit-learn, XGBoost, time-series forecasting, RAG pipelines, ChromaDB
+- Infrastructure: Docker, FastAPI, Linux, Git
+
+## Key Projects
+
+### Darwin Studio
+Evolutionary image generation engine. Treats SDXL latent tensors as genetic material
+for mutation and crossover. Custom SLERP implementation for geometrically consistent
+latent interpolation. 1024px generation in <4s on T4 GPU (16GB VRAM).
+URL: https://mitanshugoel.dev/#darwin-studio
+
+### HEXAPOD
+Multi-legged locomotion system. ROS2 control stack deployed on Raspberry Pi via Docker.
+Geometric inverse kinematics for deterministic real-time execution. Simulation-verified
+gaits transfer to hardware without modification.
+URL: https://mitanshugoel.dev/#hexapod
+
+### Memory Assistant — Local RAG Pipeline
+Privacy-first retrieval-augmented generation. Phi-3 (4-bit quantized) via llama.cpp
+on CPU-only hardware. Hybrid dense-vector (ChromaDB) + keyword retrieval with
+weighted scoring. Zero external API dependency.
+URL: https://mitanshugoel.dev/#memory-assistant
+
+### SENTINEL
+Offline mesh emergency communication. ESP-NOW protocol across ESP32 nodes.
+Embedded fall detection (MPU6050 IMU) and gas hazard sensing. No internet
+dependency at any layer.
+URL: https://mitanshugoel.dev/#sentinel
+
+## Professional Experience
+
+### SarthakAI — AI & Robotics Intern (Jun–Aug 2025)
+- Real-time voice pipeline: NVIDIA NeMo STT with custom wake-word detection
+- YOLOv8 deployment for human tracking, package classification, gesture control
+- Polling-based fault-tolerant robot-AI interface architecture
+- ESP32/Raspberry Pi hardware telemetry workstation
+
+### Nextup Robotics — Robotics Intern (Jul–Sep 2024)
+- 6-DOF robotic arm configuration in ROS/Gazebo
+- MoveIt inverse kinematics and collision-aware trajectory planning (C++)
+- 50% reduction in execution time via shortest-path algorithm selection
+
+## Contact
+
+Email: mitanshug2004@gmail.com (response within 24 hours)
+Open to: Research engineering, ML engineering, robotics software — full-time or internship

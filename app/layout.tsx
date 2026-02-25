@@ -1,34 +1,89 @@
-import './globals.css';
-import Analytics from './components/Analytics';
+import type { Metadata } from 'next'
+import { Lora, DM_Sans, DM_Mono } from 'next/font/google'
+import './globals.css'
+import Nav from '@/components/Nav'
+import NavActiveState from '@/components/NavActiveState'
+import Footer from '@/components/Footer'
+import { personSchema } from '@/lib/schema'
 
-export const metadata = {
-  metadataBase: new URL('https://mitanshu.me'),
+const lora = Lora({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+export const metadata: Metadata = {
   title: {
-    default: 'Mitanshu Goel - Portfolio',
-    template: '%s | Mitanshu Goel - Portfolio',
+    default: 'Mitanshu Goel — AI & Robotics Engineer',
+    template: '%s | Mitanshu Goel',
   },
   description:
-    'Explore the portfolio of Mitanshu Goel, an engineering student specializing in robotics, AI, and full-stack development. Featuring projects in ROS, computer vision, machine learning, and web technologies.',
+    'AI and robotics systems engineer building edge-deployed inference pipelines, robot perception systems, and embedded AI. B.Tech ECE, MAIT Delhi. Open to research engineering and robotics roles.',
   keywords: [
-    'Mitanshu Goel',
-    'robotics',
-    'AI',
-    'artificial intelligence',
-    'full-stack development',
-    'software engineer',
-    'portfolio',
-    'ROS',
-    'computer vision',
+    'AI engineer',
+    'robotics engineer',
     'machine learning',
-    'web development',
-    'Next.js',
-    'React',
-    'Python',
-    'C++',
-    'embedded systems',
+    'ROS2',
+    'YOLOv8',
+    'edge inference',
+    'embedded AI',
+    'Delhi',
+    'Mitanshu Goel',
+    'MAIT',
+    'computer vision',
+    'SLAM',
+    'llama.cpp',
+    'SDXL',
   ],
+  authors: [{ name: 'Mitanshu Goel', url: 'https://mitanshugoel.dev' }],
+  creator: 'Mitanshu Goel',
+  metadataBase: new URL('https://mitanshugoel.dev'),
   alternates: {
-    canonical: 'https://mitanshu.me',
+    canonical: 'https://mitanshugoel.dev',
+  },
+  openGraph: {
+    type: 'profile',
+    firstName: 'Mitanshu',
+    lastName: 'Goel',
+    username: 'mitanshugoel',
+    gender: 'male',
+    locale: 'en_IN',
+    siteName: 'Mitanshu Goel',
+    url: 'https://mitanshugoel.dev',
+    title: 'Mitanshu Goel — AI & Robotics Engineer',
+    description:
+      'AI and robotics systems engineer building edge-deployed inference pipelines, robot perception systems, and embedded AI. B.Tech ECE, MAIT Delhi. Open to research engineering and robotics roles.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Mitanshu Goel — AI & Robotics Engineer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mitanshu Goel — AI & Robotics Engineer',
+    description:
+      'AI and robotics systems engineer building edge-deployed inference pipelines, robot perception systems, and embedded AI.',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -41,62 +96,47 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  author: {
-    name: 'Mitanshu Goel',
-    url: 'https://mitanshu.me',
-  },
-  creator: 'Mitanshu Goel',
-  publisher: 'Mitanshu Goel',
-  lastModified: '2025-09-13',
   icons: {
-    icon: '/portfolio.png',
-    shortcut: '/portfolio.png',
-    apple: '/portfolio.png',
-  },
-
-  openGraph: {
-    title: 'Mitanshu Goel - Portfolio',
-    description:
-      'Explore the portfolio of Mitanshu Goel, an engineering student specializing in robotics, AI, and full-stack development. Featuring projects in ROS, computer vision, machine learning, and web technologies.',
-    url: 'https://mitanshu.me',
-    siteName: 'Mitanshu Goel Portfolio',
-    images: [
-      {
-        url: 'https://mitanshu.me/back.png',
-        width: 1200,
-        height: 630,
-        alt: 'Mitanshu Goel Portfolio',
-      },
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
-    locale: 'en_US',
-    type: 'website',
+    apple: '/apple-touch-icon.png',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Mitanshu Goel - Portfolio',
-    description:
-      'Explore the portfolio of Mitanshu Goel, an engineering student specializing in robotics, AI, and full-stack development. Featuring projects in ROS, computer vision, machine learning, and web technologies.',
-    creator: '@MitanshuGoel', // Replace with actual Twitter handle if available
-    images: ['https://mitanshu.me/back.png'],
-  },
-};
-
-export const viewport = {
-  themeColor: '#1a202c',
-};
-
+  manifest: '/site.webmanifest',
+  // P4-5: GSC verification code removed — add after deploying to Vercel
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${lora.variable} ${dmSans.variable} ${dmMono.variable}`}
+    >
+      <head>
+        {/* P4-4: theme-color for mobile browser chrome */}
+        <meta name="theme-color" content="#f7f5f0" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        {/* Strip URL hash on load so browser doesn't auto-scroll to #chat etc. */}
+        <script dangerouslySetInnerHTML={{ __html: `if(window.location.hash)history.replaceState(null,'',location.pathname+location.search)` }} />
+      </head>
       <body>
-        <Analytics />
-        {children}
+        {/* P3-1: skip navigation */}
+        <a href="#hero" className="skip-link">
+          Skip to main content
+        </a>
+        <NavActiveState />
+        <Nav />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
-  );
+  )
 }
