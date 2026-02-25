@@ -115,7 +115,7 @@ export default function OGImage() {
           }}
         >
           <span style={{ fontSize: '16px', color: '#888888' }}>
-            mitanshugoel.dev
+            mitanshu.me
           </span>
         </div>
       </div>

@@ -1,13 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { KNOWLEDGE } from '@/lib/knowledge'
-import { validateMessageArray, getClientIP, hashString } from '@/lib/security'
-import {
-  logChatRequest,
-  logChatResponse,
-  logChatInteraction,
-  logError,
-  logValidationError,
-} from '@/lib/logger'
+import { validateMessageArray } from '@/lib/security'
+import { logError, logWarning, logInfo } from '@/lib/logger'
 import { createCompletionWithFailover, getApiStatus } from '@/lib/groq-client'
 
 export const runtime = 'edge'
@@ -66,9 +60,6 @@ interface Message {
 
 export async function POST(req: NextRequest) {
   const startTime = Date.now()
-  const ip = getClientIP(req.headers)
-  const userAgent = req.headers.get('user-agent') || 'unknown'
-  const recruiterHashedId = hashString(ip + userAgent)
 
   let messages: Message[]
   let payloadSize = 0
@@ -80,11 +71,7 @@ export async function POST(req: NextRequest) {
 
     // Validate payload size (max 1MB)
     if (payloadSize > 1024 * 1024) {
-      logValidationError({
-        endpoint: '/api/chat',
-        reason: 'Payload exceeds 1MB limit',
-        ip,
-      })
+      logWarning('Request payload exceeds 1MB limit')
       return NextResponse.json(
         { error: 'Request body too large' },
         {
@@ -101,11 +88,7 @@ export async function POST(req: NextRequest) {
     try {
       body = JSON.parse(bodyText)
     } catch {
-      logValidationError({
-        endpoint: '/api/chat',
-        reason: 'Invalid JSON in request body',
-        ip,
-      })
+      logWarning('Invalid JSON in request body')
       return NextResponse.json(
         { error: 'Invalid JSON in request body' },
         {
@@ -119,11 +102,7 @@ export async function POST(req: NextRequest) {
 
     // Validate messages array
     if (typeof body !== 'object' || body === null || !('messages' in body)) {
-      logValidationError({
-        endpoint: '/api/chat',
-        reason: 'Missing messages field',
-        ip,
-      })
+      logWarning('Missing messages field in request')
       return NextResponse.json(
         { error: 'Missing messages field in request' },
         {
@@ -137,11 +116,7 @@ export async function POST(req: NextRequest) {
 
     const validation = validateMessageArray((body as Record<string, unknown>).messages)
     if (!validation.valid) {
-      logValidationError({
-        endpoint: '/api/chat',
-        reason: validation.error || 'Invalid messages array',
-        ip,
-      })
+      logWarning(`Message validation failed: ${validation.error || 'Unknown error'}`)
       return NextResponse.json(
         { error: validation.error || 'Invalid messages array' },
         {
@@ -155,16 +130,10 @@ export async function POST(req: NextRequest) {
 
     messages = validation.data!
 
-    // Log incoming request
-    logChatRequest({
-      ip,
-      userAgent,
-      messagesCount: messages.length,
-      payloadSize,
-      timestamp: new Date().toISOString(),
-    })
+    // Log incoming request (simplified)
+    logInfo(`Chat API request received (${messages.length} messages, ${payloadSize} bytes)`)
   } catch (error) {
-    logError(error, { endpoint: '/api/chat', phase: 'request_parsing', ip })
+    logError('Failed to parse chat request', { phase: 'request_parsing' })
     return NextResponse.json(
       { error: 'Failed to process request' },
       {
@@ -192,26 +161,8 @@ export async function POST(req: NextRequest) {
     const groqDuration = Date.now() - startGroqTime
     const answer = result.answer || ''
 
-    // Log successful response
-    logChatResponse({
-      statusCode: 200,
-      responseTime: groqDuration,
-      answerPreview: answer.substring(0, 200),
-      tokenCount: result.tokenCount,
-    })
-
-    // Log the interaction (question + answer)
-    if (messages.length > 0) {
-      const lastUserMessage = messages.filter((m) => m.role === 'user').pop()
-      if (lastUserMessage) {
-        logChatInteraction({
-          question: lastUserMessage.content,
-          answerPreview: answer.substring(0, 500),
-          recruiterHashedId,
-          duration: groqDuration,
-        })
-      }
-    }
+    // Log successful response (simplified)
+    logInfo(`Chat API response successful (${groqDuration}ms, ${result.tokenCount} tokens)`)
 
     const totalDuration = Date.now() - startTime
     const origin = req.headers.get('origin') || 'unknown'
@@ -248,19 +199,14 @@ export async function POST(req: NextRequest) {
         errorMessage = 'Request timeout'
       }
 
-      logError(error, {
-        endpoint: '/api/chat',
+      logError('Groq API call failed', {
         phase: 'groq_api_call',
         statusCode,
-        ip,
+        message: error.message,
       })
     }
 
-    logChatResponse({
-      statusCode,
-      responseTime: groqDuration,
-      error: errorMessage,
-    })
+    logWarning(`Chat API response error (${statusCode}, ${groqDuration}ms)`)
 
     return NextResponse.json(
       { error: `Something went wrong. You can reach Mitanshu at ${CONTACT_EMAIL}` },

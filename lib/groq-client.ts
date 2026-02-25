@@ -6,7 +6,7 @@
  */
 
 import Groq from 'groq-sdk'
-import { logError, logChatResponse } from './logger'
+import { logError } from './logger'
 
 /**
  * Configuration for a single Groq API instance

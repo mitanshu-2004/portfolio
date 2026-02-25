@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   keywords: [
     'AI engineer',
     'robotics engineer',
+    'data science engineer',
+    'machine learning engineer',
     'machine learning',
     'ROS2',
     'YOLOv8',
@@ -50,12 +52,14 @@ export const metadata: Metadata = {
     'SLAM',
     'llama.cpp',
     'SDXL',
+    'reinforcement learning',
+    'research engineering',
   ],
-  authors: [{ name: 'Mitanshu Goel', url: 'https://mitanshugoel.dev' }],
+  authors: [{ name: 'Mitanshu Goel', url: 'https://mitanshu.me' }],
   creator: 'Mitanshu Goel',
-  metadataBase: new URL('https://mitanshugoel.dev'),
+  metadataBase: new URL('https://mitanshu.me'),
   alternates: {
-    canonical: 'https://mitanshugoel.dev',
+    canonical: 'https://mitanshu.me',
   },
   openGraph: {
     type: 'profile',
@@ -65,7 +69,7 @@ export const metadata: Metadata = {
     gender: 'male',
     locale: 'en_IN',
     siteName: 'Mitanshu Goel',
-    url: 'https://mitanshugoel.dev',
+    url: 'https://mitanshu.me',
     title: 'Mitanshu Goel — AI & Robotics Engineer',
     description:
       'AI and robotics systems engineer building edge-deployed inference pipelines, robot perception systems, and embedded AI. B.Tech ECE, MAIT Delhi. Open to research engineering and robotics roles.',

@@ -1,5 +1,6 @@
 /**
- * Security utilities for input validation, sanitization, and protection
+ * Security utilities for input validation and sanitization
+ * Focused on message validation for the /api/chat endpoint
  */
 
 /**
@@ -107,57 +108,4 @@ export function escapePotentialInjection(content: string): string {
     .replace(/\*\*(.+?)\*\*/g, '$1') // Remove markdown bold
     .replace(/__(.*?)__/g, '$1') // Remove markdown underline
     .trim()
-}
-
-/**
- * Get client IP from request
- */
-export function getClientIP(headers: Headers): string {
-  const forwarded = headers.get('x-forwarded-for')
-  if (forwarded) {
-    return forwarded.split(',')[0].trim()
-  }
-
-  const realIP = headers.get('x-real-ip')
-  if (realIP) {
-    return realIP
-  }
-
-  return 'unknown'
-}
-
-/**
- * Create a rate limit key from IP and endpoint
- */
-export function createRateLimitKey(ip: string, endpoint: string): string {
-  return `${ip}:${endpoint}`
-}
-
-/**
- * Check if request is from allowed origin
- */
-export function isAllowedOrigin(origin: string | null): boolean {
-  if (!origin) return false
-
-  const allowedOrigins = [
-    'https://mitanshu.me',
-    'https://www.mitanshu.me',
-    'http://localhost:3000', // Development
-    'http://localhost:3001', // Development
-  ]
-
-  return allowedOrigins.includes(origin)
-}
-
-/**
- * Hash string for anonymization
- */
-export function hashString(str: string): string {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i)
-    hash = (hash << 5) - hash + char
-    hash = hash & hash // Convert to 32-bit integer
-  }
-  return Math.abs(hash).toString(16)
 }

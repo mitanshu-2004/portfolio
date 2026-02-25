@@ -31,25 +31,25 @@ at the intersection of physical hardware and learned models.
 Evolutionary image generation engine. Treats SDXL latent tensors as genetic material
 for mutation and crossover. Custom SLERP implementation for geometrically consistent
 latent interpolation. 1024px generation in <4s on T4 GPU (16GB VRAM).
-URL: https://mitanshugoel.dev/#darwin-studio
+URL: https://mitanshu.me/#darwin-studio
 
 ### HEXAPOD
 Multi-legged locomotion system. ROS2 control stack deployed on Raspberry Pi via Docker.
 Geometric inverse kinematics for deterministic real-time execution. Simulation-verified
 gaits transfer to hardware without modification.
-URL: https://mitanshugoel.dev/#hexapod
+URL: https://mitanshu.me/#hexapod
 
 ### Memory Assistant — Local RAG Pipeline
 Privacy-first retrieval-augmented generation. Phi-3 (4-bit quantized) via llama.cpp
 on CPU-only hardware. Hybrid dense-vector (ChromaDB) + keyword retrieval with
 weighted scoring. Zero external API dependency.
-URL: https://mitanshugoel.dev/#memory-assistant
+URL: https://mitanshu.me/#memory-assistant
 
 ### SENTINEL
 Offline mesh emergency communication. ESP-NOW protocol across ESP32 nodes.
 Embedded fall detection (MPU6050 IMU) and gas hazard sensing. No internet
 dependency at any layer.
-URL: https://mitanshugoel.dev/#sentinel
+URL: https://mitanshu.me/#sentinel
 
 ## Professional Experience
 

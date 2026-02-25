@@ -1,53 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getClientIP, isAllowedOrigin, createRateLimitKey } from '@/lib/security'
-
-/**
- * In-memory rate limit store
- * In production on Vercel, each function instance has its own memory
- * This is sufficient for a portfolio site with moderate traffic
- */
-const rateLimitStore = new Map<
-  string,
-  {
-    count: number
-    resetTime: number
-  }
->()
-
-const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute in milliseconds
-const RATE_LIMIT_MAX_REQUESTS = 10 // 10 requests per minute
-
-/**
- * Check rate limit for an IP on an endpoint
- */
-function checkRateLimit(ip: string, endpoint: string): { allowed: boolean; retryAfter?: number } {
-  const key = createRateLimitKey(ip, endpoint)
-  const now = Date.now()
-
-  const record = rateLimitStore.get(key)
-
-  // No record or window expired
-  if (!record || now >= record.resetTime) {
-    rateLimitStore.set(key, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW,
-    })
-    return { allowed: true }
-  }
-
-  // Increment counter
-  if (record.count < RATE_LIMIT_MAX_REQUESTS) {
-    record.count++
-    return { allowed: true }
-  }
-
-  // Rate limit exceeded
-  const retryAfter = Math.ceil((record.resetTime - now) / 1000)
-  return { allowed: false, retryAfter }
-}
 
 /**
  * Main middleware function
+ * Handles HTTPS enforcement and CORS for the /api/chat endpoint
  */
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
@@ -60,7 +15,7 @@ export function middleware(request: NextRequest) {
     )
   }
 
-  // Only apply security middleware to API routes
+  // Only apply CORS middleware to API routes
   if (!pathname.startsWith('/api/')) {
     return NextResponse.next()
   }
@@ -68,10 +23,16 @@ export function middleware(request: NextRequest) {
   // 2. CORS Check (only for /api/chat endpoint)
   if (pathname === '/api/chat') {
     const origin = request.headers.get('origin')
+    const allowedOrigins = [
+      'https://mitanshu.me',
+      'https://www.mitanshu.me',
+      'http://localhost:3000',
+      'http://localhost:3001',
+    ]
 
     // Preflight request
     if (request.method === 'OPTIONS') {
-      if (origin && isAllowedOrigin(origin)) {
+      if (origin && allowedOrigins.includes(origin)) {
         return new NextResponse(null, {
           status: 200,
           headers: {
@@ -88,31 +49,10 @@ export function middleware(request: NextRequest) {
     }
 
     // Main request - check origin
-    if (!origin || !isAllowedOrigin(origin)) {
+    if (!origin || !allowedOrigins.includes(origin)) {
       return new NextResponse(JSON.stringify({ error: 'CORS policy violation' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
-      })
-    }
-  }
-
-  // 3. Rate Limiting (for /api/chat endpoint)
-  if (pathname === '/api/chat' && request.method === 'POST') {
-    const ip = getClientIP(request.headers)
-    const rateLimitCheck = checkRateLimit(ip, '/api/chat')
-
-    if (!rateLimitCheck.allowed) {
-      console.warn(`[RATE_LIMIT] Rate limit exceeded for IP ${ip} on /api/chat`)
-
-      return new NextResponse(JSON.stringify({ error: 'Rate limit exceeded' }), {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'Retry-After': String(rateLimitCheck.retryAfter),
-          'X-RateLimit-Limit': String(RATE_LIMIT_MAX_REQUESTS),
-          'X-RateLimit-Remaining': '0',
-          'X-RateLimit-Reset': String(Date.now() + (rateLimitCheck.retryAfter || 60) * 1000),
-        },
       })
     }
   }
