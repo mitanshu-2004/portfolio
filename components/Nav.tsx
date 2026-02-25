@@ -34,7 +34,7 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            <Link href="#chat">CV</Link>
+            <Link href="#chat">Chat</Link>
           </li>
           <li>
             <Link href="#contact">Contact</Link>
