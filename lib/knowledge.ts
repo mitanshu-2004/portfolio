@@ -1,144 +1,296 @@
 export const KNOWLEDGE = `
+## SNAPSHOT
+
+Mitanshu Goel — final-year Electronics & Communication Engineering student at MAIT Delhi, graduating June 2026. Works across three intersecting threads at the same time: real-time robotics control on industrial arms, continued-pretraining of foundation-language models, and production web systems. Currently building a 125 Hz bimanual VR teleoperation rig at Variety Innovation / Enferent.ai. Looking for full-time roles starting June 2026 in Robotics SWE, Research Engineering, ML Engineering, or Applied / Foundation-Model AI. Based in Delhi; open to relocation.
+
+---
+
+## CURRENT FOCUS & ASK
+
+- **Building right now:** bimanual VR teleoperation rig — Meta Quest 3 driving two Elite Robots CS66 industrial arms over a custom C++17 control loop on real-time Linux (SCHED_FIFO, mlockall, CPU pinning). Plus a §3.2-style imitation-learning dataset recorder for downstream policy training.
+- **Target roles:** Robotics SWE / Research Engineer / ML Engineer / Applied AI Engineer / Foundation-Model Engineer. Open to junior or new-grad level; would consider an extended internship that converts.
+- **Locations:** based in Delhi, India. Open to relocation for the right opportunity (US, EU, Singapore, Tokyo, Toronto). Remote-from-India is also fine.
+- **Start date:** available full-time from June 2026 onwards; available for internship work immediately.
+- **Comp expectations:** discussed directly — recruiters can reach mitanshug2004@gmail.com.
+
+---
+
+## ENGINEERING PHILOSOPHY
+
+Three habits that show up across his code:
+
+1. **Design from the deployment end first.** What runs on a Raspberry Pi. What fits in 16 GB VRAM. What survives a sensor dropout. He picks model size, retrieval depth, scheduler priority, and batch size from the hardware backwards, not from the paper forwards.
+2. **Intellectual honesty over inflated metrics.** He removes covariates that leak the survival time in his Cox model with inline comments explaining why. He acknowledged a flawed evaluation in MiniRag-Reranker rather than quietly shipping the inflated number. He published a failed-prediction post-mortem on a trading model that "scored 63% accuracy" but caught only 2 of 44 loss days. None of these were forced by reviewers — he found them himself.
+3. **Production hygiene at the right layer.** Multi-key Groq circuit breaker with 3-strike + round-robin + 8 s AbortController on his own portfolio. CSP + HSTS preload. Pydantic structural anti-hallucination guards in his RAG work. RotatingFileHandler-backed logging in his trading-bot CLI. Hub-checkpoint strategy on every CPT run so a Lightning session interruption doesn't lose progress.
+
+---
+
+## RARE CREDENTIALS
+
+Things most ECE new-grads do not have:
+
+- **Five model-training tracks** of continued-pretraining across Mistral 7B v0.3 (r=128 and r=256), Qwen 2.5 3B (r=16), Qwen 2.5 7B (r=128 A100), and a Karpathy-style nanoGPT trained from scratch. Real CPT configs with deliberate choices (embedding LR 5–10× smaller than main LR, lm_head + embed_tokens trained, rsLoRA at high ranks), not tutorial defaults.
+- **Real-time C++17 control on industrial arms** — SCHED_FIFO scheduling, mlockall, CPU pinning, 125 Hz bimanual VR teleop loop. Few candidates at any level have shipped real-time robot code.
+- **Sole-authored a 305-line ros2_control hardware interface** for an 18-DoF hexapod plus the URDF xacro (533 lines) and Gazebo Classic → Ignition Fortress migration. Most students touch ROS only at the application layer.
+- **Self-built training datasets on Hugging Face Hub** — raw Reddit text corpus and a pre-tokenized + packed variant for max_seq_length=2048.
+- **A failed-prediction post-mortem published in the repo**, not buried.
+
+---
+
+## TIMELINE
+
+| When | Where | What |
+|---|---|---|
+| School years | Self-employed | Freelance dev work — first paid coding gigs while still in school. |
+| 2022–2026 | MAIT Delhi | B.Tech, Electronics & Communication Engineering, minor in AI/ML. |
+| 2023 – present | A.T.O.M Robotics Lab, MAIT | Core technical member. Owns hexapod URDF + ros2_control + Fortress migration. |
+| Jul – Sep 2024 | Nextup Robotics | 6-DOF arm in ROS/Gazebo. Resolved sim-to-real URDF mismatches; ~50% reduction in trajectory execution time by selecting a more appropriate MoveIt planner. |
+| Jun – Aug 2025 | SarthakAI | NVIDIA NeMo (FastConformer-Transducer) STT + custom wake-word + YOLOv8 vision + ESP32 telemetry on a UBTech Yanshee humanoid. |
+| Aug 2025 – present | Variety Innovation / Enferent.ai | 125 Hz bimanual VR teleop on Elite CS66 arms in C++17 RT; §3.2-compatible imitation-learning dataset recorder. |
+
+Trajectory note: the through-line from hardware → AI-on-robots → foundation-model training is deliberate, not accidental. He has been heading toward Physical AI since 2023; the CPT/SFT work is the parallel "make the AI side as deep as the robotics side" investment.
+
+---
+
 ## EXPERIENCE
 
-### SarthakAI — AI & Robotics Intern (June 2025 – August 2025) · Delhi, India
-- Engineered a real-time voice pipeline using NVIDIA NeMo for speech-to-text with custom wake-word detection, integrated into a physical robot system. Latency requirements drove all architecture decisions.
-- Built a polling-based interface layer between robot hardware and an AI agent for low-latency query processing and feedback; designed for fault tolerance under intermittent hardware responses.
-- Trained and deployed custom YOLOv8 models for three distinct production tasks: human tracking, package classification, and gesture-based control — each with separate training regimes and inference pipelines.
-- Developed a hardware telemetry workstation on ESP32/Raspberry Pi capturing environmental sensor data for predictive analytics, bridging embedded firmware with Python processing layers.
+### Variety Innovation / Enferent.ai — Robotics Software Engineer Intern (current)
 
-### Nextup Robotics — Robotics Intern (July 2024 – September 2024) · Delhi, India
-- Configured a 6-DOF robotic arm in ROS/Gazebo, debugging URDF kinematic configurations and resolving simulation-to-real discrepancies blocking stable trajectory execution.
-- Integrated MoveIt for inverse kinematics and collision-aware trajectory planning using C++; achieved 50% reduction in execution time through shortest-path algorithm selection and parameter tuning.
+- Building a bimanual VR teleoperation rig from scratch: Meta Quest 3 driving two Elite Robots CS66 industrial arms over a custom C++17 control loop with strict real-time Linux scheduling (SCHED_FIFO, mlockall, CPU pinning).
+- Implemented damped-Jacobian inverse kinematics via Pinocchio with manipulability-adaptive damping and null-space regularisation. Three named singularity guards on joint and TCP rotation axes.
+- Wrote a §3.2-style imitation-learning dataset recorder that synchronously captures left+right arm states, headset pose, and TCP poses for downstream policy training.
+- Stack: C++17, ROS 2 Humble, Pinocchio, Elite Robots CS SDK (RTSI, EliteDriver), OpenVR / ALVR, real-time Linux, Docker (NVIDIA runtime + CycloneDDS).
 
-### A.T.O.M Robotics Club — Core Technical Member (October 2023 – Present) · MAIT, Delhi
-- Represents the institute in robotics competitions and multiple hackathons.
-- Organizes technical workshops, project demonstrations, and competitive events for the student community.
-- Mentors junior students in robotics and AI integration.
+### SarthakAI — AI & Robotics Intern (Jun – Aug 2025)
 
----
+- Real-time voice pipeline using NVIDIA NeMo FastConformer-Transducer with custom wake-word detection, integrated into a UBTech Yanshee humanoid.
+- Trained and deployed three YOLOv8 models for separate production tasks: human tracking, package classification, gesture-based control. Each had its own training regime + augmentation strategy + inference latency budget.
+- Designed a polling-based fault-tolerant interface between robot hardware and an AI inference agent so the system survived intermittent hardware response.
+- ESP32 / Raspberry Pi telemetry workstation bridging embedded firmware with Python analytics.
 
-## PROJECTS
+### Nextup Robotics — Robotics Intern (Jul – Sep 2024)
 
-### Darwin Studio
-- Tech stack: PyTorch, SDXL, LoRA, Diffusers
-- Evolutionary image generation engine that treats SDXL latent tensors (128×128) as genetic material for mutation and crossover operations.
-- Implemented custom Spherical Linear Interpolation (SLERP) from scratch to ensure geometric consistency during latent space interpolation — avoids the muddy averaging of standard linear interpolation.
-- Optimized SDXL Lightning inference on T4 GPUs (16GB VRAM) using VAE slicing, attention slicing, and aggressive garbage collection; achieves 1024px image generation in under 4 seconds.
-- GitHub: https://github.com/mitanshu-2004/darwin-studio
+- Configured a 6-DOF robotic arm in ROS / Gazebo. Debugged URDF kinematic configurations and resolved sim-to-real discrepancies that were blocking stable trajectory execution.
+- Integrated MoveIt for inverse kinematics and collision-aware trajectory planning in C++; ~50% reduction in execution time by selecting a more appropriate planner and tuning its parameters.
 
-### HEXAPOD
-- Tech stack: ROS2, Gazebo, RViz, Raspberry Pi, Docker, Python, C++, Fusion 360, ROS2 Control
-- Multi-legged locomotion system with full ROS2 control stack deployed on Raspberry Pi via Docker.
-- Geometric inverse kinematics for deterministic real-time leg trajectory execution.
-- Simulation-verified gaits in Gazebo/RViz transfer to hardware without modification.
-- GitHub: https://github.com/mitanshu-2004/hexapod
+### A.T.O.M Robotics Lab, MAIT — Core Technical Member (Oct 2023 – present)
 
-### Memory Assistant — Local RAG Pipeline
-- Tech stack: FastAPI, ChromaDB, Sentence-Transformers, Phi-3, llama.cpp, SQLAlchemy, React
-- Privacy-first retrieval-augmented generation pipeline running entirely offline — zero external API dependency.
-- Uses Phi-3 (4-bit quantized) via llama.cpp for CPU-only inference on consumer hardware.
-- Hybrid retrieval: dense vector search (ChromaDB) + keyword pattern matching with weighted scoring to prioritize exact matches.
-- Fault-tolerant processing with deterministic regex fallbacks for metadata extraction when LLM times out or hallucinates.
-- Automated content extraction from PDFs, DOCX, images (OCR), and web pages.
-- GitHub: https://github.com/mitanshu-2004/memory-assistant
-
-### SENTINEL
-- Tech stack: ESP32, ESP-NOW, C++, Python, Arduino IDE, MPU6050, Gas Sensors
-- Offline mesh emergency communication system — no internet dependency at any layer.
-- ESP-NOW protocol across multiple ESP32 nodes for low-latency mesh messaging.
-- Embedded fall detection using MPU6050 IMU and gas hazard sensing.
-- Autonomous alert transmission with hardware reliability testing in deployed environments.
-- GitHub: https://github.com/mitanshu-2004/sentinel
-
-### 6-DOF Robotic Arm
-- Tech stack: ROS, MoveIt, Gazebo, Python, C++, JavaScript
-- Motion planning, inverse kinematics, and trajectory execution using ROS and MoveIt.
-- Web-based remote control interface with live video feedback for teleoperation.
-
-### Retail Performance & Segmentation Engine
-- Tech stack: XGBoost, K-Means, Pandas, Python
-- Store performance forecasting using XGBoost Regressor with lag-based features to capture seasonal fulfillment trends.
-- Achieved 35% reduction in RMSE vs. baseline moving averages by incorporating temporal dependencies and holiday effects.
-- Segmented 50+ retail locations into 4 strategic clusters using K-Means on performance volatility for supply chain optimization.
-
-### StockMetrics — Quantitative Analysis Pipeline
-- Tech stack: Python, Pandas, SciPy, Statistical Modeling
-- Multivariate regression analysis on 20 years of historical data for Big 5 IT firms.
-- ETL pipeline aligning daily stock volatility with quarterly financial reports.
-- Validated fundamental drivers using F-tests and p-value analysis; identified EBITDA Margin Change as statistically significant predictor (p = 0.029).
-
-### Chess Platform
-- Tech stack: React, Firebase, FastAPI
-- Real-time multiplayer chess with Firebase Firestore synchronization and versioned state updates to prevent race conditions.
-- Lobby system with dynamic room management, configurable time controls (Bullet/Blitz/Rapid), and heartbeat-based presence monitoring.
-- Integrated Stockfish chess engine through FastAPI backend for deep position analysis without blocking the frontend.
-
-### Stock Correlation Analysis Platform
-- Tech stack: React, FastAPI, Pandas, SciPy, Chart.js
-- Time-series alignment system handling timezone normalization and market calendar synchronization.
-- Statistical validation using Fisher's z-transformation with confidence intervals and p-values across Pearson, Spearman, and Kendall methods.
-- Interactive visualization dashboard with correlation heatmaps and synchronized time-series overlays.
+- Sole author of the 18-DoF hexapod's URDF xacro (533 / 569 lines), the complete ros2_control hardware interface (305 / 305 lines), the Dockerised runtime with NVIDIA runtime + X11 + CycloneDDS, and the Gazebo Classic → Ignition Fortress migration.
+- Analytic IK and gait engine were written by collaborator AkshatSharma05; Mitanshu owns the description, hardware-interface, infrastructure, and platform-migration layers.
 
 ---
 
-## SKILLS & TOOLS
+## FOUNDATION-MODEL WORK
 
-### Robotics & Embedded
-ROS, ROS2, MoveIt, Gazebo, RViz, ROS2 Control, URDF, inverse kinematics, trajectory planning
-ESP32, Raspberry Pi, Arduino IDE, ESP-NOW, C++ firmware, MPU6050, embedded sensors
+Self-collected Reddit corpus. Five training tracks across four base architectures plus a from-scratch baseline. All scripts recovered and saved with HF tokens rotated to env vars.
 
-### AI / ML & Computer Vision
-PyTorch, YOLOv8, OpenCV, NVIDIA NeMo, SDXL, LoRA, Diffusers
-Sentence-Transformers, llama.cpp, ChromaDB, RAG pipelines
-scikit-learn, XGBoost, K-Means, time-series forecasting, regression analysis
-4-bit quantization, edge inference, CPU-only LLM deployment
+| HF repo | Base | Rank | Hardware | Status |
+|---|---|---|---|---|
+| huggingface.co/mitanshugoel/mistral-7b-reddit-cpt | unsloth/mistral-7b-v0.3 (4-bit) | LoRA r=128, rsLoRA | Colab T4 + FlashAttention 2 | 2,200 logged steps; public |
+| huggingface.co/mitanshugoel/qwen2.5-3b-cpt-adapter | Qwen 2.5 3B | LoRA r=16 | GPU | 170 steps with per-step checkpoints; public |
+| huggingface.co/mitanshugoel/reddit-nanogpt | Karpathy-style nanoGPT | — | GPU | Trained from scratch; public |
+| Mistral 7B Lightning L4 r=256 run | unsloth/mistral-7b-v0.3-bnb-4bit | LoRA r=256, rsLoRA | Lightning AI L4 24 GB | Higher-rank experiment; pre-tokenized snapshot was empty at run-time; kept as recovered experiment infrastructure, not presented as a completed model. |
+| Qwen 2.5 7B A100 r=128 run | unsloth/Qwen2.5-7B-bnb-4bit | LoRA r=128, rsLoRA | A100 80 GB, effective batch 32, linear LR schedule | Largest-batch run |
 
-### Languages
-Python, C++, TypeScript, JavaScript, SQL
+Self-built datasets:
+- mitanshugoel/reddit-cpt-dataset — raw Reddit text corpus.
+- mitanshugoel/Reddit_Dump_Tokenized — pre-tokenized + packed for max_seq_length=2048.
 
-### Infrastructure & Web
-Docker, FastAPI, Linux, Git, SQLAlchemy, Firebase, React, REST APIs
-Pandas, NumPy, Vite, Tailwind CSS, Chart.js, Express.js, Node.js
+**Choices that show up across the scripts and are not tutorial defaults:**
+- embedding_learning_rate 5–10× smaller than the main LoRA learning rate. Embedding gradients are noisy on a new corpus; this keeps CPT stable.
+- lm_head + embed_tokens in target_modules (not attention-only LoRA). Required for domain vocabulary adaptation.
+- use_rslora=True at high ranks. Rank-stabilised LoRA scales by 1/sqrt(r) instead of 1/r — prevents learning-rate collapse at r=128, r=256.
+- adamw_8bit for optimiser-state quantisation.
+- HF Hub hub_strategy="checkpoint" or a custom HFCheckpointCallback that pushes every 200 steps — survivability through cloud-session interruption.
+- attn_implementation="flash_attention_2" on T4.
+
+**Honest framing of the second Mistral run:** the r=256 Lightning L4 attempt failed mid-cell because the pre-tokenized dataset snapshot was empty at the moment Lightning pulled it. It's a recovered experiment-infrastructure artifact, not a completed model. Naming this honestly matters more than hiding it.
+
+---
+
+## ROBOTICS DEPTH
+
+- **Real-time control** — SCHED_FIFO scheduling, mlockall, CPU pinning, 125 Hz control loops in C++17 on industrial arms.
+- **ROS 2 stack** — Humble, ros2_control, MoveIt, RViz, URDF/xacro authoring, Ignition Gazebo Fortress, CycloneDDS configuration.
+- **Robotics math** — closed-form analytic IK (hexapod), damped-Jacobian numerical IK with manipulability-adaptive damping + null-space regularisation (industrial arm), three named singularity guards on joint and TCP rotation axes.
+- **Embedded** — ESP32 (Arduino + ESP-IDF), Raspberry Pi, ESP-NOW peer-to-peer mesh, MPU6050 IMU, MFRC522 RFID, MQ-x gas sensors, C++17 firmware.
+- **VR + teleop** — Meta Quest 3, OpenVR, ALVR.
+- **Industrial-arm SDKs** — Elite Robots CS SDK (RTSI, EliteDriver, Primary). URScript when relevant.
+
+---
+
+## FOUNDATION-MODEL & APPLIED-AI DEPTH
+
+- **Continued-pretraining workflows** — Unsloth, TRL, PEFT / LoRA, rank-stabilised LoRA (rsLoRA), embedding-LR scheduling, lm_head + embed_tokens training.
+- **Inference on consumer hardware** — Phi-3 mini 4-bit GGUF via llama.cpp on CPU, FastConformer-Transducer for STT.
+- **Diffusion internals** — manual scheduler/CFG/VAE-decode loop in Darwin Studio. Custom moment-preserving SLERP for latent crossover: spherical interpolation followed by z-score normalisation and restoration of weighted target mean and std.
+- **RAG done with structural guards** — Pydantic cross-field validators that *refuse to parse* "Fully Answered" responses with empty citations (model-validator, not field-validator — order-safe in Pydantic v2). Auto-confidence-clamp on Unanswerable. V3 prompt with explicit constraint extraction + exception-hierarchy + retry-with-error-feedback loop.
+- **Retrieval evaluation done honestly** — held-out test set, NDCG@k, MRR, Recall@k, cross-encoder baseline (ms-marco-MiniLM-L-6-v2) as a non-trained reference. He flagged that the original MiniRag-Reranker eval was on the training set and re-engineered it.
+
+---
+
+## DATA-SCIENCE DEPTH
+
+- **Survival analysis** — Cox proportional hazards via lifelines, likelihood-ratio χ² for nested model comparison, hazard ratios with 95% CIs, explicit handling of survival-time leakage in covariates.
+- **Statistical rigor** — F-tests, Fisher z-transform confidence intervals for Pearson/Spearman/Kendall correlations, 5-fold cross-validation, honest reporting when only 1 of 25 tested pairs reaches significance.
+- **LLM-as-feature-extractor** — Groq Llama 4 Scout extracting six structured risk signals from review text into a Cox covariate matrix.
+- **Failure-mode awareness** — published a failed-prediction post-mortem on a discontinued trading model. The model "scored 63% accuracy" but caught only 2 of 44 actual loss days. A follow-on volatility regressor returned R² = -0.385.
+
+---
+
+## WEB / EDGE-SYSTEMS DEPTH
+
+- **Multi-key API failover** — 3-strike circuit breaker + round-robin + 8 s AbortController per request, with a graceful degradation path that surfaces a contact email rather than crashing.
+- **Real-time multiplayer sync** — Firestore onSnapshot + monotonic version-counter for idempotent dedup, presence heartbeats (5 s write / 15 s liveness window), throttled timer writes, optimistic UI rollback. Server-authoritative game-over with client-side fallback so a crash mid-move doesn't strand the game.
+- **Security hygiene** — full Content-Security-Policy + HSTS preload, validated input on the chat endpoint, env-var loading for secrets, no hardcoded webhooks.
+
+---
+
+## PROJECTS (detailed)
+
+Every project below has been independently code-audited; metrics in this section are defensible from the published code.
+
+### Hexapod (atom-robotics-lab) — robotics flagship
+Stack: ROS 2 Humble, Ignition Gazebo Fortress, ros2_control, Docker (NVIDIA runtime + CycloneDDS), C++, Python.
+What he owns: URDF xacro robot model (533 / 569 lines), complete ros2_control hardware interface (305 / 305 lines), Dockerised runtime with NVIDIA + X11 + CycloneDDS, Gazebo Classic → Ignition Fortress migration. IK math + gait engine written by collaborator Akshat. 1000 Hz Ignition physics under a 5 Hz JointTrajectory publisher.
+GitHub: https://github.com/atom-robotics-lab/Hexapod
+
+### RAG-assistant — evaluation-rigorous RAG
+Stack: Llama 3.3 70B via Groq, ChromaDB, Sentence-Transformers, Pydantic.
+What's defensible: Pydantic cross-field model-validator refuses to parse "Fully Answered" with empty citations. Auto-clamps confidence to 0 on Unanswerable. V3 prompt does explicit constraint extraction + exception hierarchy ("defective overrides discount", "state overrides time"). Retry-with-error-feedback loop pushes Pydantic parse failures back into the model. Audited 9-question eval: 6 PASS, 1 PARTIAL, 2 FAIL, 8/9 answerability correct, 0 hallucinations.
+GitHub: https://github.com/mitanshu-2004/RAG-assistant
+
+### MiniRag-Reranker — retrieval evaluation, repaired
+Stack: Sentence-Transformers (MiniLM), BM25, 6-feature logistic-regression reranker, cross-encoder baseline (ms-marco-MiniLM-L-6-v2), NDCG / MRR / Recall@k.
+Honest history: original release reported scores on the same questions used for training labels — that headline number was the LR classifier's self-confidence on its training data, not retrieval quality. He surfaced the flaw in the README and rebuilt the evaluation around 10 held-out questions, a cross-encoder baseline, and proper IR metrics. New numbers on held-out: learned NDCG@5 0.701 vs baseline 0.589, cross-encoder Recall@5 0.85.
+GitHub: https://github.com/mitanshu-2004/MiniRag-Reranker
+
+### memory-assistant — hybrid retrieval + local RAG endpoint
+Stack: FastAPI, ChromaDB, Sentence-Transformers, Phi-3 4-bit GGUF via llama.cpp, SQLAlchemy, React.
+Honest framing: not RAG at the main /search endpoint — the local Phi-3 runs only at ingest time for title/tags/category/summary metadata. Search is hybrid dense + keyword retrieval with no LLM generation. A new /api/v1/ask endpoint is the real RAG path: retrieve → format cited context → Phi-3 generate → return source-grounded answer with [Source N] citations and a _sanitize guard that strips Phi-3 chat-control tokens before they enter the prompt template.
+GitHub: https://github.com/mitanshu-2004/memory-assistant
+
+### Darwin Studio — SDXL latent-tensor laboratory
+Stack: PyTorch, SDXL Lightning, Diffusers, custom moment-preserving SLERP.
+What's interesting: treats SDXL latents as DNA; mutation and crossover operations across generations. Custom moment-preserving SLERP does spherical interpolation then restores weighted target mean and std — keeps each child on the unit-norm noise manifold without the variance collapse plain LERP produces. Manual diffusion loop (own CFG, scheduler step, VAE decode with scaling_factor round-trip) so latents from mutate/breed can be fed in directly.
+Honest framing: an earlier "23% LERP improvement" claim was vibes, not backed by any benchmark. He removed it. A runnable benchmark_slerp.py is staged in the repo for the CLIP-similarity + variance-ratio comparison when GPU access is available.
+GitHub: https://github.com/mitanshu-2004/Darwin-Studio
+
+### Churn / RetainIQ — LLM-augmented survival modelling
+Stack: Cox proportional hazards (lifelines), Groq Llama 4 Scout, Streamlit, pandas.
+What's defensible: 5-fold CV C-index improved from 0.60 (behavioural baseline) to 0.87 (with six LLM-extracted risk signals). Likelihood-ratio χ² = 1553, df = 6, p ≈ 0. Hazard ratios: frustration_level 2.16, positive_signal 0.55, sentiment_score 0.56.
+Intellectual-honesty signal: he explicitly removed log_duration and playtime_2wk_ratio as covariates with inline comments because they leak the survival time. README acknowledges the remaining "LLM may be reading the recommendation label out of review text" residual leakage concern and notes a held-out test set is the right next step.
+GitHub: https://github.com/mitanshu-2004/Churn
+
+### Primetrade-Analysis — failed-prediction post-mortem
+Stack: KMeans, pandas, scikit-learn, Fear & Greed Index, regression diagnostics.
+The headline of this repo is the post-mortem, not the dashboard. A binary profit classifier "scored 63% accuracy" but caught only 2 of 44 actual loss days — a 95% miss rate on the signal that matters. A follow-on volatility regressor returned R² = -0.385 (worse than predicting the mean) with MAE $7,838. Both were discontinued. The README documents the class-imbalance + personality-vs-price root cause and the decision to stop rather than tune.
+GitHub: https://github.com/mitanshu-2004/Primetrade-Analysis
+
+### Chess Platform (Chesstra) — real-time multiplayer
+Stack: React 19, Firebase Firestore, FastAPI, Stockfish, Vite.
+What's defensible: Firestore onSnapshot listeners + a monotonic version counter for idempotent dedup, presence heartbeats (5 s write / 15 s liveness window), throttled timer writes (every 3 s) to keep document writes low, optimistic UI rollback on Firestore failure. Server-authoritative game-over with client fallback: if the moving player crashes before writing the end-state, the opponent's client detects it locally via chess.js and writes the resolution back. Stockfish engine deployed independently as a FastAPI service; the client wakes the dyno with /api/health on mount before issuing /api/bestmove.
+Live: https://chesstra.vercel.app — GitHub: https://github.com/mitanshu-2004/chess
+
+### Stock-Influence Platform — deployed full-stack with stats rigor
+Stack: FastAPI, React, pandas, SciPy, yfinance, Chart.js.
+Three correlation methods (Pearson, Spearman, Kendall) returned with proper 95% Fisher z-transform confidence intervals computed via SciPy (math implemented, code-verifiable). Synchronised Chart.js heatmap + time-series overlay with shared time-axis scrubbing.
+Live: https://stock-influence.vercel.app — GitHub: https://github.com/mitanshu-2004/Stock-Influence
+
+### StockMetrics Pipeline — narrow honest result
+Stack: pandas, scikit-learn, F-test, 20 years × Big 5 Indian IT firms.
+Tested 25 company-variable pairs for predictive power on annual stock returns via linear regression. One pair reached statistical significance: Wipro EBITDA margin change (p = 0.029, coefficient 0.34). 24 others non-significant. With 17 annual observations per firm, the analysis is power-limited — the README frames the null result as the actual finding, not a failure.
+GitHub: https://github.com/mitanshu-2004/StockMetrics
+
+### Store-Performance-Dashboard — retail forecasting
+Stack: XGBoost, K-Means, pandas, scikit-learn.
+XGBoost regressor with two-month lag features + one-hot Store + Branch for one-month-ahead Attach-Percentage forecasting across 163 retail stores. K-Means (k = 4) on (mean_attach_pct, std_attach_pct) for a performance × stability tag per store. README reports the runtime RMSE from the actual run rather than a stale headline number; flags the five-months-per-store data thinness as the binding limitation.
+GitHub: https://github.com/mitanshu-2004/Store-Performance-Dashboard
+
+### mitanshu.me — production portfolio + this chatbot
+Stack: Next.js 15, Edge Runtime, Groq, TypeScript strict.
+Multi-key Groq failover with a 3-strike circuit breaker + round-robin + 8 s AbortController. The /api/chat endpoint you're using right now is grounded in this knowledge base via Edge runtime; the system prompt enforces grounding rules, query rewriting, and conversation memory. Single source of truth (lib/resume-data.ts + lib/knowledge.ts) drives both the on-page renderer and the chatbot.
+Live: https://mitanshu.me — GitHub: https://github.com/mitanshu-2004/portfolio
+
+---
+
+## INTELLECTUAL-HONESTY ARTIFACTS
+
+Concrete moments where he caught and surfaced a problem in his own work rather than burying it. Worth knowing because they are the rarest signal in a student portfolio:
+
+- **Churn / RetainIQ:** removed log_duration and playtime_2wk_ratio covariates because they leak the survival time. Inline code comments explain why. The README adds a separate honesty section noting the LLM-may-be-reading-the-label residual concern.
+- **MiniRag-Reranker:** discovered the original evaluation trained the reranker on the same 8 questions used in the comparison table. The 0.41 → 0.69 headline was the LR's self-confidence on its training data, not retrieval quality. He rebuilt the eval around 10 held-out questions + cross-encoder baseline + NDCG/MRR/Recall@k, and surfaced the original flaw in the README rather than quietly replacing the number.
+- **Darwin-Studio:** an earlier "23% LERP-vs-SLERP improvement" claim had no benchmark backing it. He killed the claim and staged a real benchmark_slerp.py harness for when GPU access is available.
+- **Primetrade-Analysis:** the failed-prediction post-mortem is the headline of the repo. He did not hide the failed binary classifier or the negative-R² volatility regressor.
+- **RAG-assistant:** his Pydantic cross-field validator was silently broken because of Pydantic v2 field-ordering semantics. He found and fixed it by switching to model_validator(mode="after"). The README claim "validators refuse to parse 'Fully Answered' with empty citations" is now actually enforced.
+
+---
+
+## STACK SUMMARY
+
+**Robotics + embedded:** ROS, ROS 2 Humble, MoveIt, Pinocchio, Ignition Gazebo Fortress, RViz, ros2_control, URDF, Elite Robots CS SDK (RTSI, EliteDriver), Meta Quest 3 + ALVR + OpenVR, ESP32 (Arduino + ESP-IDF), Raspberry Pi, MFRC522, ESP-NOW, real-time Linux (SCHED_FIFO, mlockall, CPU pinning).
+
+**AI / ML:** PyTorch, Unsloth + TRL + PEFT / LoRA (rsLoRA), continued-pretraining workflows, Hugging Face Hub, YOLOv8, NVIDIA NeMo (FastConformer-Transducer), SDXL Lightning + Diffusers, Phi-3 4-bit GGUF via llama.cpp, Sentence-Transformers, ChromaDB, hybrid retrieval, scikit-learn, lifelines (Cox PH), XGBoost, K-Means, Pydantic structured output, Instructor.
+
+**Backend + systems:** FastAPI, Uvicorn, SQLAlchemy, SQLite FTS5 / BM25, Docker (NVIDIA runtime + CycloneDDS), Linux, Firebase Firestore, Next.js 15, Vercel Edge Runtime, TypeScript strict.
+
+**Languages:** Python, C++17, TypeScript, JavaScript, SQL, Bash, URScript.
 
 ---
 
 ## EDUCATION
 
-- Degree: Bachelor of Technology in Electronics & Communication Engineering
+- B.Tech, Electronics & Communication Engineering — Maharaja Agrasen Institute of Technology (MAIT), Delhi
 - Minor: Artificial Intelligence & Machine Learning
-- Institution: Maharaja Agrasen Institute of Technology (MAIT), Delhi
-- Duration: August 2022 – June 2026 (expected)
+- 2022 – June 2026 (expected)
 - Key coursework: Signals & Systems, Embedded Systems, Control Theory, Machine Learning, Digital Signal Processing
+
+---
+
+## HONEST LIMITS
+
+Things he has not done yet — surfacing these proactively because pretending they do not exist is worse than acknowledging them:
+
+- **No big-tech employment yet.** Three startup internships, none at FAANG or equivalent. The work signal is in the projects and the current Variety/Enferent role; the brand-name signal is not.
+- **MAIT is a Tier-3 college** in the Indian engineering hierarchy. He is aware credential bias exists.
+- **No published paper.** Reading + implementing is where the time has gone; submitting to ICRA / NeurIPS / EMNLP has not.
+- **No accepted OSS pull request landed yet** in major repos (LeRobot, IsaacLab, vLLM, LangChain) — though the work he does is the kind that would merge there with a polish pass.
+- **No local GPU.** He's been training on Colab T4, Lightning AI L4, and rented A100s. The benchmark scripts for Darwin and the full retrieval evals are staged but cannot run on his current laptop.
+- **Hexapod analytic IK was written by collaborator Akshat**, not him. He owns the description, hardware-interface, infrastructure, and platform-migration layers.
+
+He does not claim things he hasn't done. Asking him a direct question about a technology will get a direct answer including "haven't used it" when that's the truth.
 
 ---
 
 ## AVAILABILITY & LOGISTICS
 
-- Mitanshu is actively looking for opportunities right now.
-- Open to: Research engineering, ML engineering, robotics software engineering — full-time or internship.
-- Location: Delhi, India. Open to relocation for the right opportunity.
-- Response time: Within 24 hours via email.
-- Contact: mitanshug2004@gmail.com
-- GitHub: https://github.com/mitanshu-2004
-- LinkedIn: https://linkedin.com/in/mitanshugoel
+- Available for: full-time roles starting June 2026; extended internships that could convert; freelance / contract work immediately.
+- Location: Delhi, India. Open to relocation.
+- Response time: within 24 hours via email — mitanshug2004@gmail.com.
+- Public links: github.com/mitanshu-2004, linkedin.com/in/mitanshugoel, huggingface.co/mitanshugoel.
 
 ---
 
-## COMPENSATION
+## FAQ — likely recruiter questions and how to think about them
 
-- Specific compensation expectations are not listed here.
-- For internship or full-time compensation discussions, reach Mitanshu directly at mitanshug2004@gmail.com.
+- **"What's his strongest project?"** Depends on the lane. For Physical AI / Robotics: the current Variety / Enferent VR teleop work (real-time C++17 on industrial arms) — followed by the sole-authored ros2_control interface in the Hexapod repo. For Foundation Models / LLM: the five model-training tracks on Hugging Face. For evaluation-rigor / RAG: the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal: the Primetrade failed-prediction post-mortem.
+- **"What's he NOT good at yet?"** He has not yet shipped at FAANG-scale, has not published a paper, and does not have a major OSS PR landed. His current GPU access is rented; benchmarks that need >24 GB VRAM are staged but not run.
+- **"How much does he want?"** Specific compensation expectations are not listed here. Reach him directly at mitanshug2004@gmail.com.
+- **"Can he start now?"** Yes for internships / contracts immediately. Full-time from June 2026.
+- **"Will he relocate?"** Yes, for the right opportunity. Has also worked remote-from-India before and can do that.
+- **"What's the catch?"** Tier-3 college (MAIT) and no big-tech name yet. The portfolio + the verifiable HF model artifacts + the live deployed sites are intended to compensate for that credential gap.
+- **"Why should I trust the numbers?"** Every metric on this page is either traceable to a JSON file in the corresponding repo (Churn's experiment_results.json, RAG-assistant's eval/results.json, MiniRag-Reranker's eval/results.json) or has been explicitly removed from the README because it was not defensible (the "23% LERP" claim in Darwin Studio).
 
 ---
 
-## PERSONAL
+## CONTACT
 
-- Full name: Mitanshu Goel
-- Based in Delhi, India
-- Final-year ECE student graduating June 2026
-- Works across the full hardware-to-software stack: from microcontroller firmware to deployed ML inference
-- Core obsession: building systems that remain reliable when the hardware misbehaves
-- Approach: designs for deployment constraints first — what runs on a Raspberry Pi, what fits in 16GB VRAM, what survives a sensor dropout
-- Active member of A.T.O.M Robotics Club at MAIT — competes in robotics competitions and mentors juniors
+Email: mitanshug2004@gmail.com
+GitHub: https://github.com/mitanshu-2004
+LinkedIn: https://linkedin.com/in/mitanshugoel
+Hugging Face: https://huggingface.co/mitanshugoel
+Portfolio: https://mitanshu.me
+Location: Delhi, India
+
+For roles, take-homes, references, or technical questions the chatbot can't answer: email is the fastest path. He responds within 24 hours.
 `

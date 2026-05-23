@@ -10,13 +10,16 @@ interface Message {
 
 const GREETING: Message = {
   role: 'assistant',
-  content: "Hi! I'm here to answer questions about Mitanshu's background, projects, and availability. What would you like to know?",
+  content: "Hi — ask me about Mitanshu's projects, technical depth, or availability. I answer from his portfolio source only, so the numbers I give you are traceable to a repo.",
 }
 
 const STARTER_CHIPS = [
-  "What has he built with ROS2?",
-  "What's his strongest domain?",
-  "Is he open to internships?",
+  "What's his strongest project?",
+  "What foundation-model work has he done?",
+  "How does the current Variety / Enferent role work?",
+  "Where's the honesty signal in his portfolio?",
+  "What hasn't he done yet?",
+  "When is he available to start?",
 ]
 
 export default function Chat() {

@@ -17,6 +17,10 @@ interface ApiConfig {
   enabled: boolean
   failureCount: number
   consecutiveFailures: number
+  // Wall-clock timestamp (ms) before which this key should not be retried.
+  // Used for rate-limit cooldowns parsed from the Groq 429 retry-after hint.
+  // 0 = available right now.
+  cooldownUntil: number
 }
 
 /**
@@ -74,6 +78,7 @@ class GroqClientManager {
       enabled: true,
       failureCount: 0,
       consecutiveFailures: 0,
+      cooldownUntil: 0,
     }))
 
     for (const api of this.apis) {
@@ -84,17 +89,21 @@ class GroqClientManager {
   }
 
   /**
-   * Get next available API client
+   * Pick the next usable key. Skips keys that are disabled or in cooldown.
+   * Returns null only if every key is unavailable right now.
    */
   private getNextAvailableApi(): ApiConfig | null {
-    const startIndex = this.currentIndex
+    const now = Date.now()
     let attempts = 0
 
     while (attempts < this.apis.length) {
       const index = (this.currentIndex + attempts) % this.apis.length
       const api = this.apis[index]
 
-      if (api.enabled && api.consecutiveFailures < this.maxConsecutiveFailures) {
+      const cooled = api.cooldownUntil <= now
+      const underFailureCap = api.consecutiveFailures < this.maxConsecutiveFailures
+
+      if (api.enabled && cooled && underFailureCap) {
         this.currentIndex = (index + 1) % this.apis.length
         return api
       }
@@ -106,14 +115,78 @@ class GroqClientManager {
   }
 
   /**
-   * Reset failure counts for an API
+   * If every key is cooled but waiting on a 429, return the earliest moment
+   * one of them is expected to be available again. Used to decide whether to
+   * sleep briefly (server-side) instead of falling back immediately.
    */
-  private resetApiFailures(api: ApiConfig): void {
-    api.consecutiveFailures = 0
+  private earliestCooldownEnd(): number {
+    const now = Date.now()
+    let earliest = Infinity
+    for (const api of this.apis) {
+      if (!api.enabled) continue
+      if (api.consecutiveFailures >= this.maxConsecutiveFailures) continue
+      if (api.cooldownUntil <= now) return now
+      if (api.cooldownUntil < earliest) earliest = api.cooldownUntil
+    }
+    return earliest === Infinity ? -1 : earliest
   }
 
   /**
-   * Record a failure for an API
+   * Parse "...try again in 4.5s..." or "...try again in 1m23s..." from
+   * Groq's 429 error message. Returns the wait in milliseconds, capped
+   * to a sane range. Returns null if the message has no hint.
+   */
+  private parseRetryAfter(message: string): number | null {
+    if (!message) return null
+    // "1m23s" or "23.4s"
+    const minSec = message.match(/try again in\s+(\d+)m(\d+(?:\.\d+)?)s/i)
+    if (minSec) {
+      const ms = parseInt(minSec[1], 10) * 60_000 + parseFloat(minSec[2]) * 1000
+      return Math.min(Math.max(ms, 1000), 120_000)
+    }
+    const secOnly = message.match(/try again in\s+(\d+(?:\.\d+)?)s/i)
+    if (secOnly) {
+      const ms = parseFloat(secOnly[1]) * 1000
+      return Math.min(Math.max(ms, 1000), 120_000)
+    }
+    return null
+  }
+
+  /**
+   * Detect whether an SDK error is a 429 rate-limit (vs. timeout / 500 / etc.)
+   */
+  private isRateLimitError(error: unknown): boolean {
+    if (!error || typeof error !== 'object') return false
+    const e = error as { status?: number; statusCode?: number; message?: string }
+    if (e.status === 429 || e.statusCode === 429) return true
+    const msg = (e.message || '').toLowerCase()
+    return msg.includes('rate limit') || msg.includes('429') || msg.includes('too many requests')
+  }
+
+  /**
+   * Successful call → clear failure state.
+   */
+  private resetApiFailures(api: ApiConfig): void {
+    api.consecutiveFailures = 0
+    api.cooldownUntil = 0
+  }
+
+  /**
+   * 429 is not a "failure" of the key — the key is fine, we just hit our
+   * per-minute quota. Park it on cooldown for the duration Groq tells us,
+   * and let other keys handle the load in the meantime.
+   */
+  private recordRateLimit(api: ApiConfig, cooldownMs: number): void {
+    api.cooldownUntil = Date.now() + cooldownMs
+    console.warn(
+      `API ${api.name} hit 429; cooling down ${(cooldownMs / 1000).toFixed(1)}s`
+    )
+  }
+
+  /**
+   * Any other failure (timeout, 5xx, auth, network) counts toward the
+   * disable threshold. Three in a row and we stop using the key for the
+   * lifetime of the process (until resetAllApis()).
    */
   private recordApiFailure(api: ApiConfig): void {
     api.failureCount++
@@ -138,8 +211,10 @@ class GroqClientManager {
       enabled: boolean
       failureCount: number
       consecutiveFailures: number
+      cooldownMsRemaining: number
     }>
   } {
+    const now = Date.now()
     return {
       totalApis: this.apis.length,
       enabledApis: this.apis.filter((a) => a.enabled).length,
@@ -148,6 +223,7 @@ class GroqClientManager {
         enabled: a.enabled,
         failureCount: a.failureCount,
         consecutiveFailures: a.consecutiveFailures,
+        cooldownMsRemaining: Math.max(0, a.cooldownUntil - now),
       })),
     }
   }
@@ -164,19 +240,34 @@ class GroqClientManager {
     const startTime = Date.now()
     const errors: Array<{ apiName: string; error: string }> = []
 
-    while (true) {
-      const api = this.getNextAvailableApi()
+    // Cap the total wall time we'll spend cycling through keys. Without this,
+    // a chain of 429s could keep the request pending for tens of seconds.
+    const overallDeadline = startTime + (params.timeout || 8000) + 4000
+
+    while (Date.now() < overallDeadline) {
+      let api = this.getNextAvailableApi()
 
       if (!api) {
-        console.error('All Groq APIs failed. Using fallback response.')
-        return this.getFallbackResponse()
+        // Every key is in cooldown right now. If the earliest one comes back
+        // soon enough to fit our deadline, wait for it. Otherwise fall back.
+        const next = this.earliestCooldownEnd()
+        const wait = next > 0 ? next - Date.now() : -1
+        if (wait > 0 && Date.now() + wait < overallDeadline) {
+          await new Promise((r) => setTimeout(r, wait + 50))
+          api = this.getNextAvailableApi()
+          if (!api) {
+            console.error('All Groq keys still unavailable after wait. Falling back.')
+            return this.getFallbackResponse()
+          }
+        } else {
+          console.error('All Groq keys unavailable; deadline exceeded. Falling back.')
+          return this.getFallbackResponse()
+        }
       }
 
       try {
         const client = this.clients.get(api.name)
-        if (!client) {
-          throw new Error(`Client not found for ${api.name}`)
-        }
+        if (!client) throw new Error(`Client not found for ${api.name}`)
 
         const controller = new AbortController()
         const timeout = setTimeout(
@@ -196,12 +287,10 @@ class GroqClientManager {
           )
 
           clearTimeout(timeout)
-
           this.resetApiFailures(api)
 
           const answer = completion.choices[0]?.message?.content ?? ''
           const duration = Date.now() - startTime
-
           console.log(`Groq API request successful using ${api.name} (${duration}ms)`)
 
           return {
@@ -214,18 +303,25 @@ class GroqClientManager {
           clearTimeout(timeout)
         }
       } catch (error) {
-        this.recordApiFailure(api)
-
         const errorMsg = error instanceof Error ? error.message : String(error)
         errors.push({ apiName: api.name, error: errorMsg })
 
-        console.warn(
-          `Groq API ${api.name} failed (attempt ${api.failureCount}): ${errorMsg}`
-        )
-
+        if (this.isRateLimitError(error)) {
+          // Park this key for the duration Groq suggested, retry on next key.
+          const hint = this.parseRetryAfter(errorMsg) ?? 30_000
+          this.recordRateLimit(api, hint)
+        } else {
+          this.recordApiFailure(api)
+          console.warn(
+            `Groq API ${api.name} failed (attempt ${api.failureCount}): ${errorMsg}`
+          )
+        }
         continue
       }
     }
+
+    console.error('Groq failover deadline exceeded after errors:', errors)
+    return this.getFallbackResponse()
   }
 
   /**
@@ -264,6 +360,7 @@ class GroqClientManager {
     for (const api of this.apis) {
       api.enabled = true
       api.consecutiveFailures = 0
+      api.cooldownUntil = 0
     }
     console.log('All APIs re-enabled')
   }
