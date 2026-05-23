@@ -228,10 +228,12 @@ export default function Hero() {
         </span>
         <h1 className="hero-name">Mitanshu Goel</h1>
         <p className="hero-descriptor">
-          AI &amp; robotics systems — from embedded firmware to deployed
-          inference pipelines, built under hardware constraints.
+          Robotics &amp; physical AI — real-time teleop, ROS 2, embedded
+          systems — plus LLM training pipelines and eval rigor under hardware
+          constraints.
         </p>
         <div className="hero-links">
+          <Link href="/cv?domain=robotics">CV (robotics) ↗</Link>
           <a
             href="https://github.com/mitanshu-2004"
             target="_blank"

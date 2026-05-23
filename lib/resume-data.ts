@@ -241,11 +241,11 @@ export const RESUMES: Record<ResumeDomain, ResumeData> = {
         projects: [
             {
                 name: 'RetainIQ — LLM-augmented churn survival model',
-                stack: 'Cox Proportional Hazards (lifelines) · Groq Llama 4 Scout · scikit-learn · Streamlit',
+                stack: 'Cox PH (lifelines) · Groq Llama 4 Scout · instructor + Pydantic · held-out 80/20 eval',
                 bullets: [
-                    'Combined Cox PH survival modelling with LLM-extracted risk signals from free-text Steam review bodies (frustration_level, technical_issue, engagement_dropped, positive_signal, …).',
-                    '5-fold CV C-index improved from 0.60 (behavioural features only) to 0.87 with LLM features added; Δ = +0.26. Likelihood-ratio χ² = 1553 (df = 6, p ≈ 0).',
-                    'Explicitly removed `log_duration` and `playtime_2wk_ratio` as covariates because they leak the survival time; the README acknowledges the remaining LLM-may-be-reading-the-label residual risk and that no held-out test set exists yet.',
+                    'Cox PH on McAuley Steam reviews with six LLM-extracted signals (instructor + Pydantic) vs TF-IDF and frozen SBERT baselines on the same split.',
+                    'Hold-out C-index 0.874 (augmented) vs 0.640 (behavioural only); leakage audit shows ~+0.14 of the headline lift is defensible non-polarity signal — polarity features largely rephrase the recommend label.',
+                    'Ablation: frozen SBERT reaches 0.832 hold-out vs LLM 0.874; repo documents PH violations, outcome-definition limits, and chi-squared tail underflow fix (github.com/mitanshu-2004/llm-survival-churn).',
                 ],
             },
             {

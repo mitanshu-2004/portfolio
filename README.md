@@ -4,7 +4,7 @@ Personal site. Next.js 15 on Edge Runtime, with a chatbot that recruiters can as
 
 ## What's in here
 
-`app/` — the routes. The interesting one is `/api/chat`, an Edge endpoint that hits Groq with a system prompt assembled from `lib/knowledge.ts`. There's also `/opengraph-image` (dynamic OG image), `/sitemap.xml`, `/robots.txt`, and the landing page.
+`app/` — the routes. The interesting one is `/api/chat`, an Edge endpoint that hits Groq with a system prompt assembled from `lib/knowledge.ts`. **`/cv?domain=robotics|ai|ds|web`** renders a printable resume from `lib/resume-data.ts` (add `&print=true` to open the browser Save-as-PDF dialog). Legacy `/?domain=robotics` redirects to `/cv`. There's also `/opengraph-image`, `/sitemap.xml`, `/robots.txt`, and the landing page.
 
 `components/` — Hero, Experience, Projects, CV, Chat, Contact, etc. Standard React.
 

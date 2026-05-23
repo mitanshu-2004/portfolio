@@ -9,8 +9,8 @@ export default function Contact() {
         </ScrollFade>
         <ScrollFade>
           <p className="contact-lead">
-            Looking for full-time roles in Robotics SWE, Research Engineering,
-            ML Engineering, or Applied / Foundation-Model AI starting June 2026.
+            Looking for full-time roles in Robotics SWE / Physical AI first;
+            also open to Research Engineering and applied ML starting June 2026.
             Available for internships and short contracts immediately. Responses
             within 24 hours.
           </p>

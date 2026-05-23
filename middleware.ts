@@ -4,8 +4,20 @@ import { NextRequest, NextResponse } from 'next/server'
  * Main middleware function
  * Handles HTTPS enforcement and CORS for the /api/chat endpoint
  */
+const RESUME_DOMAINS = new Set(['ai', 'robotics', 'ds', 'web'])
+
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
+
+  // Legacy / career-ops links: /?domain=robotics → /cv?domain=robotics
+  if (pathname === '/') {
+    const domain = request.nextUrl.searchParams.get('domain')
+    if (domain && RESUME_DOMAINS.has(domain)) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/cv'
+      return NextResponse.redirect(url, { status: 301 })
+    }
+  }
 
   // 1. HTTPS Enforcement (for all routes in production)
   if (!enforceHttps(request)) {

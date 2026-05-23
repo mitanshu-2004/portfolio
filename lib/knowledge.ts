@@ -177,11 +177,11 @@ What's interesting: treats SDXL latents as DNA; mutation and crossover operation
 Honest framing: an earlier "23% LERP improvement" claim was vibes, not backed by any benchmark. He removed it. A runnable benchmark_slerp.py is staged in the repo for the CLIP-similarity + variance-ratio comparison when GPU access is available.
 GitHub: https://github.com/mitanshu-2004/Darwin-Studio
 
-### Churn / RetainIQ — LLM-augmented survival modelling
-Stack: Cox proportional hazards (lifelines), Groq Llama 4 Scout, Streamlit, pandas.
-What's defensible: 5-fold CV C-index improved from 0.60 (behavioural baseline) to 0.87 (with six LLM-extracted risk signals). Likelihood-ratio χ² = 1553, df = 6, p ≈ 0. Hazard ratios: frustration_level 2.16, positive_signal 0.55, sentiment_score 0.56.
-Intellectual-honesty signal: he explicitly removed log_duration and playtime_2wk_ratio as covariates with inline comments because they leak the survival time. README acknowledges the remaining "LLM may be reading the recommendation label out of review text" residual leakage concern and notes a held-out test set is the right next step.
-GitHub: https://github.com/mitanshu-2004/Churn
+### RetainIQ / llm-survival-churn — LLM-augmented survival modelling
+Stack: Cox PH (lifelines), Groq Llama 4 Scout, instructor + Pydantic, scikit-learn, held-out 80/20 eval.
+What's defensible: hold-out C-index 0.874 (behavioural + six LLM signals) vs 0.640 (behavioural only). Leakage audit: polarity features (sentiment, frustration, …) explain most of the headline +0.26 lift because they rephrase the recommend label written at the same time as the event; non-polarity behaviours alone add ~+0.14 C-index — the honest forward-looking share. Ablation: frozen SBERT (PCA-64) reaches 0.832 hold-out vs LLM 0.874 on the same split. TF-IDF+SBERT stacked hits 0.905; adding bag-of-words on top buys ~0.002.
+Intellectual-honesty signal: repo renamed to llm-survival-churn; documents PH violations, McAuley outcome-definition limits (event = 1−recommend is not true churn), chi-squared tail underflow fix, and batch-alignment guards in the LLM extractor.
+GitHub: https://github.com/mitanshu-2004/llm-survival-churn
 
 ### Primetrade-Analysis — failed-prediction post-mortem
 Stack: KMeans, pandas, scikit-learn, Fear & Greed Index, regression diagnostics.

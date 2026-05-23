@@ -17,7 +17,51 @@ interface Project {
 }
 
 const PROJECTS: Project[] = [
-  // ── AI (cards 1–4) ──────────────────────────────────
+  // ── Robotics (shown first — primary lane) ─────────────
+  {
+    id: 'hexapod',
+    domain: 'robotics',
+    tag: 'Robotics',
+    title: 'HEXAPOD',
+    featured: true,
+    problem:
+      'Sole-authored the 18-DoF hexapod ROS 2 stack: URDF xacro (533/569 lines), complete ros2_control hardware interface (305 lines), Dockerised runtime with NVIDIA + CycloneDDS, and the Gazebo Classic → Ignition Fortress migration. Analytic IK written by collaborator Akshat.',
+    metrics: [
+      { value: '1000 Hz', label: 'Ignition physics under 5 Hz JointTrajectory' },
+      { value: '305', label: 'line ros2_control hardware interface, sole author' },
+    ],
+    stack: 'ROS 2 Humble · Ignition Fortress · ros2_control · Docker (NVIDIA + CycloneDDS)',
+    links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
+  },
+  {
+    id: 'arm',
+    domain: 'robotics',
+    tag: 'Robotics',
+    title: '6-DOF Robotic Arm',
+    problem:
+      'Full motion-planning pipeline with inverse kinematics, collision-aware trajectory planning, and sim-to-real validation. Resolved URDF kinematic mismatches blocking stable trajectory execution.',
+    metrics: [
+      { value: '~50%', label: 'execution time cut by planner selection + tuning' },
+      { value: 'C++', label: 'collision-free trajectory via MoveIt' },
+    ],
+    stack: 'ROS · MoveIt · Gazebo · Python · C++',
+    links: { github: 'https://github.com/mitanshu-2004/6dof-arm' },
+  },
+  {
+    id: 'sentinel',
+    domain: 'robotics',
+    tag: 'Robotics',
+    title: 'SENTINEL',
+    problem:
+      'Offline mesh emergency communication using ESP-NOW — no Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 + dual-axis threshold analysis with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
+    metrics: [
+      { value: 'ESP-NOW', label: 'zero-infrastructure peer-to-peer mesh' },
+      { value: 'IMU + gas', label: 'dual-sensor fall + hazard detection' },
+    ],
+    stack: 'ESP32 · ESP-NOW · C++ · MPU6050 · Arduino IDE',
+    links: { github: 'https://github.com/mitanshu-2004/sentinel' },
+  },
+  // ── AI ────────────────────────────────────────────────
   {
     id: 'cpt',
     domain: 'ai',
@@ -77,51 +121,7 @@ const PROJECTS: Project[] = [
     stack: 'Llama 3.3 70B · Groq · ChromaDB · Pydantic structured output · Hybrid retrieval',
     links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
   },
-  // ── Robotics (cards 5–7) ─────────────────────────────
-  {
-    id: 'hexapod',
-    domain: 'robotics',
-    tag: 'Robotics',
-    title: 'HEXAPOD',
-    featured: true,
-    problem:
-      'Sole-authored the 18-DoF hexapod ROS 2 stack: URDF xacro (533/569 lines), complete ros2_control hardware interface (305 lines), Dockerised runtime with NVIDIA + CycloneDDS, and the Gazebo Classic → Ignition Fortress migration. Analytic IK written by collaborator Akshat.',
-    metrics: [
-      { value: '1000 Hz', label: 'Ignition physics under 5 Hz JointTrajectory' },
-      { value: '305', label: 'line ros2_control hardware interface, sole author' },
-    ],
-    stack: 'ROS 2 Humble · Ignition Fortress · ros2_control · Docker (NVIDIA + CycloneDDS)',
-    links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
-  },
-  {
-    id: 'arm',
-    domain: 'robotics',
-    tag: 'Robotics',
-    title: '6-DOF Robotic Arm',
-    problem:
-      'Full motion-planning pipeline with inverse kinematics, collision-aware trajectory planning, and sim-to-real validation. Resolved URDF kinematic mismatches blocking stable trajectory execution.',
-    metrics: [
-      { value: '~50%', label: 'execution time cut by planner selection + tuning' },
-      { value: 'C++', label: 'collision-free trajectory via MoveIt' },
-    ],
-    stack: 'ROS · MoveIt · Gazebo · Python · C++',
-    links: { github: 'https://github.com/mitanshu-2004/6dof-arm' },
-  },
-  {
-    id: 'sentinel',
-    domain: 'robotics',
-    tag: 'Robotics',
-    title: 'SENTINEL',
-    problem:
-      'Offline mesh emergency communication using ESP-NOW — no Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 + dual-axis threshold analysis with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
-    metrics: [
-      { value: 'ESP-NOW', label: 'zero-infrastructure peer-to-peer mesh' },
-      { value: 'IMU + gas', label: 'dual-sensor fall + hazard detection' },
-    ],
-    stack: 'ESP32 · ESP-NOW · C++ · MPU6050 · Arduino IDE',
-    links: { github: 'https://github.com/mitanshu-2004/sentinel' },
-  },
-  // ── Data Science (cards 8–10) ──────────────────────────
+  // ── Data Science ──────────────────────────────────────
   {
     id: 'retainiq',
     domain: 'ds',
@@ -131,11 +131,11 @@ const PROJECTS: Project[] = [
     problem:
       'Cox proportional hazards + 6 LLM-extracted risk signals (frustration_level, engagement_dropped, …) from Steam review text. Explicit removal of log_duration and playtime_2wk_ratio as covariates because they leak the survival time.',
     metrics: [
-      { value: '0.87', label: '5-fold CV C-index (up from 0.60 baseline)' },
-      { value: 'χ²=1553', label: 'likelihood-ratio test, df=6, p≈0' },
+      { value: '0.874', label: 'hold-out C-index (LLM + behavioural)' },
+      { value: '+0.14', label: 'defensible lift after leakage audit' },
     ],
-    stack: 'Cox PH (lifelines) · Groq Llama 4 Scout · scikit-learn · Streamlit',
-    links: { github: 'https://github.com/mitanshu-2004/Churn' },
+    stack: 'Cox PH (lifelines) · Groq Llama 4 Scout · scikit-learn · held-out eval',
+    links: { github: 'https://github.com/mitanshu-2004/llm-survival-churn' },
   },
   {
     id: 'stockmetrics',
@@ -227,7 +227,7 @@ const DOMAIN_LABELS: Record<string, string> = {
   mixed: 'Full-Stack Engineer',
 }
 
-const DOMAINS = ['ai', 'robotics', 'ds', 'web'] as const
+const DOMAINS = ['robotics', 'ai', 'ds', 'web'] as const
 const DOMAIN_DISPLAY: Record<Domain, string> = {
   ai: 'AI',
   robotics: 'Robotics',
@@ -512,13 +512,13 @@ export default function ProjectsCarousel() {
   // Improvement 3: track animationend handler to prevent listener stacking
   const animEndHandlerRef = useRef<(() => void) | null>(null)
 
-  const currentDomain = useRef<string>('ai')
+  const currentDomain = useRef<string>('robotics')
   const visibleCards = useRef<Set<HTMLElement>>(new Set())
   const [cardIndex, setCardIndex] = useState(1)
   const [scrollHintText, setScrollHintText] = useState('scroll to explore')
   // Improvement 2: hide scroll hint after first scroll
   const [hintVisible, setHintVisible] = useState(true)
-  const [activeBg, setActiveBg] = useState<string>('ai')
+  const [activeBg, setActiveBg] = useState<string>('robotics')
 
   const updateDomainState = useCallback(() => {
     const tally: Record<Domain, number> = { ai: 0, robotics: 0, ds: 0, web: 0 }
@@ -634,6 +634,8 @@ export default function ProjectsCarousel() {
 
     cards.forEach((c) => observer.observe(c))
     setTimeout(updateDomainState, 100)
+    // Start on robotics (first cards in track)
+    requestAnimationFrame(() => jumpToDomain('robotics'))
 
     const onScroll = () => {
       setHintVisible(false) // Improvement 2: hide hint on first scroll
@@ -689,11 +691,11 @@ export default function ProjectsCarousel() {
             <span className="carousel-identity-prefix">currently viewing</span>
             <span
               ref={domainLabelRef}
-              className="carousel-identity-domain domain-ai"
+              className="carousel-identity-domain domain-robotics"
               aria-live="polite"
-              aria-label={`Currently viewing: ${DOMAIN_LABELS['ai']}`}
+              aria-label={`Currently viewing: ${DOMAIN_LABELS['robotics']}`}
             >
-              AI Engineer
+              Robotics Engineer
             </span>
           </div>
           <div className="carousel-dots">
