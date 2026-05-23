@@ -133,13 +133,12 @@ export const RESUMES: Record<ResumeDomain, ResumeData> = {
         experience: [EXP_VARIETY_AI, EXP_SARTHAK_AI, EXP_NEXTUP],
         projects: [
             {
-                name: 'LLM Continued-Pretraining on Reddit (5 model-training tracks)',
-                stack: 'Unsloth · TRL · PEFT · LoRA / rsLoRA · Mistral 7B · Qwen 2.5 3B/7B · nanoGPT · self-collected Reddit corpus',
+                name: 'LLM Continued-Pretraining on Reddit — 6 training runs',
+                stack: 'Unsloth · TRL · PEFT · LoRA / rsLoRA · Mistral 7B · Qwen 2.5 (1.5B/3B/7B) · nanoGPT · self-scraped Reddit corpus',
                 bullets: [
-                    'Ran CPT/adaptation work across five recovered model tracks: Mistral 7B v0.3 (r=128), Mistral 7B (r=256 on Lightning L4), Qwen 2.5 3B (r=16), Qwen 2.5 7B (r=128 on A100), and a Karpathy-style nanoGPT trained from scratch on the same corpus.',
-                    'Strongest run: Mistral 7B v0.3 via Unsloth 4-bit + TRL + LoRA r=128 + rsLoRA, training attention + MLP + lm_head + embed_tokens with FlashAttention 2; 2,200 steps logged with per-100-step Hub checkpoints. Public at huggingface.co/mitanshugoel/mistral-7b-reddit-cpt.',
-                    'Built supporting datasets: a raw-text Reddit corpus and a pre-tokenized + packed variant. Recurring CPT-specific choices: embedding LR 5–10× smaller than main LR, lm_head + embed_tokens in target_modules, adamw_8bit, Hugging Face hub_strategy="checkpoint" + a custom HFCheckpointCallback for session-interruption survivability.',
-                    'Kept incomplete runs visible: the Mistral r=256 Lightning L4 run failed after an empty dataset snapshot — framed as recovered experiment infrastructure, not a completed model claim.',
+                    'Six CPT/adaptation runs: Mistral 7B v0.3 (r=128, rsLoRA, Colab T4 + Kaggle 2× T4 via torchrun — 2,200 logged steps, public), Mistral 7B v0.3 (r=256 on Lightning L4 — recovered experiment, not a completed model), Qwen 2.5 7B (r=128 on A100 80 GB), Qwen 2.5 3B (r=16, Kaggle T4×2 DDP via accelerate launch, public), Qwen 2.5 1.5B (small-r QLoRA, structured "Subreddit / Title / Body" format, Kaggle T4×2), and a Karpathy nanoGPT trained from scratch (~50 M params, 8 layers / 8 heads / 512 embd, public). All scripts + data pipeline + inference test at github.com/mitanshu-2004/reddit-cpt-training-scripts.',
+                    'Data pipeline: libtorrent Pushshift download → zstandard decompression → thread joining + filter → Wilson-score ranking → Qwen tokenisation + packing. Self-built HF datasets: raw Reddit corpus and a pre-tokenized + packed variant (max_seq_length=2048).',
+                    'Non-default CPT choices across all runs: embedding_learning_rate 5–10× smaller than main LR, lm_head + embed_tokens in target_modules, use_rslora=True at high ranks, adamw_8bit, hub_strategy="checkpoint" with a custom HFCheckpointCallback for session-interruption survivability.',
                 ],
             },
             {

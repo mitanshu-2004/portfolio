@@ -15,32 +15,54 @@ export default function Experience() {
         */}
         <ScrollFade className="exp-entry">
           <div className="exp-header">
+            <span className="exp-role">Robotics Software Engineer Intern</span>
+            <span className="exp-period">Current</span>
+          </div>
+          <div className="exp-org">Variety Innovation / Enferent.ai · Remote</div>
+          <ul className="exp-bullets" aria-label="Responsibilities at Variety Innovation / Enferent.ai">
+            <li>
+              Building a bimanual VR teleoperation rig: Meta Quest 3 driving two
+              Elite Robots CS66 industrial arms over a custom C++17 control loop
+              with real-time Linux scheduling (SCHED_FIFO + CPU pinning + mlockall).
+            </li>
+            <li>
+              Implemented damped-Jacobian inverse kinematics via Pinocchio with
+              manipulability-adaptive damping and null-space regularisation; ships
+              with three named singularity guards on joint and TCP rotation axes.
+            </li>
+            <li>
+              Wrote the imitation-learning dataset recorder that captures
+              synchronised left+right arm states, VR headset pose, and TCP poses
+              to disk in a §3.2-style schema for downstream policy training.
+            </li>
+          </ul>
+        </ScrollFade>
+
+        <ScrollFade className="exp-entry">
+          <div className="exp-header">
             <span className="exp-role">AI &amp; Robotics Intern</span>
             <span className="exp-period">Jun – Aug 2025</span>
           </div>
           <div className="exp-org">SarthakAI · Delhi</div>
           <ul className="exp-bullets" aria-label="Responsibilities at SarthakAI">
             <li>
-              Engineered a real-time voice pipeline using NVIDIA NeMo for
-              speech-to-text with custom wake-word detection integrated into a
-              physical robot system — latency requirements drove all architecture
-              decisions.
+              Engineered a real-time voice pipeline using NVIDIA NeMo
+              (FastConformer-Transducer) with custom wake-word detection, integrated
+              into a UBTech Yanshee humanoid platform.
             </li>
             <li>
-              Built a polling-based interface layer between robot hardware and an
-              AI agent for low-latency query processing and feedback; designed
-              for fault tolerance under intermittent hardware responses.
+              Trained and deployed custom YOLOv8 models for three production tasks:
+              human tracking, package classification, and gesture-based robot
+              control — each with a separate training regime and inference pipeline.
             </li>
             <li>
-              Trained and deployed custom YOLOv8 models for three distinct
-              production tasks: human tracking, package classification, and
-              gesture-based control — each with separate training regimes and
-              inference pipelines.
+              Designed a polling-based fault-tolerant interface between robot
+              hardware and an AI inference agent to sustain operation under
+              intermittent hardware response.
             </li>
             <li>
-              Developed a hardware telemetry workstation on ESP32/Raspberry Pi
-              capturing environmental sensor data for predictive analytics,
-              bridging embedded firmware with Python processing layers.
+              Built an ESP32 / Raspberry Pi telemetry workstation bridging embedded
+              firmware with Python analytics layers.
             </li>
           </ul>
         </ScrollFade>
@@ -62,9 +84,8 @@ export default function Experience() {
             </li>
             <li>
               Integrated MoveIt for inverse kinematics and collision-aware
-              trajectory planning using C++; achieved 50% reduction in execution
-              time through shortest-path algorithm selection and parameter
-              tuning.
+              trajectory planning using C++; achieved ~50% reduction in execution
+              time by selecting a more appropriate planner and tuning its parameters.
             </li>
           </ul>
         </ScrollFade>

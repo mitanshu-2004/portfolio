@@ -12,34 +12,36 @@ export default function Stack() {
             <div className="stack-group">
               <span className="stack-group-label">Robotics &amp; Embedded</span>
               <p className="stack-items">
-                ROS · ROS2 · MoveIt · Gazebo · RViz · ROS2 Control · URDF
+                ROS 2 Humble · ROS · MoveIt · Pinocchio · Ignition Fortress · RViz · ros2_control · URDF
                 <br />
-                ESP32 · Raspberry Pi · Arduino IDE · ESP-NOW
+                Elite Robots CS SDK (RTSI / EliteDriver) · Meta Quest 3 + ALVR + OpenVR
+                <br />
+                ESP32 · Raspberry Pi · Arduino IDE · ESP-NOW · SCHED_FIFO · mlockall · CPU pinning
               </p>
             </div>
 
             <div className="stack-group">
               <span className="stack-group-label">AI / ML</span>
               <p className="stack-items">
-                PyTorch · YOLOv8 · SDXL · LoRA · NVIDIA NeMo
+                PyTorch · Unsloth · TRL · PEFT / LoRA · rsLoRA · SDXL Lightning · Diffusers
                 <br />
-                Sentence-Transformers · llama.cpp · ChromaDB
+                NVIDIA NeMo · YOLOv8 · llama.cpp (Phi-3) · Sentence-Transformers · ChromaDB
                 <br />
-                scikit-learn · XGBoost
+                scikit-learn · XGBoost · lifelines (Cox PH) · Pydantic structured output
               </p>
             </div>
 
             <div className="stack-group">
               <span className="stack-group-label">Languages</span>
-              <p className="stack-items">Python · C++ · TypeScript · SQL</p>
+              <p className="stack-items">Python · C++17 · TypeScript · SQL · URScript · Bash</p>
             </div>
 
             <div className="stack-group">
               <span className="stack-group-label">
-                Systems &amp; Infrastructure
+                Backend + Systems
               </span>
               <p className="stack-items">
-                Docker · FastAPI · Linux · Git · SQLAlchemy · Firebase · React
+                FastAPI · Next.js 15 · React 19 · Firebase Firestore · Docker (NVIDIA runtime + CycloneDDS) · Linux · Git · SQLAlchemy · Hugging Face Hub
               </p>
             </div>
           </div>

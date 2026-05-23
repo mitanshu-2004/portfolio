@@ -17,7 +17,22 @@ interface Project {
 }
 
 const PROJECTS: Project[] = [
-  // ── AI (cards 1–3) ──────────────────────────────────
+  // ── AI (cards 1–4) ──────────────────────────────────
+  {
+    id: 'cpt',
+    domain: 'ai',
+    tag: 'AI',
+    title: 'Reddit CPT — 6 Training Runs',
+    featured: true,
+    problem:
+      'Six continued-pretraining runs on a self-scraped Reddit corpus: Mistral 7B (r=128 + r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline included. Three adapters public on Hugging Face.',
+    metrics: [
+      { value: '6', label: 'training runs across 4 hardware tiers' },
+      { value: '3', label: 'public artefacts on Hugging Face' },
+    ],
+    stack: 'Unsloth · TRL · PEFT / LoRA · rsLoRA · Mistral 7B · Qwen 2.5 · nanoGPT · Kaggle / Colab / A100',
+    links: { github: 'https://github.com/mitanshu-2004/reddit-cpt-training-scripts' },
+  },
   {
     id: 'darwin',
     domain: 'ai',
@@ -25,13 +40,13 @@ const PROJECTS: Project[] = [
     title: 'Darwin Studio',
     featured: true,
     problem:
-      'Treats SDXL latent tensors as genetic material — mutation and crossover applied between generations. Custom SLERP for geometrically consistent latent interpolation.',
+      'Treats SDXL latent tensors as genetic material — mutation and crossover applied between generations. Custom moment-preserving SLERP: spherical interpolation followed by z-score normalisation and restoration of weighted target mean and std, keeping child latents on the unit-norm noise manifold.',
     metrics: [
-      { value: '< 4s', label: '1024px generation on T4 GPU' },
-      { value: '~23%', label: 'LERP inconsistency eliminated by SLERP' },
+      { value: 'SLERP', label: 'vs LERP: eliminates variance collapse' },
+      { value: 'manual', label: 'CFG + scheduler + VAE decode loop' },
     ],
-    stack: 'PyTorch · SDXL Lightning · Diffusers · LoRA · Custom SLERP',
-    links: { github: 'https://github.com/mitanshu-2004/darwin-studio' },
+    stack: 'PyTorch · SDXL Lightning · Diffusers · Custom moment-preserving SLERP',
+    links: { github: 'https://github.com/mitanshu-2004/Darwin-Studio' },
   },
   {
     id: 'memory-ai',
@@ -40,29 +55,29 @@ const PROJECTS: Project[] = [
     title: 'Memory Assistant',
     featured: true,
     problem:
-      'Privacy-first RAG pipeline running entirely offline. Phi-3 (4-bit quantized) via llama.cpp on CPU-only hardware with hybrid dense-vector and keyword retrieval.',
+      'Offline memory store with hybrid dense + keyword retrieval. Phi-3 (4-bit GGUF) runs at ingest time for metadata; /api/v1/ask is the real RAG path — retrieve, format cited context, generate via llama.cpp, return source-grounded answer with citations.',
     metrics: [
       { value: '0', label: 'external API dependencies' },
-      { value: 'LRU', label: 'caching reduces repeat-query latency' },
+      { value: '/api/v1/ask', label: 'real RAG endpoint with local Phi-3' },
     ],
-    stack: 'FastAPI · ChromaDB · Sentence-Transformers · Phi-3 · llama.cpp',
+    stack: 'FastAPI · ChromaDB · Sentence-Transformers · Phi-3 GGUF · llama.cpp · SQLAlchemy',
     links: { github: 'https://github.com/mitanshu-2004/memory-assistant' },
   },
   {
-    id: 'edge-vision',
+    id: 'rag-assistant',
     domain: 'ai',
     tag: 'AI',
-    title: 'Edge Vision Pipeline',
+    title: 'RAG Assistant',
     problem:
-      'Real-time voice pipeline with NVIDIA NeMo STT and custom wake-word detection. YOLOv8 models trained and deployed for human tracking, package classification, and gesture control at the edge.',
+      'Pydantic cross-field model_validator refuses to parse "Fully Answered" responses when citations list is empty — structural anti-hallucination guard enforced at parse time. V3 prompt does explicit constraint extraction + exception hierarchy + retry-with-error-feedback loop.',
     metrics: [
-      { value: 'NeMo', label: 'STT with wake-word detection' },
-      { value: 'YOLOv8', label: 'multi-task edge vision deployment' },
+      { value: '6/9', label: 'PASS on 9-question eval, 0 hallucinations' },
+      { value: 'Pydantic', label: 'structural anti-hallucination at parse time' },
     ],
-    stack: 'NVIDIA NeMo · YOLOv8 · ESP32 · Raspberry Pi · Python',
-    links: {},
+    stack: 'Llama 3.3 70B · Groq · ChromaDB · Pydantic structured output · Hybrid retrieval',
+    links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
   },
-  // ── Robotics (cards 4–6) ─────────────────────────────
+  // ── Robotics (cards 5–7) ─────────────────────────────
   {
     id: 'hexapod',
     domain: 'robotics',
@@ -70,13 +85,13 @@ const PROJECTS: Project[] = [
     title: 'HEXAPOD',
     featured: true,
     problem:
-      'Multi-legged locomotion system with ROS2 control stack deployed on Raspberry Pi via Docker. Geometric IK for deterministic real-time execution across six coupled limbs.',
+      'Sole-authored the 18-DoF hexapod ROS 2 stack: URDF xacro (533/569 lines), complete ros2_control hardware interface (305 lines), Dockerised runtime with NVIDIA + CycloneDDS, and the Gazebo Classic → Ignition Fortress migration. Analytic IK written by collaborator Akshat.',
     metrics: [
-      { value: '0', label: 'sim-to-real transfer failures' },
-      { value: '6-limb', label: 'simultaneous real-time IK' },
+      { value: '1000 Hz', label: 'Ignition physics under 5 Hz JointTrajectory' },
+      { value: '305', label: 'line ros2_control hardware interface, sole author' },
     ],
-    stack: 'ROS2 · Gazebo · MoveIt · ROS2 Control · Raspberry Pi · Docker',
-    links: { github: 'https://github.com/mitanshu-2004/hexapod' },
+    stack: 'ROS 2 Humble · Ignition Fortress · ros2_control · Docker (NVIDIA + CycloneDDS)',
+    links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
   },
   {
     id: 'arm',
@@ -84,10 +99,10 @@ const PROJECTS: Project[] = [
     tag: 'Robotics',
     title: '6-DOF Robotic Arm',
     problem:
-      'Full motion planning pipeline with inverse kinematics, trajectory execution, and collision avoidance. Simulation-validated before hardware deployment.',
+      'Full motion-planning pipeline with inverse kinematics, collision-aware trajectory planning, and sim-to-real validation. Resolved URDF kinematic mismatches blocking stable trajectory execution.',
     metrics: [
-      { value: '50%', label: 'faster execution via shortest-path selection' },
-      { value: 'C++', label: 'collision-free trajectory scripting' },
+      { value: '~50%', label: 'execution time cut by planner selection + tuning' },
+      { value: 'C++', label: 'collision-free trajectory via MoveIt' },
     ],
     stack: 'ROS · MoveIt · Gazebo · Python · C++',
     links: { github: 'https://github.com/mitanshu-2004/6dof-arm' },
@@ -98,28 +113,29 @@ const PROJECTS: Project[] = [
     tag: 'Robotics',
     title: 'SENTINEL',
     problem:
-      'Offline mesh emergency communication using ESP-NOW — zero infrastructure dependency. Autonomous fall detection and gas hazard sensing with mesh-propagated alerts.',
+      'Offline mesh emergency communication using ESP-NOW — no Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 + dual-axis threshold analysis with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
     metrics: [
-      { value: 'ESP-NOW', label: 'zero-association-overhead mesh' },
-      { value: 'IMU + gas', label: 'dual-sensor embedded firmware' },
+      { value: 'ESP-NOW', label: 'zero-infrastructure peer-to-peer mesh' },
+      { value: 'IMU + gas', label: 'dual-sensor fall + hazard detection' },
     ],
     stack: 'ESP32 · ESP-NOW · C++ · MPU6050 · Arduino IDE',
     links: { github: 'https://github.com/mitanshu-2004/sentinel' },
   },
-  // ── Data Science (cards 7–9) ──────────────────────────
+  // ── Data Science (cards 8–10) ──────────────────────────
   {
-    id: 'retail',
+    id: 'retainiq',
     domain: 'ds',
     tag: 'Data',
-    title: 'Retail Performance Engine',
+    title: 'RetainIQ — Churn Survival Model',
+    featured: true,
     problem:
-      'Store performance forecasting with XGBoost and lag-based feature engineering. K-Means segmentation across 50+ retail locations for supply chain optimization.',
+      'Cox proportional hazards + 6 LLM-extracted risk signals (frustration_level, engagement_dropped, …) from Steam review text. Explicit removal of log_duration and playtime_2wk_ratio as covariates because they leak the survival time.',
     metrics: [
-      { value: '35%', label: 'RMSE reduction vs. moving-average baseline' },
-      { value: '4', label: 'strategic clusters from 50+ locations' },
+      { value: '0.87', label: '5-fold CV C-index (up from 0.60 baseline)' },
+      { value: 'χ²=1553', label: 'likelihood-ratio test, df=6, p≈0' },
     ],
-    stack: 'XGBoost · K-Means · pandas · scikit-learn · Feature Engineering',
-    links: { github: 'https://github.com/mitanshu-2004/retail-performance-engine' },
+    stack: 'Cox PH (lifelines) · Groq Llama 4 Scout · scikit-learn · Streamlit',
+    links: { github: 'https://github.com/mitanshu-2004/Churn' },
   },
   {
     id: 'stockmetrics',
@@ -127,76 +143,77 @@ const PROJECTS: Project[] = [
     tag: 'Data',
     title: 'StockMetrics Pipeline',
     problem:
-      'Multivariate regression on 20 years of Big 5 IT firm data. ETL pipeline aligning daily volatility with quarterly financials. EBITDA Margin Change as statistically significant predictor.',
+      'Tested 25 company-variable pairs (5 fundamentals × 5 Indian IT firms 2005–2025) for predictive power on annual stock returns. One pair reached significance: Wipro EBITDA margin change (p=0.029). 24 others non-significant — framed as power-limited, not failure.',
     metrics: [
-      { value: 'p = 0.029', label: 'EBITDA Margin as significant predictor' },
-      { value: 'F-test', label: 'validated fundamental driver analysis' },
+      { value: 'p=0.029', label: 'Wipro EBITDA margin change — sole sig. pair' },
+      { value: '25', label: 'company-variable pairs tested, 20 years × 5 firms' },
     ],
-    stack: 'pandas · SciPy · statsmodels · ETL · Fisher z-transform',
-    links: { github: 'https://github.com/mitanshu-2004/stockmetrics-pipeline' },
+    stack: 'pandas · scikit-learn · F-test · statsmodels · 20 years × Big 5 IT firms',
+    links: { github: 'https://github.com/mitanshu-2004/StockMetrics' },
   },
   {
     id: 'stockcorr-ds',
     domain: 'ds',
     tag: 'Data',
-    title: 'Stock Correlation Platform',
+    title: 'Stock-Influence Platform',
     problem:
-      'Time-series alignment with timezone normalisation and market calendar sync. Pearson / Spearman / Kendall correlations with Fisher z-transform confidence intervals.',
+      'Full-stack app correlating user-uploaded time-series against Yahoo Finance stock history. Three correlation methods (Pearson, Spearman, Kendall) each returned with 95% Fisher z-transform confidence intervals — math implemented, code-verifiable.',
     metrics: [
-      { value: '3', label: 'correlation methods with statistical validation' },
-      { value: 'Chart.js', label: 'heatmaps + synchronised time-series' },
+      { value: '3', label: 'correlation methods with proper CIs' },
+      { value: 'Chart.js', label: 'heatmaps + synchronised time-series overlay' },
     ],
-    stack: 'React · FastAPI · pandas · SciPy · Chart.js',
-    links: { github: 'https://github.com/mitanshu-2004/stock-correlation-platform' },
+    stack: 'FastAPI · React · pandas · SciPy · yfinance · Chart.js',
+    links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
   },
-  // ── Web (cards 10–12) ─────────────────────────────────
+  // ── Web (cards 11–13) ─────────────────────────────────
+  {
+    id: 'portfolio-web',
+    domain: 'web',
+    tag: 'Web',
+    title: 'mitanshu.me — This Site',
+    featured: true,
+    problem:
+      'Next.js 15 App Router on Vercel Edge with a Groq-grounded RAG chatbot. Multi-key Groq failover: 3-strike circuit breaker + round-robin + 8 s AbortController per request. CSP + HSTS preload, 48 ARIA attributes. Single source of truth drives both the on-page renderer and the chatbot.',
+    metrics: [
+      { value: '3-strike', label: 'circuit breaker + round-robin Groq failover' },
+      { value: 'Edge', label: 'Vercel Edge Runtime, CSP + HSTS preload' },
+    ],
+    stack: 'Next.js 15 · Edge Runtime · Groq · TypeScript strict · Framer Motion',
+    links: { github: 'https://github.com/mitanshu-2004/portfolio', demo: 'https://mitanshu.me' },
+  },
   {
     id: 'chess',
     domain: 'web',
     tag: 'Web',
-    title: 'Chess Platform',
+    title: 'Chesstra',
     problem:
-      'Real-time multiplayer chess with Firebase Firestore synchronization. Versioned state updates prevent race conditions. Stockfish engine offloaded via FastAPI for deep position analysis.',
+      'Real-time multiplayer chess with Firestore onSnapshot + monotonic version counter for idempotent dedup. Server-authoritative game-over with client fallback. Presence heartbeats (5 s write / 15 s liveness window). Separate Stockfish FastAPI engine with cold-start health ping.',
     metrics: [
-      { value: 'Versioned', label: 'concurrent move conflict resolution' },
-      { value: 'Heartbeat', label: 'presence monitoring for lobby system' },
+      { value: 'version', label: 'counter dedup eliminates duplicate moves' },
+      { value: '5 s', label: 'heartbeat presence + 15 s liveness window' },
     ],
-    stack: 'React · Firebase · FastAPI · Stockfish · Zustand',
-    links: { github: 'https://github.com/mitanshu-2004/chess-platform' },
+    stack: 'React 19 · Firebase Firestore · FastAPI · Stockfish · Vite',
+    links: { github: 'https://github.com/mitanshu-2004/chess', demo: 'https://chesstra.vercel.app' },
   },
   {
     id: 'stockcorr-web',
     domain: 'web',
     tag: 'Web',
-    title: 'Stock Correlation Platform',
+    title: 'Stock-Influence Platform',
     problem:
-      'Time-series alignment with timezone normalisation and market calendar sync. Pearson / Spearman / Kendall correlations with Fisher z-transform confidence intervals.',
+      'Time-series alignment with timezone normalisation and market calendar synchronisation across international exchanges. Synchronised Chart.js heatmap + time-series overlay with shared time-axis scrubbing.',
     metrics: [
-      { value: '3', label: 'correlation methods with statistical validation' },
-      { value: 'Chart.js', label: 'heatmaps + synchronised time-series' },
+      { value: '3', label: 'correlation methods with 95% Fisher z CIs' },
+      { value: 'Chart.js', label: 'synchronised heatmap + time-series overlay' },
     ],
     stack: 'React · FastAPI · pandas · SciPy · Chart.js',
-    links: { github: 'https://github.com/mitanshu-2004/stock-correlation-platform' },
-  },
-  {
-    id: 'memory-web',
-    domain: 'web',
-    tag: 'Web',
-    title: 'Memory Assistant',
-    problem:
-      'Privacy-first RAG pipeline with React frontend and FastAPI backend. Automated ingestion from PDFs, DOCX, images via OCR, and web pages with optimistic UI updates.',
-    metrics: [
-      { value: 'Dual DB', label: 'SQLAlchemy metadata + ChromaDB vectors' },
-      { value: 'OCR', label: 'multi-format document ingestion' },
-    ],
-    stack: 'React · FastAPI · ChromaDB · SQLAlchemy · llama.cpp',
-    links: { github: 'https://github.com/mitanshu-2004/memory-assistant' },
+    links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
   },
 ]
 
 // All domains have exactly 3 cards — static totals
 const DOMAIN_TOTALS: Record<Domain, number> = {
-  ai: 3,
+  ai: 4,
   robotics: 3,
   ds: 3,
   web: 3,

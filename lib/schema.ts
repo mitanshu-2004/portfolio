@@ -4,27 +4,32 @@
 export const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': 'https://mitanshugoel.dev/#person',
+    '@id': 'https://mitanshu.me/#person',
     name: 'Mitanshu Goel',
     givenName: 'Mitanshu',
     familyName: 'Goel',
     email: 'mailto:mitanshug2004@gmail.com',
-    url: 'https://mitanshugoel.dev',
-    image: 'https://mitanshugoel.dev/og-image.png',
-    jobTitle: 'AI & Robotics Engineer',
+    url: 'https://mitanshu.me',
+    image: 'https://mitanshu.me/og-image.png',
+    jobTitle: 'Robotics & AI Engineer',
     description:
-        'AI and robotics systems engineer specializing in edge-deployed inference, robot perception, and embedded AI systems.',
+        'Robotics software engineer and AI/ML engineer. Building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and conducting continued-pretraining runs on self-scraped Reddit corpora. Final-year ECE student at MAIT Delhi, graduating June 2026.',
     knowsAbout: [
-        'Robot Operating System (ROS/ROS2)',
+        'Robot Operating System (ROS 2)',
+        'Real-time C++ control loops',
+        'Continued pretraining (CPT)',
+        'LoRA / rsLoRA / PEFT',
         'Machine Learning',
         'Computer Vision',
         'YOLOv8',
         'Edge Inference',
         'Embedded Systems',
         'PyTorch',
-        'Stable Diffusion',
+        'Stable Diffusion / SDXL',
         'Retrieval-Augmented Generation',
         'Inverse Kinematics',
+        'Pinocchio',
+        'Hugging Face',
     ],
     alumniOf: {
         '@type': 'CollegeOrUniversity',
@@ -47,15 +52,12 @@ export const personSchema = {
     },
     worksFor: {
         '@type': 'Organization',
-        name: 'A.T.O.M Robotics Club',
-        memberOf: {
-            '@type': 'CollegeOrUniversity',
-            name: 'Maharaja Agrasen Institute of Technology',
-        },
+        name: 'Variety Innovation / Enferent.ai',
     },
     sameAs: [
         'https://github.com/mitanshu-2004',
         'https://linkedin.com/in/mitanshugoel',
+        'https://huggingface.co/mitanshugoel',
     ],
     address: {
         '@type': 'PostalAddress',
@@ -68,21 +70,21 @@ export const projectListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Projects by Mitanshu Goel',
-    author: { '@id': 'https://mitanshugoel.dev/#person' },
+    author: { '@id': 'https://mitanshu.me/#person' },
     itemListElement: [
         {
             '@type': 'ListItem',
             position: 1,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshugoel.dev/#darwin-studio',
-                name: 'Darwin Studio',
+                '@id': 'https://mitanshu.me/#reddit-cpt',
+                name: 'Reddit CPT — 6 Training Runs',
                 description:
-                    'Evolutionary image generation engine using SDXL latent tensor manipulation with custom SLERP interpolation for geometric consistency in latent space crossover operations.',
-                applicationCategory: 'AI / Generative Image System',
-                creator: { '@id': 'https://mitanshugoel.dev/#person' },
+                    'Six continued-pretraining runs on a self-scraped Reddit corpus: Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline + inference test in one repo. Three adapters public on Hugging Face.',
+                applicationCategory: 'AI / Foundation Model Training',
+                creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'PyTorch'],
-                codeRepository: 'https://github.com/mitanshu-2004/darwin-studio',
+                codeRepository: 'https://github.com/mitanshu-2004/reddit-cpt-training-scripts',
             },
         },
         {
@@ -90,14 +92,14 @@ export const projectListSchema = {
             position: 2,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshugoel.dev/#hexapod',
-                name: 'HEXAPOD',
+                '@id': 'https://mitanshu.me/#hexapod',
+                name: 'HEXAPOD (atom-robotics-lab)',
                 description:
-                    'Multi-legged locomotion system with ROS2-based control stack deployed on Raspberry Pi via Docker. Inverse kinematics computed geometrically for deterministic real-time execution.',
+                    'Sole-authored the 18-DoF hexapod ROS 2 stack: URDF xacro (533/569 lines), ros2_control hardware interface (305 lines), Dockerised runtime with NVIDIA + CycloneDDS, and Gazebo Classic → Ignition Fortress migration.',
                 applicationCategory: 'Robotics / Locomotion System',
-                creator: { '@id': 'https://mitanshugoel.dev/#person' },
+                creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'C++'],
-                codeRepository: 'https://github.com/mitanshu-2004/hexapod',
+                codeRepository: 'https://github.com/atom-robotics-lab/Hexapod',
             },
         },
         {
@@ -105,12 +107,12 @@ export const projectListSchema = {
             position: 3,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshugoel.dev/#memory-assistant',
-                name: 'Memory Assistant — Local RAG Pipeline',
+                '@id': 'https://mitanshu.me/#memory-assistant',
+                name: 'Memory Assistant — Hybrid Retrieval + Local RAG',
                 description:
-                    'Privacy-first retrieval-augmented generation pipeline running entirely offline using Phi-3 (4-bit quantized) via llama.cpp with hybrid dense-vector and keyword retrieval.',
+                    'Offline memory store with hybrid dense + keyword retrieval. /api/v1/ask is the real RAG path: retrieve memories, format cited context, generate via local Phi-3 GGUF (llama.cpp), return source-grounded answer with citations.',
                 applicationCategory: 'AI / Natural Language Processing',
-                creator: { '@id': 'https://mitanshugoel.dev/#person' },
+                creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'TypeScript'],
                 codeRepository: 'https://github.com/mitanshu-2004/memory-assistant',
             },
@@ -120,13 +122,13 @@ export const projectListSchema = {
             position: 4,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshugoel.dev/#sentinel',
+                '@id': 'https://mitanshu.me/#sentinel',
                 name: 'SENTINEL',
                 description:
-                    'Offline mesh emergency communication system using ESP-NOW protocol across ESP32 nodes with embedded fall detection and gas hazard sensing — zero internet dependency.',
+                    'Offline mesh emergency communication system using ESP-NOW across ESP32 nodes — no Wi-Fi or cellular infrastructure. Fall detection via MPU6050 + dual-axis threshold analysis; gas hazard sensing in the same firmware layer.',
                 applicationCategory: 'Embedded Systems / IoT',
-                creator: { '@id': 'https://mitanshugoel.dev/#person' },
-                programmingLanguage: ['C++', 'Python'],
+                creator: { '@id': 'https://mitanshu.me/#person' },
+                programmingLanguage: ['C++'],
                 codeRepository: 'https://github.com/mitanshu-2004/sentinel',
             },
         },
@@ -142,15 +144,15 @@ export const faqSchema = {
             name: 'Who is Mitanshu Goel?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel is an AI and robotics engineer based in Delhi, India, currently completing a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at Maharaja Agrasen Institute of Technology. He specializes in edge-deployed inference systems, robot perception, and embedded AI, with internship experience at SarthakAI and Nextup Robotics.',
+                text: 'Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India, completing a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT, graduating June 2026. He is currently building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and has conducted six continued-pretraining runs on a self-scraped Reddit corpus across Mistral 7B, Qwen 2.5, and a from-scratch nanoGPT.',
             },
         },
         {
             '@type': 'Question',
-            name: 'What projects has Mitanshu Goel built?',
+            name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel has built four primary projects: Darwin Studio (an evolutionary image generation engine using SDXL latent manipulation with custom SLERP), HEXAPOD (a multi-legged robot with ROS2 control deployed on Raspberry Pi), Memory Assistant (a local-first RAG pipeline using Phi-3 and llama.cpp with hybrid retrieval), and SENTINEL (an offline ESP-NOW mesh emergency communication system with embedded fall detection).',
+                text: 'For Physical AI / Robotics: the current bimanual VR teleoperation rig at Variety Innovation / Enferent.ai (real-time C++17 on Elite Robots CS66 industrial arms), followed by the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For Foundation Models / LLM: six training runs at github.com/mitanshu-2004/reddit-cpt-training-scripts — three artefacts public on Hugging Face. For RAG: the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {
@@ -158,7 +160,7 @@ export const faqSchema = {
             name: "What is Mitanshu Goel's technical specialization?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel specializes in building AI systems under hardware constraints — from ESP32 embedded firmware and ROS2 robotics to SDXL latent space optimization and CPU-only LLM inference. His work spans robot perception (YOLOv8, ROS2, MoveIt), generative AI (SDXL, LoRA, diffusion models), and local inference systems (llama.cpp, ChromaDB, RAG pipelines).',
+                text: 'Mitanshu specializes in real-time robotics control (C++17, SCHED_FIFO, mlockall on industrial arms), ROS 2 systems (ros2_control, Ignition Fortress, Pinocchio), and foundation-model adaptation (Unsloth, TRL, PEFT/LoRA, rsLoRA). He also builds evaluation-rigorous RAG systems and deploys inference under hardware constraints (llama.cpp on CPU, YOLOv8 on edge, NeMo STT on humanoids).',
             },
         },
         {
@@ -166,7 +168,7 @@ export const faqSchema = {
             name: 'Is Mitanshu Goel available for internship or full-time roles?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Yes. Mitanshu Goel is open to research engineering, ML engineering, and robotics software engineering roles — full-time or internship. He can be contacted at mitanshug2004@gmail.com.',
+                text: 'Available for internships and short contracts immediately. Full-time from June 2026. Looking for Robotics SWE, Research Engineering, ML Engineering, or Applied / Foundation-Model AI roles. Based in Delhi, open to relocation. Contact: mitanshug2004@gmail.com.',
             },
         },
     ],
@@ -182,6 +184,20 @@ export const workExperienceSchema = {
             position: 1,
             item: {
                 '@type': 'OrganizationRole',
+                roleName: 'Robotics Software Engineer Intern',
+                startDate: '2025-08',
+                worksFor: {
+                    '@type': 'Organization',
+                    name: 'Variety Innovation / Enferent.ai',
+                },
+                description: 'Building a bimanual VR teleoperation rig: Meta Quest 3 driving two Elite Robots CS66 industrial arms over a C++17 real-time control loop with SCHED_FIFO scheduling, mlockall, and CPU pinning. Implementing damped-Jacobian IK via Pinocchio. Writing a §3.2-style imitation-learning dataset recorder.',
+            },
+        },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            item: {
+                '@type': 'OrganizationRole',
                 roleName: 'AI & Robotics Intern',
                 startDate: '2025-06',
                 endDate: '2025-08',
@@ -190,12 +206,12 @@ export const workExperienceSchema = {
                     name: 'SarthakAI',
                     address: { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
                 },
-                description: 'Real-time voice pipeline with NVIDIA NeMo STT, YOLOv8 deployment for physical robot tasks, fault-tolerant robot-AI interface architecture, ESP32/Raspberry Pi hardware telemetry workstation.',
+                description: 'Real-time voice pipeline with NVIDIA NeMo FastConformer-Transducer STT + wake-word detection. YOLOv8 deployment for three production tasks on a UBTech Yanshee humanoid. Fault-tolerant robot-AI interface. ESP32/Raspberry Pi hardware telemetry workstation.',
             },
         },
         {
             '@type': 'ListItem',
-            position: 2,
+            position: 3,
             item: {
                 '@type': 'OrganizationRole',
                 roleName: 'Robotics Intern',
@@ -206,7 +222,7 @@ export const workExperienceSchema = {
                     name: 'Nextup Robotics',
                     address: { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
                 },
-                description: '6-DOF robotic arm configuration in ROS/Gazebo, MoveIt inverse kinematics and collision-aware trajectory planning in C++, 50% execution time reduction via shortest-path algorithm selection.',
+                description: '6-DOF robotic arm configuration in ROS/Gazebo. MoveIt inverse kinematics and collision-aware trajectory planning in C++. ~50% execution time reduction via planner selection and parameter tuning.',
             },
         },
     ],

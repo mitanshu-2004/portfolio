@@ -29,7 +29,7 @@ Three habits that show up across his code:
 
 Things most ECE new-grads do not have:
 
-- **Five model-training tracks** of continued-pretraining across Mistral 7B v0.3 (r=128 and r=256), Qwen 2.5 3B (r=16), Qwen 2.5 7B (r=128 A100), and a Karpathy-style nanoGPT trained from scratch. Real CPT configs with deliberate choices (embedding LR 5–10× smaller than main LR, lm_head + embed_tokens trained, rsLoRA at high ranks), not tutorial defaults.
+- **Six training runs** on a self-scraped Reddit corpus: Mistral 7B v0.3 (r=128), Mistral 7B v0.3 (r=256), Qwen 2.5 7B (r=128 on A100), Qwen 2.5 3B (r=16), Qwen 2.5 1.5B (structured-format QLoRA), and a Karpathy-style nanoGPT trained from scratch (~50 M params, 8 layers / 8 heads / 512 embd). All training scripts, data pipeline notebooks, and inference tests are in one repo: github.com/mitanshu-2004/reddit-cpt-training-scripts. Three artefacts public on Hugging Face. Real CPT configs with deliberate choices (embedding LR 5–10× smaller than main LR, lm_head + embed_tokens trained, rsLoRA at high ranks), not tutorial defaults.
 - **Real-time C++17 control on industrial arms** — SCHED_FIFO scheduling, mlockall, CPU pinning, 125 Hz bimanual VR teleop loop. Few candidates at any level have shipped real-time robot code.
 - **Sole-authored a 305-line ros2_control hardware interface** for an 18-DoF hexapod plus the URDF xacro (533 lines) and Gazebo Classic → Ignition Fortress migration. Most students touch ROS only at the application layer.
 - **Self-built training datasets on Hugging Face Hub** — raw Reddit text corpus and a pre-tokenized + packed variant for max_seq_length=2048.
@@ -82,15 +82,16 @@ Trajectory note: the through-line from hardware → AI-on-robots → foundation-
 
 ## FOUNDATION-MODEL WORK
 
-Self-collected Reddit corpus. Five training tracks across four base architectures plus a from-scratch baseline. All scripts recovered and saved with HF tokens rotated to env vars.
+Self-scraped Reddit corpus. Six training runs across four base architectures plus a from-scratch baseline. All training scripts, data pipeline notebooks (libtorrent Pushshift download → zstandard decompression → thread joining + filter → Wilson-score ranking → Qwen tokenisation + packing), and inference tests in one repo: github.com/mitanshu-2004/reddit-cpt-training-scripts.
 
-| HF repo | Base | Rank | Hardware | Status |
-|---|---|---|---|---|
-| huggingface.co/mitanshugoel/mistral-7b-reddit-cpt | unsloth/mistral-7b-v0.3 (4-bit) | LoRA r=128, rsLoRA | Colab T4 + FlashAttention 2 | 2,200 logged steps; public |
-| huggingface.co/mitanshugoel/qwen2.5-3b-cpt-adapter | Qwen 2.5 3B | LoRA r=16 | GPU | 170 steps with per-step checkpoints; public |
-| huggingface.co/mitanshugoel/reddit-nanogpt | Karpathy-style nanoGPT | — | GPU | Trained from scratch; public |
-| Mistral 7B Lightning L4 r=256 run | unsloth/mistral-7b-v0.3-bnb-4bit | LoRA r=256, rsLoRA | Lightning AI L4 24 GB | Higher-rank experiment; pre-tokenized snapshot was empty at run-time; kept as recovered experiment infrastructure, not presented as a completed model. |
-| Qwen 2.5 7B A100 r=128 run | unsloth/Qwen2.5-7B-bnb-4bit | LoRA r=128, rsLoRA | A100 80 GB, effective batch 32, linear LR schedule | Largest-batch run |
+| Run | Base | Method | Hardware | HF artefact | Public |
+|---|---|---|---|---|---|
+| 01 | Mistral 7B v0.3 (4-bit Unsloth) | LoRA r=128, rsLoRA, attn + MLP + lm_head + embed_tokens | Colab T4 + Kaggle 2× T4 via torchrun | mitanshugoel/mistral-7b-reddit-cpt | yes |
+| 02 | Mistral 7B v0.3 (4-bit Unsloth) | LoRA r=256, rsLoRA, same targets | Lightning AI L4 + Kaggle 2× T4 | mitanshugoel/mistral-7b-cpt | no |
+| 03 | Qwen 2.5 7B (4-bit Unsloth) | LoRA r=128, rsLoRA, same targets | A100 80 GB | mitanshugoel/reddit-dump | no |
+| 04 | Qwen 2.5 3B (4-bit BitsAndBytesConfig) | LoRA r=16, plain LoRA, attn + MLP only | Kaggle T4×2 DDP via accelerate launch | mitanshugoel/qwen2.5-3b-cpt-adapter | yes |
+| 05 | Qwen 2.5 1.5B (4-bit) | Small-r QLoRA, structured "Subreddit / Title / Body" format | Kaggle T4×2 | not pushed | — |
+| 06 | Random init (Karpathy nanoGPT) | From scratch, ~50 M params, 8 layers / 8 heads / 512 embd | Kaggle T4×2 | mitanshugoel/reddit-nanogpt | yes |
 
 Self-built datasets:
 - mitanshugoel/reddit-cpt-dataset — raw Reddit text corpus.
@@ -104,7 +105,7 @@ Self-built datasets:
 - HF Hub hub_strategy="checkpoint" or a custom HFCheckpointCallback that pushes every 200 steps — survivability through cloud-session interruption.
 - attn_implementation="flash_attention_2" on T4.
 
-**Honest framing of the second Mistral run:** the r=256 Lightning L4 attempt failed mid-cell because the pre-tokenized dataset snapshot was empty at the moment Lightning pulled it. It's a recovered experiment-infrastructure artifact, not a completed model. Naming this honestly matters more than hiding it.
+**Honest framing of run 02:** the r=256 Lightning L4 attempt failed mid-cell because the pre-tokenized dataset snapshot was empty at the moment Lightning pulled it. It is a recovered experiment-infrastructure artifact, not a completed model. The repo frames it that way explicitly.
 
 ---
 
@@ -273,7 +274,7 @@ He does not claim things he hasn't done. Asking him a direct question about a te
 
 ## FAQ — likely recruiter questions and how to think about them
 
-- **"What's his strongest project?"** Depends on the lane. For Physical AI / Robotics: the current Variety / Enferent VR teleop work (real-time C++17 on industrial arms) — followed by the sole-authored ros2_control interface in the Hexapod repo. For Foundation Models / LLM: the five model-training tracks on Hugging Face. For evaluation-rigor / RAG: the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal: the Primetrade failed-prediction post-mortem.
+- **"What's his strongest project?"** Depends on the lane. For Physical AI / Robotics: the current Variety / Enferent VR teleop work (real-time C++17 on industrial arms) — followed by the sole-authored ros2_control interface in the Hexapod repo. For Foundation Models / LLM: the six training runs at github.com/mitanshu-2004/reddit-cpt-training-scripts — three artefacts public on Hugging Face. For evaluation-rigor / RAG: the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal: the Primetrade failed-prediction post-mortem.
 - **"What's he NOT good at yet?"** He has not yet shipped at FAANG-scale, has not published a paper, and does not have a major OSS PR landed. His current GPU access is rented; benchmarks that need >24 GB VRAM are staged but not run.
 - **"How much does he want?"** Specific compensation expectations are not listed here. Reach him directly at mitanshug2004@gmail.com.
 - **"Can he start now?"** Yes for internships / contracts immediately. Full-time from June 2026.

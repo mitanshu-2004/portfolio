@@ -28,11 +28,16 @@ export default function Home() {
       />
       {/* Invisible semantic summary for AI crawlers / RAG chunking */}
       <p className="sr-only">
-        Mitanshu Goel is an AI and robotics systems engineer based in Delhi,
-        India. He builds edge-deployed inference pipelines, robot perception
-        systems, and embedded AI hardware, with expertise in ROS2, YOLOv8,
-        PyTorch, SDXL, llama.cpp, and ESP32 firmware. He is currently seeking
-        research engineering and robotics software roles.
+        Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India,
+        graduating June 2026 from MAIT (ECE + AI/ML minor). Currently building a
+        bimanual VR teleoperation rig at Variety Innovation / Enferent.ai —
+        Meta Quest 3 driving Elite Robots CS66 arms over a C++17 real-time
+        Linux control loop. Six continued-pretraining runs on a self-scraped
+        Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) across four hardware
+        tiers; three artefacts public on Hugging Face. Sole-authored the
+        ros2_control hardware interface and Ignition Fortress migration for an
+        18-DoF hexapod at atom-robotics-lab. Seeking Robotics SWE, Research
+        Engineering, ML Engineering, or Applied AI roles from June 2026.
       </p>
       <Hero />
       <Focus />
