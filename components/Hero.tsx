@@ -231,10 +231,6 @@ export default function Hero() {
           I write code. Physical AI, LLMs, data science.
         </p>
         <div className="hero-links">
-          {/* CV link commented out — considering removing the multi-resume flow.
-              Showing recruiters different resumes per domain can backfire.
-          <Link href="/cv?domain=robotics">CV (robotics) ↗</Link>
-          */}
           <a
             href="https://github.com/mitanshu-2004"
             target="_blank"

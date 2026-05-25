@@ -210,7 +210,7 @@ GitHub: https://github.com/mitanshu-2004/Store-Performance-Dashboard
 
 ### mitanshu.me, production portfolio + this chatbot
 Stack: Next.js 15, Edge Runtime, Groq, TypeScript strict.
-Multi-key Groq failover with a 3-strike circuit breaker, round-robin, and 8 s AbortController. The /api/chat endpoint you are using right now is grounded in this knowledge base via Edge runtime. The system prompt enforces grounding rules, query rewriting, and conversation memory. A single source of truth (lib/resume-data.ts and lib/knowledge.ts) drives both the on-page renderer and the chatbot.
+Multi-key Groq failover with a 3-strike circuit breaker, round-robin, and 8 s AbortController. The /api/chat endpoint you are using right now is grounded in this knowledge base via Edge runtime. The system prompt enforces grounding rules, query rewriting, and conversation memory.
 Live: https://mitanshu.me. GitHub: https://github.com/mitanshu-2004/portfolio
 
 ---

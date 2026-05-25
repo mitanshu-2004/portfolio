@@ -33,12 +33,6 @@ export default function Nav() {
               Stack
             </Link>
           </li>
-          {/* CV link commented out — considering removing the multi-resume flow.
-              Showing recruiters different resumes per domain can backfire.
-          <li>
-            <Link href="/cv?domain=robotics">CV</Link>
-          </li>
-          */}
           <li>
             <Link href="#chat">Chat</Link>
           </li>

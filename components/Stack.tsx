@@ -1,81 +1,6 @@
-'use client'
-
-import { useState } from 'react'
 import ScrollFade from './ScrollFade'
 
-type Mode = 'main' | 'physical-ai' | 'data-science'
-
-interface StackGroup {
-  label: string
-  main: string
-  full: string[]
-}
-
-const ROBOTICS: StackGroup = {
-  label: 'Robotics & Embedded',
-  main: 'ROS 2 · MoveIt · Pinocchio · ros2_control · C++17 (real-time)',
-  full: [
-    'ROS 2 Humble · ROS · MoveIt · Pinocchio · Ignition Fortress · RViz · ros2_control · URDF',
-    'Elite Robots CS SDK (RTSI / EliteDriver) · Meta Quest 3 + ALVR + OpenVR',
-    'ESP32 · Raspberry Pi · Arduino IDE · ESP-NOW · SCHED_FIFO · mlockall · CPU pinning',
-  ],
-}
-
-const AIML: StackGroup = {
-  label: 'AI / ML',
-  main: 'PyTorch · Unsloth · LoRA / rsLoRA · Hugging Face Hub',
-  full: [
-    'PyTorch · Unsloth · TRL · PEFT / LoRA · rsLoRA · SDXL Lightning · Diffusers',
-    'NVIDIA NeMo · YOLOv8 · llama.cpp (Phi-3) · Sentence-Transformers · ChromaDB',
-    'scikit-learn · XGBoost · lifelines (Cox PH) · Pydantic structured output',
-  ],
-}
-
-const LANGUAGES: StackGroup = {
-  label: 'Languages',
-  main: 'Python · C++17 · TypeScript',
-  full: ['Python · C++17 · TypeScript · SQL · URScript · Bash'],
-}
-
-const BACKEND: StackGroup = {
-  label: 'Backend + Systems',
-  main: 'FastAPI · Next.js 15 · Docker · Linux',
-  full: [
-    'FastAPI · Next.js 15 · React 19 · Firebase Firestore · Docker (NVIDIA runtime + CycloneDDS) · Linux · Git · SQLAlchemy · Hugging Face Hub',
-  ],
-}
-
-const TABS: { value: Mode; label: string }[] = [
-  { value: 'main', label: 'Main' },
-  { value: 'physical-ai', label: 'Physical AI' },
-  { value: 'data-science', label: 'Data Science / LLM' },
-]
-
-function Group({ group, full }: { group: StackGroup; full: boolean }) {
-  return (
-    <div className="stack-group">
-      <span className="stack-group-label">{group.label}</span>
-      <p className="stack-items">
-        {full
-          ? group.full.map((line, i) => (
-              <span key={i}>
-                {line}
-                {i < group.full.length - 1 && <br />}
-              </span>
-            ))
-          : group.main}
-      </p>
-    </div>
-  )
-}
-
 export default function Stack() {
-  const [mode, setMode] = useState<Mode>('main')
-
-  const showFullRobotics = mode === 'physical-ai'
-  const showFullAI = mode === 'data-science'
-  const showFullSupport = mode !== 'main'
-
   return (
     <section id="stack" aria-label="Technical stack">
       <div className="container">
@@ -83,24 +8,55 @@ export default function Stack() {
           <span className="section-label">Technical Stack</span>
         </ScrollFade>
         <ScrollFade>
-          <div className="stack-tabs" role="tablist" aria-label="Stack focus">
-            {TABS.map((tab) => (
-              <button
-                key={tab.value}
-                role="tab"
-                aria-selected={mode === tab.value}
-                className={`stack-tab${mode === tab.value ? ' stack-tab--active' : ''}`}
-                onClick={() => setMode(tab.value)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
           <div className="stack-grid">
-            <Group group={ROBOTICS} full={showFullRobotics} />
-            <Group group={AIML} full={showFullAI} />
-            <Group group={LANGUAGES} full={showFullSupport} />
-            <Group group={BACKEND} full={showFullSupport} />
+            <div className="stack-group">
+              <span className="stack-group-label">Robotics &amp; Embedded</span>
+              <p className="stack-items">
+                ROS 2 Humble, ROS, MoveIt, Pinocchio, ros2_control, URDF, Ignition Fortress, RViz.
+                <br />
+                Elite Robots CS SDK (RTSI, EliteDriver), Franka libfranka, Meta Quest 3, OpenVR, ALVR.
+                <br />
+                Real-time Linux (SCHED_FIFO, CPU pinning, mlockall), ESP32, Raspberry Pi, ESP-NOW, Arduino IDE.
+              </p>
+            </div>
+
+            <div className="stack-group">
+              <span className="stack-group-label">AI &amp; Foundation Models</span>
+              <p className="stack-items">
+                PyTorch, Unsloth, TRL, PEFT, LoRA, rsLoRA, BitsAndBytesConfig, Hugging Face Hub.
+                <br />
+                Continued pretraining (Mistral, Qwen 2.5, nanoGPT), SDXL Lightning, Diffusers, NVIDIA NeMo, YOLOv8.
+                <br />
+                Sentence-Transformers, ChromaDB, hybrid retrieval, llama.cpp (Phi-3), Pydantic structured output, Instructor.
+              </p>
+            </div>
+
+            <div className="stack-group">
+              <span className="stack-group-label">Data Science &amp; Stats</span>
+              <p className="stack-items">
+                lifelines (Cox PH), scikit-learn, XGBoost, K-Means, pandas, NumPy, SciPy, statsmodels.
+                <br />
+                Fisher z-transform CIs, F-tests, likelihood-ratio χ², leakage audits, held-out evaluation, NDCG, MRR, Recall@k.
+              </p>
+            </div>
+
+            <div className="stack-group">
+              <span className="stack-group-label">Backend &amp; Systems</span>
+              <p className="stack-items">
+                FastAPI, Uvicorn, SQLAlchemy, SQLite FTS5, BM25.
+                <br />
+                Next.js 15, React 19, Vercel Edge Runtime, Firebase Firestore, TypeScript strict, Framer Motion.
+                <br />
+                Docker (NVIDIA runtime + CycloneDDS), Linux, Git, Bash.
+              </p>
+            </div>
+
+            <div className="stack-group stack-group--full">
+              <span className="stack-group-label">Languages</span>
+              <p className="stack-items">
+                Python, C++, TypeScript, JavaScript, SQL, URScript, Bash.
+              </p>
+            </div>
           </div>
         </ScrollFade>
       </div>
