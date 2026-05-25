@@ -13,7 +13,7 @@ export const personSchema = {
     image: 'https://mitanshu.me/og-image.png',
     jobTitle: 'Robotics & AI Engineer',
     description:
-        'Robotics software engineer and AI/ML engineer. Building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and conducting continued-pretraining runs on self-scraped Reddit corpora. Final-year ECE student at MAIT Delhi, graduating June 2026.',
+        'Robotics software engineer and AI/ML engineer. Building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and conducting continued-pretraining runs on self-scraped Reddit corpora. ECE graduate from MAIT Delhi (2026).',
     knowsAbout: [
         'Robot Operating System (ROS 2)',
         'Real-time C++ control loops',
@@ -77,9 +77,9 @@ export const projectListSchema = {
             item: {
                 '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#reddit-cpt',
-                name: 'Reddit CPT — 6 Training Runs',
+                name: 'Reddit CPT, 6 Training Runs',
                 description:
-                    'Six continued-pretraining runs on a self-scraped Reddit corpus: Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline + inference test in one repo. Three adapters public on Hugging Face.',
+                    'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline and inference test in one repo. Three adapters public on Hugging Face.',
                 applicationCategory: 'AI / Foundation Model Training',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'PyTorch'],
@@ -94,7 +94,7 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#hexapod',
                 name: 'HEXAPOD (atom-robotics-lab)',
                 description:
-                    'Sole-authored the 18-DoF hexapod ROS 2 stack: URDF xacro (533/569 lines), ros2_control hardware interface (305 lines), Dockerised runtime with NVIDIA + CycloneDDS, and Gazebo Classic → Ignition Fortress migration.',
+                    'Sole-authored the 18-DoF hexapod ROS 2 stack. URDF xacro (533/569 lines), ros2_control hardware interface (305 lines), a Dockerised runtime with NVIDIA + CycloneDDS, and the Gazebo Classic to Ignition Fortress migration.',
                 applicationCategory: 'Robotics / Locomotion System',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'C++'],
@@ -107,9 +107,9 @@ export const projectListSchema = {
             item: {
                 '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#memory-assistant',
-                name: 'Memory Assistant — Hybrid Retrieval + Local RAG',
+                name: 'Memory Assistant, Hybrid Retrieval + Local RAG',
                 description:
-                    'Offline memory store with hybrid dense + keyword retrieval. /api/v1/ask is the real RAG path: retrieve memories, format cited context, generate via local Phi-3 GGUF (llama.cpp), return source-grounded answer with citations.',
+                    'Offline memory store with hybrid dense + keyword retrieval. /api/v1/ask is the real RAG path. Retrieve memories, format cited context, generate via local Phi-3 GGUF (llama.cpp), return a source-grounded answer with citations.',
                 applicationCategory: 'AI / Natural Language Processing',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'TypeScript'],
@@ -124,7 +124,7 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#sentinel',
                 name: 'SENTINEL',
                 description:
-                    'Offline mesh emergency communication system using ESP-NOW across ESP32 nodes — no Wi-Fi or cellular infrastructure. Fall detection via MPU6050 + dual-axis threshold analysis; gas hazard sensing in the same firmware layer.',
+                    'Offline mesh emergency communication system using ESP-NOW across ESP32 nodes. No Wi-Fi or cellular infrastructure. Fall detection via MPU6050 + dual-axis threshold analysis. Gas hazard sensing in the same firmware layer.',
                 applicationCategory: 'Embedded Systems / IoT',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['C++'],
@@ -143,7 +143,7 @@ export const faqSchema = {
             name: 'Who is Mitanshu Goel?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India, completing a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT, graduating June 2026. He is currently building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and has conducted six continued-pretraining runs on a self-scraped Reddit corpus across Mistral 7B, Qwen 2.5, and a from-scratch nanoGPT.',
+                text: 'Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and has conducted six continued-pretraining runs on a self-scraped Reddit corpus across Mistral 7B, Qwen 2.5, and a from-scratch nanoGPT.',
             },
         },
         {
@@ -151,7 +151,7 @@ export const faqSchema = {
             name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'For Physical AI / Robotics: the current bimanual VR teleoperation rig at Variety Innovation / Enferent.ai (real-time C++17 on Elite Robots CS66 industrial arms), followed by the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For Foundation Models / LLM: six training runs at github.com/mitanshu-2004/reddit-cpt-training-scripts — three artefacts public on Hugging Face. For RAG: the RAG-assistant with Pydantic structural anti-hallucination guards.',
+                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at Variety Innovation / Enferent.ai. Real-time C++ on Elite Robots CS66 and Franka Research 3 arms. Then the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For Foundation Models and LLMs, six training runs at github.com/mitanshu-2004/reddit-cpt-training-scripts. Three artefacts public on Hugging Face. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {
@@ -159,7 +159,7 @@ export const faqSchema = {
             name: "What is Mitanshu Goel's technical specialization?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu specializes in real-time robotics control (C++17, SCHED_FIFO, mlockall on industrial arms), ROS 2 systems (ros2_control, Ignition Fortress, Pinocchio), and foundation-model adaptation (Unsloth, TRL, PEFT/LoRA, rsLoRA). He also builds evaluation-rigorous RAG systems and deploys inference under hardware constraints (llama.cpp on CPU, YOLOv8 on edge, NeMo STT on humanoids).',
+                text: 'Mitanshu specializes in real-time robotics control (C++, SCHED_FIFO, mlockall on industrial arms), ROS 2 systems (ros2_control, Ignition Fortress, Pinocchio), and foundation-model adaptation (Unsloth, TRL, PEFT/LoRA, rsLoRA). He also builds evaluation-rigorous RAG systems and deploys inference under hardware constraints. llama.cpp on CPU, YOLOv8 on edge, NeMo STT on humanoids.',
             },
         },
         {
@@ -167,7 +167,7 @@ export const faqSchema = {
             name: 'Is Mitanshu Goel available for internship or full-time roles?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Available for internships and short contracts immediately. Full-time from June 2026. Looking for Robotics SWE, Research Engineering, ML Engineering, or Applied / Foundation-Model AI roles. Based in Delhi, open to relocation. Contact: mitanshug2004@gmail.com.',
+                text: 'Available for full-time roles. Looking for Robotics SWE, Research Engineering, ML Engineering, or Applied and Foundation-Model AI roles. Based in Delhi, open to relocation. Contact mitanshug2004@gmail.com.',
             },
         },
     ],
@@ -189,7 +189,7 @@ export const workExperienceSchema = {
                     '@type': 'Organization',
                     name: 'Variety Innovation / Enferent.ai',
                 },
-                description: 'Building a bimanual VR teleoperation rig: Meta Quest 3 driving two Elite Robots CS66 industrial arms over a C++17 real-time control loop with SCHED_FIFO scheduling, mlockall, and CPU pinning. Implementing damped-Jacobian IK via Pinocchio. Writing a §3.2-style imitation-learning dataset recorder.',
+                description: 'Building a bimanual VR teleoperation rig. Meta Quest 3 drives an Elite Robots CS66 pair, and the same loop is being extended to a Franka Research 3 so the system covers both arm families. Runs on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall). Damped-Jacobian IK via Pinocchio. Imitation-learning dataset recorder for downstream policy training.',
             },
         },
         {

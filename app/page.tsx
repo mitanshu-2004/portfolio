@@ -28,16 +28,17 @@ export default function Home() {
       />
       {/* Invisible semantic summary for AI crawlers / RAG chunking */}
       <p className="sr-only">
-        Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India,
-        graduating June 2026 from MAIT (ECE + AI/ML minor). Currently building a
-        bimanual VR teleoperation rig at Variety Innovation / Enferent.ai —
-        Meta Quest 3 driving Elite Robots CS66 arms over a C++17 real-time
-        Linux control loop. Six continued-pretraining runs on a self-scraped
-        Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) across four hardware
-        tiers; three artefacts public on Hugging Face. Sole-authored the
-        ros2_control hardware interface and Ignition Fortress migration for an
-        18-DoF hexapod at atom-robotics-lab. Seeking Robotics SWE, Research
-        Engineering, ML Engineering, or Applied AI roles from June 2026.
+        Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India.
+        ECE graduate from MAIT (2026) with an AI/ML minor. Currently building a
+        bimanual VR teleoperation rig at Variety Innovation / Enferent.ai. Meta
+        Quest 3 drives an Elite Robots CS66 pair and a Franka Research 3 over a
+        real-time Linux control loop. He has run six continued-pretraining
+        experiments on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5,
+        nanoGPT) across four hardware tiers. Three artefacts are public on
+        Hugging Face. He sole-authored the ros2_control hardware interface and
+        Ignition Fortress migration for an 18-DoF hexapod at atom-robotics-lab.
+        Looking for Robotics SWE, Research Engineering, ML Engineering, or
+        Applied AI roles.
       </p>
       <Hero />
       <Focus />

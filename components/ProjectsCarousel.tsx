@@ -53,7 +53,7 @@ const PROJECTS: Project[] = [
     tag: 'Robotics',
     title: 'SENTINEL',
     problem:
-      'Offline mesh emergency communication using ESP-NOW — no Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 + dual-axis threshold analysis with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
+      'Offline mesh emergency communication using ESP-NOW. No Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 + dual-axis threshold analysis, with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
     metrics: [
       { value: 'ESP-NOW', label: 'zero-infrastructure peer-to-peer mesh' },
       { value: 'IMU + gas', label: 'dual-sensor fall + hazard detection' },
@@ -66,7 +66,7 @@ const PROJECTS: Project[] = [
     id: 'cpt',
     domain: 'ai',
     tag: 'AI',
-    title: 'Reddit CPT — 6 Training Runs',
+    title: 'Reddit CPT, 6 Training Runs',
     featured: true,
     problem:
       'Six continued-pretraining runs on a self-scraped Reddit corpus: Mistral 7B (r=128 + r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline included. Three adapters public on Hugging Face.',
@@ -84,7 +84,7 @@ const PROJECTS: Project[] = [
     title: 'Darwin Studio',
     featured: true,
     problem:
-      'Treats SDXL latent tensors as genetic material — mutation and crossover applied between generations. Custom moment-preserving SLERP: spherical interpolation followed by z-score normalisation and restoration of weighted target mean and std, keeping child latents on the unit-norm noise manifold.',
+      'Treats SDXL latent tensors as genetic material. Mutation and crossover applied between generations. Custom moment-preserving SLERP does spherical interpolation, then z-score normalisation and restoration of the weighted target mean and std. That keeps child latents on the unit-norm noise manifold.',
     metrics: [
       { value: 'SLERP', label: 'vs LERP: eliminates variance collapse' },
       { value: 'manual', label: 'CFG + scheduler + VAE decode loop' },
@@ -99,7 +99,7 @@ const PROJECTS: Project[] = [
     title: 'Memory Assistant',
     featured: true,
     problem:
-      'Offline memory store with hybrid dense + keyword retrieval. Phi-3 (4-bit GGUF) runs at ingest time for metadata; /api/v1/ask is the real RAG path — retrieve, format cited context, generate via llama.cpp, return source-grounded answer with citations.',
+      'Offline memory store with hybrid dense + keyword retrieval. Phi-3 (4-bit GGUF) runs at ingest time for metadata. /api/v1/ask is the real RAG path. Retrieve, format cited context, generate via llama.cpp, return a source-grounded answer with citations.',
     metrics: [
       { value: '0', label: 'external API dependencies' },
       { value: '/api/v1/ask', label: 'real RAG endpoint with local Phi-3' },
@@ -113,7 +113,7 @@ const PROJECTS: Project[] = [
     tag: 'AI',
     title: 'RAG Assistant',
     problem:
-      'Pydantic cross-field model_validator refuses to parse "Fully Answered" responses when citations list is empty — structural anti-hallucination guard enforced at parse time. V3 prompt does explicit constraint extraction + exception hierarchy + retry-with-error-feedback loop.',
+      'Pydantic cross-field model_validator refuses to parse "Fully Answered" responses when the citations list is empty. That is the structural anti-hallucination guard, enforced at parse time. V3 prompt does explicit constraint extraction, an exception hierarchy, and a retry-with-error-feedback loop.',
     metrics: [
       { value: '6/9', label: 'PASS on 9-question eval, 0 hallucinations' },
       { value: 'Pydantic', label: 'structural anti-hallucination at parse time' },
@@ -126,7 +126,7 @@ const PROJECTS: Project[] = [
     id: 'retainiq',
     domain: 'ds',
     tag: 'Data',
-    title: 'RetainIQ — Churn Survival Model',
+    title: 'RetainIQ Churn Survival Model',
     featured: true,
     problem:
       'Cox proportional hazards + 6 LLM-extracted risk signals (frustration_level, engagement_dropped, …) from Steam review text. Explicit removal of log_duration and playtime_2wk_ratio as covariates because they leak the survival time.',
@@ -143,9 +143,9 @@ const PROJECTS: Project[] = [
     tag: 'Data',
     title: 'StockMetrics Pipeline',
     problem:
-      'Tested 25 company-variable pairs (5 fundamentals × 5 Indian IT firms 2005–2025) for predictive power on annual stock returns. One pair reached significance: Wipro EBITDA margin change (p=0.029). 24 others non-significant — framed as power-limited, not failure.',
+      'Tested 25 company-variable pairs (5 fundamentals × 5 Indian IT firms 2005–2025) for predictive power on annual stock returns. One pair reached significance. Wipro EBITDA margin change (p=0.029). 24 others non-significant, framed as power-limited rather than failure.',
     metrics: [
-      { value: 'p=0.029', label: 'Wipro EBITDA margin change — sole sig. pair' },
+      { value: 'p=0.029', label: 'Wipro EBITDA margin change, sole sig. pair' },
       { value: '25', label: 'company-variable pairs tested, 20 years × 5 firms' },
     ],
     stack: 'pandas · scikit-learn · F-test · statsmodels · 20 years × Big 5 IT firms',
@@ -157,7 +157,7 @@ const PROJECTS: Project[] = [
     tag: 'Data',
     title: 'Stock-Influence Platform',
     problem:
-      'Full-stack app correlating user-uploaded time-series against Yahoo Finance stock history. Three correlation methods (Pearson, Spearman, Kendall) each returned with 95% Fisher z-transform confidence intervals — math implemented, code-verifiable.',
+      'Full-stack app correlating user-uploaded time-series against Yahoo Finance stock history. Three correlation methods (Pearson, Spearman, Kendall), each returned with 95% Fisher z-transform confidence intervals. The math is implemented in code and verifiable.',
     metrics: [
       { value: '3', label: 'correlation methods with proper CIs' },
       { value: 'Chart.js', label: 'heatmaps + synchronised time-series overlay' },
@@ -170,7 +170,7 @@ const PROJECTS: Project[] = [
     id: 'portfolio-web',
     domain: 'web',
     tag: 'Web',
-    title: 'mitanshu.me — This Site',
+    title: 'mitanshu.me (This Site)',
     featured: true,
     problem:
       'Next.js 15 App Router on Vercel Edge with a Groq-grounded RAG chatbot. Multi-key Groq failover: 3-strike circuit breaker + round-robin + 8 s AbortController per request. CSP + HSTS preload, 48 ARIA attributes. Single source of truth drives both the on-page renderer and the chatbot.',
@@ -780,7 +780,7 @@ export default function ProjectsCarousel() {
               className="carousel-track"
               ref={trackRef}
               tabIndex={0}
-              aria-label="Projects carousel — use arrow keys or swipe to navigate"
+              aria-label="Projects carousel. Use arrow keys or swipe to navigate."
             >
               {PROJECTS.map((p) => (
                 <div

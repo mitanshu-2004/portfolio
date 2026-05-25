@@ -11,9 +11,9 @@ export default function Education() {
         <ScrollFade className="exp-entry">
           <div className="exp-header">
             <span className="exp-role">
-              B.Tech — Electronics &amp; Communication Engineering
+              B.Tech, Electronics &amp; Communication Engineering
             </span>
-            <span className="exp-period">2022 – 2026 (expected)</span>
+            <span className="exp-period">2022 – 2026</span>
           </div>
           <div className="exp-org">
             Maharaja Agrasen Institute of Technology (MAIT) · Delhi

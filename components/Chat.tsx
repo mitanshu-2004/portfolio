@@ -10,7 +10,7 @@ interface Message {
 
 const GREETING: Message = {
   role: 'assistant',
-  content: "Hi — ask me about Mitanshu's projects or technical depth. I answer from his portfolio source only, so the numbers I give you are traceable to a repo.",
+  content: "Hi. Ask me about Mitanshu's projects or technical depth. I only answer from his portfolio source, so the numbers I share are traceable back to a repo.",
 }
 
 const STARTER_CHIPS = [

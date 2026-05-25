@@ -21,23 +21,24 @@ export default function Experience() {
           <div className="exp-org">Variety Innovation / Enferent.ai · Remote</div>
           <ul className="exp-bullets" aria-label="Responsibilities at Variety Innovation / Enferent.ai">
             <li>
-              Building bimanual VR teleoperation infrastructure — Meta Quest 3
-              driving an Elite Robots CS66 pair, now extending the same control
-              loop to a Franka Research 3 so the system covers both arm families.
-              Runs on a custom real-time Linux scheduler (SCHED_FIFO + CPU
-              pinning + mlockall).
+              Building bimanual VR teleoperation infrastructure. Meta Quest 3
+              drives an Elite Robots CS66 pair, and we are now extending the
+              same control loop to a Franka Research 3 so the system covers
+              both arm families. Runs on a custom real-time Linux scheduler
+              (SCHED_FIFO, CPU pinning, mlockall).
             </li>
             <li>
               Implemented damped-Jacobian inverse kinematics via Pinocchio with
-              manipulability-adaptive damping and null-space regularisation; ships
-              with three named singularity guards on joint and TCP rotation axes.
+              manipulability-adaptive damping and null-space regularisation. It
+              ships with three named singularity guards on the joint and TCP
+              rotation axes.
             </li>
             <li>
-              Built the imitation-learning dataset recorder that captures
-              synchronised left+right arm states, VR headset pose, and TCP poses
-              across both platforms — the company's primary goal is to ship
-              multi-robot teleoperation datasets at scale, and we train policies
-              on top of the data we collect.
+              Built the imitation-learning dataset recorder. It captures
+              synchronised left and right arm states, VR headset pose, and TCP
+              poses across both platforms. The company's main goal is to ship
+              multi-robot teleoperation datasets at scale, and we train
+              policies on top of the data we collect.
             </li>
           </ul>
         </ScrollFade>
@@ -55,9 +56,10 @@ export default function Experience() {
               into a UBTech Yanshee humanoid platform.
             </li>
             <li>
-              Trained and deployed custom YOLOv8 models for three production tasks:
-              human tracking, package classification, and gesture-based robot
-              control — each with a separate training regime and inference pipeline.
+              Trained and deployed custom YOLOv8 models for three production
+              tasks: human tracking, package classification, and gesture-based
+              robot control. Each one had its own training regime and inference
+              pipeline.
             </li>
             <li>
               Designed a polling-based fault-tolerant interface between robot
@@ -88,8 +90,8 @@ export default function Experience() {
             </li>
             <li>
               Integrated MoveIt for inverse kinematics and collision-aware
-              trajectory planning using C++; achieved ~50% reduction in execution
-              time by selecting a more appropriate planner and tuning its parameters.
+              trajectory planning in C++. Cut execution time by roughly 50%
+              after switching planners and tuning parameters.
             </li>
           </ul>
         </ScrollFade>

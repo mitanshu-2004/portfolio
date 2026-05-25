@@ -228,7 +228,7 @@ export default function Hero() {
         </span>
         <h1 className="hero-name">Mitanshu Goel</h1>
         <p className="hero-descriptor">
-          I write code — physical AI, LLMs, data science.
+          I write code. Physical AI, LLMs, data science.
         </p>
         <div className="hero-links">
           {/* CV link commented out — considering removing the multi-resume flow.

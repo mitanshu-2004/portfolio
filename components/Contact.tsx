@@ -9,7 +9,7 @@ export default function Contact() {
         </ScrollFade>
         <ScrollFade>
           <p className="contact-lead">
-            Looking for full-time roles in Robotics SWE / Physical AI; also
+            Looking for full-time roles in Robotics SWE or Physical AI. Also
             open to Research Engineering and applied ML.
           </p>
           <div className="contact-rows">
@@ -53,7 +53,7 @@ export default function Contact() {
             </div>
             <div className="contact-row">
               <span className="contact-label">Location</span>
-              <span className="contact-value">Delhi, India · open to relocation</span>
+              <span className="contact-value">Delhi, India. Open to relocation.</span>
             </div>
           </div>
         </ScrollFade>
