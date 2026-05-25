@@ -631,7 +631,6 @@ section {
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--ink);
-  max-width: 620px;
 }
 
 #focus p+p {
@@ -768,6 +767,16 @@ section {
   font-style: italic;
 }
 
+.proj-tag {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-left: auto;
+}
+
 .proj-problem {
   font-family: var(--font-sans), sans-serif;
   font-weight: 300;
@@ -845,6 +854,63 @@ section {
   border-bottom-color: var(--accent);
 }
 
+/* ── Projects: archive grid (compact tail) ── */
+
+.proj-archive {
+  margin-top: 3rem;
+}
+
+.proj-archive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2.25rem;
+  margin-top: 1.25rem;
+}
+
+.proj-compact {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.proj-compact + .proj-compact {
+  border-top: 1px solid var(--rule);
+}
+
+.proj-compact .proj-header {
+  margin-bottom: 0.4rem;
+}
+
+.proj-compact .proj-title {
+  font-size: 0.95rem;
+}
+
+.proj-compact .proj-problem {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.proj-compact .proj-stack {
+  font-size: 0.7rem;
+  line-height: 1.55;
+  margin-bottom: 0.55rem;
+}
+
+.proj-compact .proj-links a {
+  font-size: 0.72rem;
+}
+
+@media (max-width: 600px) {
+  .proj-archive-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 /* ── Old project entries (kept for any legacy refs) ── */
 
 /* ── Project glyphs ── */
@@ -855,6 +921,10 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem 3rem;
+}
+
+.stack-group--full {
+  grid-column: 1 / -1;
 }
 
 .stack-group-label {

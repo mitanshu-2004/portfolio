@@ -31,34 +31,6 @@ const PROJECTS: Project[] = [
     links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
   },
   {
-    id: 'arm',
-    domain: 'robotics',
-    tag: 'Robotics',
-    title: '6-DOF Robotic Arm',
-    problem:
-      'Full motion-planning pipeline with inverse kinematics, collision-aware trajectory planning, and sim-to-real validation. Resolved URDF kinematic mismatches blocking stable trajectory execution.',
-    metrics: [
-      { value: '~50%', label: 'execution time cut by planner selection and tuning' },
-      { value: 'C++', label: 'collision-free trajectory via MoveIt' },
-    ],
-    stack: 'ROS, MoveIt, Gazebo, Python, C++',
-    links: { github: 'https://github.com/mitanshu-2004/6dof-arm' },
-  },
-  {
-    id: 'sentinel',
-    domain: 'robotics',
-    tag: 'Robotics',
-    title: 'Sentinel',
-    problem:
-      'Offline mesh emergency communication using ESP-NOW. No Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 and dual-axis threshold analysis, with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
-    metrics: [
-      { value: 'ESP-NOW', label: 'zero-infrastructure peer-to-peer mesh' },
-      { value: 'IMU + gas', label: 'dual-sensor fall and hazard detection' },
-    ],
-    stack: 'ESP32, ESP-NOW, C++, MPU6050, Arduino IDE',
-    links: { github: 'https://github.com/mitanshu-2004/sentinel' },
-  },
-  {
     id: 'cpt',
     domain: 'ai',
     tag: 'AI',
@@ -104,20 +76,6 @@ const PROJECTS: Project[] = [
     links: { github: 'https://github.com/mitanshu-2004/memory-assistant' },
   },
   {
-    id: 'rag-assistant',
-    domain: 'ai',
-    tag: 'AI',
-    title: 'RAG Assistant',
-    problem:
-      'Pydantic cross-field model_validator refuses to parse "Fully Answered" responses when the citations list is empty. A structural anti-hallucination guard, enforced at parse time. V3 prompt does explicit constraint extraction, an exception hierarchy, and a retry-with-error-feedback loop.',
-    metrics: [
-      { value: '6/9 pass', label: '9-question eval, 0 hallucinations' },
-      { value: 'Pydantic', label: 'structural anti-hallucination at parse time' },
-    ],
-    stack: 'Llama 3.3 70B, Groq, ChromaDB, Pydantic structured output, hybrid retrieval',
-    links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
-  },
-  {
     id: 'retainiq',
     domain: 'ds',
     tag: 'Data',
@@ -131,6 +89,48 @@ const PROJECTS: Project[] = [
     ],
     stack: 'Cox PH (lifelines), Groq Llama 4 Scout, scikit-learn, held-out eval',
     links: { github: 'https://github.com/mitanshu-2004/llm-survival-churn' },
+  },
+  {
+    id: 'arm',
+    domain: 'robotics',
+    tag: 'Robotics',
+    title: '6-DOF Robotic Arm',
+    problem:
+      'Full motion-planning pipeline with inverse kinematics, collision-aware trajectory planning, and sim-to-real validation. Resolved URDF kinematic mismatches blocking stable trajectory execution.',
+    metrics: [
+      { value: '~50%', label: 'execution time cut by planner selection and tuning' },
+      { value: 'C++', label: 'collision-free trajectory via MoveIt' },
+    ],
+    stack: 'ROS, MoveIt, Gazebo, Python, C++',
+    links: { github: 'https://github.com/mitanshu-2004/6dof-arm' },
+  },
+  {
+    id: 'sentinel',
+    domain: 'robotics',
+    tag: 'Robotics',
+    title: 'Sentinel',
+    problem:
+      'Offline mesh emergency communication using ESP-NOW. No Wi-Fi or cellular infrastructure required. Fall detection via MPU6050 and dual-axis threshold analysis, with mesh-propagated alerts. Gas hazard sensing in the same firmware layer.',
+    metrics: [
+      { value: 'ESP-NOW', label: 'zero-infrastructure peer-to-peer mesh' },
+      { value: 'IMU + gas', label: 'dual-sensor fall and hazard detection' },
+    ],
+    stack: 'ESP32, ESP-NOW, C++, MPU6050, Arduino IDE',
+    links: { github: 'https://github.com/mitanshu-2004/sentinel' },
+  },
+  {
+    id: 'rag-assistant',
+    domain: 'ai',
+    tag: 'AI',
+    title: 'RAG Assistant',
+    problem:
+      'Pydantic cross-field model_validator refuses to parse "Fully Answered" responses when the citations list is empty. A structural anti-hallucination guard, enforced at parse time. V3 prompt does explicit constraint extraction, an exception hierarchy, and a retry-with-error-feedback loop.',
+    metrics: [
+      { value: '6/9 pass', label: '9-question eval, 0 hallucinations' },
+      { value: 'Pydantic', label: 'structural anti-hallucination at parse time' },
+    ],
+    stack: 'Llama 3.3 70B, Groq, ChromaDB, Pydantic structured output, hybrid retrieval',
+    links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
   },
   {
     id: 'stockmetrics',
@@ -161,21 +161,6 @@ const PROJECTS: Project[] = [
     links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
   },
   {
-    id: 'portfolio-web',
-    domain: 'web',
-    tag: 'Web',
-    title: 'mitanshu.me (This Site)',
-    featured: true,
-    problem:
-      'Next.js 15 App Router on Vercel Edge with a Groq-grounded RAG chatbot. Multi-key Groq failover with a 3-strike circuit breaker, round-robin, and 8 s AbortController per request. CSP and HSTS preload. Single source of truth drives both the on-page renderer and the chatbot.',
-    metrics: [
-      { value: '3-strike', label: 'circuit breaker + round-robin failover' },
-      { value: 'Edge', label: 'Vercel Edge Runtime, CSP + HSTS preload' },
-    ],
-    stack: 'Next.js 15, Edge Runtime, Groq, TypeScript strict, Framer Motion',
-    links: { github: 'https://github.com/mitanshu-2004/portfolio', demo: 'https://mitanshu.me' },
-  },
-  {
     id: 'chess',
     domain: 'web',
     tag: 'Web',
@@ -191,20 +176,12 @@ const PROJECTS: Project[] = [
   },
 ]
 
-const DOMAIN_ORDER: Domain[] = ['robotics', 'ai', 'ds', 'web']
-const DOMAIN_LABELS: Record<Domain, string> = {
-  robotics: 'Robotics',
-  ai: 'AI & Foundation Models',
-  ds: 'Data Science',
-  web: 'Web',
-}
-
 function ProjectRow({ p }: { p: Project }) {
   return (
     <article className="proj-entry" aria-label={p.title}>
       <div className="proj-header">
         <span className="proj-title">{p.title}</span>
-        {p.featured && <span className="proj-featured">Featured</span>}
+        <span className="proj-tag">{p.tag}</span>
       </div>
       <p className="proj-problem">{p.problem}</p>
       <div className="proj-metrics">
@@ -233,7 +210,35 @@ function ProjectRow({ p }: { p: Project }) {
   )
 }
 
+function ProjectCompact({ p }: { p: Project }) {
+  return (
+    <article className="proj-entry proj-compact" aria-label={p.title}>
+      <div className="proj-header">
+        <span className="proj-title">{p.title}</span>
+        <span className="proj-tag">{p.tag}</span>
+      </div>
+      <p className="proj-problem">{p.problem}</p>
+      <div className="proj-stack">{p.stack}</div>
+      <div className="proj-links">
+        {p.links.github && (
+          <a href={p.links.github} target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+        )}
+        {p.links.demo && (
+          <a href={p.links.demo} target="_blank" rel="noopener noreferrer">
+            Demo ↗
+          </a>
+        )}
+      </div>
+    </article>
+  )
+}
+
 export default function Projects() {
+  const featured = PROJECTS.filter((p) => p.featured)
+  const archive = PROJECTS.filter((p) => !p.featured)
+
   return (
     <section id="projects" aria-label="Selected projects">
       <div className="container">
@@ -241,22 +246,26 @@ export default function Projects() {
           <span className="section-label">Projects</span>
         </ScrollFade>
 
-        {DOMAIN_ORDER.map((domain) => {
-          const items = PROJECTS.filter((p) => p.domain === domain)
-          if (items.length === 0) return null
-          return (
-            <ScrollFade key={domain}>
-              <div className="proj-group">
-                <h3 className="proj-group-label">{DOMAIN_LABELS[domain]}</h3>
-                <div className="proj-list">
-                  {items.map((p) => (
-                    <ProjectRow key={p.id} p={p} />
-                  ))}
-                </div>
+        <ScrollFade>
+          <div className="proj-list">
+            {featured.map((p) => (
+              <ProjectRow key={p.id} p={p} />
+            ))}
+          </div>
+        </ScrollFade>
+
+        {archive.length > 0 && (
+          <ScrollFade>
+            <div className="proj-archive">
+              <h3 className="proj-group-label">More work</h3>
+              <div className="proj-archive-grid">
+                {archive.map((p) => (
+                  <ProjectCompact key={p.id} p={p} />
+                ))}
               </div>
-            </ScrollFade>
-          )
-        })}
+            </div>
+          </ScrollFade>
+        )}
 
         <ScrollFade>
           <div className="proj-github-link">

@@ -228,7 +228,7 @@ export default function Hero() {
         </span>
         <h1 className="hero-name">Mitanshu Goel</h1>
         <p className="hero-descriptor">
-          I write code. Physical AI, LLMs, data science.
+          Building robots and training models.
         </p>
         <div className="hero-links">
           <a
