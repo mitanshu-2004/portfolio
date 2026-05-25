@@ -57,7 +57,6 @@ export const personSchema = {
     sameAs: [
         'https://github.com/mitanshu-2004',
         'https://linkedin.com/in/mitanshugoel',
-        'https://huggingface.co/mitanshugoel',
     ],
     address: {
         '@type': 'PostalAddress',

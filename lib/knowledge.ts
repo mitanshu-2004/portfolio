@@ -268,7 +268,7 @@ He does not claim things he hasn't done. Asking him a direct question about a te
 - Available for: full-time roles starting June 2026; extended internships that could convert; freelance / contract work immediately.
 - Location: Delhi, India. Open to relocation.
 - Response time: within 24 hours via email — mitanshug2004@gmail.com.
-- Public links: github.com/mitanshu-2004, linkedin.com/in/mitanshugoel, huggingface.co/mitanshugoel.
+- Public links: github.com/mitanshu-2004, linkedin.com/in/mitanshugoel.
 
 ---
 
@@ -287,9 +287,9 @@ He does not claim things he hasn't done. Asking him a direct question about a te
 ## CONTACT
 
 Email: mitanshug2004@gmail.com
+Phone: +91 85956 57583
 GitHub: https://github.com/mitanshu-2004
 LinkedIn: https://linkedin.com/in/mitanshugoel
-Hugging Face: https://huggingface.co/mitanshugoel
 Portfolio: https://mitanshu.me
 Location: Delhi, India
 

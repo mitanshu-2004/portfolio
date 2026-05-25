@@ -228,12 +228,13 @@ export default function Hero() {
         </span>
         <h1 className="hero-name">Mitanshu Goel</h1>
         <p className="hero-descriptor">
-          Robotics &amp; physical AI — real-time teleop, ROS 2, embedded
-          systems — plus LLM training pipelines and eval rigor under hardware
-          constraints.
+          I write code — physical AI, LLMs, data science.
         </p>
         <div className="hero-links">
+          {/* CV link commented out — considering removing the multi-resume flow.
+              Showing recruiters different resumes per domain can backfire.
           <Link href="/cv?domain=robotics">CV (robotics) ↗</Link>
+          */}
           <a
             href="https://github.com/mitanshu-2004"
             target="_blank"

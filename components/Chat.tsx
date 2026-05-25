@@ -10,16 +10,13 @@ interface Message {
 
 const GREETING: Message = {
   role: 'assistant',
-  content: "Hi — ask me about Mitanshu's projects, technical depth, or availability. I answer from his portfolio source only, so the numbers I give you are traceable to a repo.",
+  content: "Hi — ask me about Mitanshu's projects or technical depth. I answer from his portfolio source only, so the numbers I give you are traceable to a repo.",
 }
 
 const STARTER_CHIPS = [
   "What's his strongest project?",
   "What foundation-model work has he done?",
   "How does the current Variety / Enferent role work?",
-  "Where's the honesty signal in his portfolio?",
-  "What hasn't he done yet?",
-  "When is he available to start?",
 ]
 
 export default function Chat() {
@@ -88,7 +85,7 @@ export default function Chat() {
         <ScrollFade>
           <h2 className="chat-heading">Have a question?</h2>
           <p className="hero-descriptor">
-            Ask anything about Mitanshu's experience, skills, or availability.
+            Ask anything about Mitanshu's experience, skills.
           </p>
 
           {/* Message window */}
@@ -141,7 +138,7 @@ export default function Chat() {
               ref={inputRef}
               className="chat-input"
               type="text"
-              placeholder="Ask about skills, projects, availability…"
+              placeholder="Ask about skills or projects…"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}

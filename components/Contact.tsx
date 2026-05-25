@@ -9,10 +9,8 @@ export default function Contact() {
         </ScrollFade>
         <ScrollFade>
           <p className="contact-lead">
-            Looking for full-time roles in Robotics SWE / Physical AI first;
-            also open to Research Engineering and applied ML starting June 2026.
-            Available for internships and short contracts immediately. Responses
-            within 24 hours.
+            Looking for full-time roles in Robotics SWE / Physical AI; also
+            open to Research Engineering and applied ML.
           </p>
           <div className="contact-rows">
             <div className="contact-row">
@@ -21,6 +19,12 @@ export default function Contact() {
                 <a href="mailto:mitanshug2004@gmail.com">
                   mitanshug2004@gmail.com
                 </a>
+              </span>
+            </div>
+            <div className="contact-row">
+              <span className="contact-label">Phone</span>
+              <span className="contact-value">
+                <a href="tel:+918595657583">+91 85956 57583</a>
               </span>
             </div>
             <div className="contact-row">
@@ -44,18 +48,6 @@ export default function Contact() {
                   rel="noopener noreferrer"
                 >
                   linkedin.com/in/mitanshugoel
-                </a>
-              </span>
-            </div>
-            <div className="contact-row">
-              <span className="contact-label">Hugging Face</span>
-              <span className="contact-value">
-                <a
-                  href="https://huggingface.co/mitanshugoel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  huggingface.co/mitanshugoel
                 </a>
               </span>
             </div>

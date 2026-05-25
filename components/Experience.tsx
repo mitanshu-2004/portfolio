@@ -21,9 +21,11 @@ export default function Experience() {
           <div className="exp-org">Variety Innovation / Enferent.ai · Remote</div>
           <ul className="exp-bullets" aria-label="Responsibilities at Variety Innovation / Enferent.ai">
             <li>
-              Building a bimanual VR teleoperation rig: Meta Quest 3 driving two
-              Elite Robots CS66 industrial arms over a custom C++17 control loop
-              with real-time Linux scheduling (SCHED_FIFO + CPU pinning + mlockall).
+              Building bimanual VR teleoperation infrastructure — Meta Quest 3
+              driving an Elite Robots CS66 pair, now extending the same control
+              loop to a Franka Research 3 so the system covers both arm families.
+              Runs on a custom real-time Linux scheduler (SCHED_FIFO + CPU
+              pinning + mlockall).
             </li>
             <li>
               Implemented damped-Jacobian inverse kinematics via Pinocchio with
@@ -31,9 +33,11 @@ export default function Experience() {
               with three named singularity guards on joint and TCP rotation axes.
             </li>
             <li>
-              Wrote the imitation-learning dataset recorder that captures
+              Built the imitation-learning dataset recorder that captures
               synchronised left+right arm states, VR headset pose, and TCP poses
-              to disk in a §3.2-style schema for downstream policy training.
+              across both platforms — the company's primary goal is to ship
+              multi-robot teleoperation datasets at scale, and we train policies
+              on top of the data we collect.
             </li>
           </ul>
         </ScrollFade>

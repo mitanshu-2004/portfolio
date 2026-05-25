@@ -23,14 +23,6 @@ export default function Education() {
               <strong>Minor:</strong> Artificial Intelligence &amp; Machine
               Learning
             </li>
-            <li>
-              {/* TODO: add CGPA once finalised */}
-              <strong>Key coursework:</strong>{' '}
-              <span className="edu-tags">
-                Signals &amp; Systems · Embedded Systems · Control Theory ·
-                Machine Learning · Digital Signal Processing
-              </span>
-            </li>
           </ul>
         </ScrollFade>
       </div>

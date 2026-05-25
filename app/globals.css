@@ -808,6 +808,39 @@ section {
 }
 
 /* ── Stack ── */
+.stack-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.stack-tab {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mid);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.stack-tab:hover {
+  color: var(--black);
+  border-color: var(--accent);
+}
+
+.stack-tab--active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
 .stack-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3974,6 +4007,7 @@ footer {
   align-items: flex-end;
   gap: 0.5rem;
   max-width: 82%;
+  width: fit-content;
 }
 
 .chat-message--user {
@@ -4010,8 +4044,10 @@ footer {
   line-height: 1.6;
   padding: 0.55rem 0.85rem;
   border-radius: 12px;
+  width: fit-content;
   max-width: 100%;
-  word-break: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .chat-message--user .chat-bubble {
