@@ -37,13 +37,13 @@ const PROJECTS: Project[] = [
     title: 'Reddit CPT, 6 Training Runs',
     featured: true,
     problem:
-      'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline in the same repo. Three adapters public on Hugging Face.',
+      'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline (libtorrent Pushshift download, zstandard decompression, thread joining, Wilson-score ranking, Qwen tokenisation and packing). Artefacts kept private.',
     metrics: [
       { value: '6 runs', label: 'across 4 hardware tiers' },
-      { value: '3 public', label: 'artefacts on Hugging Face' },
+      { value: '4 bases', label: 'Mistral 7B, Qwen 2.5 (7B/3B/1.5B), nanoGPT' },
     ],
     stack: 'Unsloth, TRL, PEFT, LoRA, rsLoRA, Mistral 7B, Qwen 2.5, nanoGPT, Kaggle, Colab, A100',
-    links: { github: 'https://github.com/mitanshu-2004/reddit-cpt-training-scripts' },
+    links: {},
   },
   {
     id: 'darwin',

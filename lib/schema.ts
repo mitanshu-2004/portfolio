@@ -79,11 +79,10 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#reddit-cpt',
                 name: 'Reddit CPT, 6 Training Runs',
                 description:
-                    'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline and inference test in one repo. Three adapters public on Hugging Face.',
+                    'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline and inference test. Artefacts kept private.',
                 applicationCategory: 'AI / Foundation Model Training',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'PyTorch'],
-                codeRepository: 'https://github.com/mitanshu-2004/reddit-cpt-training-scripts',
             },
         },
         {
@@ -151,7 +150,7 @@ export const faqSchema = {
             name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at Variety Innovation / Enferent.ai. Real-time C++ on Elite Robots CS66 and Franka Research 3 arms. Then the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For Foundation Models and LLMs, six training runs at github.com/mitanshu-2004/reddit-cpt-training-scripts. Three artefacts public on Hugging Face. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
+                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at Variety Innovation / Enferent.ai. Real-time C++ on Elite Robots CS66 and Franka Research 3 arms. Then the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For Foundation Models and LLMs, six continued-pretraining runs on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) with artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {

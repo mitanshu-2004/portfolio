@@ -34,8 +34,8 @@ export default function Home() {
         Quest 3 drives an Elite Robots CS66 pair and a Franka Research 3 over a
         real-time Linux control loop. He has run six continued-pretraining
         experiments on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5,
-        nanoGPT) across four hardware tiers. Three artefacts are public on
-        Hugging Face. He sole-authored the ros2_control hardware interface and
+        nanoGPT) across four hardware tiers, with artefacts kept private. He
+        sole-authored the ros2_control hardware interface and
         Ignition Fortress migration for an 18-DoF hexapod at atom-robotics-lab.
         Looking for Robotics SWE, Research Engineering, ML Engineering, or
         Applied AI roles.

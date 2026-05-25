@@ -23,9 +23,8 @@ export default function Focus() {
             Separately, six training runs on a Reddit corpus I scraped myself.
             Mistral 7B. Qwen 2.5 at 1.5B, 3B, and 7B. A from-scratch nanoGPT I
             wrote because I wanted to feel the pain. Four hardware tiers, from
-            a Colab T4 up to an A100 80 GB borrowed for a weekend. Three of
-            the resulting adapters and checkpoints are public on my Hugging
-            Face.
+            a Colab T4 up to an A100 80 GB borrowed for a weekend. The
+            artefacts are kept private for now.
           </p>
           <p>
             ECE at MAIT Delhi, 2026. I tend to start from the deployment end.

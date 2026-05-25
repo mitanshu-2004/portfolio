@@ -29,7 +29,7 @@ Three habits that show up across his code:
 
 Things most ECE new-grads do not have:
 
-- **Six training runs** on a self-scraped Reddit corpus. Mistral 7B v0.3 (r=128), Mistral 7B v0.3 (r=256), Qwen 2.5 7B (r=128 on A100), Qwen 2.5 3B (r=16), Qwen 2.5 1.5B (structured-format QLoRA), and a Karpathy-style nanoGPT trained from scratch (~50 M params, 8 layers, 8 heads, 512 embd). All training scripts, data pipeline notebooks, and inference tests are in one repo: github.com/mitanshu-2004/reddit-cpt-training-scripts. Three artefacts public on Hugging Face. Real CPT configs with deliberate choices (embedding LR 5 to 10 times smaller than main LR, lm_head and embed_tokens trained, rsLoRA at high ranks), not tutorial defaults.
+- **Six training runs** on a self-scraped Reddit corpus. Mistral 7B v0.3 (r=128), Mistral 7B v0.3 (r=256), Qwen 2.5 7B (r=128 on A100), Qwen 2.5 3B (r=16), Qwen 2.5 1.5B (structured-format QLoRA), and a Karpathy-style nanoGPT trained from scratch (~50 M params, 8 layers, 8 heads, 512 embd). Real CPT configs with deliberate choices (embedding LR 5 to 10 times smaller than main LR, lm_head and embed_tokens trained, rsLoRA at high ranks), not tutorial defaults. Artefacts kept private.
 - **Real-time C++ control on industrial arms.** SCHED_FIFO scheduling, mlockall, CPU pinning, 125 Hz bimanual VR teleop loop. Few candidates at any level have shipped real-time robot code.
 - **Sole-authored a 305-line ros2_control hardware interface** for an 18-DoF hexapod, plus the URDF xacro (533 lines) and Gazebo Classic to Ignition Fortress migration. Most students touch ROS only at the application layer.
 - **Self-built training datasets on Hugging Face Hub.** A raw Reddit text corpus, and a pre-tokenized and packed variant for max_seq_length=2048.
@@ -82,20 +82,16 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ## FOUNDATION-MODEL WORK
 
-Self-scraped Reddit corpus. Six training runs across four base architectures plus a from-scratch baseline. All training scripts, data pipeline notebooks (libtorrent Pushshift download, zstandard decompression, thread joining and filter, Wilson-score ranking, Qwen tokenisation and packing), and inference tests in one repo: github.com/mitanshu-2004/reddit-cpt-training-scripts.
+Self-scraped Reddit corpus. Six training runs across four base architectures plus a from-scratch baseline. Full data pipeline: libtorrent Pushshift download, zstandard decompression, thread joining and filter, Wilson-score ranking, Qwen tokenisation and packing. All artefacts kept private.
 
-| Run | Base | Method | Hardware | HF artefact | Public |
-|---|---|---|---|---|---|
-| 01 | Mistral 7B v0.3 (4-bit Unsloth) | LoRA r=128, rsLoRA, attn + MLP + lm_head + embed_tokens | Colab T4 + Kaggle 2× T4 via torchrun | mitanshugoel/mistral-7b-reddit-cpt | yes |
-| 02 | Mistral 7B v0.3 (4-bit Unsloth) | LoRA r=256, rsLoRA, same targets | Lightning AI L4 + Kaggle 2× T4 | mitanshugoel/mistral-7b-cpt | no |
-| 03 | Qwen 2.5 7B (4-bit Unsloth) | LoRA r=128, rsLoRA, same targets | A100 80 GB | mitanshugoel/reddit-dump | no |
-| 04 | Qwen 2.5 3B (4-bit BitsAndBytesConfig) | LoRA r=16, plain LoRA, attn + MLP only | Kaggle T4×2 DDP via accelerate launch | mitanshugoel/qwen2.5-3b-cpt-adapter | yes |
-| 05 | Qwen 2.5 1.5B (4-bit) | Small-r QLoRA, structured "Subreddit / Title / Body" format | Kaggle T4×2 | not pushed | . |
-| 06 | Random init (Karpathy nanoGPT) | From scratch, ~50 M params, 8 layers, 8 heads, 512 embd | Kaggle T4×2 | mitanshugoel/reddit-nanogpt | yes |
-
-Self-built datasets:
-- mitanshugoel/reddit-cpt-dataset. Raw Reddit text corpus.
-- mitanshugoel/Reddit_Dump_Tokenized. Pre-tokenized and packed for max_seq_length=2048.
+| Run | Base | Method | Hardware |
+|---|---|---|---|
+| 01 | Mistral 7B v0.3 (4-bit Unsloth) | LoRA r=128, rsLoRA, attn + MLP + lm_head + embed_tokens | Colab T4 + Kaggle 2× T4 via torchrun |
+| 02 | Mistral 7B v0.3 (4-bit Unsloth) | LoRA r=256, rsLoRA, same targets | Lightning AI L4 + Kaggle 2× T4 |
+| 03 | Qwen 2.5 7B (4-bit Unsloth) | LoRA r=128, rsLoRA, same targets | A100 80 GB |
+| 04 | Qwen 2.5 3B (4-bit BitsAndBytesConfig) | LoRA r=16, plain LoRA, attn + MLP only | Kaggle T4×2 DDP via accelerate launch |
+| 05 | Qwen 2.5 1.5B (4-bit) | Small-r QLoRA, structured "Subreddit / Title / Body" format | Kaggle T4×2 |
+| 06 | Random init (Karpathy nanoGPT) | From scratch, ~50 M params, 8 layers, 8 heads, 512 embd | Kaggle T4×2 |
 
 **Choices that show up across the scripts and are not tutorial defaults:**
 - embedding_learning_rate 5 to 10 times smaller than the main LoRA learning rate. Embedding gradients are noisy on a new corpus. This keeps CPT stable.
@@ -208,11 +204,6 @@ Stack: XGBoost, K-Means, pandas, scikit-learn.
 An XGBoost regressor with two-month lag features and one-hot Store and Branch features for one-month-ahead Attach-Percentage forecasting across 163 retail stores. K-Means (k = 4) on (mean_attach_pct, std_attach_pct) for a performance and stability tag per store. The README reports the runtime RMSE from the actual run rather than a stale headline number. It flags the five-months-per-store data thinness as the binding limitation.
 GitHub: https://github.com/mitanshu-2004/Store-Performance-Dashboard
 
-### mitanshu.me, production portfolio + this chatbot
-Stack: Next.js 15, Edge Runtime, Groq, TypeScript strict.
-Multi-key Groq failover with a 3-strike circuit breaker, round-robin, and 8 s AbortController. The /api/chat endpoint you are using right now is grounded in this knowledge base via Edge runtime. The system prompt enforces grounding rules, query rewriting, and conversation memory.
-Live: https://mitanshu.me. GitHub: https://github.com/mitanshu-2004/portfolio
-
 ---
 
 ## INTELLECTUAL-HONESTY ARTIFACTS
@@ -272,12 +263,12 @@ He does not claim things he has not done. Asking him a direct question about a t
 
 ## FAQ, likely recruiter questions and how to think about them
 
-- **"What's his strongest project?"** Depends on the lane. For Physical AI / Robotics, the current Variety / Enferent VR teleop work. Real-time C++ on Elite CS66 arms and a Franka Research 3, with the sole-authored ros2_control interface in the Hexapod repo as a second pillar. For Foundation Models / LLM, the six training runs at github.com/mitanshu-2004/reddit-cpt-training-scripts, with three artefacts public on Hugging Face. For evaluation-rigor / RAG, the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal, the Primetrade failed-prediction post-mortem.
+- **"What's his strongest project?"** Depends on the lane. For Physical AI / Robotics, the current Variety / Enferent VR teleop work. Real-time C++ on Elite CS66 arms and a Franka Research 3, with the sole-authored ros2_control interface in the Hexapod repo as a second pillar. For Foundation Models / LLM, the six training runs on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT, four hardware tiers). Artefacts kept private. For evaluation-rigor / RAG, the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal, the Primetrade failed-prediction post-mortem.
 - **"What's he NOT good at yet?"** He has not yet shipped at FAANG-scale, has not published a paper, and does not have a major OSS PR landed. His current GPU access is rented. Benchmarks that need more than 24 GB VRAM are staged but not run.
 - **"How much does he want?"** Specific compensation expectations are not listed here. Reach him directly at mitanshug2004@gmail.com.
 - **"Can he start now?"** Yes.
 - **"Will he relocate?"** Yes, for the right opportunity. He has also worked remote-from-India before and can do that.
-- **"What's the catch?"** Tier-3 college (MAIT) and no big-tech name yet. The portfolio, the verifiable HF model artifacts, and the live deployed sites are intended to compensate for that credential gap.
+- **"What's the catch?"** Tier-3 college (MAIT) and no big-tech name yet. The portfolio, the open-source repos he can show, and the live deployed sites are intended to compensate for that credential gap.
 - **"Why should I trust the numbers?"** Every metric on this page is either traceable to a JSON file in the corresponding repo (Churn's experiment_results.json, RAG-assistant's eval/results.json, MiniRag-Reranker's eval/results.json) or has been explicitly removed from the README because it was not defensible (the "23% LERP" claim in Darwin Studio).
 
 ---
