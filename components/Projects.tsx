@@ -22,25 +22,25 @@ const PROJECTS: Project[] = [
     title: 'Hexapod (atom-robotics-lab)',
     featured: true,
     problem:
-      'Sole-authored the 18-DoF hexapod ROS 2 stack. URDF xacro (533/569 lines), the complete ros2_control hardware interface (305 lines), a Dockerised runtime with NVIDIA + CycloneDDS, and the Gazebo Classic to Ignition Fortress migration. Analytic IK written by collaborator Akshat.',
+      'Team-built 18-DoF hexapod ROS 2 stack at atom-robotics-lab. URDF xacro model, ros2_control hardware interface, Dockerised NVIDIA + CycloneDDS runtime, and the Gazebo Classic to Ignition Fortress migration. Analytic IK by collaborator Akshat.',
     metrics: [
       { value: '1000 Hz', label: 'Ignition physics under 5 Hz JointTrajectory' },
-      { value: '305 lines', label: 'ros2_control hardware interface, sole author' },
+      { value: 'Docker', label: 'NVIDIA runtime + CycloneDDS real-time network' },
     ],
-    stack: 'ROS 2 Humble, Ignition Fortress, ros2_control, Docker (NVIDIA + CycloneDDS)',
+    stack: 'ROS 2 Humble, ros2_control, Pinocchio, Docker (NVIDIA + CycloneDDS)',
     links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
   },
   {
     id: 'cpt',
     domain: 'ai',
     tag: 'AI',
-    title: 'Reddit CPT, 6 Training Runs',
+    title: 'Reddit CPT',
     featured: true,
     problem:
-      'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline (libtorrent Pushshift download, zstandard decompression, thread joining, Wilson-score ranking, Qwen tokenisation and packing). Artefacts kept private.',
+      'Continued pretraining on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B, 3B, 1.5B), and a from-scratch nanoGPT. Full data pipeline — libtorrent Pushshift download, zstandard decompression, thread joining, Wilson-score ranking, and tokenisation with packing.',
     metrics: [
-      { value: '6 runs', label: 'across 4 hardware tiers' },
-      { value: '4 bases', label: 'Mistral 7B, Qwen 2.5 (7B/3B/1.5B), nanoGPT' },
+      { value: 'Mistral + Qwen', label: 'multiple scales from 1.5B to 7B' },
+      { value: 'nanoGPT', label: 'from-scratch to understand training end to end' },
     ],
     stack: 'Unsloth, TRL, PEFT, LoRA, rsLoRA, Mistral 7B, Qwen 2.5, nanoGPT, Kaggle, Colab, A100',
     links: {},

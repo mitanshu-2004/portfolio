@@ -15,17 +15,15 @@ export default function Experience() {
         */}
         <ScrollFade className="exp-entry">
           <div className="exp-header">
-            <span className="exp-role">Robotics Software Engineer Intern</span>
-            <span className="exp-period">Current</span>
+            <span className="exp-role">Robotics SWE &amp; Physical AI Intern</span>
+            <span className="exp-period">Mar 2025 – Present</span>
           </div>
           <div className="exp-org">Variety Innovation / Enferent.ai · Remote</div>
           <ul className="exp-bullets" aria-label="Responsibilities at Variety Innovation / Enferent.ai">
             <li>
               Building bimanual VR teleoperation infrastructure. Meta Quest 3
-              drives an Elite Robots CS66 pair, and we are now extending the
-              same control loop to a Franka Research 3 so the system covers
-              both arm families. Runs on a custom real-time Linux scheduler
-              (SCHED_FIFO, CPU pinning, mlockall).
+              drives an Elite Robots CS66 pair, extended to a Franka Research 3
+              so the system covers both arm families.
             </li>
             <li>
               Implemented damped-Jacobian inverse kinematics via Pinocchio with

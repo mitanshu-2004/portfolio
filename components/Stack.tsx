@@ -12,11 +12,9 @@ export default function Stack() {
             <div className="stack-group">
               <span className="stack-group-label">Robotics &amp; Embedded</span>
               <p className="stack-items">
-                ROS 2 Humble, ROS, MoveIt, Pinocchio, ros2_control, URDF, Ignition Fortress, RViz.
+                ROS 2 Humble, ROS, MoveIt, Pinocchio, ros2_control, RViz.
                 <br />
-                Elite Robots CS SDK (RTSI, EliteDriver), Franka libfranka, Meta Quest 3, OpenVR, ALVR.
-                <br />
-                Real-time Linux (SCHED_FIFO, CPU pinning, mlockall), ESP32, Raspberry Pi, ESP-NOW, Arduino IDE.
+                Meta Quest 3, OpenVR, ALVR, ESP32, Raspberry Pi, ESP-NOW, Arduino IDE.
               </p>
             </div>
 
@@ -54,7 +52,7 @@ export default function Stack() {
             <div className="stack-group stack-group--full">
               <span className="stack-group-label">Languages</span>
               <p className="stack-items">
-                Python, C++, TypeScript, JavaScript, SQL, URScript, Bash.
+                Python, C++, TypeScript, JavaScript, SQL, Bash.
               </p>
             </div>
           </div>
