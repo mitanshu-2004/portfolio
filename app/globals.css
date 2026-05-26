@@ -710,11 +710,7 @@ section {
 
 /* ── Projects (new clean layout) ── */
 .proj-group {
-  margin-top: 3rem;
-}
-
-.proj-group:first-of-type {
-  margin-top: 2rem;
+  /* gap on .proj-groups handles spacing */
 }
 
 .proj-group-label {
@@ -853,6 +849,17 @@ section {
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
+
+.proj-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 0;
+}
+
+.proj-domain--robotics .proj-group-label { color: var(--robotics); }
+.proj-domain--ds .proj-group-label { color: var(--ds); }
+.proj-domain--web .proj-group-label { color: var(--web); }
 
 /* ── Projects: archive grid (compact tail) ── */
 
