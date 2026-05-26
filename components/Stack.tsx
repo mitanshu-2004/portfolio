@@ -10,42 +10,40 @@ export default function Stack() {
         <ScrollFade>
           <div className="stack-grid">
             <div className="stack-group">
-              <span className="stack-group-label">Robotics &amp; Embedded</span>
+              <span className="stack-group-label">Robotics</span>
               <p className="stack-items">
                 ROS 2 Humble, ROS, MoveIt, Pinocchio, ros2_control, RViz.
-                <br />
-                Meta Quest 3, OpenVR, ALVR, ESP32, Raspberry Pi, ESP-NOW, Arduino IDE.
               </p>
             </div>
 
             <div className="stack-group">
-              <span className="stack-group-label">AI &amp; Foundation Models</span>
+              <span className="stack-group-label">AI &amp; ML</span>
               <p className="stack-items">
                 PyTorch, Unsloth, TRL, PEFT, LoRA, rsLoRA, BitsAndBytesConfig, Hugging Face Hub.
                 <br />
-                Continued pretraining (Mistral, Qwen 2.5, nanoGPT), SDXL Lightning, Diffusers, NVIDIA NeMo, YOLOv8.
+                Mistral 7B, Qwen 2.5, nanoGPT, SDXL Lightning, Diffusers, NVIDIA NeMo, YOLOv8.
                 <br />
-                Sentence-Transformers, ChromaDB, hybrid retrieval, llama.cpp (Phi-3), Pydantic structured output, Instructor.
+                Sentence-Transformers, ChromaDB, llama.cpp.
               </p>
             </div>
 
             <div className="stack-group">
-              <span className="stack-group-label">Data Science &amp; Stats</span>
+              <span className="stack-group-label">Data Science</span>
               <p className="stack-items">
                 lifelines (Cox PH), scikit-learn, XGBoost, K-Means, pandas, NumPy, SciPy, statsmodels.
                 <br />
-                Fisher z-transform CIs, F-tests, likelihood-ratio χ², leakage audits, held-out evaluation, NDCG, MRR, Recall@k.
+                Fisher z-transform CIs, F-tests, NDCG, MRR, Recall@k.
               </p>
             </div>
 
             <div className="stack-group">
-              <span className="stack-group-label">Backend &amp; Systems</span>
+              <span className="stack-group-label">Backend &amp; Web</span>
               <p className="stack-items">
-                FastAPI, Uvicorn, SQLAlchemy, SQLite FTS5, BM25.
+                FastAPI, Uvicorn, SQLite FTS5, BM25.
                 <br />
-                Next.js 15, React 19, Vercel Edge Runtime, Firebase Firestore, TypeScript strict, Framer Motion.
+                Next.js 15, React 19, Firebase Firestore, TypeScript.
                 <br />
-                Docker (NVIDIA runtime + CycloneDDS), Linux, Git, Bash.
+                Docker, Linux, Git.
               </p>
             </div>
 

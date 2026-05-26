@@ -22,7 +22,7 @@ const PROJECTS: Project[] = [
     title: 'Hexapod (atom-robotics-lab)',
     featured: true,
     problem:
-      'Team-built 18-DoF hexapod ROS 2 stack at atom-robotics-lab. URDF xacro model, ros2_control hardware interface, Dockerised NVIDIA + CycloneDDS runtime, and the Gazebo Classic to Ignition Fortress migration. Analytic IK by collaborator Akshat.',
+      'Team-built 18-DoF hexapod ROS 2 stack at atom-robotics-lab. URDF xacro model, ros2_control hardware interface, Dockerised NVIDIA + CycloneDDS runtime, and the Gazebo Classic to Ignition Fortress migration.',
     metrics: [
       { value: '1000 Hz', label: 'Ignition physics under 5 Hz JointTrajectory' },
       { value: 'Docker', label: 'NVIDIA runtime + CycloneDDS real-time network' },
