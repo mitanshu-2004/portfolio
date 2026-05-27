@@ -91,9 +91,9 @@ export const projectListSchema = {
             item: {
                 '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#hexapod',
-                name: 'HEXAPOD (atom-robotics-lab)',
+                name: 'HEXAPOD',
                 description:
-                    'Sole-authored the 18-DoF hexapod ROS 2 stack. URDF xacro (533/569 lines), ros2_control hardware interface (305 lines), a Dockerised runtime with NVIDIA + CycloneDDS, and the Gazebo Classic to Ignition Fortress migration.',
+                    'Sole-authored the 18-DoF hexapod ROS 2 stack. URDF xacro (533/569 lines), ros2_control hardware interface (305 lines), and a Dockerised runtime with NVIDIA GPU support.',
                 applicationCategory: 'Robotics / Locomotion System',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'C++'],
@@ -183,10 +183,11 @@ export const workExperienceSchema = {
             item: {
                 '@type': 'OrganizationRole',
                 roleName: 'Robotics Software Engineer Intern',
-                startDate: '2025-08',
+                startDate: '2026-03',
                 worksFor: {
                     '@type': 'Organization',
                     name: 'Variety Innovation / Enferent.ai',
+                    address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
                 },
                 description: 'Building a bimanual VR teleoperation rig. Meta Quest 3 drives an Elite Robots CS66 pair, and the same loop is being extended to a Franka Research 3 so the system covers both arm families. Runs on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall). Damped-Jacobian IK via Pinocchio. Imitation-learning dataset recorder for downstream policy training.',
             },

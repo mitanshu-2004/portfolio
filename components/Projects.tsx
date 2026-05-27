@@ -21,7 +21,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'robotics',
         title: 'Hexapod',
         problem:
-          'Team-built 18-DoF hexapod ROS 2 stack at atom-robotics-lab. URDF xacro model, ros2_control hardware interface, Dockerised NVIDIA + CycloneDDS runtime, and the Gazebo Classic to Ignition Fortress migration.',
+          '18-DoF hexapod with a full ROS 2 stack. Wrote the URDF xacro model and a complete ros2_control hardware interface from scratch. Dockerised the runtime with NVIDIA GPU support.',
         stack: 'ROS 2 Humble, ros2_control, Pinocchio, Docker',
         links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
       },
@@ -30,7 +30,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'robotics',
         title: '6-DOF Robotic Arm',
         problem:
-          'Full motion-planning pipeline with inverse kinematics, collision-aware trajectory planning, and sim-to-real validation. Resolved URDF kinematic mismatches blocking stable trajectory execution.',
+          'Motion planning pipeline for a 6-DOF arm — IK, collision-aware trajectories, and sim-to-real validation. The hard part was tracking down URDF kinematic mismatches that kept blocking stable execution.',
         stack: 'ROS, MoveIt, Gazebo, C++, Python',
         links: { github: 'https://github.com/mitanshu-2004/6dof-arm' },
       },
@@ -39,7 +39,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'robotics',
         title: 'Sentinel',
         problem:
-          'Offline mesh emergency communication using ESP-NOW — no infrastructure required. Fall detection via MPU6050 and dual-axis threshold analysis, with mesh-propagated alerts and gas hazard sensing in the same firmware layer.',
+          'Emergency mesh communication that works with zero infrastructure — just ESP32 nodes talking to each other over ESP-NOW. Fall detection via MPU6050, with gas sensing packed into the same firmware. Mesh propagates alerts automatically.',
         stack: 'ESP32, ESP-NOW, C++, MPU6050',
         links: { github: 'https://github.com/mitanshu-2004/sentinel' },
       },
@@ -54,7 +54,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'Reddit CPT',
         problem:
-          'Continued pretraining on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B, 3B, 1.5B), and a from-scratch nanoGPT. Full data pipeline — libtorrent Pushshift download, zstandard decompression, thread joining, Wilson-score ranking, and tokenisation with packing.',
+          'Six continued pretraining runs on a Reddit corpus I scraped and processed myself. Mistral 7B at two ranks, Qwen 2.5 at three scales, and a nanoGPT built from scratch to understand what training actually feels like end to end. Full pipeline from raw Pushshift data to packed tokenization.',
         stack: 'Unsloth, TRL, PEFT, LoRA, rsLoRA, Mistral 7B, Qwen 2.5, nanoGPT, A100',
         links: {},
       },
@@ -63,7 +63,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'Darwin Studio',
         problem:
-          'Treats SDXL latent tensors as genetic material. Mutation and crossover applied between generations. Custom moment-preserving SLERP does spherical interpolation, then restores the weighted target mean and std — keeping child latents on the unit-norm noise manifold.',
+          'What if image generation worked like evolution? Darwin Studio treats SDXL latent tensors as genetic material — mutation, crossover, generations. A custom moment-preserving SLERP handles the interpolation and keeps child latents on the correct noise manifold so they decode properly.',
         stack: 'PyTorch, SDXL Lightning, Diffusers, custom SLERP',
         links: { github: 'https://github.com/mitanshu-2004/Darwin-Studio' },
       },
@@ -72,7 +72,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'Memory Assistant',
         problem:
-          'Offline memory store with hybrid dense and keyword retrieval. Phi-3 (4-bit GGUF) runs at ingest time for metadata. /api/v1/ask is the real RAG path — retrieve, format cited context, generate via llama.cpp, return a source-grounded answer with citations.',
+          'An offline personal memory store with hybrid dense and keyword retrieval. Phi-3 runs locally via llama.cpp for metadata at ingest time. The /api/v1/ask endpoint is the real RAG path — retrieve memories, generate a cited answer, return it with source references. No cloud required.',
         stack: 'FastAPI, ChromaDB, Sentence-Transformers, Phi-3 GGUF, llama.cpp',
         links: { github: 'https://github.com/mitanshu-2004/memory-assistant' },
       },
@@ -81,7 +81,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'RAG Assistant',
         problem:
-          'Pydantic cross-field model_validator refuses to parse "Fully Answered" responses when the citations list is empty — a structural anti-hallucination guard enforced at parse time. V3 prompt with explicit constraint extraction, an exception hierarchy, and a retry-with-error-feedback loop. 9-question eval: 6 pass, 0 hallucinations.',
+          'A RAG system where hallucinations are structurally impossible by design. If the model claims "Fully Answered" but has no citations to back it up, Pydantic rejects the response at parse time — before it ever reaches the user. Built with a retry loop that feeds parse failures back to the model, and an eval that found 0 hallucinations across 9 test questions.',
         stack: 'Llama 3.3 70B, Groq, ChromaDB, Pydantic',
         links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
       },
@@ -96,7 +96,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ds',
         title: 'RetainIQ Churn Model',
         problem:
-          'Cox proportional hazards model with six LLM-extracted risk signals from Steam review text. Explicit removal of covariates that leak the survival time. Hold-out C-index 0.874 vs 0.640 behavioural-only baseline.',
+          'Churn prediction using a Cox proportional hazards model, with six risk signals extracted from Steam review text by an LLM. Careful about leakage — explicitly removed covariates that encode the event label. Hold-out C-index: 0.874 vs 0.640 without the LLM signals.',
         stack: 'Cox PH (lifelines), Groq Llama 4 Scout, scikit-learn',
         links: { github: 'https://github.com/mitanshu-2004/llm-survival-churn' },
       },
@@ -105,7 +105,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ds',
         title: 'StockMetrics Pipeline',
         problem:
-          'Tested 25 company-variable pairs (5 fundamentals × 5 Indian IT firms, 2005–2025) for predictive power on annual stock returns. One pair reached significance — Wipro EBITDA margin change (p=0.029). 24 others non-significant, framed as power-limited.',
+          'Tested 25 fundamental-variable pairs across 5 Indian IT firms (2005–2025) for predictive power on annual stock returns. One pair came out significant — Wipro EBITDA margin change, p=0.029. The other 24 didn\'t, and the README says so plainly. Null results are results too.',
         stack: 'pandas, scikit-learn, F-test, statsmodels',
         links: { github: 'https://github.com/mitanshu-2004/StockMetrics' },
       },
@@ -114,7 +114,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ds',
         title: 'Stock-Influence Platform',
         problem:
-          'Full-stack app correlating user-uploaded time-series against Yahoo Finance stock history. Three correlation methods (Pearson, Spearman, Kendall), each returned with 95% Fisher z-transform confidence intervals. The math is implemented in code and verifiable.',
+          'Upload any time-series and see how it correlates with a stock price. Three correlation methods (Pearson, Spearman, Kendall), each with proper 95% Fisher z-transform confidence intervals. The math is in the code and can be checked.',
         stack: 'FastAPI, React, pandas, SciPy, yfinance, Chart.js',
         links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
       },
@@ -129,7 +129,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'web',
         title: 'Chesstra',
         problem:
-          'Real-time multiplayer chess with Firestore onSnapshot and a monotonic version counter for idempotent dedup. Server-authoritative game-over with client fallback. Presence heartbeats with 15 s liveness window. Stockfish engine deployed as a separate FastAPI service with cold-start health ping.',
+          'Real-time multiplayer chess with Firestore. Server decides who wins — if the moving player crashes mid-move, the opponent\'s client detects it and writes the resolution. Presence heartbeats with a 15s liveness window. Stockfish runs as a separate FastAPI service with a cold-start wake-up ping.',
         stack: 'React 19, Firebase Firestore, FastAPI, Stockfish, Vite',
         links: { github: 'https://github.com/mitanshu-2004/chess', demo: 'https://chesstra.vercel.app' },
       },

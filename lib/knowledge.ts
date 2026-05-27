@@ -31,7 +31,7 @@ Things most ECE new-grads do not have:
 
 - **Six training runs** on a self-scraped Reddit corpus. Mistral 7B v0.3 (r=128), Mistral 7B v0.3 (r=256), Qwen 2.5 7B (r=128 on A100), Qwen 2.5 3B (r=16), Qwen 2.5 1.5B (structured-format QLoRA), and a Karpathy-style nanoGPT trained from scratch (~50 M params, 8 layers, 8 heads, 512 embd). Real CPT configs with deliberate choices (embedding LR 5 to 10 times smaller than main LR, lm_head and embed_tokens trained, rsLoRA at high ranks), not tutorial defaults. Artefacts kept private.
 - **Real-time C++ control on industrial arms.** SCHED_FIFO scheduling, mlockall, CPU pinning, 125 Hz bimanual VR teleop loop. Few candidates at any level have shipped real-time robot code.
-- **Sole-authored a 305-line ros2_control hardware interface** for an 18-DoF hexapod, plus the URDF xacro (533 lines) and Gazebo Classic to Ignition Fortress migration. Most students touch ROS only at the application layer.
+- **Sole-authored a 305-line ros2_control hardware interface** for an 18-DoF hexapod, plus the URDF xacro (533 lines). Most students touch ROS only at the application layer.
 - **Self-built training datasets on Hugging Face Hub.** A raw Reddit text corpus, and a pre-tokenized and packed variant for max_seq_length=2048.
 - **A failed-prediction post-mortem published in the repo.** Not buried.
 
@@ -43,10 +43,10 @@ Things most ECE new-grads do not have:
 |---|---|---|
 | School years | Self-employed | Freelance dev work. First paid coding gigs while still in school. |
 | 2022 to 2026 | MAIT Delhi | B.Tech, Electronics & Communication Engineering, minor in AI/ML. |
-| 2023 to present | A.T.O.M Robotics Lab, MAIT | Core technical member. Owns hexapod URDF, ros2_control, and the Fortress migration. |
+| 2023 to present | Robotics Club, MAIT | Core technical member. Owns hexapod URDF and ros2_control hardware interface. |
 | Jul to Sep 2024 | Nextup Robotics | 6-DOF arm in ROS/Gazebo. Resolved sim-to-real URDF mismatches. Cut trajectory execution time by roughly 50% after switching MoveIt planners. |
 | Jun to Aug 2025 | SarthakAI | NVIDIA NeMo (FastConformer-Transducer) STT, custom wake-word, YOLOv8 vision, and ESP32 telemetry on a UBTech Yanshee humanoid. |
-| Aug 2025 to present | Variety Innovation / Enferent.ai | Bimanual VR teleop on Elite CS66 arms, now being extended to a Franka Research 3. Imitation-learning dataset recorder built alongside the control loop. |
+| Mar 2026 to present | Variety Innovation / Enferent.ai · Gurugram, On-site | Bimanual VR teleop on Elite CS66 arms, now being extended to a Franka Research 3. Imitation-learning dataset recorder built alongside the control loop. |
 
 Trajectory note: the through-line from hardware to AI-on-robots to foundation-model training is deliberate, not accidental. He has been heading toward Physical AI since 2023. The CPT/SFT work is the parallel "make the AI side as deep as the robotics side" investment.
 
@@ -54,12 +54,12 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ## EXPERIENCE
 
-### Variety Innovation / Enferent.ai, Robotics Software Engineer Intern (current)
+### Variety Innovation / Enferent.ai, Robotics Software Engineer Intern (Mar 2026 – Present · Gurugram, On-site)
 
 - Building a bimanual VR teleoperation rig from scratch. Meta Quest 3 drives an Elite Robots CS66 pair, and the same control loop is being extended to a Franka Research 3 so the system covers both arm families. Runs on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall).
 - Implemented damped-Jacobian inverse kinematics via Pinocchio with manipulability-adaptive damping and null-space regularisation. It ships with three named singularity guards on the joint and TCP rotation axes.
 - Wrote an imitation-learning dataset recorder that synchronously captures left and right arm states, headset pose, and TCP poses for downstream policy training. The company's main goal is to ship multi-robot teleop datasets at scale, and we train policies on top of what we collect.
-- Stack: C++, ROS 2 Humble, Pinocchio, Elite Robots CS SDK (RTSI, EliteDriver), Franka libfranka, OpenVR, ALVR, real-time Linux, Docker (NVIDIA runtime + CycloneDDS).
+- Stack: C++, ROS 2 Humble, Pinocchio, Elite Robots CS SDK (RTSI, EliteDriver), Franka libfranka, OpenVR, ALVR, real-time Linux, Docker (NVIDIA runtime).
 
 ### SarthakAI, AI & Robotics Intern (Jun to Aug 2025)
 
@@ -73,10 +73,10 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 - Configured a 6-DOF robotic arm in ROS and Gazebo. Debugged URDF kinematic configurations and resolved sim-to-real discrepancies that were blocking stable trajectory execution.
 - Integrated MoveIt for inverse kinematics and collision-aware trajectory planning in C++. Cut execution time by roughly 50% after switching planners and tuning parameters.
 
-### A.T.O.M Robotics Lab, MAIT, Core Technical Member (Oct 2023 to present)
+### Hexapod, ROS 2 Robotics Club Project
 
-- Sole author of the 18-DoF hexapod's URDF xacro (533 / 569 lines), the complete ros2_control hardware interface (305 / 305 lines), the Dockerised runtime with NVIDIA runtime, X11, and CycloneDDS, and the Gazebo Classic to Ignition Fortress migration.
-- Analytic IK and gait engine were written by collaborator AkshatSharma05. Mitanshu owns the description, hardware-interface, infrastructure, and platform-migration layers.
+- Sole author of the 18-DoF hexapod's URDF xacro (533 / 569 lines) and the complete ros2_control hardware interface (305 / 305 lines). Built and maintained the Dockerised runtime with NVIDIA GPU support.
+- Analytic IK and gait engine were written by collaborator AkshatSharma05. Owns the description, hardware-interface, and infrastructure layers.
 
 ---
 
@@ -108,7 +108,7 @@ Self-scraped Reddit corpus. Six training runs across four base architectures plu
 ## ROBOTICS DEPTH
 
 - **Real-time control.** SCHED_FIFO scheduling, mlockall, CPU pinning, 125 Hz control loops in C++ on industrial arms.
-- **ROS 2 stack.** Humble, ros2_control, MoveIt, RViz, URDF and xacro authoring, Ignition Gazebo Fortress, CycloneDDS configuration.
+- **ROS 2 stack.** Humble, ros2_control, MoveIt, RViz, URDF and xacro authoring, Ignition Gazebo Fortress.
 - **Robotics math.** Closed-form analytic IK (hexapod), damped-Jacobian numerical IK with manipulability-adaptive damping and null-space regularisation (industrial arm), three named singularity guards on joint and TCP rotation axes.
 - **Embedded.** ESP32 (Arduino and ESP-IDF), Raspberry Pi, ESP-NOW peer-to-peer mesh, MPU6050 IMU, MFRC522 RFID, MQ-x gas sensors, C++ firmware.
 - **VR and teleop.** Meta Quest 3, OpenVR, ALVR.
@@ -138,7 +138,7 @@ Self-scraped Reddit corpus. Six training runs across four base architectures plu
 ## WEB / EDGE-SYSTEMS DEPTH
 
 - **Multi-key API failover.** 3-strike circuit breaker, round-robin, and 8 s AbortController per request, with a graceful degradation path that surfaces a contact email rather than crashing.
-- **Real-time multiplayer sync.** Firestore onSnapshot and a monotonic version-counter for idempotent dedup. Presence heartbeats (5 s write, 15 s liveness window). Throttled timer writes. Optimistic UI rollback. Server-authoritative game-over with client-side fallback so a crash mid-move does not strand the game.
+- **Real-time multiplayer sync.** Firestore onSnapshot listeners. Presence heartbeats (5 s write, 15 s liveness window). Throttled timer writes. Optimistic UI rollback. Server-authoritative game-over with client-side fallback so a crash mid-move does not strand the game.
 - **Security hygiene.** Full Content-Security-Policy and HSTS preload, validated input on the chat endpoint, env-var loading for secrets, and no hardcoded webhooks.
 
 ---
@@ -147,14 +147,14 @@ Self-scraped Reddit corpus. Six training runs across four base architectures plu
 
 Every project below has been independently code-audited. Metrics in this section are defensible from the published code.
 
-### Hexapod (atom-robotics-lab), robotics flagship
-Stack: ROS 2 Humble, Ignition Gazebo Fortress, ros2_control, Docker (NVIDIA runtime + CycloneDDS), C++, Python.
-What he owns: URDF xacro robot model (533 / 569 lines), complete ros2_control hardware interface (305 / 305 lines), Dockerised runtime with NVIDIA + X11 + CycloneDDS, and the Gazebo Classic to Ignition Fortress migration. IK math and gait engine written by collaborator Akshat. 1000 Hz Ignition physics under a 5 Hz JointTrajectory publisher.
+### Hexapod, robotics flagship
+Stack: ROS 2 Humble, Ignition Gazebo Fortress, ros2_control, Docker (NVIDIA runtime), C++, Python.
+What he owns: URDF xacro robot model (533 / 569 lines), complete ros2_control hardware interface (305 / 305 lines), Dockerised runtime with NVIDIA + X11. IK math and gait engine written by collaborator Akshat. 1000 Hz Ignition physics under a 5 Hz JointTrajectory publisher.
 GitHub: https://github.com/atom-robotics-lab/Hexapod
 
 ### RAG-assistant, evaluation-rigorous RAG
 Stack: Llama 3.3 70B via Groq, ChromaDB, Sentence-Transformers, Pydantic.
-What is defensible: a Pydantic cross-field model-validator that refuses to parse "Fully Answered" with empty citations. Auto-clamps confidence to 0 on Unanswerable. V3 prompt does explicit constraint extraction with an exception hierarchy ("defective overrides discount", "state overrides time"). A retry-with-error-feedback loop pushes Pydantic parse failures back into the model. Audited 9-question eval: 6 PASS, 1 PARTIAL, 2 FAIL, 8/9 answerability correct, 0 hallucinations.
+What is defensible: a Pydantic cross-field model-validator that refuses to parse "Fully Answered" with empty citations — a hard schema constraint, not a runtime check. If the model claims it answered something but has no citations, the response is rejected before it reaches the user. Auto-clamps confidence to 0 on Unanswerable. Retry loop feeds parse failures back into the model. Audited 9-question eval: 6 PASS, 1 PARTIAL, 2 FAIL, 8/9 answerability correct, 0 hallucinations.
 GitHub: https://github.com/mitanshu-2004/RAG-assistant
 
 ### MiniRag-Reranker, retrieval evaluation, repaired
@@ -186,7 +186,7 @@ GitHub: https://github.com/mitanshu-2004/Primetrade-Analysis
 
 ### Chess Platform (Chesstra), real-time multiplayer
 Stack: React 19, Firebase Firestore, FastAPI, Stockfish, Vite.
-What is defensible: Firestore onSnapshot listeners and a monotonic version counter for idempotent dedup. Presence heartbeats (5 s write, 15 s liveness window). Throttled timer writes (every 3 s) to keep document writes low. Optimistic UI rollback on Firestore failure. Server-authoritative game-over with client fallback. If the moving player crashes before writing the end-state, the opponent's client detects it locally via chess.js and writes the resolution back. Stockfish engine deployed independently as a FastAPI service. The client wakes the dyno with /api/health on mount before issuing /api/bestmove.
+What is defensible: Firestore onSnapshot listeners for real-time sync. Presence heartbeats (5 s write, 15 s liveness window). Throttled timer writes (every 3 s) to keep document writes low. Optimistic UI rollback on Firestore failure. Server-authoritative game-over with client fallback. If the moving player crashes before writing the end-state, the opponent's client detects it locally via chess.js and writes the resolution back. Stockfish engine deployed independently as a FastAPI service. The client wakes the dyno with /api/health on mount before issuing /api/bestmove.
 Live: https://chesstra.vercel.app. GitHub: https://github.com/mitanshu-2004/chess
 
 ### Stock-Influence Platform, deployed full-stack with stats rigor
@@ -224,7 +224,7 @@ Concrete moments where he caught and surfaced a problem in his own work rather t
 
 **AI / ML:** PyTorch, Unsloth + TRL + PEFT / LoRA (rsLoRA), continued-pretraining workflows, Hugging Face Hub, YOLOv8, NVIDIA NeMo (FastConformer-Transducer), SDXL Lightning + Diffusers, Phi-3 4-bit GGUF via llama.cpp, Sentence-Transformers, ChromaDB, hybrid retrieval, scikit-learn, lifelines (Cox PH), XGBoost, K-Means, Pydantic structured output, Instructor.
 
-**Backend + systems:** FastAPI, Uvicorn, SQLAlchemy, SQLite FTS5 / BM25, Docker (NVIDIA runtime + CycloneDDS), Linux, Firebase Firestore, Next.js 15, Vercel Edge Runtime, TypeScript strict.
+**Backend + systems:** FastAPI, Uvicorn, SQLAlchemy, SQLite FTS5 / BM25, Docker (NVIDIA runtime), Linux, Firebase Firestore, Next.js 15, Vercel Edge Runtime, TypeScript strict.
 
 **Languages:** Python, C++, TypeScript, JavaScript, SQL, Bash, URScript.
 
@@ -247,7 +247,7 @@ Things he has not done yet. Surfacing these proactively because pretending they 
 - **No published paper.** Reading and implementing is where the time has gone. Submitting to ICRA, NeurIPS, or EMNLP has not.
 - **No accepted OSS pull request landed yet** in major repos (LeRobot, IsaacLab, vLLM, LangChain), though the work he does is the kind that would merge there with a polish pass.
 - **No local GPU.** He has been training on Colab T4, Lightning AI L4, and rented A100s. The benchmark scripts for Darwin and the full retrieval evals are staged but cannot run on his current laptop.
-- **Hexapod analytic IK was written by collaborator Akshat**, not him. He owns the description, hardware-interface, infrastructure, and platform-migration layers.
+- **Hexapod analytic IK was written by collaborator Akshat**, not him. He owns the description, hardware-interface, and infrastructure layers.
 
 He does not claim things he has not done. Asking him a direct question about a technology will get a direct answer, including "haven't used it" when that is the truth.
 

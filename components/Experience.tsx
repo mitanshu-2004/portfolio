@@ -16,9 +16,9 @@ export default function Experience() {
         <ScrollFade className="exp-entry">
           <div className="exp-header">
             <span className="exp-role">Robotics SWE &amp; Physical AI Intern</span>
-            <span className="exp-period">Mar 2025 – Present</span>
+            <span className="exp-period">Mar 2026 – Present</span>
           </div>
-          <div className="exp-org">Variety Innovation / Enferent.ai · Remote</div>
+          <div className="exp-org">Variety Innovation / Enferent.ai · Gurugram, On-site</div>
           <ul className="exp-bullets" aria-label="Responsibilities at Variety Innovation / Enferent.ai">
             <li>
               Building bimanual VR teleoperation infrastructure. Meta Quest 3
@@ -26,10 +26,9 @@ export default function Experience() {
               so the system covers both arm families.
             </li>
             <li>
-              Implemented damped-Jacobian inverse kinematics via Pinocchio with
-              manipulability-adaptive damping and null-space regularisation. It
-              ships with three named singularity guards on the joint and TCP
-              rotation axes.
+              Implemented damped-Jacobian IK via Pinocchio — manipulability-adaptive
+              damping, null-space regularisation, and three singularity guards on
+              the critical joint and TCP rotation axes.
             </li>
             <li>
               Built the imitation-learning dataset recorder. It captures
@@ -49,9 +48,9 @@ export default function Experience() {
           <div className="exp-org">SarthakAI · Delhi</div>
           <ul className="exp-bullets" aria-label="Responsibilities at SarthakAI">
             <li>
-              Engineered a real-time voice pipeline using NVIDIA NeMo
-              (FastConformer-Transducer) with custom wake-word detection, integrated
-              into a UBTech Yanshee humanoid platform.
+              Built a real-time voice pipeline with NVIDIA NeMo's
+              FastConformer-Transducer STT, added custom wake-word detection,
+              and integrated it into a UBTech Yanshee humanoid.
             </li>
             <li>
               Trained and deployed custom YOLOv8 models for three production
@@ -60,13 +59,13 @@ export default function Experience() {
               pipeline.
             </li>
             <li>
-              Designed a polling-based fault-tolerant interface between robot
-              hardware and an AI inference agent to sustain operation under
-              intermittent hardware response.
+              Designed a fault-tolerant interface between the robot hardware and
+              the AI inference agent — polling-based, built to keep running even
+              when hardware responses are intermittent.
             </li>
             <li>
-              Built an ESP32 / Raspberry Pi telemetry workstation bridging embedded
-              firmware with Python analytics layers.
+              Built an ESP32 / Raspberry Pi telemetry workstation bridging
+              embedded firmware with Python analytics layers.
             </li>
           </ul>
         </ScrollFade>
@@ -82,9 +81,9 @@ export default function Experience() {
             aria-label="Responsibilities at Nextup Robotics"
           >
             <li>
-              Configured a 6-DOF robotic arm in ROS/Gazebo, debugging URDF
-              kinematic configurations and resolving simulation-to-real
-              discrepancies blocking stable trajectory execution.
+              Configured a 6-DOF arm in ROS/Gazebo — debugged URDF kinematic
+              configurations and tracked down the sim-to-real discrepancies that
+              were blocking stable trajectory execution.
             </li>
             <li>
               Integrated MoveIt for inverse kinematics and collision-aware
