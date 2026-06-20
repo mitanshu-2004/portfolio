@@ -12,7 +12,11 @@ export default function Stack() {
             <div className="stack-group">
               <span className="stack-group-label">Robotics</span>
               <p className="stack-items">
-                ROS 2 Humble, ROS, MoveIt, Pinocchio, ros2_control, RViz.
+                ROS 2 Humble, ros2_control, MoveIt, RViz, Gazebo.
+                <br />
+                Real-time C++ control loops, Cartesian servoing, inverse kinematics, SE(3) transforms.
+                <br />
+                VR teleoperation (Quest 3, OpenVR), RealSense RGB-D, multi-camera sync, Elite CS SDK, Franka libfranka.
               </p>
             </div>
 
@@ -32,7 +36,7 @@ export default function Stack() {
               <p className="stack-items">
                 lifelines (Cox PH), scikit-learn, XGBoost, K-Means, pandas, NumPy, SciPy, statsmodels.
                 <br />
-                Fisher z-transform CIs, F-tests, NDCG, MRR, Recall@k.
+                F-tests, cross-validation, NDCG, MRR, Recall@k.
               </p>
             </div>
 

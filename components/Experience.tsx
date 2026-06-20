@@ -18,54 +18,75 @@ export default function Experience() {
             <span className="exp-role">Robotics SWE &amp; Physical AI Intern</span>
             <span className="exp-period">Mar 2026 – Present</span>
           </div>
-          <div className="exp-org">Variety Innovation / Enferent.ai · Gurugram, On-site</div>
-          <ul className="exp-bullets" aria-label="Responsibilities at Variety Innovation / Enferent.ai">
+          <div className="exp-org">nFerent.ai · Gurugram, On-site</div>
+          <ul className="exp-bullets" aria-label="Responsibilities at nFerent.ai">
             <li>
-              Building bimanual VR teleoperation infrastructure. Meta Quest 3
-              drives an Elite Robots CS66 pair, extended to a Franka Research 3
-              so the system covers both arm families.
+              Built a bimanual VR teleoperation stack from scratch. A Meta Quest
+              3 controller streams pose over UDP to a per-arm real-time C++
+              control loop that drives two Elite Robots CS66 arms by Cartesian
+              servoing, with One-Euro input filtering, SE(3) command smoothing,
+              and singularity and step-cap safety guards. An anchor-and-clutch
+              model lets the operator release and re-grip without the arm
+              jumping.
             </li>
             <li>
-              Implemented damped-Jacobian IK via Pinocchio — manipulability-adaptive
-              damping, null-space regularisation, and three singularity guards on
-              the critical joint and TCP rotation axes.
+              Extended the same teleoperation to a Franka Research 3 with
+              DROID-style anchor-and-delta control and a layered safety stack:
+              frame-jump rejection, a position and orientation leash, and
+              slew-rate limiting. Collected a multi-episode dataset of dual
+              RGB-D video and robot state for imitation learning.
             </li>
             <li>
-              Built the imitation-learning dataset recorder. It captures
-              synchronised left and right arm states, VR headset pose, and TCP
-              poses across both platforms. The company's main goal is to ship
-              multi-robot teleoperation datasets at scale, and we train
-              policies on top of the data we collect.
+              Diagnosed and patched a real-hardware crash in the robot's
+              URScript, a null handle on headless restart, that had been
+              breaking teleop bring-up.
+            </li>
+            <li>
+              Built a multi-sensor capture tool, two MANUS gloves and three
+              RealSense cameras, that synchronises every stream on one hardware
+              clock and runs a frame-uniqueness watchdog to catch silent camera
+              repeat-frame faults.
+            </li>
+            <li>
+              Brought up and tested incoming commercial robots before dispatch:
+              arms (Franka, Flexiv, Elite, Elephant Robotics), grippers
+              (Robotiq, Tesollo, DH Robotics), and a Unitree quadruped.
             </li>
           </ul>
         </ScrollFade>
 
         <ScrollFade className="exp-entry">
           <div className="exp-header">
-            <span className="exp-role">AI &amp; Robotics Intern</span>
+            <span className="exp-role">AI Intern</span>
             <span className="exp-period">Jun – Aug 2025</span>
           </div>
           <div className="exp-org">SarthakAI · Delhi</div>
           <ul className="exp-bullets" aria-label="Responsibilities at SarthakAI">
             <li>
-              Built a real-time voice pipeline with NVIDIA NeMo's
-              FastConformer-Transducer STT, added custom wake-word detection,
-              and integrated it into a UBTech Yanshee humanoid.
+              Built the PC-side system that turned a UBTech Yanshee humanoid into
+              a voice and vision assistant for a logistics demo. A custom-trained
+              YOLOv8 package detector ran over the robot's MJPEG stream, and a
+              NeMo ASR pipeline handled wake-word and command routing to either a
+              chat service or a QR scanner.
             </li>
             <li>
-              Trained and deployed custom YOLOv8 models for three production
-              tasks: human tracking, package classification, and gesture-based
-              robot control. Each one had its own training regime and inference
-              pipeline.
+              Designed resilient camera reconnection with exponential backoff and
+              placeholder frames, so the web view never went blank when the
+              stream dropped.
             </li>
             <li>
-              Designed a fault-tolerant interface between the robot hardware and
-              the AI inference agent — polling-based, built to keep running even
-              when hardware responses are intermittent.
+              Handled wake-word detection cheaply by matching ASR transcripts
+              against about twenty phonetic spellings of the trigger phrase,
+              instead of pulling in a separate wake-word engine.
             </li>
             <li>
-              Built an ESP32 / Raspberry Pi telemetry workstation bridging
-              embedded firmware with Python analytics layers.
+              Built a sensor-network workstation that collected environmental
+              data and ran predictive analysis on it to infer the state of the
+              monitored equipment.
+            </li>
+            <li>
+              Built a vision-driven detection and sorting line on a robotic arm
+              and conveyor belt.
             </li>
           </ul>
         </ScrollFade>
@@ -75,20 +96,40 @@ export default function Experience() {
             <span className="exp-role">Robotics Intern</span>
             <span className="exp-period">Jul – Sep 2024</span>
           </div>
-          <div className="exp-org">Nextup Robotics · Delhi</div>
+          <div className="exp-org">Nextup Robotics · Ghaziabad</div>
           <ul
             className="exp-bullets"
             aria-label="Responsibilities at Nextup Robotics"
           >
             <li>
-              Configured a 6-DOF arm in ROS/Gazebo — debugged URDF kinematic
-              configurations and tracked down the sim-to-real discrepancies that
-              were blocking stable trajectory execution.
+              Built MoveIt motion planning for a 6-DOF arm, validated first in
+              simulation and then on the real hardware, focused on
+              Cartesian-space planning for pick-and-place.
             </li>
             <li>
-              Integrated MoveIt for inverse kinematics and collision-aware
-              trajectory planning in C++. Cut execution time by roughly 50%
-              after switching planners and tuning parameters.
+              Tracked down the URDF kinematic mismatches between simulation and
+              hardware that were blocking stable trajectory execution.
+            </li>
+          </ul>
+        </ScrollFade>
+
+        <ScrollFade className="exp-entry">
+          <div className="exp-header">
+            <span className="exp-role">Core Member</span>
+            <span className="exp-period">Oct 2023 – Present</span>
+          </div>
+          <div className="exp-org">A.T.O.M. Robotics, MAIT robotics society · Delhi</div>
+          <ul
+            className="exp-bullets"
+            aria-label="Responsibilities at A.T.O.M. Robotics"
+          >
+            <li>
+              Build robots with a team of college peers. The hexapod and the
+              web-controlled arm in my projects both came out of this society.
+            </li>
+            <li>
+              Represent the society at robotics competitions and hackathons, and
+              run technical sessions for members.
             </li>
           </ul>
         </ScrollFade>

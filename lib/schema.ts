@@ -11,24 +11,24 @@ export const personSchema = {
     email: 'mailto:mitanshug2004@gmail.com',
     url: 'https://mitanshu.me',
     image: 'https://mitanshu.me/og-image.png',
-    jobTitle: 'Robotics & AI Engineer',
+    jobTitle: 'Robotics & Physical AI Engineer',
     description:
-        'Robotics software engineer and AI/ML engineer. Building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and conducting continued-pretraining runs on self-scraped Reddit corpora. ECE graduate from MAIT Delhi (2026).',
+        'Robotics and Physical AI engineer. Building a bimanual VR teleoperation rig and a robot-learning data pipeline on industrial arms at nFerent.ai, plus continued-pretraining runs on a self-scraped Reddit corpus. ECE graduate from MAIT Delhi (2026).',
     knowsAbout: [
         'Robot Operating System (ROS 2)',
         'Real-time C++ control loops',
+        'VR teleoperation',
+        'Robot-learning data pipelines',
+        'Imitation learning',
+        'Inverse kinematics',
         'Continued pretraining (CPT)',
         'LoRA / rsLoRA / PEFT',
+        'Retrieval-Augmented Generation',
         'Machine Learning',
         'Computer Vision',
         'YOLOv8',
-        'Edge Inference',
-        'Embedded Systems',
         'PyTorch',
         'Stable Diffusion / SDXL',
-        'Retrieval-Augmented Generation',
-        'Inverse Kinematics',
-        'Pinocchio',
         'Hugging Face',
     ],
     alumniOf: {
@@ -52,7 +52,7 @@ export const personSchema = {
     },
     worksFor: {
         '@type': 'Organization',
-        name: 'Variety Innovation / Enferent.ai',
+        name: 'nFerent.ai',
     },
     sameAs: [
         'https://github.com/mitanshu-2004',
@@ -76,6 +76,20 @@ export const projectListSchema = {
             position: 1,
             item: {
                 '@type': 'SoftwareApplication',
+                '@id': 'https://mitanshu.me/#nferent-teleop',
+                name: 'Bimanual VR Teleoperation',
+                description:
+                    'A real-time C++ teleoperation stack at nFerent.ai. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap safety guards. Records a dual RGB-D and robot-state imitation-learning dataset. Company work, no public repo.',
+                applicationCategory: 'Robotics / Physical AI',
+                creator: { '@id': 'https://mitanshu.me/#person' },
+                programmingLanguage: ['C++', 'Python'],
+            },
+        },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            item: {
+                '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#reddit-cpt',
                 name: 'Reddit CPT, 6 Training Runs',
                 description:
@@ -87,13 +101,13 @@ export const projectListSchema = {
         },
         {
             '@type': 'ListItem',
-            position: 2,
+            position: 3,
             item: {
                 '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#hexapod',
-                name: 'HEXAPOD',
+                name: 'Hexapod',
                 description:
-                    'Sole-authored the 18-DoF hexapod ROS 2 stack. URDF xacro (533/569 lines), ros2_control hardware interface (305 lines), and a Dockerised runtime with NVIDIA GPU support.',
+                    'An 18-DoF hexapod ROS 2 stack. Authored the URDF xacro (533 lines), the ros2_control hardware interface (305 lines), and a Dockerised runtime with NVIDIA GPU support. Team project with A.T.O.M. Robotics; the gait and analytic IK were a collaborator\'s.',
                 applicationCategory: 'Robotics / Locomotion System',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'C++'],
@@ -102,32 +116,32 @@ export const projectListSchema = {
         },
         {
             '@type': 'ListItem',
-            position: 3,
+            position: 4,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshu.me/#memory-assistant',
-                name: 'Memory Assistant, Hybrid Retrieval + Local RAG',
+                '@id': 'https://mitanshu.me/#rag-assistant',
+                name: 'RAG-assistant',
                 description:
-                    'Offline memory store with hybrid dense + keyword retrieval. /api/v1/ask is the real RAG path. Retrieve memories, format cited context, generate via local Phi-3 GGUF (llama.cpp), return a source-grounded answer with citations.',
+                    'A grounded policy Q&A system on Llama 3.3 70B (Groq) where a Pydantic model-validator rejects "Fully Answered" responses with empty citations at parse time. On a 9-question held-out rubric it returned 0 hallucinations with 8 of 9 answerability calls correct.',
                 applicationCategory: 'AI / Natural Language Processing',
                 creator: { '@id': 'https://mitanshu.me/#person' },
-                programmingLanguage: ['Python', 'TypeScript'],
-                codeRepository: 'https://github.com/mitanshu-2004/memory-assistant',
+                programmingLanguage: ['Python'],
+                codeRepository: 'https://github.com/mitanshu-2004/RAG-assistant',
             },
         },
         {
             '@type': 'ListItem',
-            position: 4,
+            position: 5,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshu.me/#sentinel',
-                name: 'SENTINEL',
+                '@id': 'https://mitanshu.me/#churn-survival',
+                name: 'Churn Survival Model',
                 description:
-                    'Offline mesh emergency communication system using ESP-NOW across ESP32 nodes. No Wi-Fi or cellular infrastructure. Fall detection via MPU6050 + dual-axis threshold analysis. Gas hazard sensing in the same firmware layer.',
-                applicationCategory: 'Embedded Systems / IoT',
+                    'A Cox proportional-hazards churn model on ~10,000 Steam reviews with LLM-extracted risk signals. The contribution is a leakage decomposition: most of the headline C-index lift re-encoded the label, leaving a defensible forward-looking gain of roughly +0.14, guarded by a contract test.',
+                applicationCategory: 'Data Science / Survival Analysis',
                 creator: { '@id': 'https://mitanshu.me/#person' },
-                programmingLanguage: ['C++'],
-                codeRepository: 'https://github.com/mitanshu-2004/sentinel',
+                programmingLanguage: ['Python'],
+                codeRepository: 'https://github.com/mitanshu-2004/llm-survival-churn',
             },
         },
     ],
@@ -142,7 +156,7 @@ export const faqSchema = {
             name: 'Who is Mitanshu Goel?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel is a robotics and AI/ML engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai, and has conducted six continued-pretraining runs on a self-scraped Reddit corpus across Mistral 7B, Qwen 2.5, and a from-scratch nanoGPT.',
+                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig and robot-learning data pipeline at nFerent.ai, and has run six continued-pretraining runs on a self-scraped Reddit corpus across Mistral 7B, Qwen 2.5, and a from-scratch nanoGPT.',
             },
         },
         {
@@ -150,7 +164,7 @@ export const faqSchema = {
             name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at Variety Innovation / Enferent.ai. Real-time C++ on Elite Robots CS66 and Franka Research 3 arms. Then the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For Foundation Models and LLMs, six continued-pretraining runs on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) with artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
+                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at nFerent.ai: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, with a multi-sensor capture tool feeding an imitation-learning dataset. Then the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For foundation models and LLMs, six continued-pretraining runs on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) with artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {
@@ -158,15 +172,15 @@ export const faqSchema = {
             name: "What is Mitanshu Goel's technical specialization?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu specializes in real-time robotics control (C++, SCHED_FIFO, mlockall on industrial arms), ROS 2 systems (ros2_control, Ignition Fortress, Pinocchio), and foundation-model adaptation (Unsloth, TRL, PEFT/LoRA, rsLoRA). He also builds evaluation-rigorous RAG systems and deploys inference under hardware constraints. llama.cpp on CPU, YOLOv8 on edge, NeMo STT on humanoids.',
+                text: 'Mitanshu works on real-time robotics control (C++, SCHED_FIFO, mlockall on industrial arms), VR teleoperation and robot-learning data pipelines, ROS 2 systems (ros2_control, MoveIt, Ignition Fortress), and foundation-model adaptation (Unsloth, TRL, PEFT/LoRA, rsLoRA). He also builds evaluation-rigorous RAG systems and runs inference under hardware constraints, such as Phi-3 on CPU via llama.cpp and YOLOv8 for vision.',
             },
         },
         {
             '@type': 'Question',
-            name: 'Is Mitanshu Goel available for internship or full-time roles?',
+            name: 'Is Mitanshu Goel available for full-time roles?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Available for full-time roles. Looking for Robotics SWE, Research Engineering, ML Engineering, or Applied and Foundation-Model AI roles. Based in Delhi, open to relocation. Contact mitanshug2004@gmail.com.',
+                text: 'Available for full-time roles now. Looking for Physical AI, Robotics SWE, ML Engineering, or Research Engineering roles. Based in Delhi, open to relocation. Contact mitanshug2004@gmail.com.',
             },
         },
     ],
@@ -182,14 +196,14 @@ export const workExperienceSchema = {
             position: 1,
             item: {
                 '@type': 'OrganizationRole',
-                roleName: 'Robotics Software Engineer Intern',
+                roleName: 'Robotics SWE & Physical AI Intern',
                 startDate: '2026-03',
                 worksFor: {
                     '@type': 'Organization',
-                    name: 'Variety Innovation / Enferent.ai',
+                    name: 'nFerent.ai',
                     address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
                 },
-                description: 'Building a bimanual VR teleoperation rig. Meta Quest 3 drives an Elite Robots CS66 pair, and the same loop is being extended to a Franka Research 3 so the system covers both arm families. Runs on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall). Damped-Jacobian IK via Pinocchio. Imitation-learning dataset recorder for downstream policy training.',
+                description: 'Built a bimanual VR teleoperation stack. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall) with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. Diagnosed and patched a real-hardware URScript crash, and built a multi-sensor capture tool (MANUS gloves and RealSense cameras) feeding an imitation-learning dataset.',
             },
         },
         {
@@ -197,7 +211,7 @@ export const workExperienceSchema = {
             position: 2,
             item: {
                 '@type': 'OrganizationRole',
-                roleName: 'AI & Robotics Intern',
+                roleName: 'AI Intern',
                 startDate: '2025-06',
                 endDate: '2025-08',
                 worksFor: {
@@ -205,7 +219,7 @@ export const workExperienceSchema = {
                     name: 'SarthakAI',
                     address: { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
                 },
-                description: 'Real-time voice pipeline with NVIDIA NeMo FastConformer-Transducer STT + wake-word detection. YOLOv8 deployment for three production tasks on a UBTech Yanshee humanoid. Fault-tolerant robot-AI interface. ESP32/Raspberry Pi hardware telemetry workstation.',
+                description: 'Built the PC-side system that turned a UBTech Yanshee humanoid into a voice and vision assistant: a custom-trained YOLOv8 package detector over the robot MJPEG stream and a NeMo ASR wake-word and command pipeline, with resilient camera reconnection. Also built a sensor-network workstation and a vision-driven sorting line on a robotic arm and conveyor.',
             },
         },
         {
@@ -219,9 +233,24 @@ export const workExperienceSchema = {
                 worksFor: {
                     '@type': 'Organization',
                     name: 'Nextup Robotics',
+                    address: { '@type': 'PostalAddress', addressLocality: 'Ghaziabad', addressCountry: 'IN' },
+                },
+                description: 'Built MoveIt motion planning for a 6-DOF arm, validated first in simulation and then on the real hardware, focused on Cartesian-space planning for pick-and-place. Tracked down the URDF kinematic mismatches between sim and hardware that were blocking stable trajectory execution.',
+            },
+        },
+        {
+            '@type': 'ListItem',
+            position: 4,
+            item: {
+                '@type': 'OrganizationRole',
+                roleName: 'Core Member',
+                startDate: '2023-10',
+                worksFor: {
+                    '@type': 'Organization',
+                    name: 'A.T.O.M. Robotics, MAIT',
                     address: { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
                 },
-                description: '6-DOF robotic arm configuration in ROS/Gazebo. MoveIt inverse kinematics and collision-aware trajectory planning in C++. ~50% execution time reduction via planner selection and parameter tuning.',
+                description: 'Core member of MAIT\'s student robotics society. Built the hexapod URDF and ros2_control hardware interface and a web-controlled robotic arm (rosbridge with a live camera feed), and represents the society at robotics competitions and hackathons.',
             },
         },
     ],

@@ -16,7 +16,7 @@ const GREETING: Message = {
 const STARTER_CHIPS = [
   "What's his strongest project?",
   "What foundation-model work has he done?",
-  "How does the current Variety / Enferent role work?",
+  "How does the current nFerent role work?",
 ]
 
 export default function Chat() {
@@ -85,7 +85,7 @@ export default function Chat() {
         <ScrollFade>
           <h2 className="chat-heading">Have a question?</h2>
           <p className="hero-descriptor">
-            Ask anything about Mitanshu's experience, skills.
+            Ask anything about his work, projects, or experience.
           </p>
 
           {/* Message window */}

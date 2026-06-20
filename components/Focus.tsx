@@ -9,20 +9,22 @@ export default function Focus() {
         </ScrollFade>
         <ScrollFade>
           <p>
-            Most of what I do sits at the intersection of hardware and learned
-            models. Right now that means a bimanual VR teleoperation rig — a
-            Meta Quest 3 driving an Elite Robots CS66 pair, with the same
-            control loop being extended to a Franka Research 3 so it works
-            across arm families. The rig double-duties as a dataset collector:
-            every teleoperation session logs synchronised arm states and headset
-            pose for downstream policy training.
+            Most of what I do sits where hardware meets learned models. Right
+            now that means a bimanual VR teleoperation rig at nFerent.ai. A Meta
+            Quest 3 drives a pair of Elite Robots CS66 arms through a real-time
+            C++ control loop, and the same loop extends to a Franka Research 3 so
+            it covers both arm families. The rig doubles as a data collector.
+            Every session logs synchronised arm state and headset pose, which is
+            what the imitation-learning policies train on.
           </p>
           <p>
-            On the model side, I've been running continued pretraining
+            On the model side, I've been running continued-pretraining
             experiments on a Reddit corpus I scraped and processed myself. Six
             runs across Mistral 7B, Qwen 2.5 at a few scales, and a nanoGPT I
-            built from scratch — partly to ship experiments, partly just to
-            understand what training actually feels like from the ground up.
+            built from scratch. Part of it was to ship real experiments, part of
+            it was to feel what training actually does from the ground up. The
+            habit underneath both threads is the same one. Build the eval before
+            you trust the number.
           </p>
         </ScrollFade>
       </div>

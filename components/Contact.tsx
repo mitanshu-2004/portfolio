@@ -9,8 +9,8 @@ export default function Contact() {
         </ScrollFade>
         <ScrollFade>
           <p className="contact-lead">
-            Looking for full-time roles in Robotics SWE or Physical AI. Also
-            open to Research Engineering and applied ML.
+            Looking for full-time roles in Physical AI and Robotics SWE. Also
+            open to research engineering and applied ML.
           </p>
           <div className="contact-rows">
             <div className="contact-row">

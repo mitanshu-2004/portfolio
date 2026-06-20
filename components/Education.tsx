@@ -23,6 +23,9 @@ export default function Education() {
               <strong>Minor:</strong> Artificial Intelligence &amp; Machine
               Learning
             </li>
+            <li>
+              <strong>CGPA:</strong> 8.01 / 10
+            </li>
           </ul>
         </ScrollFade>
       </div>
