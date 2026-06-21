@@ -23,18 +23,6 @@ export default function NavActiveState() {
     }
   }, [])
 
-  // Trigger hero object entry animations on first scroll
-  useEffect(() => {
-    const hero = document.getElementById('hero')
-    if (!hero) return
-    const reveal = () => {
-      hero.classList.add('hero-revealed')
-      window.removeEventListener('scroll', reveal)
-    }
-    window.addEventListener('scroll', reveal, { passive: true })
-    return () => window.removeEventListener('scroll', reveal)
-  }, [])
-
   useEffect(() => {
     const nav = document.querySelector('nav')
     if (!nav) return

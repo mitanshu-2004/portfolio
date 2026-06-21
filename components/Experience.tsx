@@ -21,15 +21,16 @@ export default function Experience() {
           <div className="exp-org">nFerent.ai · Gurugram, On-site</div>
           <ul className="exp-bullets" aria-label="Responsibilities at nFerent.ai">
             <li>
-              Built a bimanual VR teleoperation stack from scratch. A Meta Quest
-              3 controller streams pose over UDP to a per-arm real-time C++
-              control loop that drives two Elite Robots CS66 arms by Cartesian
-              servoing, with One-Euro input filtering, SE(3) command smoothing,
-              and singularity and step-cap safety guards. An anchor-and-clutch
-              model lets the operator release and re-grip without the arm
-              jumping.
+              <strong>Dual-arm VR teleoperation.</strong> Built the stack from
+              scratch. A Meta Quest 3 controller streams pose over UDP to a
+              per-arm real-time C++ control loop that drives two Elite Robots
+              CS66 arms by Cartesian servoing, with One-Euro input filtering,
+              SE(3) command smoothing, and singularity and step-cap safety
+              guards. An anchor-and-clutch model lets the operator release and
+              re-grip without the arm jumping.
             </li>
             <li>
+              <strong>Franka teleop and imitation-learning data.</strong>{' '}
               Extended the same teleoperation to a Franka Research 3 with
               DROID-style anchor-and-delta control and a layered safety stack:
               frame-jump rejection, a position and orientation leash, and
@@ -37,15 +38,15 @@ export default function Experience() {
               RGB-D video and robot state for imitation learning.
             </li>
             <li>
+              <strong>MANUS multi-sensor capture.</strong> Built a capture tool,
+              two MANUS gloves and three RealSense cameras, that synchronises
+              every stream on one hardware clock and runs a frame-uniqueness
+              watchdog to catch silent camera repeat-frame faults.
+            </li>
+            <li>
               Diagnosed and patched a real-hardware crash in the robot's
               URScript, a null handle on headless restart, that had been
               breaking teleop bring-up.
-            </li>
-            <li>
-              Built a multi-sensor capture tool, two MANUS gloves and three
-              RealSense cameras, that synchronises every stream on one hardware
-              clock and runs a frame-uniqueness watchdog to catch silent camera
-              repeat-frame faults.
             </li>
             <li>
               Brought up and tested incoming commercial robots before dispatch:
@@ -121,11 +122,26 @@ export default function Experience() {
           <div className="exp-org">A.T.O.M. Robotics, MAIT robotics society · Delhi</div>
           <ul
             className="exp-bullets"
-            aria-label="Responsibilities at A.T.O.M. Robotics"
+            aria-label="Projects and responsibilities at A.T.O.M. Robotics"
           >
             <li>
-              Build robots with a team of college peers. The hexapod and the
-              web-controlled arm in my projects both came out of this society.
+              <strong>Hexapod (simulation).</strong> An 18-DoF hexapod in ROS 2
+              and Gazebo. I worked on the control side: the tripod-gait and
+              analytic inverse-kinematics node, the ros2_control hardware
+              interface, and the launch wiring. The URDF is CAD-exported. Team
+              project, simulation only.{' '}
+              <a
+                href="https://github.com/atom-robotics-lab/Hexapod"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub ↗
+              </a>
+            </li>
+            <li>
+              <strong>Web-controlled robotic arm.</strong> A browser interface
+              that drives a robotic arm through a rosbridge WebSocket, with the
+              arm's live camera feed streamed back into the UI.
             </li>
             <li>
               Represent the society at robotics competitions and hackathons, and
