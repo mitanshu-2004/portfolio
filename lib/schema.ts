@@ -91,9 +91,9 @@ export const projectListSchema = {
             item: {
                 '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#reddit-cpt',
-                name: 'Reddit CPT, 6 Training Runs',
+                name: 'Reddit CPT, continued pretraining',
                 description:
-                    'Six continued-pretraining runs on a self-scraped Reddit corpus. Mistral 7B (r=128, r=256), Qwen 2.5 (7B r=128, 3B r=16, 1.5B structured), and a from-scratch nanoGPT (~50 M params). Full data pipeline and inference test. Artefacts kept private.',
+                    'Continued pretraining on a self-scraped Reddit corpus across three setups: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5 through a hand-written accelerate DDP loop with token-offset sharding and resume-by-token-count, and a from-scratch nanoGPT (~50 M params). Proof-of-concept runs, stopped early, no eval yet. Artefacts kept private.',
                 applicationCategory: 'AI / Foundation Model Training',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'PyTorch'],
@@ -107,7 +107,7 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#hexapod',
                 name: 'Hexapod',
                 description:
-                    'An 18-DoF hexapod ROS 2 stack. Authored the URDF xacro (533 lines), the ros2_control hardware interface (305 lines), and a Dockerised runtime with NVIDIA GPU support. Team project with A.T.O.M. Robotics; the gait and analytic IK were a collaborator\'s.',
+                    'An 18-DoF hexapod simulated in ROS 2 and Gazebo. Worked on the control side: the tripod-gait and analytic inverse-kinematics node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported. A.T.O.M. Robotics team project, simulation only.',
                 applicationCategory: 'Robotics / Locomotion System',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'C++'],
@@ -156,7 +156,7 @@ export const faqSchema = {
             name: 'Who is Mitanshu Goel?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig and robot-learning data pipeline at nFerent.ai, and has run six continued-pretraining runs on a self-scraped Reddit corpus across Mistral 7B, Qwen 2.5, and a from-scratch nanoGPT.',
+                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig and robot-learning data pipeline at nFerent.ai, and has run three continued-pretraining setups on a self-scraped Reddit corpus: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a from-scratch nanoGPT.',
             },
         },
         {
@@ -164,7 +164,7 @@ export const faqSchema = {
             name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at nFerent.ai: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, with a multi-sensor capture tool feeding an imitation-learning dataset. Then the sole-authored ros2_control hardware interface in the atom-robotics-lab Hexapod repo. For foundation models and LLMs, six continued-pretraining runs on a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) with artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
+                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at nFerent.ai: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, with a multi-sensor capture tool feeding an imitation-learning dataset. Then the gait and inverse-kinematics control node and ros2_control integration on the A.T.O.M. Robotics Hexapod (a team project). For foundation models and LLMs, three continued-pretraining setups on a self-scraped Reddit corpus (Mistral 7B LoRA, Qwen 2.5 QLoRA via a hand-written distributed loop, and a from-scratch nanoGPT), artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {
@@ -180,7 +180,7 @@ export const faqSchema = {
             name: 'Is Mitanshu Goel available for full-time roles?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Available for full-time roles now. Looking for Physical AI, Robotics SWE, ML Engineering, or Research Engineering roles. Based in Delhi, open to relocation. Contact mitanshug2004@gmail.com.',
+                text: 'Available for full-time roles now. Looking for Physical AI, Robotics SWE, ML Engineering, or Research Engineering roles. Based in Delhi, open to roles across India and India-friendly remote. Contact mitanshug2004@gmail.com.',
             },
         },
     ],
@@ -250,7 +250,7 @@ export const workExperienceSchema = {
                     name: 'A.T.O.M. Robotics, MAIT',
                     address: { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
                 },
-                description: 'Core member of MAIT\'s student robotics society. Built the hexapod URDF and ros2_control hardware interface and a web-controlled robotic arm (rosbridge with a live camera feed), and represents the society at robotics competitions and hackathons.',
+                description: 'Core member of MAIT\'s student robotics society. On the team hexapod (simulation only), worked on the gait and inverse-kinematics control node and the ros2_control integration, and built a web-controlled robotic arm (rosbridge with a live camera feed). Represents the society at robotics competitions and hackathons.',
             },
         },
     ],

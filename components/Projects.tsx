@@ -21,17 +21,17 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'robotics',
         title: 'Dual-Arm VR Teleoperation',
         problem:
-          'A Meta Quest 3 drives two Elite Robots CS66 arms in real time. Controller pose streams over UDP to a per-arm C++ control loop that maps each hand to its arm by Cartesian servoing, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. An anchor-and-clutch model lets the operator release and re-grip without the arm jumping. Built at nFerent.ai.',
-        stack: 'C++, Meta Quest 3, OpenVR, Elite CS SDK, real-time Linux, UDP',
+          'A Meta Quest 3 drives two Elite Robots CS66 arms in real time. Controller pose streams over UDP to a per-arm C++ control loop that maps each hand to its arm by Cartesian servoing, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. The loop runs at real-time priority, with memory locked and the thread pinned to its own core. An anchor-and-clutch model lets the operator release and re-grip without the arm jumping. Built at nFerent.ai.',
+        stack: 'C++, real-time Linux, Elite CS SDK, Meta Quest 3, OpenVR, UDP',
         links: {},
       },
       {
         id: 'teleop-franka',
         domain: 'robotics',
-        title: 'Franka Teleop + Imitation Dataset',
+        title: 'Franka Teleop + Robot-Learning Data',
         problem:
-          'The same teleoperation extended to a Franka Research 3 with DROID-style anchor-and-delta control and a layered safety stack: frame-jump rejection, a position and orientation leash, and slew-rate limiting. Every session records dual RGB-D video and full robot state as an imitation-learning dataset. Built at nFerent.ai.',
-        stack: 'C++, Franka libfranka, RealSense RGB-D, DROID-style control, HDF5',
+          'The same teleoperation extended to a Franka Research 3, with a recording pipeline built around it. DROID-style anchor-and-delta control runs behind a layered safety stack of frame-jump rejection, a position and orientation leash, and slew-rate limiting. Every session writes dual RGB-D video and full robot state as episodes for imitation learning. The recorder sits on a CPU-pinned writer thread that drops a whole tick rather than let the queue back up and desync the data. Built at nFerent.ai.',
+        stack: 'C++, Python, Franka libfranka, RealSense RGB-D, LeRobot, HDF5',
         links: {},
       },
       {
@@ -40,7 +40,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         title: 'MANUS Multi-Sensor Capture',
         problem:
           'A capture tool that records two MANUS gloves and three RealSense cameras onto one hardware clock for robot-learning data. A frame-uniqueness watchdog catches a nasty failure mode where a camera silently repeats a stale frame under USB load, which passes naive frame-count checks but quietly corrupts the dataset. Built at nFerent.ai.',
-        stack: 'Python, C++, MANUS SDK, RealSense, multi-stream sync',
+        stack: 'Python, MANUS SDK, RealSense, multi-stream sync',
         links: {},
       },
       {
@@ -48,8 +48,8 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'robotics',
         title: 'Hexapod',
         problem:
-          '18-DoF hexapod simulated in ROS 2 and Gazebo. I wrote the URDF xacro model and the full ros2_control hardware interface, and Dockerised the runtime with NVIDIA GPU support. A /cmd_vel teleop maps into a tripod gait and per-leg analytic inverse kinematics. Team project with A.T.O.M. Robotics; the gait and IK math were a collaborator\'s.',
-        stack: 'ROS 2 Humble, ros2_control, Gazebo, Docker, Python',
+          'An 18-DoF hexapod simulated in ROS 2 and Gazebo, built with A.T.O.M. Robotics. A /cmd_vel teleop maps into a tripod gait, and each leg is solved with closed-form analytic inverse kinematics and published through ros2_control. I worked on the control side: the gait and IK node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported. Team project, simulation only.',
+        stack: 'ROS 2 Humble, ros2_control, Gazebo, Python',
         links: { github: 'https://github.com/atom-robotics-lab/Hexapod' },
       },
       {
@@ -72,8 +72,8 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'Reddit CPT',
         problem:
-          'Six continued-pretraining runs on a Reddit corpus I scraped and processed myself. Mistral 7B at two ranks, Qwen 2.5 at three scales, and a nanoGPT built from scratch to feel training from the ground up. The pipeline runs from raw Pushshift dumps through filtering and Wilson-score ranking to packed tokenisation, with choices that are not tutorial defaults: a smaller embedding learning rate, rsLoRA at high ranks, and hub checkpointing so a dropped cloud session never loses progress.',
-        stack: 'Unsloth, TRL, PEFT, LoRA, rsLoRA, Mistral 7B, Qwen 2.5, nanoGPT, A100',
+          'Continued pretraining on a Reddit corpus I scraped and cleaned myself, across three setups: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a small GPT trained from scratch. The Qwen run goes through a distributed training loop I wrote by hand, with token-offset sharding across two GPUs and checkpointing that resumes from the exact token count after a dropped cloud session. These are proof-of-concept runs, stopped early, with no eval yet. The point was the data and training infrastructure, learned from the ground up.',
+        stack: 'PyTorch, Unsloth, PEFT, QLoRA, accelerate (DDP), Hugging Face Hub',
         links: {},
       },
       {
@@ -81,7 +81,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'MiniRag-Reranker',
         problem:
-          'Hybrid retrieval over 20 industrial-safety PDFs: dense vectors plus BM25, a learned reranker, and score-gated abstention on FastAPI. The real story is the evaluation. I caught that the original test set reused the training questions, so the headline number was the reranker grading its own homework. I rebuilt it around a disjoint held-out set with NDCG, MRR, and Recall@k, plus a cross-encoder as a reference baseline.',
+          'Hybrid retrieval over 20 industrial-safety PDFs: dense vectors plus BM25, a logistic-regression reranker, and a cross-encoder reference, on FastAPI. The real story is the evaluation. I caught that the original test set reused the training questions, so the headline number was the reranker grading its own homework. I rebuilt the eval around a disjoint held-out set with NDCG, MRR, and Recall@k, and once it was measured honestly the learned reranker did not clearly beat the plain hybrid baseline. The corrected eval is the result, not a leaderboard win.',
         stack: 'FastAPI, ChromaDB, BM25, Sentence-Transformers, scikit-learn',
         links: { github: 'https://github.com/mitanshu-2004/MiniRag-Reranker' },
       },
@@ -90,18 +90,9 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ai',
         title: 'RAG Assistant',
         problem:
-          'A RAG system where hallucinations are structurally hard. If the model claims "Fully Answered" but has no citations to back it up, a Pydantic model-validator rejects the response at parse time, before it reaches the user. A retry loop feeds parse failures back to the model. On a 9-question held-out rubric it returned 0 hallucinations, with 8 of 9 answerability calls correct.',
+          'A RAG system where hallucinations are structurally hard. If the model says it fully answered something but cites nothing to back it up, a Pydantic model-validator rejects the response at parse time, before it reaches the user. A retry loop feeds the parse failure back to the model. On a 9-question held-out rubric it returned 0 hallucinations, with 8 of 9 answerability calls correct.',
         stack: 'Llama 3.3 70B, Groq, ChromaDB, Pydantic, FastAPI',
         links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
-      },
-      {
-        id: 'memory-ai',
-        domain: 'ai',
-        title: 'Memory Assistant',
-        problem:
-          'An offline personal memory store that never leaves the machine. A local Phi-3, run through llama.cpp, tags and summarises each note at ingest, and search is hybrid dense plus keyword retrieval over ChromaDB and SQLite. The point was to see how far a useful knowledge tool gets with no cloud and no API key.',
-        stack: 'FastAPI, ChromaDB, Sentence-Transformers, Phi-3 GGUF, llama.cpp',
-        links: { github: 'https://github.com/mitanshu-2004/memory-assistant' },
       },
       {
         id: 'darwin',
@@ -123,7 +114,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ds',
         title: 'Churn Survival Model',
         problem:
-          'A Cox proportional-hazards model for churn on about 10,000 Steam reviews, with risk signals pulled from the review text by an LLM. The interesting part was not the 0.874 hold-out C-index, it was taking it apart. Most of the lift came from features that re-encode the outcome, so I separated those out and kept the roughly +0.14 that actually looks forward, guarded by a contract test that blocks the leaky features from creeping back in.',
+          'A Cox proportional-hazards model for churn on about 10,000 Steam reviews, with risk signals pulled from the review text by an LLM. It reached a 0.874 hold-out C-index, but most of that lift came from features that quietly re-encode the outcome. So I decomposed it: separated the leaky polarity features from the forward-looking behaviour, kept the roughly +0.14 that actually predicts ahead of time, and added a contract test to block the leaky features from creeping back in. The smaller honest number is the one I report.',
         stack: 'Cox PH (lifelines), Groq Llama 4 Scout, scikit-learn, instructor',
         links: { github: 'https://github.com/mitanshu-2004/llm-survival-churn' },
       },
@@ -132,18 +123,9 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'ds',
         title: 'Primetrade Analysis',
         problem:
-          'A trader-behaviour study on 211k trades against the Bitcoin Fear and Greed index, with KMeans segmentation into trader archetypes. The honest centre of the repo is the post-mortem. A next-day classifier scored 63% accuracy but caught only 2 of 44 actual loss days, and a follow-on volatility regressor came back worse than predicting the mean. I wrote up why it failed and stopped, instead of tuning a dead signal.',
+          'A trader-behaviour study on 211k trades against the Bitcoin Fear and Greed index, with KMeans segmentation into trader archetypes. The honest centre of the repo is the post-mortem. A next-day classifier landed right at the base rate and caught only 2 of 44 actual loss days, and a follow-on volatility regressor came back worse than predicting the mean. I wrote up why it failed and stopped, instead of tuning a dead signal.',
         stack: 'pandas, scikit-learn, KMeans, XGBoost, matplotlib',
         links: { github: 'https://github.com/mitanshu-2004/Primetrade-Analysis' },
-      },
-      {
-        id: 'stockmetrics',
-        domain: 'ds',
-        title: 'StockMetrics',
-        problem:
-          'Tested 25 fundamental-versus-return variable pairs across five Indian IT firms over twenty years, by linear regression with F-tests. Almost nothing came back significant, and with seventeen annual observations per firm the study is power-limited by design. The README leads with the null result, because a clean null is the finding, not something to hide.',
-        stack: 'pandas, scikit-learn, F-test, statsmodels',
-        links: { github: 'https://github.com/mitanshu-2004/StockMetrics' },
       },
     ],
   },
@@ -165,7 +147,7 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         domain: 'web',
         title: 'Stock-Influence',
         problem:
-          'A deployed full-stack tool for exploring how any uploaded time series tracks a stock price. FastAPI backend, React and Chart.js front end, with Pearson, Spearman, and Kendall correlations and synchronised heatmap and time-series views. The correlation math is all in the code and checkable.',
+          'A deployed full-stack tool for exploring how any uploaded time series tracks a stock price. FastAPI backend, React and Chart.js front end, with Pearson, Spearman, and Kendall correlations and synchronised heatmap and time-series views. The correlation math is all in the code and checkable. It is a correlation explorer, so it reports associations, not proof of cause.',
         stack: 'FastAPI, React, pandas, SciPy, yfinance, Chart.js',
         links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
       },

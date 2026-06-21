@@ -228,7 +228,7 @@ export default function Hero() {
         </span>
         <h1 className="hero-name">Mitanshu Goel</h1>
         <p className="hero-descriptor">
-          Building robots and training models, mostly where the two meet.
+          Building robots, and the data and models that teach them.
         </p>
         <div className="hero-links">
           <a

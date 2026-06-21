@@ -13,18 +13,23 @@ export default function Focus() {
             now that means a bimanual VR teleoperation rig at nFerent.ai. A Meta
             Quest 3 drives a pair of Elite Robots CS66 arms through a real-time
             C++ control loop, and the same loop extends to a Franka Research 3 so
-            it covers both arm families. The rig doubles as a data collector.
-            Every session logs synchronised arm state and headset pose, which is
-            what the imitation-learning policies train on.
+            it covers both arm families. The rig is also how the data gets made.
+            Every session records synchronised arm state, headset pose, and
+            multi-camera video, and a separate capture tool puts two MANUS gloves
+            and three RealSense cameras on one hardware clock. That recorded data
+            is what imitation-learning policies train on.
           </p>
           <p>
-            On the model side, I've been running continued-pretraining
-            experiments on a Reddit corpus I scraped and processed myself. Six
-            runs across Mistral 7B, Qwen 2.5 at a few scales, and a nanoGPT I
-            built from scratch. Part of it was to ship real experiments, part of
-            it was to feel what training actually does from the ground up. The
-            habit underneath both threads is the same one. Build the eval before
-            you trust the number.
+            On the model side, I have been running continued-pretraining
+            experiments on a Reddit corpus I scraped and cleaned myself. Three so
+            far: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5 through
+            a distributed training loop I wrote by hand, and a small GPT from
+            scratch. The hard part was making them survive free cloud sessions,
+            so the loop shards the corpus by token offset and picks up from the
+            exact token it stopped at when a session dies. Part of it was to ship
+            real experiments, part of it was to feel what training does from the
+            ground up. The habit underneath both threads is the same. Build the
+            eval before you trust the number.
           </p>
         </ScrollFade>
       </div>

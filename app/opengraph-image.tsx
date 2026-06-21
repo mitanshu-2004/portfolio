@@ -59,7 +59,7 @@ export default function OGImage() {
               maxWidth: '560px',
             }}
           >
-            AI &amp; Robotics Engineer
+            Robotics &amp; Physical AI Engineer
           </div>
           <div
             style={{
@@ -70,10 +70,10 @@ export default function OGImage() {
               gap: '24px',
             }}
           >
-            <span>ROS2</span>
-            <span>YOLOv8</span>
+            <span>ROS 2</span>
+            <span>C++</span>
             <span>PyTorch</span>
-            <span>ESP32</span>
+            <span>YOLOv8</span>
             <span>llama.cpp</span>
           </div>
         </div>

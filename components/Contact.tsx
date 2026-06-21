@@ -53,7 +53,7 @@ export default function Contact() {
             </div>
             <div className="contact-row">
               <span className="contact-label">Location</span>
-              <span className="contact-value">Delhi, India. Open to relocation.</span>
+              <span className="contact-value">Delhi, India. Open to roles across India and India-friendly remote.</span>
             </div>
           </div>
         </ScrollFade>

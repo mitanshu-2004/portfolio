@@ -30,15 +30,17 @@ export default function Home() {
       <p className="sr-only">
         Mitanshu Goel is a robotics and Physical AI engineer based in Delhi,
         India. ECE graduate from MAIT (2026) with an AI/ML minor. Currently
-        building a bimanual VR teleoperation rig at nFerent.ai. A Meta Quest 3
-        drives an Elite Robots CS66 pair and a Franka Research 3 over a
-        real-time control loop, and the rig collects an imitation-learning
-        dataset on the side. He has run six continued-pretraining experiments on
-        a self-scraped Reddit corpus (Mistral 7B, Qwen 2.5, nanoGPT) across four
-        hardware tiers, with artefacts kept private. He authored the
-        ros2_control hardware interface and Ignition Fortress migration for an
-        18-DoF hexapod at atom-robotics-lab. Looking for Physical AI, Robotics
-        SWE, ML Engineering, or Research Engineering roles.
+        building a bimanual VR teleoperation rig and robot-learning data pipeline
+        at nFerent.ai. A Meta Quest 3 drives an Elite Robots CS66 pair and a
+        Franka Research 3 over a real-time C++ control loop, and a multi-sensor
+        capture tool records MANUS gloves and RealSense cameras as
+        imitation-learning data. He has run three continued-pretraining
+        experiments on a self-scraped Reddit corpus (a LoRA adapter on Mistral
+        7B, a QLoRA adapter on Qwen 2.5 through a hand-written distributed loop,
+        and a small GPT from scratch). On an A.T.O.M. Robotics team hexapod he
+        worked on the gait and inverse-kinematics control node and the
+        ros2_control integration. He looks for Physical AI, Robotics SWE, ML
+        Engineering, and Research Engineering roles.
       </p>
       <Hero />
       <Focus />
