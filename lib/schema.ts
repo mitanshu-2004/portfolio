@@ -91,7 +91,7 @@ export const projectListSchema = {
             item: {
                 '@type': 'SoftwareApplication',
                 '@id': 'https://mitanshu.me/#reddit-cpt',
-                name: 'Reddit CPT, continued pretraining',
+                name: 'Continued pretraining on a Reddit corpus',
                 description:
                     'Continued pretraining on a self-scraped Reddit corpus across three setups: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5 through a hand-written accelerate DDP loop with token-offset sharding and resume-by-token-count, and a from-scratch nanoGPT (~50 M params). Proof-of-concept runs, stopped early, no eval yet. Artefacts kept private.',
                 applicationCategory: 'AI / Foundation Model Training',
@@ -107,7 +107,7 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#hexapod',
                 name: 'Hexapod',
                 description:
-                    'An 18-DoF hexapod simulated in ROS 2 and Gazebo. Worked on the control side: the tripod-gait and analytic inverse-kinematics node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported. A.T.O.M. Robotics team project, simulation only.',
+                    'An 18-DoF hexapod built with ROS 2, run in simulation and on hardware. Worked on the control side: the tripod-gait and analytic inverse-kinematics node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported. A.T.O.M. Robotics team project.',
                 applicationCategory: 'Robotics / Locomotion System',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'C++'],
@@ -250,7 +250,7 @@ export const workExperienceSchema = {
                     name: 'A.T.O.M. Robotics, MAIT',
                     address: { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
                 },
-                description: 'Core member of MAIT\'s student robotics society. On the team hexapod (simulation only), worked on the gait and inverse-kinematics control node and the ros2_control integration, and built a web-controlled robotic arm (rosbridge with a live camera feed). Represents the society at robotics competitions and hackathons.',
+                description: 'Core member of MAIT\'s student robotics society. On the team hexapod, worked on the gait and inverse-kinematics control node and the ros2_control integration, and built a web-controlled robotic arm (rosbridge with a live camera feed). Represents the society at robotics competitions and hackathons.',
             },
         },
     ],

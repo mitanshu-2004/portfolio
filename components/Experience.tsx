@@ -125,11 +125,11 @@ export default function Experience() {
             aria-label="Projects and responsibilities at A.T.O.M. Robotics"
           >
             <li>
-              <strong>Hexapod (simulation).</strong> An 18-DoF hexapod in ROS 2
-              and Gazebo. I worked on the control side: the tripod-gait and
-              analytic inverse-kinematics node, the ros2_control hardware
-              interface, and the launch wiring. The URDF is CAD-exported. Team
-              project, simulation only.{' '}
+              <strong>Hexapod.</strong> An 18-DoF hexapod built with ROS 2, run
+              in simulation and on hardware. I worked on the control side: the
+              tripod-gait and analytic inverse-kinematics node, the ros2_control
+              hardware interface, and the launch wiring. The URDF is
+              CAD-exported. Team project.{' '}
               <a
                 href="https://github.com/atom-robotics-lab/Hexapod"
                 target="_blank"

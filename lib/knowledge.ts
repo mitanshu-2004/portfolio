@@ -76,7 +76,7 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ### A.T.O.M. Robotics, Core Member (Oct 2023 – Present · MAIT, Delhi)
 
-- MAIT's student robotics society. On the team hexapod (simulated in ROS 2 and Gazebo), he worked on the control side: the tripod-gait and analytic-IK node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported. It is a team project, simulation only.
+- MAIT's student robotics society. On the team hexapod (ROS 2, run in simulation and on hardware), he worked on the control side: the tripod-gait and analytic-IK node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported. It is a team project.
 - Also built a web-controlled robotic arm: a browser interface over rosbridge with the arm's live camera feed streamed into the UI.
 - Represents the society at robotics competitions and hackathons.
 
@@ -151,7 +151,7 @@ Three pieces under his current role. (1) Dual-arm Elite CS66 teleop: Quest 3 pos
 
 ### Hexapod, robotics (A.T.O.M. team project)
 Stack: ROS 2 Humble, Ignition Gazebo Fortress, ros2_control, Python.
-An 18-DoF hexapod simulated in ROS 2 and Gazebo. A /cmd_vel teleop maps into a tripod gait, and each leg is solved with closed-form analytic inverse kinematics, published through ros2_control. His part was the control side: the gait and IK control node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported, not hand-written. It is a team project and runs in simulation only.
+An 18-DoF hexapod built with ROS 2, run in Gazebo simulation and on hardware. A /cmd_vel teleop maps into a tripod gait, and each leg is solved with closed-form analytic inverse kinematics, published through ros2_control. His part was the control side: the gait and IK control node, the ros2_control hardware interface, and the launch wiring. The URDF model is CAD-exported, not hand-written. It is a team project.
 GitHub: https://github.com/atom-robotics-lab/Hexapod
 
 ### Robotic-Arm Web Control, robotics
@@ -248,7 +248,7 @@ Things he has not done yet. Surfacing these proactively because pretending they 
 - **No published paper.** Reading and implementing is where the time has gone, not submitting to ICRA, NeurIPS, or EMNLP.
 - **No accepted OSS pull request landed yet** in major repos (LeRobot, IsaacLab, vLLM, LangChain), though the work he does is the kind that would merge there with a polish pass.
 - **No local GPU.** He has been training on free and rented cloud GPUs (Colab and Kaggle T4s, Lightning AI). The benchmark scripts for Darwin and the CPT runs are constrained by that, and the CPT runs are proof-of-concept, stopped early, with no eval yet.
-- **The Hexapod is a team project and simulation only.** The URDF is CAD-exported, not hand-written. His part is the gait/IK control node and the ros2_control integration; the exact split of work across the team is not separately documented.
+- **The Hexapod is a team project.** The URDF is CAD-exported, not hand-written. His part is the gait/IK control node and the ros2_control integration; the exact split of work across the team is not separately documented.
 
 He does not claim things he has not done. Asking him a direct question about a technology will get a direct answer, including "haven't used it" when that is the truth.
 

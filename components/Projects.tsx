@@ -23,8 +23,8 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
       {
         id: 'cpt',
         domain: 'ai',
-        title: 'Reddit CPT',
-        hook: 'Continued pretraining on a self-scraped Reddit corpus, three ways.',
+        title: 'Continued Pretraining on Reddit',
+        hook: 'A self-scraped corpus trained three ways: LoRA, QLoRA, and a from-scratch GPT.',
         problem:
           'Continued pretraining on a Reddit corpus I scraped and cleaned myself, across three setups: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a small GPT trained from scratch. The Qwen run goes through a distributed training loop I wrote by hand, with token-offset sharding across two GPUs and checkpointing that resumes from the exact token count after a dropped cloud session. These are proof-of-concept runs, stopped early, with no eval yet. The point was the data and training infrastructure, learned from the ground up.',
         stack: 'PyTorch, Unsloth, PEFT, QLoRA, accelerate (DDP), Hugging Face Hub',
@@ -86,6 +86,16 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
         stack: 'pandas, scikit-learn, KMeans, XGBoost, matplotlib',
         links: { github: 'https://github.com/mitanshu-2004/Primetrade-Analysis' },
       },
+      {
+        id: 'stock-influence',
+        domain: 'ds',
+        title: 'Stock-Influence',
+        hook: 'A deployed correlation explorer for time series and stock price.',
+        problem:
+          'A deployed full-stack tool for exploring how any uploaded time series tracks a stock price. FastAPI backend, React and Chart.js front end, with Pearson, Spearman, and Kendall correlations and synchronised heatmap and time-series views. The correlation math is all in the code and checkable. It is a correlation explorer, so it reports associations, not proof of cause.',
+        stack: 'FastAPI, React, pandas, SciPy, yfinance, Chart.js',
+        links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
+      },
     ],
   },
   {
@@ -101,16 +111,6 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
           'Real-time multiplayer chess on Firestore. Moves sync through a versioned write protocol so duplicate snapshots never double-apply. Presence runs on heartbeats with a 15-second liveness window. If the moving player crashes mid-move, the opponent\'s client detects the finished position locally and writes the resolution back, so a game never hangs half-done. Stockfish runs as a separate FastAPI service with a cold-start wake-up ping.',
         stack: 'React 19, Firebase Firestore, FastAPI, Stockfish, Vite',
         links: { github: 'https://github.com/mitanshu-2004/chess', demo: 'https://chesstra.vercel.app' },
-      },
-      {
-        id: 'stock-influence',
-        domain: 'web',
-        title: 'Stock-Influence',
-        hook: 'A deployed correlation explorer for time series and stock price.',
-        problem:
-          'A deployed full-stack tool for exploring how any uploaded time series tracks a stock price. FastAPI backend, React and Chart.js front end, with Pearson, Spearman, and Kendall correlations and synchronised heatmap and time-series views. The correlation math is all in the code and checkable. It is a correlation explorer, so it reports associations, not proof of cause.',
-        stack: 'FastAPI, React, pandas, SciPy, yfinance, Chart.js',
-        links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
       },
     ],
   },
