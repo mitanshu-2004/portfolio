@@ -45,6 +45,8 @@ export default function Chat() {
     setLoading(true)
     setChipsVisible(false)
 
+    const FALLBACK = "Something went wrong. You can reach Mitanshu at mitanshug2004@gmail.com"
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -52,16 +54,53 @@ export default function Chat() {
         body: JSON.stringify({ messages: nextMessages }),
       })
 
-      const data = await res.json()
+      // Validation / error responses come back as JSON, not a stream.
+      if (!res.ok || !res.body) {
+        let msg = FALLBACK
+        try {
+          const data = await res.json()
+          if (data?.error) msg = data.error
+        } catch {
+          // non-JSON body, keep the fallback
+        }
+        setMessages((prev) => [...prev, { role: 'assistant', content: msg }])
+        return
+      }
 
-      // Both answer and error land as an assistant bubble
-      const replyContent: string = data.answer ?? data.error ?? "Something went wrong. You can reach Mitanshu at mitanshug2004@gmail.com"
-      setMessages((prev) => [...prev, { role: 'assistant', content: replyContent }])
+      // Stream the answer token by token into a single growing bubble.
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let acc = ''
+      let started = false
+
+      const flush = () => {
+        setMessages((prev) => {
+          const copy = [...prev]
+          copy[copy.length - 1] = { role: 'assistant', content: acc }
+          return copy
+        })
+      }
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        acc += decoder.decode(value, { stream: true })
+        if (!started) {
+          started = true
+          setMessages((prev) => [...prev, { role: 'assistant', content: acc }])
+        } else {
+          flush()
+        }
+      }
+      acc += decoder.decode()
+
+      if (!started) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: acc || FALLBACK }])
+      } else {
+        flush()
+      }
     } catch {
-      setMessages((prev) => [...prev, {
-        role: 'assistant',
-        content: "Something went wrong. You can reach Mitanshu at mitanshug2004@gmail.com",
-      }])
+      setMessages((prev) => [...prev, { role: 'assistant', content: FALLBACK }])
     } finally {
       setLoading(false)
       setTimeout(() => inputRef.current?.focus(), 50)
@@ -101,8 +140,8 @@ export default function Chat() {
               </div>
             ))}
 
-            {/* Typing indicator */}
-            {loading && (
+            {/* Typing indicator — only until the first streamed token arrives */}
+            {loading && messages[messages.length - 1]?.role === 'user' && (
               <div className="chat-message chat-message--assistant" aria-label="Typing">
                 <span className="chat-avatar" aria-hidden="true">MG</span>
                 <div className="chat-bubble chat-bubble--assistant chat-typing">

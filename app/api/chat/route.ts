@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { KNOWLEDGE } from '@/lib/knowledge'
 import { validateMessageArray } from '@/lib/security'
 import { logError, logWarning, logInfo } from '@/lib/logger'
-import { createCompletionWithFailover, getApiStatus } from '@/lib/groq-client'
+import { createStreamWithFailover } from '@/lib/groq-client'
 
 export const runtime = 'edge'
 
@@ -156,8 +156,6 @@ interface Message {
 }
 
 export async function POST(req: NextRequest) {
-  const startTime = Date.now()
-
   let messages: Message[]
   let payloadSize = 0
 
@@ -242,77 +240,77 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // Call Groq API with automatic failover
-  const startGroqTime = Date.now()
+  // Stream the answer from Groq (with key failover). Streaming keeps
+  // time-to-first-byte low so the Edge function never idles into a gateway
+  // timeout, and the answer renders live in the UI instead of freezing.
+  const origin = req.headers.get('origin') || '*'
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
+  const FALLBACK = `I'm having trouble reaching the model right now. You can reach Mitanshu directly at ${CONTACT_EMAIL}.`
+
+  // Only the most recent turns are needed to resolve follow-ups. Bounding the
+  // history keeps the prompt small and the first token fast.
+  const recent = messages.slice(-10)
+
   try {
-    const result = await createCompletionWithFailover({
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...messages.map((m) => ({ role: m.role, content: m.content })),
-      ],
-      maxTokens: 512,
-      temperature: 0.3,
-      timeout: 8000,
-    })
-
-    const groqDuration = Date.now() - startGroqTime
-    const answer = result.answer || ''
-
-    // Log successful response (simplified)
-    logInfo(`Chat API response successful (${groqDuration}ms, ${result.tokenCount} tokens)`)
-
-    const totalDuration = Date.now() - startTime
-    const origin = req.headers.get('origin') || 'unknown'
-
-    // Include API info in response headers for debugging
-    const responseHeaders: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'X-Response-Time': `${totalDuration}ms`,
-      'X-API-Used': result.apiUsed || 'unknown',
+    let result: { stream: ReadableStream<Uint8Array>; apiUsed: string } | null = null
+    try {
+      result = await createStreamWithFailover({
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...recent.map((m) => ({ role: m.role, content: m.content })),
+        ],
+        maxTokens: 512,
+        temperature: 0.3,
+        firstTokenTimeout: 6000,
+      })
+    } catch (error) {
+      logError('Groq stream init failed', {
+        phase: 'groq_stream_init',
+        message: error instanceof Error ? error.message : String(error),
+      })
+      result = null
     }
 
-    if (result.isFromFallback) {
-      responseHeaders['X-Fallback-Used'] = 'true'
-    }
-
-    return NextResponse.json(
-      { answer },
-      {
+    // No key could open a stream. Degrade gracefully with a plain-text 200
+    // (never a 504) so the user always gets a usable message.
+    if (!result) {
+      logWarning('Chat API served fallback (no stream available)')
+      return new Response(FALLBACK, {
         status: 200,
-        headers: responseHeaders,
-      }
-    )
-  } catch (error) {
-    const groqDuration = Date.now() - startGroqTime
-
-    let statusCode = 500
-    let errorMessage = 'Failed to generate response'
-
-    if (error instanceof Error) {
-      if (error.name === 'AbortError') {
-        statusCode = 504
-        errorMessage = 'Request timeout'
-      }
-
-      logError('Groq API call failed', {
-        phase: 'groq_api_call',
-        statusCode,
-        message: error.message,
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Cache-Control': 'no-store',
+          ...corsHeaders,
+        },
       })
     }
 
-    logWarning(`Chat API response error (${statusCode}, ${groqDuration}ms)`)
-
-    return NextResponse.json(
-      { error: `Something went wrong. You can reach Mitanshu at ${CONTACT_EMAIL}` },
-      {
-        status: statusCode,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    logInfo(`Chat API streaming via ${result.apiUsed}`)
+    return new Response(result.stream, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-store',
+        'X-Accel-Buffering': 'no',
+        'X-API-Used': result.apiUsed,
+        ...corsHeaders,
+      },
+    })
+  } catch (error) {
+    logError('Chat API unexpected error', {
+      phase: 'chat_post',
+      message: error instanceof Error ? error.message : String(error),
+    })
+    return new Response(FALLBACK, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-store',
+        ...corsHeaders,
+      },
+    })
   }
 }

@@ -325,6 +325,123 @@ class GroqClientManager {
   }
 
   /**
+   * Create a STREAMING chat completion with failover on connection.
+   *
+   * Failover happens at the first-token boundary: we try a key, wait up to
+   * firstTokenTimeout for its first streamed chunk, and if that fails (timeout,
+   * 429, 5xx) we move to the next key. Once the first token arrives we commit to
+   * that key and pipe the rest. This keeps time-to-first-byte low so the Edge
+   * function never idles into a gateway 504, and the answer renders live.
+   *
+   * Returns null only if no key could produce a stream — the caller then serves
+   * a graceful plain-text fallback (never a 504).
+   */
+  async createCompletionStream(params: {
+    messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>
+    maxTokens?: number
+    temperature?: number
+    firstTokenTimeout?: number
+  }): Promise<{ stream: ReadableStream<Uint8Array>; apiUsed: string } | null> {
+    const startTime = Date.now()
+    const firstTokenTimeout = params.firstTokenTimeout || 6000
+    // Bound the time spent cycling keys to OPEN a stream. Generation time after
+    // the first token is not counted here (bytes flow, so no timeout risk).
+    const overallDeadline = startTime + firstTokenTimeout + 4000
+    const encoder = new TextEncoder()
+
+    while (Date.now() < overallDeadline) {
+      let api = this.getNextAvailableApi()
+
+      if (!api) {
+        const next = this.earliestCooldownEnd()
+        const wait = next > 0 ? next - Date.now() : -1
+        if (wait > 0 && Date.now() + wait < overallDeadline) {
+          await new Promise((r) => setTimeout(r, wait + 50))
+          api = this.getNextAvailableApi()
+        }
+        if (!api) return null
+      }
+
+      const client = this.clients.get(api.name)
+      if (!client) {
+        this.recordApiFailure(api)
+        continue
+      }
+
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), firstTokenTimeout)
+
+      try {
+        const completion = await client.chat.completions.create(
+          {
+            model: 'llama-3.3-70b-versatile',
+            max_tokens: params.maxTokens || 512,
+            temperature: params.temperature ?? 0.3,
+            messages: params.messages,
+            stream: true,
+          },
+          { signal: controller.signal as any }
+        )
+
+        // Wait for the first chunk so we can fail over before committing.
+        const iterator = (completion as AsyncIterable<any>)[Symbol.asyncIterator]()
+        const first = await iterator.next()
+        clearTimeout(timeoutId)
+        this.resetApiFailures(api)
+
+        const apiName = api.name
+        const stream = new ReadableStream<Uint8Array>({
+          async start(ctrl) {
+            try {
+              if (!first.done) {
+                const c0 = first.value?.choices?.[0]?.delta?.content
+                if (c0) ctrl.enqueue(encoder.encode(c0))
+              }
+              while (true) {
+                const { done, value } = await iterator.next()
+                if (done) break
+                const piece = value?.choices?.[0]?.delta?.content
+                if (piece) ctrl.enqueue(encoder.encode(piece))
+              }
+            } catch {
+              // Mid-stream error: we've already committed, so end cleanly with
+              // whatever we have rather than failing the whole response.
+            } finally {
+              ctrl.close()
+            }
+          },
+          cancel() {
+            try {
+              controller.abort()
+            } catch {
+              // ignore
+            }
+          },
+        })
+
+        const duration = Date.now() - startTime
+        console.log(`Groq stream opened using ${apiName} (${duration}ms to first token)`)
+        return { stream, apiUsed: apiName }
+      } catch (error) {
+        clearTimeout(timeoutId)
+        const errorMsg = error instanceof Error ? error.message : String(error)
+
+        if (this.isRateLimitError(error)) {
+          const hint = this.parseRetryAfter(errorMsg) ?? 30_000
+          this.recordRateLimit(api, hint)
+        } else {
+          this.recordApiFailure(api)
+          console.warn(`Groq stream ${api.name} failed: ${errorMsg}`)
+        }
+        continue
+      }
+    }
+
+    console.error('Groq stream failover deadline exceeded.')
+    return null
+  }
+
+  /**
    * Fallback response when all APIs are exhausted
    */
   private getFallbackResponse(): CompletionResult {
@@ -389,6 +506,19 @@ export async function createCompletionWithFailover(params: {
 }): Promise<CompletionResult> {
   const manager = getGroqManager()
   return manager.createCompletion(params)
+}
+
+/**
+ * Create a streaming completion with automatic failover.
+ */
+export async function createStreamWithFailover(params: {
+  messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>
+  maxTokens?: number
+  temperature?: number
+  firstTokenTimeout?: number
+}): Promise<{ stream: ReadableStream<Uint8Array>; apiUsed: string } | null> {
+  const manager = getGroqManager()
+  return manager.createCompletionStream(params)
 }
 
 /**
