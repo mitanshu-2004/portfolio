@@ -184,11 +184,6 @@ Stack: KMeans, pandas, scikit-learn, Fear and Greed Index, regression diagnostic
 The headline of this repo is the post-mortem, not the dashboard. A next-day profit classifier landed at the base rate but caught only 2 of 44 actual loss days, a 95% miss rate on the signal that matters. A follow-on volatility regressor returned an R-squared of -0.385 (worse than predicting the mean). Both were discontinued. The README documents the class-imbalance and personality-versus-price root cause, and the decision to stop rather than tune.
 GitHub: https://github.com/mitanshu-2004/Primetrade-Analysis
 
-### Chesstra, real-time multiplayer chess
-Stack: React 19, Firebase Firestore, FastAPI, Stockfish, Vite.
-Firestore onSnapshot listeners for real-time sync, with a versioned write protocol so duplicate snapshots never double-apply. Presence heartbeats (5 s write, 15 s liveness window). Throttled timer writes. Optimistic UI rollback. Server-authoritative game-over with a client fallback. If the moving player crashes before writing the end-state, the opponent's client detects it locally via chess.js and writes the resolution back. Stockfish is deployed independently as a FastAPI service, woken by a health ping on mount before the first move. The rules engine (chess.js) and bot (Stockfish) are vendored.
-Live: https://chesstra.vercel.app. GitHub: https://github.com/mitanshu-2004/chess
-
 ### Stock-Influence, deployed full-stack correlation explorer
 Stack: FastAPI, React, pandas, SciPy, yfinance, Chart.js.
 Upload any time series and see how it tracks a stock price. Three correlation methods (Pearson, Spearman, Kendall), with a synchronised Chart.js heatmap and time-series overlay on a shared time axis. The correlation math is implemented in code and verifiable. It is a correlation explorer: it reports associations, not proof of cause, and does not apply a multiple-comparison correction.

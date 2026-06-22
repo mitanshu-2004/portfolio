@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import ScrollFade from './ScrollFade'
 
-type Domain = 'ai' | 'ds' | 'web'
+type Domain = 'ai' | 'ds'
 
 interface Project {
   id: string
@@ -95,22 +95,6 @@ const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
           'A deployed full-stack tool for exploring how any uploaded time series tracks a stock price. FastAPI backend, React and Chart.js front end, with Pearson, Spearman, and Kendall correlations and synchronised heatmap and time-series views. The correlation math is all in the code and checkable. It is a correlation explorer, so it reports associations, not proof of cause.',
         stack: 'FastAPI, React, pandas, SciPy, yfinance, Chart.js',
         links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
-      },
-    ],
-  },
-  {
-    domain: 'web',
-    label: 'Web',
-    projects: [
-      {
-        id: 'chess',
-        domain: 'web',
-        title: 'Chesstra',
-        hook: 'Real-time multiplayer chess with a crash-safe sync protocol.',
-        problem:
-          'Real-time multiplayer chess on Firestore. Moves sync through a versioned write protocol so duplicate snapshots never double-apply. Presence runs on heartbeats with a 15-second liveness window. If the moving player crashes mid-move, the opponent\'s client detects the finished position locally and writes the resolution back, so a game never hangs half-done. Stockfish runs as a separate FastAPI service with a cold-start wake-up ping.',
-        stack: 'React 19, Firebase Firestore, FastAPI, Stockfish, Vite',
-        links: { github: 'https://github.com/mitanshu-2004/chess', demo: 'https://chesstra.vercel.app' },
       },
     ],
   },
