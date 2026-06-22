@@ -1,7 +1,7 @@
 export const KNOWLEDGE = `
 ## SNAPSHOT
 
-Mitanshu Goel. ECE graduate from MAIT Delhi (2026), minor in AI/ML. He works across three intersecting threads: real-time robotics control on industrial arms, robot-learning data pipelines, and continued-pretraining of language models, with applied ML and data-science work alongside. Currently building a bimanual VR teleoperation rig and its data pipeline at nFerent.ai. The system drives an Elite Robots CS66 pair and a Franka Research 3 over a real-time C++ control loop. Looking for full-time roles in Physical AI, Robotics SWE, ML Engineering, or Research Engineering. Based in Delhi. Open to roles anywhere in India and to India-reachable remote.
+Mitanshu Goel. ECE graduate from MAIT Delhi (2026), minor in AI/ML. He works across three intersecting threads: real-time robotics control on industrial arms, robot-learning data pipelines, and continued-pretraining of language models, with applied ML and data-science work alongside. Currently building a bimanual VR teleoperation rig and its data pipeline at Nferent AI. The system drives an Elite Robots CS66 pair and a Franka Research 3 over a real-time C++ control loop. Looking for full-time roles in Physical AI, Robotics SWE, ML Engineering, or Research Engineering. Based in Delhi. Open to roles anywhere in India and to India-reachable remote.
 
 ---
 
@@ -44,7 +44,7 @@ Things most ECE new-grads do not have:
 | 2023 to present | A.T.O.M. Robotics, MAIT | Core member of the student robotics society. Worked on the hexapod's gait and IK control node and the ros2_control integration, and built a web-controlled robotic arm. |
 | Jul to Sep 2024 | Nextup Robotics | 6-DOF arm in ROS and Gazebo. MoveIt motion planning, validated in simulation then on hardware. Resolved sim-to-real URDF mismatches. |
 | Jun to Aug 2025 | SarthakAI | A custom YOLOv8 detector and a NeMo ASR wake-word and command pipeline on a UBTech Yanshee humanoid, plus a sensor-network workstation. |
-| Mar 2026 to present | nFerent.ai, Gurugram, On-site | Bimanual VR teleop on Elite CS66 arms, extended to a Franka Research 3. An imitation-learning dataset recorder and a multi-sensor capture tool built alongside the control loop. |
+| Mar 2026 to present | Nferent AI, Gurugram, On-site | Bimanual VR teleop on Elite CS66 arms, extended to a Franka Research 3. An imitation-learning dataset recorder and a multi-sensor capture tool built alongside the control loop. |
 
 Trajectory note: the through-line from hardware to AI-on-robots to foundation-model training is deliberate. He has been heading toward Physical AI since 2023. The CPT work is the parallel investment to make the AI side as deep as the robotics side.
 
@@ -52,7 +52,7 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ## EXPERIENCE
 
-### nFerent.ai, Robotics SWE & Physical AI Intern (Mar 2026 – Present · Gurugram, On-site)
+### Nferent AI, Robotics SWE & Physical AI Intern (Mar 2026 – Present · Gurugram, On-site)
 
 - Built a bimanual VR teleoperation stack. A Meta Quest 3 controller streams pose over UDP to a per-arm real-time C++ control loop that drives two Elite Robots CS66 arms by Cartesian servoing, with One-Euro input filtering, SE(3) command smoothing, and singularity and step-cap safety guards. The loop runs at real-time priority (SCHED_FIFO, mlockall, CPU pinning). An anchor-and-clutch model lets the operator release and re-grip without the arm jumping.
 - Extended the same teleoperation to a Franka Research 3 with DROID-style anchor-and-delta control and a layered safety stack (frame-jump rejection, a position and orientation leash, slew-rate limiting). Built the recorder that writes a dual RGB-D and robot-state dataset for imitation learning, on a CPU-pinned writer thread that sheds a whole tick rather than desync the data.
@@ -146,7 +146,7 @@ A self-scraped Reddit corpus and three continued-pretraining setups. The data pi
 
 Every project below has been independently code-audited. Metrics in this section are defensible from the published code, with caveats stated where they exist.
 
-### nFerent.ai teleoperation and data pipeline, the robotics flagship
+### Nferent AI teleoperation and data pipeline, the robotics flagship
 Three pieces under his current role. (1) Dual-arm Elite CS66 teleop: Quest 3 pose over UDP to a per-arm real-time C++ control loop, Cartesian servoing, One-Euro filtering, SE(3) smoothing, singularity and step-cap guards, anchor-and-clutch re-grip, running at real-time priority (SCHED_FIFO, mlockall, CPU pinning). (2) Franka Research 3 teleop with DROID-style anchor-and-delta and a layered safety stack, plus the recorder that writes a dual RGB-D and robot-state dataset for imitation learning on a load-shedding CPU-pinned writer thread. (3) A multi-sensor capture tool (two MANUS gloves, three RealSense cameras) on one hardware clock with a frame-uniqueness watchdog. This is company work, no public repo.
 
 ### Hexapod, robotics (A.T.O.M. team project)
@@ -243,7 +243,7 @@ Concrete moments where he caught and surfaced a problem in his own work rather t
 
 Things he has not done yet. Surfacing these proactively because pretending they do not exist is worse than acknowledging them.
 
-- **No big-tech employment yet.** Three startup internships, none at FAANG or equivalent. The work signal is in the projects and the current nFerent role. The brand-name signal is not.
+- **No big-tech employment yet.** Three startup internships, none at FAANG or equivalent. The work signal is in the projects and the current Nferent AI role. The brand-name signal is not.
 - **MAIT is a Tier-3 college** in the Indian engineering hierarchy. He is aware credential bias exists.
 - **No published paper.** Reading and implementing is where the time has gone, not submitting to ICRA, NeurIPS, or EMNLP.
 - **No accepted OSS pull request landed yet** in major repos (LeRobot, IsaacLab, vLLM, LangChain), though the work he does is the kind that would merge there with a polish pass.
@@ -264,7 +264,7 @@ He does not claim things he has not done. Asking him a direct question about a t
 
 ## FAQ, likely recruiter questions and how to think about them
 
-- **"What's his strongest project?"** Depends on the role. For Physical AI and Robotics, the current nFerent VR teleop work: real-time C++ on Elite CS66 arms and a Franka Research 3, plus the robot-learning data pipeline (the recorder and the MANUS-plus-RealSense capture tool). For foundation models and LLMs, the three continued-pretraining setups on a self-scraped Reddit corpus, including a hand-written distributed training loop. For evaluation rigor and RAG, the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal, the Primetrade failed-prediction post-mortem.
+- **"What's his strongest project?"** Depends on the role. For Physical AI and Robotics, the current Nferent AI VR teleop work: real-time C++ on Elite CS66 arms and a Franka Research 3, plus the robot-learning data pipeline (the recorder and the MANUS-plus-RealSense capture tool). For foundation models and LLMs, the three continued-pretraining setups on a self-scraped Reddit corpus, including a hand-written distributed training loop. For evaluation rigor and RAG, the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal, the Primetrade failed-prediction post-mortem.
 - **"What's he NOT good at yet?"** He has not shipped at FAANG scale, has not published a paper, and does not have a major OSS PR landed. His GPU access is cloud-only, and his CPT runs are proof-of-concept, stopped early.
 - **"How much does he want?"** Specific compensation expectations are not listed here. Reach him directly at mitanshug2004@gmail.com.
 - **"Can he start now?"** Yes.

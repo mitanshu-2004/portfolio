@@ -435,6 +435,55 @@ section {
   opacity: 0.7;
 }
 
+/* ── Experience: embedded demo video ── */
+.exp-media {
+  margin: 1.1rem 0 0.35rem;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.exp-media figcaption {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-top: 0.7rem;
+  text-align: center;
+}
+
+.exp-media figcaption a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.exp-media figcaption a:hover {
+  opacity: 0.7;
+}
+
 /* Education coursework tags — Task 3 */
 .edu-tags {
   font-family: var(--font-mono), monospace;

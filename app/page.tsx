@@ -31,7 +31,7 @@ export default function Home() {
         Mitanshu Goel is a robotics and Physical AI engineer based in Delhi,
         India. ECE graduate from MAIT (2026) with an AI/ML minor. Currently
         building a bimanual VR teleoperation rig and robot-learning data pipeline
-        at nFerent.ai. A Meta Quest 3 drives an Elite Robots CS66 pair and a
+        at Nferent AI. A Meta Quest 3 drives an Elite Robots CS66 pair and a
         Franka Research 3 over a real-time C++ control loop, and a multi-sensor
         capture tool records MANUS gloves and RealSense cameras as
         imitation-learning data. He has run three continued-pretraining

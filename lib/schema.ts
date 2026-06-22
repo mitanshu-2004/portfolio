@@ -13,7 +13,7 @@ export const personSchema = {
     image: 'https://mitanshu.me/og-image.png',
     jobTitle: 'Robotics & Physical AI Engineer',
     description:
-        'Robotics and Physical AI engineer. Building a bimanual VR teleoperation rig and a robot-learning data pipeline on industrial arms at nFerent.ai, plus continued-pretraining runs on a self-scraped Reddit corpus. ECE graduate from MAIT Delhi (2026).',
+        'Robotics and Physical AI engineer. Building a bimanual VR teleoperation rig and a robot-learning data pipeline on industrial arms at Nferent AI, plus continued-pretraining runs on a self-scraped Reddit corpus. ECE graduate from MAIT Delhi (2026).',
     knowsAbout: [
         'Robot Operating System (ROS 2)',
         'Real-time C++ control loops',
@@ -52,7 +52,7 @@ export const personSchema = {
     },
     worksFor: {
         '@type': 'Organization',
-        name: 'nFerent.ai',
+        name: 'Nferent AI',
     },
     sameAs: [
         'https://github.com/mitanshu-2004',
@@ -79,7 +79,7 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#nferent-teleop',
                 name: 'Bimanual VR Teleoperation',
                 description:
-                    'A real-time C++ teleoperation stack at nFerent.ai. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap safety guards. Records a dual RGB-D and robot-state imitation-learning dataset. Company work, no public repo.',
+                    'A real-time C++ teleoperation stack at Nferent AI. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap safety guards. Records a dual RGB-D and robot-state imitation-learning dataset. Company work, no public repo.',
                 applicationCategory: 'Robotics / Physical AI',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['C++', 'Python'],
@@ -156,7 +156,7 @@ export const faqSchema = {
             name: 'Who is Mitanshu Goel?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig and robot-learning data pipeline at nFerent.ai, and has run three continued-pretraining setups on a self-scraped Reddit corpus: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a from-scratch nanoGPT.',
+                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig and robot-learning data pipeline at Nferent AI, and has run three continued-pretraining setups on a self-scraped Reddit corpus: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a from-scratch nanoGPT.',
             },
         },
         {
@@ -164,7 +164,7 @@ export const faqSchema = {
             name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at nFerent.ai: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, with a multi-sensor capture tool feeding an imitation-learning dataset. Then the gait and inverse-kinematics control node and ros2_control integration on the A.T.O.M. Robotics Hexapod (a team project). For foundation models and LLMs, three continued-pretraining setups on a self-scraped Reddit corpus (Mistral 7B LoRA, Qwen 2.5 QLoRA via a hand-written distributed loop, and a from-scratch nanoGPT), artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
+                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at Nferent AI: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, with a multi-sensor capture tool feeding an imitation-learning dataset. Then the gait and inverse-kinematics control node and ros2_control integration on the A.T.O.M. Robotics Hexapod (a team project). For foundation models and LLMs, three continued-pretraining setups on a self-scraped Reddit corpus (Mistral 7B LoRA, Qwen 2.5 QLoRA via a hand-written distributed loop, and a from-scratch nanoGPT), artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {
@@ -200,7 +200,7 @@ export const workExperienceSchema = {
                 startDate: '2026-03',
                 worksFor: {
                     '@type': 'Organization',
-                    name: 'nFerent.ai',
+                    name: 'Nferent AI',
                     address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
                 },
                 description: 'Built a bimanual VR teleoperation stack. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall) with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. Diagnosed and patched a real-hardware URScript crash, and built a multi-sensor capture tool (MANUS gloves and RealSense cameras) feeding an imitation-learning dataset.',

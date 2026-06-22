@@ -18,8 +18,8 @@ export default function Experience() {
             <span className="exp-role">Robotics SWE &amp; Physical AI Intern</span>
             <span className="exp-period">Mar 2026 – Present</span>
           </div>
-          <div className="exp-org">nFerent.ai · Gurugram, On-site</div>
-          <ul className="exp-bullets" aria-label="Responsibilities at nFerent.ai">
+          <div className="exp-org">Nferent AI · Gurugram, On-site</div>
+          <ul className="exp-bullets" aria-label="Responsibilities at Nferent AI">
             <li>
               <strong>Dual-arm VR teleoperation.</strong> Built the stack from
               scratch. A Meta Quest 3 controller streams pose over UDP to a
@@ -28,6 +28,28 @@ export default function Experience() {
               SE(3) command smoothing, and singularity and step-cap safety
               guards. An anchor-and-clutch model lets the operator release and
               re-grip without the arm jumping.
+              <figure className="exp-media">
+                <div className="video-frame">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/kUlfE-U_5m4"
+                    title="Dual-arm VR teleoperation demo — Nferent AI"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <figcaption>
+                  That&rsquo;s me teleoperating the dual-arm rig I built at
+                  Nferent AI.{' '}
+                  <a
+                    href="https://www.youtube.com/watch?v=kUlfE-U_5m4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Watch on YouTube ↗
+                  </a>
+                </figcaption>
+              </figure>
             </li>
             <li>
               <strong>Franka teleop and imitation-learning data.</strong>{' '}

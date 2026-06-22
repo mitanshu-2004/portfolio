@@ -16,7 +16,7 @@ const GREETING: Message = {
 const STARTER_CHIPS = [
   "What's his strongest robotics project?",
   "What robot-learning data work has he done?",
-  "How does the nFerent teleoperation work?",
+  "How does the Nferent AI teleoperation work?",
 ]
 
 export default function Chat() {

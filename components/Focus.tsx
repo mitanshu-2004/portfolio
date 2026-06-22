@@ -10,7 +10,7 @@ export default function Focus() {
         <ScrollFade>
           <p>
             Most of what I do sits where hardware meets learned models. Right
-            now that means a bimanual VR teleoperation rig at nFerent.ai. A Meta
+            now that means a bimanual VR teleoperation rig at Nferent AI. A Meta
             Quest 3 drives a pair of Elite Robots CS66 arms through a real-time
             C++ control loop, and the same loop extends to a Franka Research 3 so
             it covers both arm families. The rig is also how the data gets made.

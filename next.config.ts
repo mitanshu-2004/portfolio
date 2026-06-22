@@ -34,6 +34,8 @@ const nextConfig: NextConfig = {
               "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com",
               "img-src 'self' data: https:",
               "connect-src 'self' https://api.groq.com https://*.sentry.io",
+              // Allow embedding the Nferent AI demo video (privacy-enhanced YouTube)
+              "frame-src https://www.youtube-nocookie.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
