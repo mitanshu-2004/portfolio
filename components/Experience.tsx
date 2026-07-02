@@ -30,12 +30,12 @@ export default function Experience() {
               re-grip without the arm jumping.
               <figure className="exp-media">
                 <div className="video-frame">
-                  <iframe
-                    src="https://www.youtube-nocookie.com/embed/kUlfE-U_5m4"
-                    title="Dual-arm VR teleoperation demo — Nferent AI"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                  <video
+                    src="/dualarm-teleop-demo.mp4"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label="Dual-arm VR teleoperation demo — Nferent AI"
                   />
                 </div>
                 <figcaption>
