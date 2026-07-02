@@ -1,70 +1,136 @@
 # Mitanshu Goel
 
-AI and robotics systems engineer based in Delhi, India. Specializes in
-edge-deployed inference pipelines, robot perception systems, and embedded AI
-at the intersection of physical hardware and learned models.
+Robotics and Physical AI engineer based in Delhi, India. Builds real-time
+robot control, robot-learning data pipelines, and LLM and ML systems. His
+projects report held-out evaluations, and several document a bug or inflated
+metric he caught in his own work.
 
 ## Core Profile
 
 - Full name: Mitanshu Goel
-- Role: AI & Robotics Engineer (open to research engineering and ML engineering roles)
-- Location: Delhi, India
+- Role: Robotics and Physical AI engineer (also open to ML engineering and
+  research engineering roles)
+- Location: Delhi, India. Open to roles anywhere in India and India-friendly remote.
 - Email: mitanshug2004@gmail.com
 - GitHub: https://github.com/mitanshu-2004
 - LinkedIn: https://linkedin.com/in/mitanshugoel
-- Education: B.Tech Electronics & Communication Engineering, Minor in AI/ML —
-  Maharaja Agrasen Institute of Technology, Delhi (2022–2026)
-
-## Technical Expertise
-
-- Robotics: ROS, ROS2, MoveIt, Gazebo, URDF, ROS2 Control, inverse kinematics
-- Computer Vision: YOLOv8, OpenCV, real-time object detection and tracking
-- Edge AI: llama.cpp, ONNX, 4-bit quantization, CPU-only inference
-- Generative AI: PyTorch, SDXL, LoRA, diffusion model latent space manipulation
-- Embedded Systems: ESP32, Raspberry Pi, ESP-NOW, Arduino, C++ firmware
-- ML: scikit-learn, XGBoost, time-series forecasting, RAG pipelines, ChromaDB
-- Infrastructure: Docker, FastAPI, Linux, Git
-
-## Key Projects
-
-### Darwin Studio
-Evolutionary image generation engine. Treats SDXL latent tensors as genetic material
-for mutation and crossover. Custom SLERP implementation for geometrically consistent
-latent interpolation. 1024px generation in <4s on T4 GPU (16GB VRAM).
-URL: https://mitanshu.me/#darwin-studio
-
-### HEXAPOD
-Multi-legged locomotion system. ROS2 control stack deployed on Raspberry Pi via Docker.
-Geometric inverse kinematics for deterministic real-time execution. Simulation-verified
-gaits transfer to hardware without modification.
-URL: https://mitanshu.me/#hexapod
-
-### Memory Assistant — Local RAG Pipeline
-Privacy-first retrieval-augmented generation. Phi-3 (4-bit quantized) via llama.cpp
-on CPU-only hardware. Hybrid dense-vector (ChromaDB) + keyword retrieval with
-weighted scoring. Zero external API dependency.
-URL: https://mitanshu.me/#memory-assistant
-
-### SENTINEL
-Offline mesh emergency communication. ESP-NOW protocol across ESP32 nodes.
-Embedded fall detection (MPU6050 IMU) and gas hazard sensing. No internet
-dependency at any layer.
-URL: https://mitanshu.me/#sentinel
+- Hugging Face: https://huggingface.co/mitanshugoel
+- Education: B.Tech Electronics and Communication Engineering, minor in AI/ML,
+  Maharaja Agrasen Institute of Technology (MAIT), Delhi, 2022 to 2026. CGPA 8.01/10.
 
 ## Professional Experience
 
-### SarthakAI — AI & Robotics Intern (Jun–Aug 2025)
-- Real-time voice pipeline: NVIDIA NeMo STT with custom wake-word detection
-- YOLOv8 deployment for human tracking, package classification, gesture control
-- Polling-based fault-tolerant robot-AI interface architecture
-- ESP32/Raspberry Pi hardware telemetry workstation
+### Nferent AI, Robotics SWE and Physical AI Intern (Mar to Jun 2026, Gurugram)
+- Built a bimanual VR teleoperation stack: a Meta Quest 3 drives two Elite
+  Robots CS66 arms through a per-arm real-time C++ control loop, with an
+  anchor-and-clutch model so the operator can re-grip without the arm jumping.
+  Demo video: https://www.youtube.com/watch?v=kUlfE-U_5m4
+- Extended the teleoperation to a Franka Research 3 behind a layered safety
+  stack, and recorded a 10-task, 51-episode imitation-learning dataset
+  (about 2.1 hours of dual RGB-D video with synchronized robot state,
+  exported to LeRobot format).
+- Wrote control software for a Tesollo DG-5F five-finger dexterous hand
+  (20 motors over Modbus-TCP) that plays Rock-Paper-Scissors using a
+  RealSense camera and a MediaPipe gesture classifier.
+- Built a multi-sensor capture tool that records two MANUS gloves and three
+  RealSense cameras on one hardware clock (measured sync error under 15 ms
+  at p95), with a frame-uniqueness watchdog that rejects episodes containing
+  silently repeated camera frames.
+- Demo videos of all this work: https://mitanshu.me/gallery
 
-### Nextup Robotics — Robotics Intern (Jul–Sep 2024)
-- 6-DOF robotic arm configuration in ROS/Gazebo
-- MoveIt inverse kinematics and collision-aware trajectory planning (C++)
-- 50% reduction in execution time via shortest-path algorithm selection
+### SarthakAI, AI Intern (Jun to Aug 2025, Delhi)
+- Turned a UBTech Yanshee humanoid into a voice and vision assistant: a
+  custom-trained YOLOv8 package detector over the robot's camera stream and
+  a NeMo ASR wake-word and command pipeline. Demo video at
+  https://mitanshu.me/sarthakai
+- Built a sensor-network workstation and a vision-driven sorting line on a
+  robotic arm and conveyor.
+
+### Nextup Robotics, Robotics Intern (Jul to Sep 2024, Ghaziabad)
+- MoveIt motion planning for a 6-DOF arm, validated in simulation then on
+  hardware. Resolved sim-to-real URDF kinematic mismatches.
+
+### A.T.O.M. Robotics, Core Member (Oct 2023 to present, MAIT Delhi)
+- Team hexapod (18-DoF, ROS 2): the tripod-gait and analytic
+  inverse-kinematics node, the ros2_control hardware interface, and launch
+  wiring. https://github.com/atom-robotics-lab/Hexapod
+- A web-controlled robotic arm over rosbridge with a live camera feed.
+
+## Key Projects
+
+### Reddit LLM Training
+Three language models on a self-scraped Reddit corpus: a 51M-parameter GPT
+trained from scratch, a LoRA adapter on Mistral 7B, and a QLoRA adapter on
+Qwen 2.5 through a hand-written distributed training loop with token-offset
+sharding and resume-by-token-count across free cloud sessions. Held-out
+perplexity eval: the from-scratch model reaches 16.85 against 24.68 for
+GPT-2; the half-trained Mistral adapter is slightly worse than its base and
+is reported that way.
+Repo: https://github.com/mitanshu-2004/reddit-llm-training
+Models: https://huggingface.co/mitanshugoel
+
+### RAG Assistant
+Grounded policy Q&A where hallucinations fail at parse time: a Pydantic
+model-validator rejects any "fully answered" response with empty citations.
+0 hallucinations on a 9-question held-out rubric.
+Repo: https://github.com/mitanshu-2004/RAG-assistant
+
+### MiniRag-Reranker
+Hybrid retrieval (dense plus BM25 plus a learned reranker) over industrial
+safety PDFs. He caught that the original eval reused training questions,
+rebuilt it around a disjoint held-out set, and reported that the learned
+reranker does not clearly beat the hybrid baseline.
+Repo: https://github.com/mitanshu-2004/MiniRag-Reranker
+
+### Memory Assistant
+Local-first personal memory store: a 4-bit Phi-3 generates metadata at
+ingest, hybrid dense and keyword search, and a retrieval-backed ask endpoint.
+Live demo: https://memory-assistant-psi.vercel.app
+Repo: https://github.com/mitanshu-2004/memory-assistant
+
+### Darwin Studio
+Image generation treated like evolution: SDXL latents as genetic material
+with a custom moment-preserving SLERP crossover and a hand-written diffusion
+loop. Repo: https://github.com/mitanshu-2004/Darwin-Studio
+
+### Churn Survival Model
+Cox proportional-hazards churn study on about 10,000 Steam reviews with
+LLM-extracted risk signals. The contribution is a leakage decomposition that
+cut a headline +0.26 C-index lift to a defensible +0.14, guarded by a
+contract test. Repo: https://github.com/mitanshu-2004/llm-survival-churn
+
+### Store Performance Dashboard
+Retail forecasting over 163 stores judged against a persistence baseline on
+a temporal holdout: RMSE 0.158 versus 0.160, reported at exactly that margin.
+Repo: https://github.com/mitanshu-2004/Store-Performance-Dashboard
+
+### Primetrade Analysis
+A trading-signal study whose headline is an honest post-mortem: the next-day
+classifier landed at the base rate and the project was stopped rather than
+tuned. Repo: https://github.com/mitanshu-2004/Primetrade-Analysis
+
+### StockMetrics
+Fundamentals-versus-returns study across the big 5 Indian IT firms with FDR
+correction, leave-one-out CV, and permutation tests. The finding is an honest
+null, made credible by a positive control (inter-firm co-movement r 0.84 to
+0.94). Repo: https://github.com/mitanshu-2004/StockMetrics
+
+## Technical Stack
+
+- Robotics: ROS 2 Humble, ros2_control, MoveIt, RViz, Gazebo, real-time C++
+  control loops, Cartesian servoing, inverse kinematics, SE(3) transforms,
+  VR teleoperation (Quest 3, OpenVR), RealSense RGB-D, multi-camera sync,
+  LeRobot datasets, Elite Robots CS SDK, Franka libfranka
+- AI and ML: PyTorch, Unsloth, TRL, PEFT, LoRA and rsLoRA, accelerate DDP,
+  Hugging Face Hub, YOLOv8, NVIDIA NeMo, SDXL and Diffusers, llama.cpp,
+  Sentence-Transformers, ChromaDB
+- Data science: lifelines (Cox PH), scikit-learn, XGBoost, statsmodels,
+  NDCG, MRR, Recall@k
+- Backend and web: FastAPI, SQLite FTS5, BM25, Next.js, React, TypeScript
+- Languages: Python, C++, TypeScript, JavaScript, SQL, Bash
 
 ## Contact
 
-Email: mitanshug2004@gmail.com (response within 24 hours)
-Open to: Research engineering, ML engineering, robotics software — full-time or internship
+Email: mitanshug2004@gmail.com
+Available for full-time roles now. Physical AI, Robotics SWE, ML
+Engineering, or Research Engineering.

@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         destination: '/#nferent',
         permanent: false,
       },
+      {
+        source: '/gallery',
+        destination: '/#gallery',
+        permanent: false,
+      },
     ]
   },
 

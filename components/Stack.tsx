@@ -16,7 +16,7 @@ export default function Stack() {
                 <br />
                 Real-time C++ control loops, Cartesian servoing, inverse kinematics, SE(3) transforms.
                 <br />
-                VR teleoperation (Quest 3, OpenVR), RealSense RGB-D, multi-camera sync, Elite CS SDK, Franka libfranka.
+                VR teleoperation (Quest 3, OpenVR), RealSense RGB-D, multi-camera sync, LeRobot datasets, Elite CS SDK, Franka libfranka.
               </p>
             </div>
 

@@ -2,105 +2,9 @@
 
 import { useState } from 'react'
 import ScrollFade from './ScrollFade'
+import { GROUPS, type Project } from '@/lib/projects'
 
-type Domain = 'ai' | 'ds'
-
-interface Project {
-  id: string
-  domain: Domain
-  title: string
-  hook: string
-  problem: string
-  stack: string
-  links: { github?: string; demo?: string }
-}
-
-const GROUPS: { domain: Domain; label: string; projects: Project[] }[] = [
-  {
-    domain: 'ai',
-    label: 'AI & ML',
-    projects: [
-      {
-        id: 'cpt',
-        domain: 'ai',
-        title: 'Continued Pretraining on Reddit',
-        hook: 'A self-scraped corpus trained three ways: LoRA, QLoRA, and a from-scratch GPT.',
-        problem:
-          'Continued pretraining on a Reddit corpus I scraped and cleaned myself, across three setups: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a small GPT trained from scratch. The Qwen run goes through a distributed training loop I wrote by hand, with token-offset sharding across two GPUs and checkpointing that resumes from the exact token count after a dropped cloud session. These are proof-of-concept runs, stopped early, with no eval yet. The point was the data and training infrastructure, learned from the ground up.',
-        stack: 'PyTorch, Unsloth, PEFT, QLoRA, accelerate (DDP), Hugging Face Hub',
-        links: {},
-      },
-      {
-        id: 'minirag',
-        domain: 'ai',
-        title: 'MiniRag-Reranker',
-        hook: 'Hybrid retrieval where the real result was catching my own eval leak.',
-        problem:
-          'Hybrid retrieval over 20 industrial-safety PDFs: dense vectors plus BM25, a logistic-regression reranker, and a cross-encoder reference, on FastAPI. The real story is the evaluation. I caught that the original test set reused the training questions, so the headline number was the reranker grading its own homework. I rebuilt the eval around a disjoint held-out set with NDCG, MRR, and Recall@k, and once it was measured honestly the learned reranker did not clearly beat the plain hybrid baseline. The corrected eval is the result, not a leaderboard win.',
-        stack: 'FastAPI, ChromaDB, BM25, Sentence-Transformers, scikit-learn',
-        links: { github: 'https://github.com/mitanshu-2004/MiniRag-Reranker' },
-      },
-      {
-        id: 'rag-assistant',
-        domain: 'ai',
-        title: 'RAG Assistant',
-        hook: 'Hallucinations fail at parse time. 0 on a 9-question held-out rubric.',
-        problem:
-          'A RAG system where hallucinations are structurally hard. If the model says it fully answered something but cites nothing to back it up, a Pydantic model-validator rejects the response at parse time, before it reaches the user. A retry loop feeds the parse failure back to the model. On a 9-question held-out rubric it returned 0 hallucinations, with 8 of 9 answerability calls correct.',
-        stack: 'Llama 3.3 70B, Groq, ChromaDB, Pydantic, FastAPI',
-        links: { github: 'https://github.com/mitanshu-2004/RAG-assistant' },
-      },
-      {
-        id: 'darwin',
-        domain: 'ai',
-        title: 'Darwin Studio',
-        hook: 'Image generation treated like evolution, breeding SDXL latents.',
-        problem:
-          'Image generation treated like evolution. SDXL latent tensors are the genetic material: mutate them, cross two together, iterate across generations. A custom moment-preserving SLERP does the interpolation and restores the parent mean and variance, so a child latent stays on the noise manifold instead of decoding to grey mush. The diffusion loop is hand-written so bred latents can be fed straight in as initial noise.',
-        stack: 'PyTorch, SDXL Lightning, Diffusers, custom SLERP',
-        links: { github: 'https://github.com/mitanshu-2004/Darwin-Studio' },
-      },
-    ],
-  },
-  {
-    domain: 'ds',
-    label: 'Data Science',
-    projects: [
-      {
-        id: 'churn',
-        domain: 'ds',
-        title: 'Churn Survival Model',
-        hook: 'A Cox survival model. I cut my own headline number to the honest one.',
-        problem:
-          'A Cox proportional-hazards model for churn on about 10,000 Steam reviews, with risk signals pulled from the review text by an LLM. It reached a 0.874 hold-out C-index, but most of that lift came from features that quietly re-encode the outcome. So I decomposed it: separated the leaky polarity features from the forward-looking behaviour, kept the roughly +0.14 that actually predicts ahead of time, and added a contract test to block the leaky features from creeping back in. The smaller honest number is the one I report.',
-        stack: 'Cox PH (lifelines), Groq Llama 4 Scout, scikit-learn, instructor',
-        links: { github: 'https://github.com/mitanshu-2004/llm-survival-churn' },
-      },
-      {
-        id: 'primetrade',
-        domain: 'ds',
-        title: 'Primetrade Analysis',
-        hook: 'A trading-signal study I stopped after an honest post-mortem.',
-        problem:
-          'A trader-behaviour study on 211k trades against the Bitcoin Fear and Greed index, with KMeans segmentation into trader archetypes. The honest centre of the repo is the post-mortem. A next-day classifier landed right at the base rate and caught only 2 of 44 actual loss days, and a follow-on volatility regressor came back worse than predicting the mean. I wrote up why it failed and stopped, instead of tuning a dead signal.',
-        stack: 'pandas, scikit-learn, KMeans, XGBoost, matplotlib',
-        links: { github: 'https://github.com/mitanshu-2004/Primetrade-Analysis' },
-      },
-      {
-        id: 'stock-influence',
-        domain: 'ds',
-        title: 'Stock-Influence',
-        hook: 'A deployed correlation explorer for time series and stock price.',
-        problem:
-          'A deployed full-stack tool for exploring how any uploaded time series tracks a stock price. FastAPI backend, React and Chart.js front end, with Pearson, Spearman, and Kendall correlations and synchronised heatmap and time-series views. The correlation math is all in the code and checkable. It is a correlation explorer, so it reports associations, not proof of cause.',
-        stack: 'FastAPI, React, pandas, SciPy, yfinance, Chart.js',
-        links: { github: 'https://github.com/mitanshu-2004/Stock-Influence', demo: 'https://stock-influence.vercel.app' },
-      },
-    ],
-  },
-]
-
-// Continuous index across all groups (01..08), computed once.
+// Continuous index across all groups (01..N), computed once.
 const PROJECT_INDEX: Record<string, number> = {}
 GROUPS.flatMap((g) => g.projects).forEach((p, i) => {
   PROJECT_INDEX[p.id] = i + 1
@@ -117,7 +21,6 @@ function ProjectRow({
 }) {
   const panelId = `proj-panel-${p.id}`
   const headId = `proj-head-${p.id}`
-  const hasLinks = Boolean(p.links.github || p.links.demo)
 
   return (
     <div className={`proj-row${open ? ' is-open' : ''}`}>
@@ -148,18 +51,18 @@ function ProjectRow({
           <div className="proj-panel-pad">
             <p className="proj-problem">{p.problem}</p>
             <div className="proj-stack">{p.stack}</div>
-            {hasLinks && (
+            {p.links.length > 0 && (
               <div className="proj-links">
-                {p.links.github && (
-                  <a href={p.links.github} target="_blank" rel="noopener noreferrer">
-                    GitHub ↗
+                {p.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label} ↗
                   </a>
-                )}
-                {p.links.demo && (
-                  <a href={p.links.demo} target="_blank" rel="noopener noreferrer">
-                    Demo ↗
-                  </a>
-                )}
+                ))}
               </div>
             )}
           </div>

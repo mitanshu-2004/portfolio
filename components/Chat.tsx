@@ -15,6 +15,7 @@ const GREETING: Message = {
 
 const STARTER_CHIPS = [
   "What's his strongest robotics project?",
+  "Where can I watch his robot demos?",
   "What robot-learning data work has he done?",
   "How does the Nferent AI teleoperation work?",
 ]

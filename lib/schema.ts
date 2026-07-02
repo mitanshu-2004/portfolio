@@ -10,10 +10,10 @@ export const personSchema = {
     familyName: 'Goel',
     email: 'mailto:mitanshug2004@gmail.com',
     url: 'https://mitanshu.me',
-    image: 'https://mitanshu.me/og-image.png',
+    image: 'https://mitanshu.me/opengraph-image',
     jobTitle: 'Robotics & Physical AI Engineer',
     description:
-        'Robotics and Physical AI engineer. Building a bimanual VR teleoperation rig and a robot-learning data pipeline on industrial arms at Nferent AI, plus continued-pretraining runs on a self-scraped Reddit corpus. ECE graduate from MAIT Delhi (2026).',
+        'Robotics and Physical AI engineer. Built a bimanual VR teleoperation rig and a robot-learning data pipeline on industrial arms at Nferent AI, and trains LLMs on a self-scraped Reddit corpus. ECE graduate from MAIT Delhi (2026).',
     knowsAbout: [
         'Robot Operating System (ROS 2)',
         'Real-time C++ control loops',
@@ -50,13 +50,10 @@ export const personSchema = {
             name: 'Maharaja Agrasen Institute of Technology',
         },
     },
-    worksFor: {
-        '@type': 'Organization',
-        name: 'Nferent AI',
-    },
     sameAs: [
         'https://github.com/mitanshu-2004',
         'https://linkedin.com/in/mitanshugoel',
+        'https://huggingface.co/mitanshugoel',
     ],
     address: {
         '@type': 'PostalAddress',
@@ -79,7 +76,7 @@ export const projectListSchema = {
                 '@id': 'https://mitanshu.me/#nferent-teleop',
                 name: 'Bimanual VR Teleoperation',
                 description:
-                    'A real-time C++ teleoperation stack at Nferent AI. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap safety guards. Records a dual RGB-D and robot-state imitation-learning dataset. Company work, no public repo.',
+                    'A real-time C++ teleoperation stack built at Nferent AI (Mar to Jun 2026). A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap safety guards. Recorded a 10-task, 51-episode imitation-learning dataset exported to LeRobot format. Also drove a Tesollo DG-5F dexterous hand playing Rock-Paper-Scissors via RealSense and MediaPipe. Company work, no public repo; demo videos at https://mitanshu.me/nferent and https://www.youtube.com/watch?v=kUlfE-U_5m4.',
                 applicationCategory: 'Robotics / Physical AI',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['C++', 'Python'],
@@ -90,13 +87,14 @@ export const projectListSchema = {
             position: 2,
             item: {
                 '@type': 'SoftwareApplication',
-                '@id': 'https://mitanshu.me/#reddit-cpt',
-                name: 'Continued pretraining on a Reddit corpus',
+                '@id': 'https://mitanshu.me/#reddit-llm-training',
+                name: 'Reddit LLM Training',
                 description:
-                    'Continued pretraining on a self-scraped Reddit corpus across three setups: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5 through a hand-written accelerate DDP loop with token-offset sharding and resume-by-token-count, and a from-scratch nanoGPT (~50 M params). Proof-of-concept runs, stopped early, no eval yet. Artefacts kept private.',
-                applicationCategory: 'AI / Foundation Model Training',
+                    'Three language models trained on a self-scraped Reddit corpus: a from-scratch nanoGPT (~51M params), a LoRA adapter on Mistral 7B, and a QLoRA adapter on Qwen 2.5 through a hand-written accelerate DDP loop with token-offset sharding and resume-by-token-count. Held-out perplexity eval: the from-scratch model reaches 16.85 against 24.68 for GPT-2; the half-trained Mistral adapter is slightly worse than its base and reported that way. Runs stopped early by free-tier GPU limits.',
+                applicationCategory: 'AI / LLM Training',
                 creator: { '@id': 'https://mitanshu.me/#person' },
                 programmingLanguage: ['Python', 'PyTorch'],
+                codeRepository: 'https://github.com/mitanshu-2004/reddit-llm-training',
             },
         },
         {
@@ -156,7 +154,7 @@ export const faqSchema = {
             name: 'Who is Mitanshu Goel?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. He is currently building a bimanual VR teleoperation rig and robot-learning data pipeline at Nferent AI, and has run three continued-pretraining setups on a self-scraped Reddit corpus: a LoRA adapter on Mistral 7B, a QLoRA adapter on Qwen 2.5, and a from-scratch nanoGPT.',
+                text: 'Mitanshu Goel is a robotics and Physical AI engineer based in Delhi, India. He completed a B.Tech in Electronics & Communication Engineering with a minor in AI/ML at MAIT in 2026. At Nferent AI (Mar to Jun 2026) he built a bimanual VR teleoperation rig and robot-learning data pipeline on Elite CS66 and Franka Research 3 arms, and he has trained three language models on a self-scraped Reddit corpus: a from-scratch nanoGPT, a LoRA adapter on Mistral 7B, and a QLoRA adapter on Qwen 2.5.',
             },
         },
         {
@@ -164,7 +162,7 @@ export const faqSchema = {
             name: "What are Mitanshu Goel's strongest projects?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'For Physical AI and Robotics, the current bimanual VR teleoperation rig at Nferent AI: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, with a multi-sensor capture tool feeding an imitation-learning dataset. Then the gait and inverse-kinematics control node and ros2_control integration on the A.T.O.M. Robotics Hexapod (a team project). For foundation models and LLMs, three continued-pretraining setups on a self-scraped Reddit corpus (Mistral 7B LoRA, Qwen 2.5 QLoRA via a hand-written distributed loop, and a from-scratch nanoGPT), artefacts kept private. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
+                text: 'For Physical AI and Robotics, the bimanual VR teleoperation rig he built at Nferent AI: real-time C++ on Elite Robots CS66 and Franka Research 3 arms, a 51-episode imitation-learning dataset exported to LeRobot format, a multi-sensor capture tool, and a Tesollo dexterous hand playing Rock-Paper-Scissors. Demo videos are embedded on mitanshu.me. For LLM work, the Reddit LLM Training repo (github.com/mitanshu-2004/reddit-llm-training): a from-scratch GPT that beats GPT-2 on held-out Reddit text, plus adapter runs through a hand-written distributed loop. For RAG, the RAG-assistant with Pydantic structural anti-hallucination guards.',
             },
         },
         {
@@ -198,12 +196,13 @@ export const workExperienceSchema = {
                 '@type': 'OrganizationRole',
                 roleName: 'Robotics SWE & Physical AI Intern',
                 startDate: '2026-03',
+                endDate: '2026-06',
                 worksFor: {
                     '@type': 'Organization',
                     name: 'Nferent AI',
                     address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
                 },
-                description: 'Built a bimanual VR teleoperation stack. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall) with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. Diagnosed and patched a real-hardware URScript crash, and built a multi-sensor capture tool (MANUS gloves and RealSense cameras) feeding an imitation-learning dataset.',
+                description: 'Built a bimanual VR teleoperation stack. A Meta Quest 3 drives two Elite Robots CS66 arms by Cartesian servoing, extended to a Franka Research 3, on a real-time Linux scheduler (SCHED_FIFO, CPU pinning, mlockall) with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. Recorded a 10-task, 51-episode imitation-learning dataset exported to LeRobot format. Wrote control software for a Tesollo DG-5F dexterous hand playing Rock-Paper-Scissors. Diagnosed and patched a real-hardware URScript crash, and built a multi-sensor capture tool (MANUS gloves and RealSense cameras) synchronized on one hardware clock.',
             },
         },
         {

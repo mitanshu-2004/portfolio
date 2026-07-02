@@ -35,7 +35,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -221,27 +221,14 @@ section {
   transform: translateY(0);
 }
 
-/* ── Hero ── */
+/* ── Hero: compact typed-memo header, content on the first screen ── */
 #hero {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
   border-top: none;
   opacity: 1;
   transform: none;
-  padding-top: 52px;
-  padding-bottom: 0;
-}
-
-@media (max-height: 500px) and (orientation: landscape) {
-  #hero {
-    min-height: auto;
-    padding-top: 64px;
-    padding-bottom: 2.5rem;
-    align-items: flex-start;
-  }
+  padding-top: calc(52px + clamp(3rem, 8vh, 5.5rem));
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
 }
 
 .hero-content {
@@ -306,12 +293,23 @@ section {
 
 .hero-descriptor {
   font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.05rem;
-  color: var(--mid);
-  max-width: 520px;
+  color: var(--ink);
+  max-width: 560px;
   line-height: 1.7;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.4rem;
+}
+
+/* Typed-memo intro paragraph: small about-me, full column width */
+.hero-intro {
+  font-family: var(--font-mono), monospace;
+  font-weight: 400;
+  font-size: 0.84rem;
+  color: var(--mid);
+  text-align: left;
+  line-height: 1.85;
+  margin-bottom: 1.9rem;
 }
 
 .hero-links {
@@ -339,20 +337,6 @@ section {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
-}
-
-/* ── Focus ── */
-
-#focus p {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: var(--ink);
-}
-
-#focus p+p {
-  margin-top: 1.25rem;
 }
 
 /* ── Experience ── */
@@ -400,7 +384,7 @@ section {
 
 .exp-bullets li {
   font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 0.95rem;
   line-height: 1.75;
   color: var(--ink);
@@ -437,7 +421,8 @@ section {
 
 /* ── Experience: embedded demo video ── */
 .exp-media {
-  margin: 1.1rem 0 0.35rem;
+  /* cancel the bullet's dash indent so media centers on the column axis */
+  margin: 1.1rem 0 0.35rem -1.25rem;
 }
 
 .video-frame {
@@ -458,6 +443,11 @@ section {
   aspect-ratio: 9 / 16;
 }
 
+.video-frame video::cue {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
 .video-frame iframe,
 .video-frame video {
   position: absolute;
@@ -469,11 +459,11 @@ section {
 }
 
 .exp-media figcaption {
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-mono), monospace;
   font-weight: 400;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--ink);
+  font-size: 0.76rem;
+  line-height: 1.7;
+  color: var(--mid);
   margin-top: 0.7rem;
   text-align: center;
 }
@@ -488,6 +478,95 @@ section {
 }
 
 .exp-media figcaption a:hover {
+  opacity: 0.7;
+}
+
+/* ── Demos: the reel ── */
+.demos-lead {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.84rem;
+  color: var(--mid);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem 1.25rem;
+}
+
+.demo-tile {
+  margin: 0;
+  min-width: 0;
+}
+
+.demo-tile--landscape { grid-column: span 6; }
+.demo-tile--portrait { grid-column: span 4; }
+
+/* tiles reuse the .video-frame chrome but fill their grid cell */
+.demo-frame {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.demo-tile--landscape .demo-frame { aspect-ratio: 16 / 9; }
+.demo-tile--portrait .demo-frame { aspect-ratio: 9 / 16; }
+
+.demo-tile figcaption {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--mid);
+  margin-top: 0.55rem;
+}
+
+.demo-title {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.demo-tile figcaption a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.demo-tile figcaption a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .demo-tile--landscape { grid-column: span 12; }
+  .demo-tile--portrait { grid-column: span 6; }
+  /* with an odd number of portrait tiles, the last one centers
+     instead of orphaning against the left edge */
+  .demo-tile--portrait:last-child:nth-child(odd) { grid-column: 4 / span 6; }
+}
+
+@media (max-width: 540px) {
+  .demo-tile--landscape,
+  .demo-tile--portrait,
+  .demo-tile--portrait:last-child:nth-child(odd) { grid-column: span 12; }
+  .demo-tile--portrait .demo-frame {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}
+
+/* hero intro link to the demos section */
+.hero-intro a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  transition: opacity 0.2s ease;
+}
+
+.hero-intro a:hover {
   opacity: 0.7;
 }
 
@@ -543,23 +622,17 @@ section {
   margin: 0;
   background: none;
   border: none;
-  border-left: 2px solid transparent;
   text-align: left;
   font: inherit;
   color: inherit;
   cursor: pointer;
-  transition: border-color 0.2s ease, padding-left 0.2s ease, background 0.2s ease;
 }
 
-.proj-row-head:hover,
-.proj-row.is-open .proj-row-head {
-  border-left-color: var(--domain, var(--accent));
-  padding-left: 0.7rem;
-  background: linear-gradient(
-    to right,
-    var(--domain-bg, var(--accent-light)) 0%,
-    transparent 75%
-  );
+.proj-row-head:hover .proj-title,
+.proj-row.is-open .proj-row-head .proj-title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 .proj-row-head:focus-visible {
@@ -601,10 +674,10 @@ section {
 }
 
 .proj-hook {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-family: var(--font-mono), monospace;
+  font-weight: 400;
+  font-size: 0.78rem;
+  line-height: 1.65;
   color: var(--mid);
 }
 
@@ -672,7 +745,7 @@ section {
 
 .proj-problem {
   font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 0.95rem;
   line-height: 1.75;
   color: var(--ink);
@@ -914,7 +987,6 @@ footer {
   outline-offset: 3px;
 }
 
-/* ── Projects Carousel ── */
 
 /* Domain color tokens */
 :root {
@@ -927,50 +999,6 @@ footer {
   --web: #4a1a6b;
   --web-bg: #f0e8f5;
 }
-
-/* ── Sticky carousel header ── */
-/* P2-1: outer is full-width with bg; inner constrains to max-w */
-
-@keyframes morphIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Dot indicators */
-
-/* ── Count strip ── */
-
-/* ── Tally bar ── */
-
-/* ── Scroll hint ── */
-/* ── Arrow nav buttons ── */
-
-@keyframes nudge {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  50% {
-    transform: translateX(6px);
-  }
-}
-
-/* ── Carousel track ── */
-
-/* ── Project cards ── */
-
-/* ── Proj card GitHub/Demo links ── */
-
-/* ── Proj card badges row (featured + domain tag) ── */
 
 /* ── Responsive 600px ── */
 @media (max-width: 600px) {
@@ -1078,492 +1106,6 @@ footer {
   
 }
 
-/* ══════════════════════════════════════════════════════
-   CAROUSEL — full block (sticky header, counts, tally,
-   scroll hint, track, cards, nav, github link)
-   ══════════════════════════════════════════════════════ */
-
-/* Domain color tokens (duplicated in :root above — belt+suspenders) */
-:root {
-  --ai: #2d5a3d;
-  --ai-bg: #e8f0eb;
-  --robotics: #1e3a5f;
-  --robotics-bg: #e3eaf4;
-  --ds: #6b3a1f;
-  --ds-bg: #f4ece3;
-  --web: #4a1a6b;
-  --web-bg: #f0e8f5;
-}
-
-/* Sticky header — outer full-width, inner constrained */
-
-@keyframes morphIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Dot indicators — now <button> elements */
-
-/* Count strip */
-
-/* Tally bar */
-
-/* Scroll hint */
-
-@keyframes nudge {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  50% {
-    transform: translateX(6px);
-  }
-}
-
-/* Arrow nav buttons */
-
-/* View all on GitHub link */
-
-/* Carousel track */
-
-/* Project cards */
-
-/* CV fallback notice */
-
-/* CV section intro (missing from earlier replacement) */
-
-/* ── Character counter ── */
-
-/* ── Input collapses after match ── */
-
-/* ═══════════════════════════════════════════════════════
-   RESUME RENDERER
-   Lora (--font-serif) is visually close to Computer Modern.
-   window.print() + @media print = browser-native A4 PDF.
-   ═══════════════════════════════════════════════════════ */
-
-.resume-outer {
-  margin-top: 1.5rem;
-}
-
-/* Controls bar — hidden when printing */
-.resume-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 0.85rem;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 5px 5px 0 0;
-  border-bottom: none;
-}
-
-.resume-controls-label {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-}
-
-.resume-print-btn {
-  font-family: var(--font-mono), monospace;
-  font-weight: 500;
-  font-size: 0.72rem;
-  color: #fff;
-  border: none;
-  padding: 0.35rem 0.85rem;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.15s ease;
-  letter-spacing: 0.04em;
-}
-
-.resume-print-btn:hover {
-  opacity: 0.87;
-  transform: translateY(-1px);
-}
-
-.resume-print-btn:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
-
-.resume-print-btn--ai {
-  background: var(--ai);
-}
-
-.resume-print-btn--robotics {
-  background: var(--robotics);
-}
-
-.resume-print-btn--ds {
-  background: var(--ds);
-}
-
-.resume-print-btn--web {
-  background: var(--web);
-}
-
-.resume-domain-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 0.5rem;
-}
-
-.resume-domain-link {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--muted);
-  padding: 0.2rem 0.45rem;
-  border-radius: 3px;
-  border: 1px solid var(--rule);
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.resume-domain-link:hover {
-  color: var(--ink);
-  border-color: var(--ink);
-}
-
-.resume-domain-link--active {
-  color: var(--ink);
-  border-color: var(--accent);
-  background: var(--surface);
-}
-
-/* The document itself */
-.resume-page {
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-radius: 0 0 5px 5px;
-  padding: 2.25rem 2.5rem;
-  font-family: var(--font-serif), serif;
-  color: #1a1a1a;
-  line-height: 1.55;
-}
-
-/* Header */
-.resume-header {
-  margin-bottom: 0;
-}
-
-.resume-name {
-  font-family: var(--font-serif), serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-  letter-spacing: -0.01em;
-  color: #0d0d0d;
-  margin-bottom: 0.35rem;
-  line-height: 1.1;
-}
-
-.resume-contact-line {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.7rem;
-  color: #4a4a4a;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.15rem 0;
-  align-items: center;
-  letter-spacing: 0.02em;
-}
-
-.resume-contact-link {
-  color: #1a1a1a;
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.resume-contact-link:hover {
-  color: var(--accent);
-}
-
-.resume-contact-sep {
-  margin: 0 0.45rem;
-  color: #ccc;
-}
-
-/* Rule */
-.resume-rule {
-  border: none;
-  border-top: 1.5px solid #0d0d0d;
-  margin: 0.85rem 0 0;
-}
-
-/* Sections */
-.resume-section {
-  margin-top: 1.05rem;
-}
-
-.resume-section-title {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 500;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #0d0d0d;
-  border-bottom: 0.75px solid #ccc;
-  padding-bottom: 0.2rem;
-  margin-bottom: 0.65rem;
-}
-
-/* Summary */
-.resume-summary {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  color: #2a2a2a;
-}
-
-/* Entries */
-.resume-entry {
-  margin-bottom: 0.75rem;
-}
-
-.resume-entry:last-child {
-  margin-bottom: 0;
-}
-
-.resume-entry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.2rem;
-  margin-bottom: 0.1rem;
-}
-
-.resume-entry-role {
-  font-family: var(--font-serif), serif;
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: #0d0d0d;
-  line-height: 1.3;
-}
-
-.resume-entry-org-inline {
-  font-weight: 400;
-  font-style: italic;
-}
-
-.resume-entry-location {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: #555;
-}
-
-.resume-entry-period {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.68rem;
-  color: #777;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.resume-entry-org {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 400;
-  font-size: 0.8rem;
-  color: #555;
-  margin-bottom: 0.25rem;
-}
-
-.resume-entry-sub {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
-  font-size: 0.78rem;
-  color: #666;
-  font-style: italic;
-}
-
-/* Bullets */
-.resume-bullets {
-  list-style: none;
-  padding: 0;
-  margin: 0.3rem 0 0;
-}
-
-.resume-bullet {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: #2a2a2a;
-  padding-left: 1rem;
-  position: relative;
-  margin-bottom: 0.2rem;
-}
-
-.resume-bullet::before {
-  content: '–';
-  position: absolute;
-  left: 0;
-  color: #999;
-  font-size: 0.75rem;
-}
-
-/* Project stack line */
-.resume-project-stack {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.67rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.02em;
-}
-
-/* Skills */
-.resume-skills {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.resume-skill-row {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.55;
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.resume-skill-label {
-  font-weight: 500;
-  color: #0d0d0d;
-  flex-shrink: 0;
-}
-
-.resume-skill-items {
-  font-weight: 300;
-  color: #2a2a2a;
-}
-
-/* ── @media print ─────────────────────────────────────── */
-@media print {
-  @page {
-    size: A4;
-    margin: 1.5cm 2cm;
-  }
-
-  body>* {
-    display: none !important;
-  }
-
-  body,
-  main,
-  #__next,
-  [id="__next"] {
-    display: block !important;
-    background: #fff !important;
-  }
-
-  
-
-  .resume-outer {
-    margin: 0 !important;
-  }
-
-  .resume-page {
-    display: block !important;
-    border: none !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    font-size: 10.5pt !important;
-    line-height: 1.45 !important;
-    color: #000 !important;
-  }
-
-  .resume-name {
-    font-size: 18pt !important;
-  }
-
-  .resume-contact-line {
-    font-size: 8.5pt !important;
-  }
-
-  .resume-section-title {
-    font-size: 8.5pt !important;
-  }
-
-  .resume-contact-link,
-  .resume-contact-link:visited {
-    color: #000 !important;
-    text-decoration: none !important;
-  }
-
-  .resume-entry {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .resume-section {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-}
-
-/* ── Resume responsive ── */
-@media (max-width: 600px) {
-  .resume-page {
-    padding: 1.25rem 1rem;
-  }
-
-  .resume-name {
-    font-size: 1.3rem;
-  }
-
-  .resume-contact-line {
-    font-size: 0.62rem;
-  }
-
-  .resume-controls {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .resume-print-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-/* ── PDF preview card (replaces blank iframe) ── */
-
-/* ══════════════════════════════════════════════════
-   COMPARISON ENGINE UI
-   ══════════════════════════════════════════════════ */
-
-/* Header row */
-
-/* Overall badge */
-
-/* Count bar */
-
-/* Requirements list */
-
-/* Error state */
-
-/* ── Spec-aligned comparison class names ── */
-
-/* Requirements table */
 
 /* ══════════════════════════════════════════════════
    CHAT BOT
@@ -1779,7 +1321,8 @@ footer {
   padding: 0.3rem 0.75rem;
   cursor: pointer;
   transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-  white-space: nowrap;
+  text-align: left;
+  max-width: 100%;
 }
 
 .chat-chip:hover {
@@ -2058,7 +1601,7 @@ div[id] {
 
 /* ── Section: clamp vertical padding ── */
 section {
-  padding-block: clamp(48px, 8vw, 100px);
+  padding-block: clamp(44px, 6vw, 80px);
 }
 
 /* ── Nav: mobile — hide overflow by tightening gap ── */
@@ -2099,22 +1642,15 @@ section {
   }
 }
 
-/* ── Hero: min-height, clamp font, stacked CTAs on mobile ── */
-#hero {
-  min-height: 90svh;
-  min-height: 90vh;
-}
-
+/* ── Hero: clamp font, stacked CTAs on mobile ── */
 .hero-name {
   font-size: clamp(2.2rem, 7vw, 3.4rem);
 }
 
 @media (max-width: 479px) {
   #hero {
-    padding-top: 72px;
-    padding-bottom: 3rem;
-    min-height: 85svh;
-    min-height: 85vh;
+    padding-top: 84px;
+    padding-bottom: 2.5rem;
   }
 
   .hero-name {
@@ -2133,68 +1669,6 @@ section {
     display: flex;
     align-items: center;
   }
-}
-
-/* ── Carousel header: wrap on small screens ── */
-@media (max-width: 479px) {
-  
-
-  
-
-  
-
-  
-
-  /* Dots: bump size and tap area */
-  
-
-  
-
-  
-}
-
-@media (max-width: 767px) {
-  
-
-  
-
-  
-}
-
-/* ── Carousel: responsive card widths ── */
-
-/* Small phone ≤479px */
-@media (max-width: 479px) {
-  
-
-  
-
-  /* Nav buttons: full 44px height */
-  
-
-  
-}
-
-/* Phone 480–767px */
-@media (min-width: 480px) and (max-width: 767px) {
-  
-
-  
-}
-
-/* Tablet 768px+ */
-@media (min-width: 768px) {
-  
-}
-
-/* Laptop 1024px+ */
-@media (min-width: 1024px) {
-  
-}
-
-/* Large desktop 1440px+ */
-@media (min-width: 1440px) {
-  
 }
 
 /* ── Stack: responsive grid columns ── */

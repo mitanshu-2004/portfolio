@@ -74,21 +74,14 @@ export const metadata: Metadata = {
     title: 'Mitanshu Goel · Robotics & Physical AI Engineer',
     description:
       'Robotics and Physical AI engineer. Real-time VR teleoperation on industrial arms, robot-learning datasets, and LLM and ML systems. B.Tech ECE, MAIT Delhi. Open to Physical AI, robotics, and applied ML roles.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Mitanshu Goel · Robotics & Physical AI Engineer',
-      },
-    ],
+    // og:image comes from app/opengraph-image.tsx (auto-injected by Next).
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Mitanshu Goel · Robotics & Physical AI Engineer',
     description:
       'Robotics and Physical AI engineer. Real-time VR teleoperation on industrial arms, robot-learning datasets, and LLM and ML systems.',
-    images: ['/og-image.png'],
+    // twitter:image falls back to the generated opengraph-image.
   },
   robots: {
     index: true,
@@ -127,7 +120,7 @@ export default function RootLayout({
         />
         {/* Strip URL hash on load so browser doesn't auto-scroll to #chat etc.
             Shareable deep links (/sarthakai, /nferent) are exempt. */}
-        <script dangerouslySetInnerHTML={{ __html: `if(window.location.hash&&!['#sarthakai','#nferent'].includes(window.location.hash))history.replaceState(null,'',location.pathname+location.search)` }} />
+        <script dangerouslySetInnerHTML={{ __html: `if(window.location.hash&&!['#sarthakai','#nferent','#gallery'].includes(window.location.hash))history.replaceState(null,'',location.pathname+location.search)` }} />
       </head>
       <body>
         {/* P3-1: skip navigation */}

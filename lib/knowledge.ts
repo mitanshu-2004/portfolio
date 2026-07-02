@@ -1,13 +1,13 @@
 export const KNOWLEDGE = `
 ## SNAPSHOT
 
-Mitanshu Goel. ECE graduate from MAIT Delhi (2026), minor in AI/ML. He works across three intersecting threads: real-time robotics control on industrial arms, robot-learning data pipelines, and continued-pretraining of language models, with applied ML and data-science work alongside. Currently building a bimanual VR teleoperation rig and its data pipeline at Nferent AI. The system drives an Elite Robots CS66 pair and a Franka Research 3 over a real-time C++ control loop. Looking for full-time roles in Physical AI, Robotics SWE, ML Engineering, or Research Engineering. Based in Delhi. Open to roles anywhere in India and to India-reachable remote.
+Mitanshu Goel. ECE graduate from MAIT Delhi (2026), minor in AI/ML. He works across three intersecting threads: real-time robotics control on industrial arms, robot-learning data pipelines, and LLM training, with applied ML and data-science work alongside. His most recent role was at Nferent AI (Mar to Jun 2026), where he built a bimanual VR teleoperation rig and its data pipeline: the system drives an Elite Robots CS66 pair and a Franka Research 3 over a real-time C++ control loop. Looking for full-time roles in Physical AI, Robotics SWE, ML Engineering, or Research Engineering. Based in Delhi. Open to roles anywhere in India and to India-reachable remote.
 
 ---
 
 ## CURRENT FOCUS & ASK
 
-- **Building right now:** a bimanual VR teleoperation rig and the data pipeline around it. A Meta Quest 3 drives an Elite Robots CS66 pair, and the same control loop extends to a Franka Research 3 so the system covers both arm families. It runs at real-time priority on Linux (SCHED_FIFO, memory locked with mlockall, threads pinned to dedicated cores). The rig records its sessions as imitation-learning data, and a separate capture tool puts two MANUS gloves and three RealSense cameras on one hardware clock. The work centres on real-time teleoperation and the multi-robot data it produces, which downstream policies train on.
+- **Most recent work (Nferent AI internship, Mar to Jun 2026):** a bimanual VR teleoperation rig and the data pipeline around it. A Meta Quest 3 drives an Elite Robots CS66 pair, and the same control loop extends to a Franka Research 3 so the system covers both arm families. It runs at real-time priority on Linux (SCHED_FIFO, memory locked with mlockall, threads pinned to dedicated cores). The rig records its sessions as imitation-learning data: the Franka setup recorded a 10-task, 51-episode manipulation dataset (about 2.1 hours of dual RGB-D video with synchronized robot state, exported to LeRobot format), and a separate capture tool puts two MANUS gloves and three RealSense cameras on one hardware clock. Demo videos of this work are embedded on the site (deep links: mitanshu.me/nferent for the robot work, mitanshu.me/sarthakai for the earlier voice-assistant demo).
 - **Target roles:** Physical AI, Robotics SWE, ML Engineer, Applied AI Engineer, or Research Engineer. New-grad or junior level.
 - **Locations:** based in Delhi, India. Open to relocating anywhere in India, and to remote roles that work with India hours (india-friendly, APAC, or global-anywhere). Not looking for onsite roles abroad.
 - **Start date:** available now.
@@ -44,7 +44,7 @@ Things most ECE new-grads do not have:
 | 2023 to present | A.T.O.M. Robotics, MAIT | Core member of the student robotics society. Worked on the hexapod's gait and IK control node and the ros2_control integration, and built a web-controlled robotic arm. |
 | Jul to Sep 2024 | Nextup Robotics | 6-DOF arm in ROS and Gazebo. MoveIt motion planning, validated in simulation then on hardware. Resolved sim-to-real URDF mismatches. |
 | Jun to Aug 2025 | SarthakAI | A custom YOLOv8 detector and a NeMo ASR wake-word and command pipeline on a UBTech Yanshee humanoid, plus a sensor-network workstation. |
-| Mar 2026 to present | Nferent AI, Gurugram, On-site | Bimanual VR teleop on Elite CS66 arms, extended to a Franka Research 3. An imitation-learning dataset recorder and a multi-sensor capture tool built alongside the control loop. |
+| Mar to Jun 2026 | Nferent AI, Gurugram, On-site | Bimanual VR teleop on Elite CS66 arms, extended to a Franka Research 3. An imitation-learning dataset recorder, a multi-sensor capture tool, and control software for a Tesollo DG-5F dexterous hand, built alongside the control loop. |
 
 Trajectory note: the through-line from hardware to AI-on-robots to foundation-model training is deliberate. He has been heading toward Physical AI since 2023. The CPT work is the parallel investment to make the AI side as deep as the robotics side.
 
@@ -52,14 +52,15 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ## EXPERIENCE
 
-### Nferent AI, Robotics SWE & Physical AI Intern (Mar 2026 – Present · Gurugram, On-site)
+### Nferent AI, Robotics SWE & Physical AI Intern (Mar – Jun 2026 · Gurugram, On-site)
 
-- Built a bimanual VR teleoperation stack. A Meta Quest 3 controller streams pose over UDP to a per-arm real-time C++ control loop that drives two Elite Robots CS66 arms by Cartesian servoing, with One-Euro input filtering, SE(3) command smoothing, and singularity and step-cap safety guards. The loop runs at real-time priority (SCHED_FIFO, mlockall, CPU pinning). An anchor-and-clutch model lets the operator release and re-grip without the arm jumping.
-- Extended the same teleoperation to a Franka Research 3 with DROID-style anchor-and-delta control and a layered safety stack (frame-jump rejection, a position and orientation leash, slew-rate limiting). Built the recorder that writes a dual RGB-D and robot-state dataset for imitation learning, on a CPU-pinned writer thread that sheds a whole tick rather than desync the data.
+- Built a bimanual VR teleoperation stack. A Meta Quest 3 controller streams pose over UDP to a per-arm real-time C++ control loop that drives two Elite Robots CS66 arms by Cartesian servoing, with One-Euro input filtering, SE(3) command smoothing, and singularity and step-cap safety guards. The loop runs at real-time priority (SCHED_FIFO, mlockall, CPU pinning). An anchor-and-clutch model lets the operator release and re-grip without the arm jumping. A demo video is embedded on the site and on YouTube (youtube.com/watch?v=kUlfE-U_5m4).
+- Extended the same teleoperation to a Franka Research 3 with DROID-style anchor-and-delta control and a layered safety stack (frame-jump rejection, a position and orientation leash, slew-rate limiting). Built the recorder that writes a dual RGB-D and robot-state dataset for imitation learning, on a CPU-pinned writer thread that sheds a whole tick rather than desync the data. Used the rig to record a 10-task, 51-episode manipulation dataset: about 2.1 hours, wrist and scene RGB-D at 1280x720 with full robot state and per-episode language instructions, exported to LeRobot v2.1 format.
+- Wrote the control software for a Tesollo DG-5F five-finger dexterous hand (20 motors over Modbus-TCP) that plays Rock-Paper-Scissors with a human, reading the operator's hand through a RealSense camera and an orientation-independent MediaPipe gesture classifier. Fixed a vendor-SDK segfault (the native library calls connect/disconnect callback pointers, so they must be registered before connecting) and replaced the firmware's non-latching arrived flag with a motion-settled arrival detector. The gesture classifier and a fist-pump round-start detector are unit-tested without hardware. Demo video on the site and on the Unbox Industry LinkedIn page.
 - Diagnosed and patched a real-hardware crash in the robot's URScript (a null handle on headless restart) that had been breaking teleop bring-up.
-- Built a multi-sensor capture tool, two MANUS gloves and three RealSense cameras, that synchronises every stream on one hardware clock, with a frame-uniqueness watchdog that catches silent camera repeat-frame faults under USB load.
+- Built a multi-sensor capture tool, two MANUS gloves and three RealSense cameras, that synchronises every stream on one hardware clock, with measured sync error under 15 ms at the 95th percentile. A frame-uniqueness watchdog catches silent camera repeat-frame faults under USB load and fails the episode, and validation re-reads files from disk before an episode is admitted. Recorded 9 manipulation tasks, 45 episodes, all validation-passed, exported to LeRobot v2.1 and Parquet/HDF5.
 - Brought up and tested incoming commercial robots before dispatch: arms (Franka, Flexiv, Elite, Elephant Robotics), grippers (Robotiq, Tesollo, DH Robotics), and a Unitree quadruped. Testing and evaluation only.
-- Stack: C++, ROS 2, Elite Robots CS SDK (RTSI, EliteDriver), Franka libfranka, Meta Quest 3, OpenVR, RealSense RGB-D, real-time Linux.
+- Stack: C++, ROS 2, Elite Robots CS SDK (RTSI, EliteDriver), Franka libfranka, Meta Quest 3, OpenVR, RealSense RGB-D, MediaPipe, Modbus-TCP, real-time Linux.
 
 ### SarthakAI, AI Intern (Jun to Aug 2025)
 
@@ -84,7 +85,7 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ## FOUNDATION-MODEL WORK
 
-A self-scraped Reddit corpus and three continued-pretraining setups. The data pipeline streams raw Pushshift-style dumps through decompression, thread joining and filtering, ranking and bucketing, then tokenisation and packing into fixed-length sequences. All artefacts are kept private (no public repo).
+A self-scraped Reddit corpus and three training setups. The data pipeline streams raw Pushshift-style dumps through decompression, thread joining and filtering, ranking and bucketing, then tokenisation and packing into fixed-length sequences. Public repo: github.com/mitanshu-2004/reddit-llm-training. Trained models live at huggingface.co/mitanshugoel.
 
 | Run | Base | Method | Notes |
 |---|---|---|---|
@@ -92,7 +93,7 @@ A self-scraped Reddit corpus and three continued-pretraining setups. The data pi
 | 2 | Qwen 2.5 3B (4-bit) | QLoRA r=16 via a hand-written accelerate DDP loop | per-rank token-offset sharding, resume by token count |
 | 3 | Random init (Karpathy nanoGPT) | GPT from scratch, ~50M params, 8 layers, 8 heads, 512 embd | tiktoken GPT-2 encoding, 20-minute Hub checkpoint pusher |
 
-**Honest status:** all three runs are real but stopped early (Mistral about 20% of one epoch, Qwen about 11% of its token target, nanoGPT about 45% of planned iterations). There is no held-out eval or perplexity comparison yet. These are proof-of-concept runs. The value is the data pipeline and the training infrastructure, especially the custom Qwen DDP loop.
+**Honest status:** all three runs are real but stopped early by free-tier GPU limits (Mistral about 20% of one epoch, Qwen about 11% of its token target, nanoGPT about 45% of planned iterations). A held-out perplexity eval was added and run. Measured on held-out Reddit text: the from-scratch nanoGPT reaches perplexity 16.85 against 24.68 for GPT-2 (about a third better at under half the parameters), the Qwen adapter improves its base slightly (17.31 to 16.88), and the half-trained Mistral adapter comes out slightly worse than its base (10.90 to 11.20) and is reported that way. This is a token-budget result, not a method comparison. The value is the data pipeline, the training infrastructure (especially the custom Qwen DDP loop), and the measured-not-asserted eval.
 
 **Choices that are not tutorial defaults:**
 - embedding_learning_rate set about 10x smaller than the main LoRA learning rate. Embedding gradients are noisy on a new corpus, so this keeps CPT stable.
@@ -147,7 +148,7 @@ A self-scraped Reddit corpus and three continued-pretraining setups. The data pi
 Every project below has been independently code-audited. Metrics in this section are defensible from the published code, with caveats stated where they exist.
 
 ### Nferent AI teleoperation and data pipeline, the robotics flagship
-Three pieces under his current role. (1) Dual-arm Elite CS66 teleop: Quest 3 pose over UDP to a per-arm real-time C++ control loop, Cartesian servoing, One-Euro filtering, SE(3) smoothing, singularity and step-cap guards, anchor-and-clutch re-grip, running at real-time priority (SCHED_FIFO, mlockall, CPU pinning). (2) Franka Research 3 teleop with DROID-style anchor-and-delta and a layered safety stack, plus the recorder that writes a dual RGB-D and robot-state dataset for imitation learning on a load-shedding CPU-pinned writer thread. (3) A multi-sensor capture tool (two MANUS gloves, three RealSense cameras) on one hardware clock with a frame-uniqueness watchdog. This is company work, no public repo.
+Four pieces under his Nferent AI internship (Mar to Jun 2026). (1) Dual-arm Elite CS66 teleop: Quest 3 pose over UDP to a per-arm real-time C++ control loop, Cartesian servoing, One-Euro filtering, SE(3) smoothing, singularity and step-cap guards, anchor-and-clutch re-grip, running at real-time priority (SCHED_FIFO, mlockall, CPU pinning). Demo video embedded on the site and at youtube.com/watch?v=kUlfE-U_5m4. (2) Franka Research 3 teleop with DROID-style anchor-and-delta and a layered safety stack, plus the recorder that writes a dual RGB-D and robot-state dataset for imitation learning on a load-shedding CPU-pinned writer thread. Recorded 10 tasks, 51 episodes, about 2.1 hours, exported to LeRobot v2.1. (3) A multi-sensor capture tool (two MANUS gloves, three RealSense cameras) on one hardware clock, measured sync error under 15 ms at p95, with a frame-uniqueness watchdog; 9 tasks, 45 episodes recorded, all validation-passed. (4) Control software for a Tesollo DG-5F dexterous hand (20 motors, Modbus-TCP) that plays Rock-Paper-Scissors via RealSense plus MediaPipe; demo on the site and on the Unbox Industry LinkedIn page. This is company work, no public repo; the demo videos are the public proof. Deep link: mitanshu.me/nferent.
 
 ### Hexapod, robotics (A.T.O.M. team project)
 Stack: ROS 2 Humble, Ignition Gazebo Fortress, ros2_control, Python.
@@ -184,6 +185,11 @@ Stack: KMeans, pandas, scikit-learn, Fear and Greed Index, regression diagnostic
 The headline of this repo is the post-mortem, not the dashboard. A next-day profit classifier landed at the base rate but caught only 2 of 44 actual loss days, a 95% miss rate on the signal that matters. A follow-on volatility regressor returned an R-squared of -0.385 (worse than predicting the mean). Both were discontinued. The README documents the class-imbalance and personality-versus-price root cause, and the decision to stop rather than tune.
 GitHub: https://github.com/mitanshu-2004/Primetrade-Analysis
 
+### Store-Performance-Dashboard, a forecast judged against the boring baseline
+Stack: pandas, scikit-learn, XGBoost, K-Means, seaborn. 163 stores, 5 months of retail data.
+An XGBoost model forecasts next-month attach rate and is judged against persistence (last month carried forward) on a temporal holdout. It wins by a hair, RMSE 0.158 versus 0.160, and the write-up reports exactly that margin instead of hiding the baseline. An earlier random split had leaked store identity between train and test; moving to a temporal holdout replaced a flattering wrong number with the honest thin one. K-Means store segmentation (4 clusters) and per-store rankings ride on the same pipeline. Tests pass.
+GitHub: https://github.com/mitanshu-2004/Store-Performance-Dashboard
+
 ### Stock-Influence, deployed full-stack correlation explorer
 Stack: FastAPI, React, pandas, SciPy, yfinance, Chart.js.
 Upload any time series and see how it tracks a stock price. Three correlation methods (Pearson, Spearman, Kendall), with a synchronised Chart.js heatmap and time-series overlay on a shared time axis. The correlation math is implemented in code and verifiable. It is a correlation explorer: it reports associations, not proof of cause, and does not apply a multiple-comparison correction.
@@ -191,12 +197,12 @@ Live: https://stock-influence.vercel.app. GitHub: https://github.com/mitanshu-20
 
 ### memory-assistant, local-first knowledge store
 Stack: FastAPI, ChromaDB, Sentence-Transformers, Phi-3 4-bit GGUF via llama.cpp, SQLAlchemy, React.
-Honest framing: it is local-first and runs with no cloud. The Phi-3 model runs at ingest time for title, tags, category, and summary metadata. Search is hybrid dense and keyword retrieval. A retrieval-augmented answer endpoint exists in the code but is not wired into the UI, so the working surface is the local ingest plus hybrid search. This is a working skeleton, weaker proof than the projects above.
-GitHub: https://github.com/mitanshu-2004/memory-assistant
+Local-first and runs with no cloud dependency. The Phi-3 model runs at ingest time for title, tags, category, and summary metadata, with regex fallbacks when the model fumbles. Search is hybrid dense and keyword retrieval merged by best score. The retrieval-augmented /ask endpoint is wired end to end (an earlier version had it dead in the UI; that is fixed), and a prompt-injection guard strips chat-control tokens from pasted notes.
+Live demo: https://memory-assistant-psi.vercel.app. GitHub: https://github.com/mitanshu-2004/memory-assistant
 
-### StockMetrics, a power-limited study with a data-validation catch
-Stack: pandas, scikit-learn, F-test, 20 years across the Big 5 Indian IT firms.
-Tested fundamental-versus-return variable pairs for predictive power on annual stock returns via linear regression with F-tests. Almost nothing reached significance, and with seventeen annual observations per firm the analysis is power-limited by design. While auditing it he found a ticker-to-company mapping bug that had paired some firms' returns with another firm's fundamentals, which invalidates several of the per-firm results. It is kept as a lesson in data validation, not as a headline result.
+### StockMetrics, an honest null result with a positive control
+Stack: pandas, statsmodels, scikit-learn, SciPy, about 17 years across the big 5 Indian IT firms (TCS, Infosys, HCL, Wipro, Tech Mahindra).
+Tests whether annual fundamental growth explains annual returns, with the multiple-comparison rigor most student projects skip: Benjamini-Hochberg FDR correction, leave-one-out cross-validation, and permutation tests. The honest answer is a null: no predictor survives correction, and the null is reported as the finding. A positive control makes the null credible: the method recovers the strong inter-firm co-movement (correlations 0.84 to 0.94, mean 0.91), so it finds real effects where they exist. While auditing he also found and fixed a ticker-to-company mapping bug that had paired some firms' returns with another firm's fundamentals; the fix is pinned by a test so it cannot regress.
 GitHub: https://github.com/mitanshu-2004/StockMetrics
 
 ---
@@ -242,7 +248,7 @@ Things he has not done yet. Surfacing these proactively because pretending they 
 - **MAIT is a Tier-3 college** in the Indian engineering hierarchy. He is aware credential bias exists.
 - **No published paper.** Reading and implementing is where the time has gone, not submitting to ICRA, NeurIPS, or EMNLP.
 - **No accepted OSS pull request landed yet** in major repos (LeRobot, IsaacLab, vLLM, LangChain), though the work he does is the kind that would merge there with a polish pass.
-- **No local GPU.** He has been training on free and rented cloud GPUs (Colab and Kaggle T4s, Lightning AI). The benchmark scripts for Darwin and the CPT runs are constrained by that, and the CPT runs are proof-of-concept, stopped early, with no eval yet.
+- **No local GPU.** He has been training on free and rented cloud GPUs (Colab and Kaggle T4s, Lightning AI). The benchmark scripts for Darwin are constrained by that, and the three Reddit LLM runs were stopped early by free-tier limits. Their held-out perplexity eval was run, though, so the headline comparison there is measured, not asserted.
 - **The Hexapod is a team project.** The URDF is CAD-exported, not hand-written. His part is the gait/IK control node and the ros2_control integration; the exact split of work across the team is not separately documented.
 
 He does not claim things he has not done. Asking him a direct question about a technology will get a direct answer, including "haven't used it" when that is the truth.
@@ -251,15 +257,16 @@ He does not claim things he has not done. Asking him a direct question about a t
 
 ## AVAILABILITY & LOGISTICS
 
-- Available for full-time roles, starting now.
+- Available for full-time roles, starting now. The Nferent AI internship ended in June 2026.
 - Location: Delhi, India. Open to roles anywhere in India and to India-reachable remote (india-friendly, APAC, global-anywhere). Not looking for onsite roles abroad.
-- Public links: github.com/mitanshu-2004, linkedin.com/in/mitanshugoel.
+- Public links: github.com/mitanshu-2004, linkedin.com/in/mitanshugoel, huggingface.co/mitanshugoel.
+- Demo videos: the site has a Gallery section (shareable link mitanshu.me/gallery) with five videos: dual-arm VR teleoperation, Franka ring-stacking teleop, the Tesollo hand playing Stone-Paper-Scissors, MANUS glove tracking, and the Bodhi voice assistant. The written detail lives under mitanshu.me/nferent and mitanshu.me/sarthakai.
 
 ---
 
 ## FAQ, likely recruiter questions and how to think about them
 
-- **"What's his strongest project?"** Depends on the role. For Physical AI and Robotics, the current Nferent AI VR teleop work: real-time C++ on Elite CS66 arms and a Franka Research 3, plus the robot-learning data pipeline (the recorder and the MANUS-plus-RealSense capture tool). For foundation models and LLMs, the three continued-pretraining setups on a self-scraped Reddit corpus, including a hand-written distributed training loop. For evaluation rigor and RAG, the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal, the Primetrade failed-prediction post-mortem.
+- **"What's his strongest project?"** Depends on the role. For Physical AI and Robotics, the Nferent AI VR teleop work: real-time C++ on Elite CS66 arms and a Franka Research 3, the robot-learning data pipeline (the 51-episode LeRobot dataset, the MANUS-plus-RealSense capture tool), and the Tesollo dexterous-hand demo. There are demo videos on the site. For LLM work, the Reddit LLM training repo: a from-scratch GPT that beats GPT-2 on held-out Reddit text, plus two adapter runs and a hand-written distributed training loop. For evaluation rigor and RAG, the RAG-assistant with its Pydantic structural anti-hallucination guards. For intellectual-honesty signal, the Primetrade failed-prediction post-mortem.
 - **"What's he NOT good at yet?"** He has not shipped at FAANG scale, has not published a paper, and does not have a major OSS PR landed. His GPU access is cloud-only, and his CPT runs are proof-of-concept, stopped early.
 - **"How much does he want?"** Specific compensation expectations are not listed here. Reach him directly at mitanshug2004@gmail.com.
 - **"Can he start now?"** Yes.
@@ -275,6 +282,7 @@ Email: mitanshug2004@gmail.com
 Phone: +91 85956 57583
 GitHub: https://github.com/mitanshu-2004
 LinkedIn: https://linkedin.com/in/mitanshugoel
+Hugging Face: https://huggingface.co/mitanshugoel
 Portfolio: https://mitanshu.me
 Location: Delhi, India
 

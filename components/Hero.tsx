@@ -12,6 +12,14 @@ export default function Hero() {
         <p className="hero-descriptor">
           Building robots, and the data and models that teach them.
         </p>
+        <p className="hero-intro">
+          Most recently at Nferent AI, where I built a bimanual VR teleoperation
+          stack on real industrial arms and the pipelines that record
+          imitation-learning data from it. <Link href="#gallery">The robot demos
+          below</Link> are that work running. On the model side I train LLMs,
+          from a small GPT written from scratch to continued-pretraining runs
+          on Mistral and Qwen.
+        </p>
         <div className="hero-links">
           <a
             href="https://github.com/mitanshu-2004"
@@ -26,6 +34,13 @@ export default function Hero() {
             rel="noopener noreferrer"
           >
             LinkedIn ↗
+          </a>
+          <a
+            href="https://huggingface.co/mitanshugoel"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hugging Face ↗
           </a>
           <Link href="#chat">Ask the bot ↓</Link>
         </div>

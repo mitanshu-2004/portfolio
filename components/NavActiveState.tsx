@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 const SECTIONS = [
   'hero',
-  'focus',
+  'gallery',
   'experience',
   'education',
   'projects',
@@ -18,7 +18,7 @@ export default function NavActiveState() {
   // doesn't auto-scroll to a section the user didn't intend.
   // Shareable deep links (/sarthakai, /nferent) are exempt.
   useEffect(() => {
-    const deepLinks = ['#sarthakai', '#nferent']
+    const deepLinks = ['#sarthakai', '#nferent', '#gallery']
     if (window.location.hash && !deepLinks.includes(window.location.hash)) {
       history.replaceState(null, '', window.location.pathname)
       window.scrollTo(0, 0)

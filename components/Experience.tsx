@@ -16,90 +16,55 @@ export default function Experience() {
         <ScrollFade className="exp-entry" id="nferent">
           <div className="exp-header">
             <span className="exp-role">Robotics SWE &amp; Physical AI Intern</span>
-            <span className="exp-period">Mar 2026 – Present</span>
+            <span className="exp-period">Mar – Jun 2026</span>
           </div>
           <div className="exp-org">Nferent AI · Gurugram, On-site</div>
-          <ul className="exp-bullets" aria-label="Responsibilities at Nferent AI">
+          <ul className="exp-bullets" aria-label="Work at Nferent AI">
             <li>
-              <strong>Dual-arm VR teleoperation.</strong> Built the stack from
-              scratch. A Meta Quest 3 controller streams pose over UDP to a
-              per-arm real-time C++ control loop that drives two Elite Robots
-              CS66 arms by Cartesian servoing, with One-Euro input filtering,
-              SE(3) command smoothing, and singularity and step-cap safety
-              guards. An anchor-and-clutch model lets the operator release and
-              re-grip without the arm jumping.
-              <figure className="exp-media">
-                <div className="video-frame">
-                  <video
-                    src="/dualarm-teleop-demo.mp4"
-                    controls
-                    playsInline
-                    preload="metadata"
-                    aria-label="Dual-arm VR teleoperation demo — Nferent AI"
-                  />
-                </div>
-                <figcaption>
-                  That&rsquo;s me teleoperating the dual-arm rig I built at
-                  Nferent AI.{' '}
-                  <a
-                    href="https://www.youtube.com/watch?v=kUlfE-U_5m4"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Watch on YouTube ↗
-                  </a>
-                </figcaption>
-              </figure>
+              <strong>Dual-arm VR teleoperation.</strong> Built the stack that
+              drives two Elite Robots CS66 arms from Meta Quest 3 controllers,
+              a real-time C++ control loop per arm, written from scratch. It
+              maps the operator&rsquo;s hand motion to end-effector motion in
+              the tool frame, smooths the noisy human input, and clamps sudden
+              or near-singular moves so the arm cannot jerk. An anchor and
+              clutch model lets the operator release, reposition, and re-grip
+              without the arm jumping.
             </li>
             <li>
-              <strong>Franka teleop and imitation-learning data.</strong>{' '}
-              Extended the same teleoperation to a Franka Research 3 with
-              DROID-style anchor-and-delta control and a layered safety stack:
-              frame-jump rejection, a position and orientation leash, and
-              slew-rate limiting. Collected a multi-episode dataset of dual
-              RGB-D video and robot state for imitation learning.
+              <strong>DROID-style Franka teleop and a LeRobot dataset.</strong>{' '}
+              Extended the teleoperation to a Franka Research 3 with a layered
+              safety stack between the headset and the arm: a frame-jump guard
+              rejects impossible VR readings, a leash keeps every command
+              within a short reach of the arm&rsquo;s measured pose, and a
+              slew-rate limiter caps how fast the target can move. Used the rig
+              to record a 10-task, 51-episode manipulation dataset, about 2.1
+              hours of two-camera RGB-D (color plus depth) video with
+              synchronized robot state, exported to LeRobot format for
+              imitation learning.
             </li>
             <li>
               <strong>Dexterous-hand Rock-Paper-Scissors.</strong> Wrote the
-              control software that drives a Tesollo DG-5F five-finger
-              dexterous hand (20 motors over Modbus-TCP) to play
-              Rock-Paper-Scissors against a human, reading the operator&rsquo;s
-              hand in real time with a RealSense camera and an
-              orientation-independent MediaPipe gesture classifier. Along the
-              way: fixed a vendor-SDK segfault (callbacks must be registered
-              before connect) and replaced the firmware&rsquo;s unreliable
-              target-arrived flag with a motion-settled arrival detector.
-              <figure className="exp-media">
-                <div className="video-frame video-frame--portrait">
-                  <video
-                    src="/tesollo-rps-demo.mp4"
-                    controls
-                    playsInline
-                    preload="metadata"
-                    aria-label="Tesollo dexterous hand playing Rock-Paper-Scissors"
-                  />
-                </div>
-                <figcaption>
-                  The hand playing Rock, Paper, Scissors, as featured on
-                  LinkedIn.{' '}
-                  <a
-                    href="https://www.linkedin.com/posts/teleoperation-research-robots-ugcPost-7478032354410737664-uXAB/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View the post ↗
-                  </a>
-                </figcaption>
-              </figure>
+              control software that lets a Tesollo DG-5F five-finger hand, 20
+              motors over Modbus-TCP, play Rock-Paper-Scissors with a human. A
+              RealSense camera and a MediaPipe gesture classifier read the
+              operator&rsquo;s hand at any orientation. Two fixes made the hand
+              reliable: registering the vendor SDK&rsquo;s callbacks before
+              connecting, because the native library segfaults otherwise, and
+              replacing the firmware&rsquo;s unreliable arrived flag with a
+              detector that waits for the joints to settle.
             </li>
             <li>
-              <strong>MANUS multi-sensor capture.</strong> Built a capture tool,
-              two MANUS gloves and three RealSense cameras, that synchronises
-              every stream on one hardware clock and runs a frame-uniqueness
-              watchdog to catch silent camera repeat-frame faults.
+              <strong>MANUS multi-sensor capture.</strong> Built the capture
+              tool that records two MANUS gloves and three RealSense cameras on
+              a single hardware clock, with measured sync error under 15
+              milliseconds at the 95th percentile. A frame-uniqueness watchdog
+              fails any episode in which a camera silently repeats a stale
+              frame, so corrupted recordings never reach the training set.
+              Recorded 9 manipulation tasks across 45 episodes, every one
+              validation-passed.
             </li>
             <li>
-              Diagnosed and patched a real-hardware crash in the robot's
+              Diagnosed and patched a real-hardware crash in the robot&rsquo;s
               URScript, a null handle on headless restart, that had been
               breaking teleop bring-up.
             </li>
@@ -117,30 +82,13 @@ export default function Experience() {
             <span className="exp-period">Jun – Aug 2025</span>
           </div>
           <div className="exp-org">SarthakAI · Delhi</div>
-          <ul className="exp-bullets" aria-label="Responsibilities at SarthakAI">
+          <ul className="exp-bullets" aria-label="Work at SarthakAI">
             <li>
               Built the PC-side system that turned a UBTech Yanshee humanoid into
               a voice and vision assistant for a logistics demo. A custom-trained
-              YOLOv8 package detector ran over the robot's MJPEG stream, and a
-              NeMo ASR pipeline handled wake-word and command routing to either a
-              chat service or a QR scanner.
-              <figure className="exp-media">
-                <div className="video-frame video-frame--portrait">
-                  <video
-                    src="/bodhi-voice-demo.mp4"
-                    poster="/bodhi-poster.jpg"
-                    controls
-                    playsInline
-                    preload="metadata"
-                    aria-label="Bodhi, the Yanshee voice assistant, answering a spoken question"
-                  />
-                </div>
-                <figcaption>
-                  Bodhi in action: it wakes on &ldquo;Hi Bodhi&rdquo;, hears a
-                  question about packaging materials, and speaks the answer
-                  back. Sound on.
-                </figcaption>
-              </figure>
+              YOLOv8 package detector ran over the robot's camera stream, and a
+              NeMo speech-recognition (ASR) pipeline handled wake-word and
+              command routing to either a chat service or a QR scanner.
             </li>
             <li>
               Designed resilient camera reconnection with exponential backoff and
@@ -172,7 +120,7 @@ export default function Experience() {
           <div className="exp-org">Nextup Robotics · Ghaziabad</div>
           <ul
             className="exp-bullets"
-            aria-label="Responsibilities at Nextup Robotics"
+            aria-label="Work at Nextup Robotics"
           >
             <li>
               Built MoveIt motion planning for a 6-DOF arm, validated first in
@@ -197,11 +145,13 @@ export default function Experience() {
             aria-label="Projects and responsibilities at A.T.O.M. Robotics"
           >
             <li>
-              <strong>Hexapod.</strong> An 18-DoF hexapod built with ROS 2, run
-              in simulation and on hardware. I worked on the control side: the
-              tripod-gait and analytic inverse-kinematics node, the ros2_control
-              hardware interface, and the launch wiring. The URDF is
-              CAD-exported. Team project.{' '}
+              <strong>Hexapod.</strong> An 18-DoF hexapod built with ROS 2. I
+              worked on the control side: the tripod-gait and analytic
+              inverse-kinematics node, the ros2_control hardware interface, and
+              the launch wiring. The URDF is CAD-exported. Team project, and an
+              honest boundary with it: the hexapod walks in Gazebo and on a
+              stand, and free-standing on the floor is the part that never got
+              solved.{' '}
               <a
                 href="https://github.com/atom-robotics-lab/Hexapod"
                 target="_blank"

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { PROJECT_COUNT } from '@/lib/constants'
+import { PROJECT_COUNT } from '@/lib/projects'
 
 export default function Nav() {
   return (
@@ -9,6 +9,9 @@ export default function Nav() {
           MG
         </Link>
         <ul className="nav-links">
+          <li>
+            <Link href="#gallery">Gallery</Link>
+          </li>
           <li>
             <Link href="#experience">
               <span className="nav-exp-full">Experience</span>

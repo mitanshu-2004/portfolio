@@ -52,6 +52,18 @@ export default function Contact() {
               </span>
             </div>
             <div className="contact-row">
+              <span className="contact-label">Hugging Face</span>
+              <span className="contact-value">
+                <a
+                  href="https://huggingface.co/mitanshugoel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  huggingface.co/mitanshugoel
+                </a>
+              </span>
+            </div>
+            <div className="contact-row">
               <span className="contact-label">Location</span>
               <span className="contact-value">Delhi, India. Open to roles across India and India-friendly remote.</span>
             </div>
