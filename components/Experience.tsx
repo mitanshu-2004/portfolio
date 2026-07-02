@@ -60,6 +60,39 @@ export default function Experience() {
               RGB-D video and robot state for imitation learning.
             </li>
             <li>
+              <strong>Dexterous-hand Rock-Paper-Scissors.</strong> Wrote the
+              control software that drives a Tesollo DG-5F five-finger
+              dexterous hand (20 motors over Modbus-TCP) to play
+              Rock-Paper-Scissors against a human, reading the operator&rsquo;s
+              hand in real time with a RealSense camera and an
+              orientation-independent MediaPipe gesture classifier. Along the
+              way: fixed a vendor-SDK segfault (callbacks must be registered
+              before connect) and replaced the firmware&rsquo;s unreliable
+              target-arrived flag with a motion-settled arrival detector.
+              <figure className="exp-media">
+                <div className="video-frame video-frame--portrait">
+                  <video
+                    src="/tesollo-rps-demo.mp4"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label="Tesollo dexterous hand playing Rock-Paper-Scissors"
+                  />
+                </div>
+                <figcaption>
+                  The hand playing Rock, Paper, Scissors, as featured on
+                  LinkedIn.{' '}
+                  <a
+                    href="https://www.linkedin.com/posts/teleoperation-research-robots-ugcPost-7478032354410737664-uXAB/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View the post ↗
+                  </a>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
               <strong>MANUS multi-sensor capture.</strong> Built a capture tool,
               two MANUS gloves and three RealSense cameras, that synchronises
               every stream on one hardware clock and runs a frame-uniqueness

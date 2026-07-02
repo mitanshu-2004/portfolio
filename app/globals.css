@@ -452,7 +452,14 @@ section {
   background: var(--surface);
 }
 
-.video-frame iframe {
+/* Portrait (9:16) self-hosted demo videos */
+.video-frame--portrait {
+  max-width: 300px;
+  aspect-ratio: 9 / 16;
+}
+
+.video-frame iframe,
+.video-frame video {
   position: absolute;
   inset: 0;
   width: 100%;
