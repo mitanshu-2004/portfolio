@@ -4,8 +4,8 @@ import Experience from '@/components/Experience'
 import Education from '@/components/Education'
 import Projects from '@/components/Projects'
 import Stack from '@/components/Stack'
-import Chat from '@/components/Chat'
 import Contact from '@/components/Contact'
+import ChatWidget from '@/components/ChatWidget'
 import { projectListSchema, faqSchema, workExperienceSchema } from '@/lib/schema'
 
 export default function Home() {
@@ -54,8 +54,8 @@ export default function Home() {
       <Education />
       <Projects />
       <Stack />
-      <Chat />
       <Contact />
+      <ChatWidget />
     </>
   )
 }

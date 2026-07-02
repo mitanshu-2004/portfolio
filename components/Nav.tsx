@@ -37,7 +37,9 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            <Link href="#chat">Chat</Link>
+            <Link href="#chat" className="hide-mobile">
+              Ask
+            </Link>
           </li>
           <li>
             <Link href="#contact">Contact</Link>

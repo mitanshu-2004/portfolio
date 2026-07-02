@@ -31,17 +31,7 @@ export default function Gallery() {
                     playsInline
                     preload="metadata"
                     aria-label={d.title}
-                  >
-                    {d.captionsVtt && (
-                      <track
-                        kind="captions"
-                        src={d.captionsVtt}
-                        srcLang="en"
-                        label="English"
-                        default
-                      />
-                    )}
-                  </video>
+                  />
                 </div>
                 <figcaption>
                   <span className="demo-title">{d.title}.</span> {d.caption}{' '}

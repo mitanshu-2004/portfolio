@@ -6,7 +6,6 @@ export interface Demo {
   id: string
   src: string
   poster?: string
-  captionsVtt?: string
   orientation: 'landscape' | 'portrait'
   title: string
   caption: string
@@ -64,7 +63,6 @@ export const DEMOS: Demo[] = [
     id: 'bodhi',
     src: '/bodhi-voice-demo.mp4',
     poster: '/bodhi-poster.jpg',
-    captionsVtt: '/bodhi-captions.vtt',
     orientation: 'portrait',
     title: 'Bodhi voice assistant',
     caption:

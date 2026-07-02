@@ -9,7 +9,6 @@ const SECTIONS = [
   'education',
   'projects',
   'stack',
-  'chat',
   'contact',
 ]
 

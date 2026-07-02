@@ -42,7 +42,7 @@ export default function Hero() {
           >
             Hugging Face ↗
           </a>
-          <Link href="#chat">Ask the bot ↓</Link>
+          <Link href="#chat">Ask the bot ✳</Link>
         </div>
       </div>
     </section>
