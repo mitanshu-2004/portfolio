@@ -42,7 +42,7 @@ metric he caught in his own work.
 - Turned a UBTech Yanshee humanoid into a voice and vision assistant: a
   custom-trained YOLOv8 package detector over the robot's camera stream and
   a NeMo ASR wake-word and command pipeline. Demo video at
-  https://mitanshu.me/sarthakai
+  https://mitanshu.me/sarthakai and https://youtube.com/shorts/xXeeRUaeu3U
 - Built a sensor-network workstation and a vision-driven sorting line on a
   robotic arm and conveyor.
 

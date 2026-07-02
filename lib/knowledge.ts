@@ -64,7 +64,7 @@ Trajectory note: the through-line from hardware to AI-on-robots to foundation-mo
 
 ### SarthakAI, AI Intern (Jun to Aug 2025)
 
-- Built the PC-side system that turned a UBTech Yanshee humanoid into a voice and vision assistant for a logistics demo. A custom-trained YOLOv8 package detector ran over the robot's MJPEG stream, and a NeMo ASR pipeline routed wake-word and commands to a chat service or a QR scanner.
+- Built the PC-side system that turned a UBTech Yanshee humanoid into a voice and vision assistant for a logistics demo. A custom-trained YOLOv8 package detector ran over the robot's MJPEG stream, and a NeMo ASR pipeline routed wake-word and commands to a chat service or a QR scanner. Demo video on the site and on YouTube (youtube.com/shorts/xXeeRUaeu3U).
 - Designed resilient camera reconnection (exponential backoff and placeholder frames) so the web view never went blank when the stream dropped.
 - Handled wake-word detection cheaply by matching ASR transcripts against about twenty phonetic spellings of the trigger phrase, instead of adding a separate wake-word engine.
 - Built a sensor-network workstation that collected environmental data and ran predictive analysis on it to infer the state of the monitored equipment.

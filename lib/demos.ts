@@ -68,5 +68,9 @@ export const DEMOS: Demo[] = [
     caption:
       'Wakes on "Hi Bodhi", hears a question, speaks the answer. Sound on.',
     contextHref: '#sarthakai',
+    external: {
+      label: 'YouTube',
+      href: 'https://youtube.com/shorts/xXeeRUaeu3U',
+    },
   },
 ]
