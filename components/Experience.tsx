@@ -13,7 +13,7 @@ export default function Experience() {
           sibling selector .exp-entry + .exp-entry works correctly across
           the fade-in wrappers.
         */}
-        <ScrollFade className="exp-entry">
+        <ScrollFade className="exp-entry" id="nferent">
           <div className="exp-header">
             <span className="exp-role">Robotics SWE &amp; Physical AI Intern</span>
             <span className="exp-period">Mar 2026 – Present</span>

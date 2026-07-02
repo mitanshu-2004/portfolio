@@ -126,8 +126,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
         {/* Strip URL hash on load so browser doesn't auto-scroll to #chat etc.
-            #sarthakai is exempt: it's a shareable deep link (/sarthakai). */}
-        <script dangerouslySetInnerHTML={{ __html: `if(window.location.hash&&window.location.hash!=='#sarthakai')history.replaceState(null,'',location.pathname+location.search)` }} />
+            Shareable deep links (/sarthakai, /nferent) are exempt. */}
+        <script dangerouslySetInnerHTML={{ __html: `if(window.location.hash&&!['#sarthakai','#nferent'].includes(window.location.hash))history.replaceState(null,'',location.pathname+location.search)` }} />
       </head>
       <body>
         {/* P3-1: skip navigation */}
