@@ -16,8 +16,9 @@ const SECTIONS = [
 export default function NavActiveState() {
   // Clear any hash from the URL on first load so the browser
   // doesn't auto-scroll to a section the user didn't intend.
+  // #sarthakai is exempt: it's a shareable deep link (/sarthakai).
   useEffect(() => {
-    if (window.location.hash) {
+    if (window.location.hash && window.location.hash !== '#sarthakai') {
       history.replaceState(null, '', window.location.pathname)
       window.scrollTo(0, 0)
     }

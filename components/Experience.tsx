@@ -111,7 +111,7 @@ export default function Experience() {
           </ul>
         </ScrollFade>
 
-        <ScrollFade className="exp-entry">
+        <ScrollFade className="exp-entry" id="sarthakai">
           <div className="exp-header">
             <span className="exp-role">AI Intern</span>
             <span className="exp-period">Jun – Aug 2025</span>
@@ -124,6 +124,23 @@ export default function Experience() {
               YOLOv8 package detector ran over the robot's MJPEG stream, and a
               NeMo ASR pipeline handled wake-word and command routing to either a
               chat service or a QR scanner.
+              <figure className="exp-media">
+                <div className="video-frame video-frame--portrait">
+                  <video
+                    src="/bodhi-voice-demo.mp4"
+                    poster="/bodhi-poster.jpg"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label="Bodhi, the Yanshee voice assistant, answering a spoken question"
+                  />
+                </div>
+                <figcaption>
+                  Bodhi in action: it wakes on &ldquo;Hi Bodhi&rdquo;, hears a
+                  question about packaging materials, and speaks the answer
+                  back. Sound on.
+                </figcaption>
+              </figure>
             </li>
             <li>
               Designed resilient camera reconnection with exponential backoff and

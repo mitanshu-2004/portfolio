@@ -1,6 +1,17 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Shareable short link that lands on the SarthakAI experience entry
+  async redirects() {
+    return [
+      {
+        source: '/sarthakai',
+        destination: '/#sarthakai',
+        permanent: false,
+      },
+    ]
+  },
+
   async headers() {
     return [
       {
